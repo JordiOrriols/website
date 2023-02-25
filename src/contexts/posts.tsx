@@ -16,7 +16,7 @@ export interface DefaultPost {
 }
 
 export interface Post extends DefaultPost {
-    id: number;
+    id: string;
     created_at: string;
 }
 

@@ -22,7 +22,7 @@ describe('Post List Screen', (): void => {
     test('shows list when results available', async (): Promise<void> => {
         const posts: Post[] = [
             {
-                id: 0,
+                id: 'post',
                 created_at: 'created_at',
                 content: 'Content',
                 image_url: 'https://www.google.com/logo.png',
