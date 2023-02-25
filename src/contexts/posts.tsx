@@ -11,7 +11,8 @@ import React from 'react';
 export interface DefaultPost {
     title: string;
     content: string;
-    image_url: string;
+    image_url?: string;
+    tags: string[];
 }
 
 export interface Post extends DefaultPost {

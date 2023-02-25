@@ -24,12 +24,10 @@ describe('Post List Screen', (): void => {
             {
                 id: 0,
                 created_at: 'created_at',
-                updated_at: 'updated_at',
                 content: 'Content',
                 image_url: 'https://www.google.com/logo.png',
-                lat: '15.00',
-                long: '10.01',
                 title: 'Title',
+                tags: [],
             },
         ];
 

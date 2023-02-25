@@ -17,10 +17,8 @@ describe('Card Post Screen', (): void => {
             created_at: 'Post Created At',
             id: 1,
             image_url: 'https://www.google.com/image',
-            lat: '10.0',
-            long: '10.0',
             title: 'Post Title',
-            updated_at: 'Post Updated At',
+            tags: [],
         };
 
         render(<CardPost post={post} />);

@@ -58,7 +58,9 @@ export const CardPost: FC<Props> = (props: Props): ReactElement => {
     return (
         <Card>
             <>
-                <PostImage src={post.image_url} onError={onImageError} />
+                {post.image_url ? (
+                    <PostImage src={post.image_url} onError={onImageError} />
+                ) : null}
                 <PostContent>
                     <PostTitle>{post.title}</PostTitle>
                     <PostDescription>{post.content}</PostDescription>
