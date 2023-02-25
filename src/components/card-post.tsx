@@ -29,7 +29,7 @@ const PostContent = styled('div')((): any => ({
 }));
 
 const PostTitle = styled('h2')((): any => ({
-    fontWeight: '300',
+    fontWeight: '600',
     color: colors.gray,
 }));
 

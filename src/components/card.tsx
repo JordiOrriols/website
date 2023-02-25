@@ -19,7 +19,7 @@ const CardBody = styled('div')((): any => ({
     background: 'white',
     margin: '40px auto',
     boxSizing: 'border-box',
-    boxShadow: ' 0 20px 40px -20px rgba(0,0,0,0.3)',
+    boxShadow: '0 13px 20px -20px rgba(0,0,0,0.3)',
 }));
 
 export const Card: FC<Props> = (props: Props): ReactElement => {
