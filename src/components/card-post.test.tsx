@@ -14,13 +14,11 @@ describe('Card Post Screen', (): void => {
     test('renders card post', (): void => {
         const post = {
             content: 'Post Content',
-            created_at: 'Post Created At',
-            id: 1,
+            created_at: 1677355624,
+            id: 'post',
             image_url: 'https://www.google.com/image',
-            lat: '10.0',
-            long: '10.0',
             title: 'Post Title',
-            updated_at: 'Post Updated At',
+            tags: [],
         };
 
         render(<CardPost post={post} />);
