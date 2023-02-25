@@ -17,7 +17,7 @@ const isPost = (item: unknown): item is Post => {
         typeof item === 'object' &&
         item !== null &&
         'content' in item &&
-        'image_url' in item &&
+        'tags' in item &&
         'title' in item &&
         'created_at' in item
     );
