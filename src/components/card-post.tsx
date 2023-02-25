@@ -38,12 +38,12 @@ const PostDescription = styled('p')((): any => ({
     textJustify: 'inter-word',
     marginBottom: '30px',
 }));
-
+/*
 const PostSeeMore = styled('a')((): any => ({
     textAlign: 'right',
     color: colors.blue,
 }));
-
+*/
 export const CardPost: FC<Props> = (props: Props): ReactElement => {
     const { post } = props;
 
@@ -62,14 +62,6 @@ export const CardPost: FC<Props> = (props: Props): ReactElement => {
                 <PostContent>
                     <PostTitle>{post.title}</PostTitle>
                     <PostDescription>{post.content}</PostDescription>
-
-                    {!props.preview ? (
-                        <PostSeeMore href={`/edit/${post.id}`}>
-                            Edit post
-                        </PostSeeMore>
-                    ) : (
-                        'Edit post'
-                    )}
                 </PostContent>
             </>
         </Card>

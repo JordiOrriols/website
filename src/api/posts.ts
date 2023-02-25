@@ -6,10 +6,8 @@
  * Proprietary and confidential.
  */
 
-import { DefaultPost, Post } from '../contexts/posts';
+import { Post } from '../contexts/posts';
 import { logger } from '../helpers/logger';
-
-import { getFromApi } from './api';
 
 // tslint:disable cyclomatic-complexity
 const isPost = (item: unknown): item is Post => {
@@ -31,7 +29,18 @@ export const getPosts = async (): Promise<Post[]> => {
     logger.info('API: GetPosts');
 
     const posts: Post[] = [];
-    const response: unknown = await getFromApi('GET', 'posts');
+    const response: unknown = [
+        {
+            content: 'Test',
+            image_url: 'Test',
+            lat: 'Test',
+            long: 'Test',
+            title: 'Test',
+            id: 'Test',
+            created_at: 'Test',
+            updated_at: 'Test',
+        },
+    ];
 
     // Validating Schema from API response
 
@@ -44,25 +53,4 @@ export const getPosts = async (): Promise<Post[]> => {
     }
 
     return posts;
-};
-
-export const addPost = async (post: DefaultPost): Promise<any> => {
-    logger.info('API: addPost');
-
-    return getFromApi('POST', 'posts', post);
-};
-
-export const updatePost = async (
-    postId: number,
-    post: DefaultPost
-): Promise<any> => {
-    logger.info('API: updatePost');
-
-    return getFromApi('PUT', `posts/${postId}`, post);
-};
-
-export const deletePost = async (postId: number): Promise<any> => {
-    logger.info('API: deletePost');
-
-    return getFromApi('DELETE', `posts/${postId}`);
 };

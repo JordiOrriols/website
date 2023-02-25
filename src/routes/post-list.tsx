@@ -7,16 +7,9 @@
  */
 
 import { useContext, FC, ReactElement } from 'react';
-import styled from 'styled-components';
 
 import { CardPost } from '../components/card-post';
 import { Post, PostsContext } from '../contexts/posts';
-import { colors } from '../helpers/colors';
-
-const CreateNewPost = styled('a')((): any => ({
-    textAlign: 'right',
-    color: colors.blue,
-}));
 
 const PostListScreen: FC = (): ReactElement => {
     const postsContext = useContext(PostsContext);
@@ -30,8 +23,6 @@ const PostListScreen: FC = (): ReactElement => {
                     <CardPost key={post.id} post={post} />
                 )
             )}
-
-            <CreateNewPost href={'/create'}>Add new post</CreateNewPost>
         </>
     );
 };

@@ -27,14 +27,6 @@ type PostsContextType = {
     refresh(): void;
 };
 
-export const defaultPost = {
-    content: ' ',
-    image_url: ' ',
-    lat: ' ',
-    long: ' ',
-    title: ' ',
-};
-
 export const PostsContext: React.Context<PostsContextType> =
     React.createContext<PostsContextType>({
         refresh: (): void => {

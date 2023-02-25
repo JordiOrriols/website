@@ -11,14 +11,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 type ImportComponent = Promise<{ default: ComponentType<any> }>;
 
-const PostEditScreen = lazy(
-    (): ImportComponent =>
-        import(
-            /* webpackChunkName: "post-edit" */
-            './routes/post-edit'
-        )
-);
-
 const PostListScreen = lazy(
     (): ImportComponent =>
         import(
@@ -35,8 +27,6 @@ export const Navigator = (): ReactElement => {
             <Suspense fallback={fallback}>
                 <Routes>
                     <Route path="/" element={<PostListScreen />} />
-                    <Route path="/create" element={<PostEditScreen />} />
-                    <Route path="/edit/:id" element={<PostEditScreen />} />
                 </Routes>
             </Suspense>
         </Router>
