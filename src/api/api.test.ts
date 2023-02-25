@@ -6,6 +6,7 @@
  * Proprietary and confidential.
  */
 import { magicNumber } from '../helpers/numbers';
+
 import { getFromApi } from './api';
 describe('api', (): void => {
     describe('getFromApi', (): void => {
