@@ -11,8 +11,8 @@ import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
 import { Card } from '../components/card';
-import { Post } from '../contexts/posts';
 import { magicNumber } from '../helpers/numbers';
+import { Post } from '../helpers/posts';
 
 interface Props {
     post: Post;
@@ -80,7 +80,11 @@ export const CardPost: FC<Props> = (props: Props): ReactElement => {
         <Card>
             <>
                 {post.image_url ? (
-                    <PostImage src={post.image_url} onError={onImageError} />
+                    <PostImage
+                        src={post.image_url}
+                        alt={post.title}
+                        onError={onImageError}
+                    />
                 ) : null}
                 <PostContent>
                     <PostTitle>{post.title}</PostTitle>
