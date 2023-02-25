@@ -7,8 +7,8 @@
  */
 
 import { FC, ReactElement } from 'react';
-import { getPosts } from '../api/posts';
 
+import { getPosts } from '../api/posts';
 import { CardPost } from '../components/card-post';
 import { Post } from '../helpers/posts';
 

@@ -6,9 +6,7 @@
  * Proprietary and confidential.
  */
 
-import React, { useEffect, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import { Navigator } from './navigator';
@@ -52,6 +50,7 @@ const AppLogo = styled('svg')((): any => ({
     height: '75px',
     pointerEvents: 'none',
     fill: 'var(--title-color)',
+    marginBottom: '10px',
 }));
 
 const AppTitle = styled('h1')((): any => ({
@@ -72,6 +71,7 @@ const AppSubtitle = styled('p')((): any => ({
     fontSize: '1.2rem',
     lineHeight: '1.8rem',
     margin: 0,
+    marginTop: '1.2em',
     marginBottom: '1.2em',
     opacity: '.8',
 }));
@@ -90,7 +90,7 @@ const AppFooter = styled('footer')((): any => ({
     textAlign: 'center',
     padding: '20px',
     fontSize: '0.8rem',
-    opacity: '.3',
+    opacity: '.8',
 }));
 
 function App(): React.ReactElement {

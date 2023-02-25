@@ -6,7 +6,7 @@
  * Proprietary and confidential.
  */
 
-import { DefaultPost, Post, postsJson } from '../helpers/posts';
+import { postsJson, DefaultPost, Post } from '../helpers/posts';
 
 export const getPosts = (): Post[] => {
     return postsJson.map((item: DefaultPost): Post => {
