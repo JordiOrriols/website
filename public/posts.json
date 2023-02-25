@@ -1,14 +1,8 @@
 [
     {
         "title": "Test",
-        "content": "Test",
+        "content": "Hello, *world*!",
         "image_url": "Test",
-        "created_at": "Test",
-        "tags": ["hashtag"]
-    },
-    {
-        "title": "Designer",
-        "content": "Test",
         "created_at": "Test",
         "tags": ["hashtag"]
     },

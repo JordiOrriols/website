@@ -8,6 +8,7 @@
 
 import { FC, ReactElement } from 'react';
 import styled from 'styled-components';
+import ReactMarkdown from 'react-markdown';
 
 import { Card } from '../components/card';
 import { Post } from '../contexts/posts';
@@ -33,9 +34,7 @@ const PostTitle = styled('h2')((): any => ({
     color: colors.gray,
 }));
 
-const PostDescription = styled('p')((): any => ({
-    textAlign: 'justify',
-    textJustify: 'inter-word',
+const PostDescription = styled('div')((): any => ({
     marginBottom: '30px',
 }));
 /*
@@ -63,7 +62,9 @@ export const CardPost: FC<Props> = (props: Props): ReactElement => {
                 ) : null}
                 <PostContent>
                     <PostTitle>{post.title}</PostTitle>
-                    <PostDescription>{post.content}</PostDescription>
+                    <PostDescription>
+                        <ReactMarkdown>{post.content}</ReactMarkdown>
+                    </PostDescription>
                 </PostContent>
             </>
         </Card>
