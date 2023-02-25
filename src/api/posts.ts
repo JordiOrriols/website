@@ -16,12 +16,9 @@ const isPost = (item: unknown): item is Post => {
         item !== null &&
         'content' in item &&
         'image_url' in item &&
-        'lat' in item &&
-        'long' in item &&
         'title' in item &&
         'id' in item &&
-        'created_at' in item &&
-        'updated_at' in item
+        'created_at' in item
     );
 };
 
@@ -33,12 +30,9 @@ export const getPosts = async (): Promise<Post[]> => {
         {
             content: 'Test',
             image_url: 'Test',
-            lat: 'Test',
-            long: 'Test',
             title: 'Test',
             id: 'Test',
             created_at: 'Test',
-            updated_at: 'Test',
         },
     ];
 

@@ -9,17 +9,14 @@
 import React from 'react';
 
 export interface DefaultPost {
+    title: string;
     content: string;
     image_url: string;
-    lat: string;
-    long: string;
-    title: string;
 }
 
 export interface Post extends DefaultPost {
     id: number;
     created_at: string;
-    updated_at: string;
 }
 
 type PostsContextType = {
