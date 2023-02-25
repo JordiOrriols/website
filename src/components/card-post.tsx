@@ -7,8 +7,8 @@
  */
 
 import { FC, ReactElement } from 'react';
-import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
+import styled from 'styled-components';
 
 import { Card } from '../components/card';
 import { Post } from '../contexts/posts';
