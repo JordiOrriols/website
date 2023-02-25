@@ -20,19 +20,12 @@ export interface Post extends DefaultPost {
 
 export const postsJson: DefaultPost[] = [
     {
-        title: 'Markdown test file',
+        title: 'Stress Handling',
         content:
-            "Markdown is intended to be as easy-to-read and easy-to-write as is feasible. Readability, however, is emphasized above all else. A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions.",
-        created_at: 1677355624,
-        tags: ['hashtag'],
-    },
-    {
-        title: 'A post with a cover image',
-        content:
-            "Markdown is intended to be as easy-to-read and easy-to-write as is feasible. Readability, however, is emphasized above all else. A Markdown-formatted document should be publishable as-is, as plain text, without looking like it's been marked up with tags or formatting instructions.",
+            "A few years ago I started training to become a Private Pilot and I was amazed about some knowledge that can be used in other areas! When you're going to fly an aircraft, it's very important to know your limitations as an individual, some of them are psychological and others physical. Because not handling them properly can increase the risk of an accident by far. For this example, Imagine that you can handle 80 points of stress, and you're going to do a presentation for the Investors, and you need this to be a great success, so just because of this, you will add 60 points of stress. But, yesterday you didn't sleep very well (add 5 extra points), and you are wearing a suit that is not very comfortable (another 5 points), and also you didn't eat something for breakfast because you are late (another 5 points). Every single point on the list keeps adding extra points of Stress, currently, you're inside the 80 points you can handle! But any strange comment from your investors will put you in the danger zone. In aviation, this is critical, because if you are not comfortable with your clothes, you didn't sleep well, or anything else, and your engine stops, these extra points will make the difference. So if you already know that you can be exposed to a Stress scenario, try to mitigate all these minor situations where you're adding extra points.",
         image_url:
-            'https://gridsome-starter-blog.netlify.app/assets/static/alexandr-podvalny-220262-unsplash.81b85c1.4903438.jpg',
+            'https://www.grupooneair.com/wp-content/uploads/2019/11/private-pilot-course-with-cirrus-aircraft.jpeg',
         created_at: 1677355624,
-        tags: ['hashtag'],
+        tags: ['stress', 'leadership', 'aviation'],
     },
 ];
