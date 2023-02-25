@@ -23,7 +23,7 @@ describe('Post List Screen', (): void => {
         const posts: Post[] = [
             {
                 id: 'post',
-                created_at: 'created_at',
+                created_at: 1677355624,
                 content: 'Content',
                 image_url: 'https://www.google.com/logo.png',
                 title: 'Title',

@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 import { Card } from '../components/card';
 import { Post } from '../contexts/posts';
-import { colors } from '../helpers/colors';
+import { magicNumber } from '../helpers/numbers';
 
 interface Props {
     post: Post;
@@ -34,8 +34,19 @@ const PostTitle = styled('h2')((): any => ({
     color: colors.gray,
 }));
 
-const PostDescription = styled('div')((): any => ({
-    marginBottom: '30px',
+const PostDescription = styled('div')((): any => ({}));
+const PostCreated = styled('div')((): any => ({
+    fontSize: '.8em',
+    opacity: '.8',
+}));
+
+const PostTags = styled('div')((): any => ({ margin: '1em 0 0' }));
+const PostTag = styled('span')((): any => ({
+    marginRight: '.7em',
+    fontSize: '.8em',
+    backgroundColor: 'var(--bg-color)',
+    padding: '.5em',
+    borderRadius: 'var(--radius)',
 }));
 /*
 const PostSeeMore = styled('a')((): any => ({
@@ -54,6 +65,15 @@ export const CardPost: FC<Props> = (props: Props): ReactElement => {
             'https://previews.123rf.com/images/ominaesi/ominaesi1701/ominaesi170100010/68761420-silueta-inconsútil-urban-landscape-city-real-estate-summer-day-fondo-plano-diseño-concepto-icono-pla.jpg';
     };
 
+    const postedDate = new Date(
+        post.created_at * magicNumber.thousand
+    ).toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+
     return (
         <Card>
             <>
@@ -65,6 +85,14 @@ export const CardPost: FC<Props> = (props: Props): ReactElement => {
                     <PostDescription>
                         <ReactMarkdown>{post.content}</ReactMarkdown>
                     </PostDescription>
+                    <PostCreated>Posted {postedDate}</PostCreated>
+                    <PostTags>
+                        {post.tags.map(
+                            (tag: string): ReactElement => (
+                                <PostTag key={tag}>#{tag}</PostTag>
+                            )
+                        )}
+                    </PostTags>
                 </PostContent>
             </>
         </Card>

@@ -17,7 +17,7 @@ export interface DefaultPost {
 
 export interface Post extends DefaultPost {
     id: string;
-    created_at: string;
+    created_at: number;
 }
 
 type PostsContextType = {

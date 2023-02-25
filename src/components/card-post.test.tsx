@@ -14,7 +14,7 @@ describe('Card Post Screen', (): void => {
     test('renders card post', (): void => {
         const post = {
             content: 'Post Content',
-            created_at: 'Post Created At',
+            created_at: 1677355624,
             id: 'post',
             image_url: 'https://www.google.com/image',
             title: 'Post Title',
