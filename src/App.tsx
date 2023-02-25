@@ -21,6 +21,7 @@ const AppContainer = styled('div')((): any => ({
     width: '100%',
     flexGrow: 1,
     margin: '30px',
+
     display: 'flex',
     flexDirection: 'column',
     flexWrap: 'nowrap',
@@ -29,19 +30,54 @@ const AppContainer = styled('div')((): any => ({
     alignContent: 'stretch',
 }));
 
+const ThemeSelector = styled('div')((): any => ({
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'end',
+    justifyContent: 'center',
+
+    width: '100%',
+    margin: '0 auto',
+}));
+
 const AppHeader = styled('header')((): any => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
-    padding: '20px',
+
+    margin: '0 auto',
+    padding: 'calc(var(--space)/2) 0',
+    maxWidth: '500px',
 }));
 
 const AppLogo = styled('svg')((): any => ({
-    height: '50px',
+    height: '75px',
     pointerEvents: 'none',
-    opacity: 0.1,
+    fill: 'var(--title-color)',
+}));
+
+const AppTitle = styled('h1')((): any => ({
+    fontSize: '1.7rem',
+
+    transition: 'color .6s',
+    color: 'var(--title-color)',
+    margin: '2.75rem 0 1rem',
+    fontFamily: 'Poppins,sans-serif',
+    fontWeight: 600,
+    lineHeight: 1.15,
+    marginTop: 0,
+}));
+
+const AppSubtitle = styled('p')((): any => ({
+    maxWidth: '500px',
+    fontWeight: 300,
+    fontSize: '1.2rem',
+    lineHeight: '1.8rem',
+    margin: 0,
+    marginBottom: '1.2em',
+    opacity: '.8',
 }));
 
 const AppContent = styled('div')((): any => ({
@@ -52,16 +88,28 @@ const AppContent = styled('div')((): any => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     alignContent: 'stretch',
-    padding: '20px',
 }));
 
 const AppFooter = styled('footer')((): any => ({
     textAlign: 'center',
     padding: '20px',
+    fontSize: '0.8rem',
+    opacity: '.3',
 }));
 
 function App(): React.ReactElement {
     const [posts, setPosts] = useState<Post[]>();
+    const [darkTheme, setDarkTheme] = useState<boolean>(false);
+
+    const toogleDarkTheme = (): void => {
+        const darkModeClassname = 'darkMode';
+        if (darkTheme) {
+            document.body.classList.add(darkModeClassname);
+        } else {
+            document.body.classList.remove(darkModeClassname);
+        }
+        setDarkTheme(!darkTheme);
+    };
 
     const refresh = (): void => {
         getPosts()
@@ -81,6 +129,63 @@ function App(): React.ReactElement {
     return (
         <PostsContext.Provider value={{ posts, refresh }}>
             <AppContainer>
+                <ThemeSelector>
+                    <div onClick={toogleDarkTheme}>
+                        {darkTheme ? (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                            </svg>
+                        ) : (
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="5" />
+                                <line x1="12" y1="1" x2="12" y2="3" />
+                                <line x1="12" y1="21" x2="12" y2="23" />
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                                <line
+                                    x1="18.36"
+                                    y1="18.36"
+                                    x2="19.78"
+                                    y2="19.78"
+                                />
+                                <line x1="1" y1="12" x2="3" y2="12" />
+                                <line x1="21" y1="12" x2="23" y2="12" />
+                                <line
+                                    x1="4.22"
+                                    y1="19.78"
+                                    x2="5.64"
+                                    y2="18.36"
+                                />
+                                <line
+                                    x1="18.36"
+                                    y1="5.64"
+                                    x2="19.78"
+                                    y2="4.22"
+                                />
+                            </svg>
+                        )}
+                    </div>
+                </ThemeSelector>
+
                 <AppHeader>
                     <AppLogo
                         version="1.1"
@@ -111,12 +216,18 @@ function App(): React.ReactElement {
         c3,0,5.9-1.6,7.4-4.3L575.9,89.8C579.2,84.1,575.1,77,568.5,77z"
                         />
                     </AppLogo>
+                    <AppTitle>Jordi Orriols</AppTitle>
+                    <AppSubtitle>
+                        Here you can find some articles where I'm sharing
+                        different personal experiences or ideas. Hope you enjoy
+                        it!
+                    </AppSubtitle>
                 </AppHeader>
                 <AppContent>
                     <Navigator />
                 </AppContent>
 
-                <AppFooter>Jordi Orriols</AppFooter>
+                <AppFooter>Copyright © 2023.</AppFooter>
 
                 <ToastContainer
                     position="bottom-left"

@@ -21,17 +21,20 @@ interface Props {
 
 const PostImage = styled('img')((): any => ({
     width: '100%',
-    height: '200px',
-    objectFit: 'cover',
+    //  height: '200px',
+    //  objectFit: 'cover',
 }));
 
 const PostContent = styled('div')((): any => ({
-    padding: '10px 30px 50px 30px',
+    padding: 'var(--space)',
+    paddingTop: '3rem',
 }));
 
 const PostTitle = styled('h2')((): any => ({
+    marginTop: 0,
     fontWeight: '600',
-    color: colors.gray,
+    fontSize: '2rem',
+    color: 'var(--title-color)',
 }));
 
 const PostDescription = styled('div')((): any => ({}));
@@ -51,7 +54,6 @@ const PostTag = styled('span')((): any => ({
 /*
 const PostSeeMore = styled('a')((): any => ({
     textAlign: 'right',
-    color: colors.blue,
 }));
 */
 export const CardPost: FC<Props> = (props: Props): ReactElement => {
