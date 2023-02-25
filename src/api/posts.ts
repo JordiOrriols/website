@@ -6,41 +6,12 @@
  * Proprietary and confidential.
  */
 
-import { Post } from '../contexts/posts';
-import { logger } from '../helpers/logger';
+import { DefaultPost, Post, postsJson } from '../helpers/posts';
 
-import { getFromApi } from './api';
+export const getPosts = (): Post[] => {
+    return postsJson.map((item: DefaultPost): Post => {
+        const id = item.title.trim().toLowerCase().replace(/\s+/g, '-');
 
-// tslint:disable cyclomatic-complexity
-const isPost = (item: unknown): item is Post => {
-    return (
-        typeof item === 'object' &&
-        item !== null &&
-        'content' in item &&
-        'tags' in item &&
-        'title' in item &&
-        'created_at' in item
-    );
-};
-
-export const getPosts = async (): Promise<Post[]> => {
-    logger.info('API: GetPosts');
-
-    const posts: Post[] = [];
-    const response: unknown = await getFromApi('GET', 'posts');
-
-    // Validating Schema from API response
-
-    logger.info('API: GetPosts', response);
-
-    if (Array.isArray(response)) {
-        response.forEach((item: unknown): void => {
-            if (isPost(item)) {
-                const id = item.title.trim().toLowerCase().replace(/\s+/g, '-');
-                posts.push({ ...item, id });
-            }
-        });
-    }
-
-    return posts;
+        return { ...item, id };
+    });
 };

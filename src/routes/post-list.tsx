@@ -6,19 +6,18 @@
  * Proprietary and confidential.
  */
 
-import { useContext, FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
+import { getPosts } from '../api/posts';
 
 import { CardPost } from '../components/card-post';
-import { Post, PostsContext } from '../contexts/posts';
+import { Post } from '../helpers/posts';
 
 const PostListScreen: FC = (): ReactElement => {
-    const postsContext = useContext(PostsContext);
-
-    if (postsContext.posts === undefined) return <>Loading</>;
+    const posts = getPosts();
 
     return (
         <>
-            {postsContext.posts.map(
+            {posts.map(
                 (post: Post): ReactElement => (
                     <CardPost key={post.id} post={post} />
                 )
