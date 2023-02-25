@@ -99,7 +99,7 @@ const AppFooter = styled('footer')((): any => ({
 
 function App(): React.ReactElement {
     const [posts, setPosts] = useState<Post[]>();
-    const [darkTheme, setDarkTheme] = useState<boolean>(false);
+    const [darkTheme, setDarkTheme] = useState<boolean>(true);
 
     const toogleDarkTheme = (): void => {
         const darkModeClassname = 'darkMode';
