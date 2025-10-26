@@ -22,6 +22,7 @@ export default function Rain(props: { max: number }) {
           key={drop.id}
           className="absolute w-0.5 h-12 bg-gradient-to-b from-transparent via-blue-200 to-blue-300 opacity-60 animate-rain"
           style={{
+            top: `-50px`,
             left: `${drop.left}%`,
             animationDelay: `${drop.delay}s`,
             animationDuration: `${drop.duration}s`,
@@ -32,10 +33,10 @@ export default function Rain(props: { max: number }) {
       <style>{`
         @keyframes rain {
           from {
-            transform: translateY(-100vh);
+            transform: translateY(-20vh);
           }
           to {
-            transform: translateY(100vh);
+            transform: translateY(120vh);
           }
         }
         .animate-rain {
