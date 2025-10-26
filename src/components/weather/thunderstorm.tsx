@@ -21,16 +21,6 @@ export default function ThunderstormScene() {
 
       {/* Logo */}
       <AppLogo />
-
-      <style>{`
-        @keyframes flash {
-          0%, 100% { opacity: 0; }
-          50% { opacity: 0.4; }
-        }
-        .animate-flash {
-          animation: flash 0.2s ease-in-out;
-        }
-      `}</style>
     </div>
   );
 }
