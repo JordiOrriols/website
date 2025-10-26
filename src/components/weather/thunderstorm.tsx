@@ -14,7 +14,7 @@ export default function ThunderstormScene({ timeOfDay }) {
         setLightning(true);
         setTimeout(() => setLightning(false), 200);
       }
-    }, 3000);
+    }, 1000);
 
     return () => clearInterval(lightningInterval);
   }, []);
@@ -27,7 +27,7 @@ export default function ThunderstormScene({ timeOfDay }) {
       )}
 
       {/* Clouds */}
-      <Clouds maxNumber={50} maxSize={5} maxOpacity={0.1} />
+      <Clouds maxNumber={50} maxSize={5} maxOpacity={0.03} />
 
       {/* Rain */}
       <Rain max={500} />
