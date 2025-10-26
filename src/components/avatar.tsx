@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Avatar() {
+  const [hidden, setHidden] = useState(true);
 
   const styles = {
     s0: { fill: "#f7b491" },
@@ -12,10 +13,16 @@ export default function Avatar() {
     s6: { fill: "#f27774" },
     s7: { fill: "#372a27" },
     s8: { fill: "#716558" },
-    s9: { fill: "#181111" },
-    s10: { fill: "#fefefe" },
+    s9: {
+      display: !hidden ? "none" : "inherit",
+      fill: "#181111",
+    },
+    s10: {
+      display: !hidden ? "none" : "inherit",
+      fill: "#fefefe",
+    },
     s11: {
-      display: "none",
+      display: hidden ? "none" : "inherit",
       fill: "none",
       stroke: "#231f20",
       "stroke-miterlimit": 10,
@@ -23,7 +30,11 @@ export default function Avatar() {
   };
 
   return (
-    <div className="w-full h-full rounded-full bg-gradient-to-br from-[#F2F1F5] to-[#D2D1D5] flex items-center justify-center overflow-hidden relative">
+    <div
+      className="w-full h-full rounded-full bg-gradient-to-br from-[#F2F1F5] to-[#D2D1D5] flex items-center justify-center overflow-hidden relative"
+      onMouseEnter={() => setHidden(false)}
+      onMouseLeave={() => setHidden(true)}
+    >
       <svg
         version="1.2"
         xmlns="http://www.w3.org/2000/svg"
