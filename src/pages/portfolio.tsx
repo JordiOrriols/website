@@ -189,12 +189,12 @@ export default function Portfolio() {
               </div>
 
               {/* Name and Title */}
-              <div className="ml-4 mr-4 flex justify-between items-start flex-wrap gap-4">
+              <div className="ml-4 mr-4 mb-4 flex justify-between items-start flex-wrap gap-4">
                 <div className="text-center w-full mt-5">
                   <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide">
                     Jordi Orriols
                   </h1>
-                  <p className="text-gray-400 text-sm tracking-wider">
+                  <p className="text-gray-400 text-m tracking-wider">
                     Multimedia Engineer Lead
                   </p>
                 </div>
