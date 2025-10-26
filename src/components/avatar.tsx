@@ -113,7 +113,7 @@ export default function Avatar() {
           <g
             id="Eye"
             style={{
-              display: hover ? "none" : "inherit",
+              display: clicked ? "none" : "inherit",
             }}
           >
             <path
@@ -135,7 +135,7 @@ export default function Avatar() {
           <g
             id="Eye"
             style={{
-              display: clicked ? "none" : "inherit",
+              display: hover ? "none" : "inherit",
             }}
           >
             <path
@@ -156,12 +156,12 @@ export default function Avatar() {
           </g>
           <path
             id="Eye Closed"
-            style={{ ...styles.s11, display: !hover ? "none" : "inherit" }}
+            style={{ ...styles.s11, display: !clicked ? "none" : "inherit" }}
             d="m34.32 79.85l8.26 4.16-8.26 3.09"
           />
           <path
             id="Eye Closed"
-            style={{ ...styles.s11, display: !clicked ? "none" : "inherit" }}
+            style={{ ...styles.s11, display: !hover ? "none" : "inherit" }}
             d="m63.32 79.57l-8.15 4.15 8.15 3.09"
           />
         </g>
