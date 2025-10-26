@@ -46,7 +46,9 @@ export default function ClearScene(props: {
   const [clouds, setClouds] = useState<number>(7);
 
   useEffect(() => {
-    setClouds(props.weather === "clear" ? 7 : 25);
+    const newClouds =
+      props.timeOfDay === "night" ? 0 : props.weather === "clear" ? 7 : 25;
+    setClouds(newClouds);
   }, [props.weather]);
 
   return (
@@ -58,7 +60,7 @@ export default function ClearScene(props: {
       }]`}
     >
       {/* Bright Sun */}
-      {props.timeOfDay !== "night" ? (
+      {props.timeOfDay === "afternoon" ? (
         <div className="absolute top-20 right-24">
           <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-[#FFD700] to-[#FFA500] shadow-2xl animate-pulse">
             {/* Glowing effect */}
@@ -67,14 +69,11 @@ export default function ClearScene(props: {
         </div>
       ) : null}
 
-      {/* Stars */}
-      {props.timeOfDay === "night" ? <Stars max={150} /> : null}
-
       {/* Moon */}
       {props.timeOfDay === "night" ? (
         <div className="absolute top-40 right-40 w-20 h-20 rounded-full bg-white/80 backdrop-blur-sm">
           <div
-            className="absolute left-5 w-20 h-20 rounded-full bg-[#5B7FA8]"
+            className="absolute left-5 w-20 h-20 rounded-full bg-[#5874A2]"
             style={{ top: -8 }}
           ></div>
         </div>
@@ -85,6 +84,9 @@ export default function ClearScene(props: {
 
       {/* City Skyline */}
       <CitySkyline fill={config[props.timeOfDay].skyline} />
+
+      {/* Stars */}
+      {props.timeOfDay === "night" ? <Stars max={150} /> : null}
 
       {/* Logo */}
       <AppLogo />
