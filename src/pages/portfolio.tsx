@@ -124,12 +124,12 @@ export default function Portfolio() {
           value={weatherMode}
           onValueChange={handleWeatherModeChange}
           options={[
-            { label: "☀️ Despejado", value: "clear" },
-            { label: "☁️ Nublado", value: "cloudy" },
-            { label: "🌧️ Lluvioso", value: "rain" },
-            { label: "⚡ Tormenta", value: "thunderstorm" },
+            { label: "☀️ Clear", value: "clear" },
+            { label: "☁️ Cloudy", value: "cloudy" },
+            { label: "🌧️ Rainy", value: "rain" },
+            { label: "⚡ Thunderstorm", value: "thunderstorm" },
           ]}
-          placeholder="Seleccionar clima"
+          placeholder="Select Weather"
         />
       </div>
 
@@ -140,12 +140,12 @@ export default function Portfolio() {
           value={timeOfDayMode}
           onValueChange={handleTimeOfDayModeChange}
           options={[
-            { label: "🌅 Mañana", value: "morning" },
-            { label: "☀️ Dia", value: "day" },
-            { label: "☀️ Tarde", value: "afternoon" },
-            { label: "🌙 Noche", value: "night" },
+            { label: "🌅 Morning", value: "morning" },
+            { label: "☀️ Day", value: "day" },
+            { label: "☀️ Afternoon", value: "afternoon" },
+            { label: "🌙 Night", value: "night" },
           ]}
-          placeholder="Seleccionar clima"
+          placeholder="Select moment"
         />
       </div>
 
@@ -204,10 +204,10 @@ export default function Portfolio() {
             {/* Stats Section */}
             <Stats
               options={[
-                { label: "Proyectos", value: "15" },
-                { label: "Empresas", value: "12" },
-                { label: "Años liderando", value: "3" },
-                { label: "Años de Experiencia", value: "12" },
+                { label: "Projects", value: "15" },
+                { label: "Companies", value: "12" },
+                { label: "Leading Years", value: "3" },
+                { label: "Experience Years", value: "12" },
               ]}
             />
             {/* 

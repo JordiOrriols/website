@@ -15,6 +15,10 @@ interface Props {
   onValueChange: (value: string) => void;
 }
 
+function capitalizeFirstLetter(val) {
+  return String(val).charAt(0).toUpperCase() + String(val).slice(1);
+}
+
 export default function Dropdown(props: Props) {
   return (
     <Select value={props.value} onValueChange={props.onValueChange}>
@@ -25,7 +29,7 @@ export default function Dropdown(props: Props) {
         <SelectItem value="auto">
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-            Auto ({props.auto})
+            Current ({capitalizeFirstLetter(props.auto)})
           </div>
         </SelectItem>
         {props.options.map((option) => (
