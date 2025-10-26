@@ -4,7 +4,7 @@ import CitySkyline from "./elements/skyline";
 import Clouds from "./elements/cloud";
 import Rain from "./elements/rain";
 
-export default function ThunderstormScene({ timeOfDay }) {
+export default function ThunderstormScene() {
   const [lightning, setLightning] = useState(false);
 
   useEffect(() => {

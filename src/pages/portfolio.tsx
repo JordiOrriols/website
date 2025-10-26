@@ -52,7 +52,7 @@ export default function Portfolio() {
       setWeather(response);
     } catch (error) {
       console.error("Error fetching weather:", error);
-      setWeather({ condition: "clear", temperature: 20 });
+      setWeather({ condition: "clear" });
     } finally {
       setLoading(false);
     }
@@ -61,22 +61,14 @@ export default function Portfolio() {
   const handleWeatherModeChange = (value) => {
     setWeatherMode(value);
 
-    if (value === "morning-sunny") {
-      setTimeOfDay("morning");
-      setWeather({ condition: "clear" });
-    } else if (value === "afternoon-sunny") {
-      setTimeOfDay("afternoon");
-      setWeather({ condition: "clear" });
-    } else if (value === "night-clear") {
-      setTimeOfDay("night");
-      setWeather({ condition: "clear" });
-    } else if (value === "rain") {
-      setWeather({ condition: "rain" });
-      determineTimeOfDay();
-    } else if (value === "thunderstorm") {
+    if (value.includes("morning")) setTimeOfDay("morning");
+    if (value.includes("afternoon")) setTimeOfDay("afternoon");
+    if (value.includes("night")) setTimeOfDay("night");
+
+    if (value.includes("clear")) setWeather({ condition: "clear" });
+    if (value.includes("rain")) setWeather({ condition: "rain" });
+    if (value.includes("thunderstorm"))
       setWeather({ condition: "thunderstorm" });
-      determineTimeOfDay();
-    }
   };
 
   const getBackgroundComponent = () => {
@@ -85,7 +77,7 @@ export default function Portfolio() {
     if (!condition) return <NightClear />;
 
     if (condition === "thunderstorm") {
-      return <ThunderstormScene timeOfDay={timeOfDay} />;
+      return <ThunderstormScene />;
     }
 
     if (condition === "rain") {
@@ -130,10 +122,12 @@ export default function Portfolio() {
                 Auto (Barcelona)
               </div>
             </SelectItem>
-            <SelectItem value="morning-sunny">🌅 Mañana Soleada</SelectItem>
-            <SelectItem value="afternoon-sunny">☀️ Tarde Soleada</SelectItem>
+            <SelectItem value="morning-clear">🌅 Mañana Soleada</SelectItem>
+            <SelectItem value="afternoon-clear">☀️ Tarde Soleada</SelectItem>
             <SelectItem value="night-clear">🌙 Noche Despejada</SelectItem>
-            <SelectItem value="rain">🌧️ Lluvia</SelectItem>
+            <SelectItem value="morning-rain">🌧️ Mañana de Lluvia</SelectItem>
+            <SelectItem value="afternoon-rain">🌧️ Tarde de Lluvia</SelectItem>
+            <SelectItem value="night-rain">🌧️ Noche de Lluvia</SelectItem>
             <SelectItem value="thunderstorm">⚡ Tormenta</SelectItem>
           </SelectContent>
         </Select>

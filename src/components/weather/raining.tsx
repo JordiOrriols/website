@@ -3,6 +3,7 @@ import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
 import Clouds from "./elements/cloud";
 import Rain from "./elements/rain";
+import Stars from "./elements/stars";
 
 export default function RainyScene({ timeOfDay }) {
   const getGradient = () => {
@@ -17,15 +18,14 @@ export default function RainyScene({ timeOfDay }) {
 
   return (
     <div className={`absolute inset-0 bg-gradient-to-b ${getGradient()}`}>
+      {/* Stars */}
+      {timeOfDay === "night" ? <Stars max={150} /> : null}
       {/* Clouds */}
       <Clouds maxNumber={50} maxSize={5} maxOpacity={0.1} />
-
       {/* Rain */}
       <Rain max={50} />
-
       {/* City Skyline */}
       <CitySkyline fill="#1F2937" />
-
       {/* Logo */}
       <AppLogo />
     </div>
