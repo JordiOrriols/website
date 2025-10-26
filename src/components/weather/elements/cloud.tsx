@@ -47,10 +47,10 @@ export default function Clouds(props: CloudsProps) {
       <style>{`
         @keyframes float {
           from {
-            transform: translateX(-20vw);
+            transform: translateX(-50vw);
           }
           to {
-            transform: translateX(120vw);
+            transform: translateX(150vw);
           }
         }
       `}</style>
@@ -65,7 +65,7 @@ export const generateClouds = (config: CloudsProps): ICloud[] => {
       id: i,
       top: Math.random() * 30 + 15,
       left: Math.random() * 100,
-      size: Math.random() * (config.maxSize || 1),
+      size: (Math.random() * (config.maxSize || 1)) + 1,
       opacity: Math.random() * (config.maxOpacity || 1),
       duration: Math.random() * 50 + 70,
     });
