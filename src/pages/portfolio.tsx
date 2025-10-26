@@ -25,6 +25,8 @@ export default function Portfolio() {
   const [weatherMode, setWeatherMode] = useState<WeatherType>("auto");
   const [timeOfDayMode, setTimeOfDayMode] = useState<TimeOfDayType>("auto");
 
+  const [currentWeather, setCurrentWeather] = useState<WeatherType>();
+
   const [loading, setLoading] = useState(true);
   const [showContactForm, setShowContactForm] = useState(false);
 
@@ -48,10 +50,19 @@ export default function Portfolio() {
 
   const fetchWeather = async () => {
     try {
+      if (currentWeather) {
+        setWeather(currentWeather);
+        return;
+      }
+
       setLoading(true);
       const response = await fetchCurrentWeather(BARCELONA_LAT, BARCELONA_LON);
       console.log("Weather response:", response);
-      setWeather(getWeatherMode(response.current_weather.weathercode));
+      const selectedWeather = getWeatherMode(
+        response.current_weather.weathercode
+      );
+      setCurrentWeather(selectedWeather);
+      setWeather(selectedWeather);
     } catch (error) {
       console.error("Error fetching weather:", error);
       setWeather("clear");
