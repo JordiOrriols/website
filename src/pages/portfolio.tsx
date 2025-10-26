@@ -10,6 +10,7 @@ import Avatar from "../components/avatar";
 import ContactForm from "../components/contact-form";
 import Dropdown from "../components/dropdown";
 import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
+import Stats from "@/components/stats";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -197,40 +198,14 @@ export default function Portfolio() {
             </div>
 
             {/* Stats Section */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-12">
-              <div className="text-center">
-                <div className="text-5xl font-extralight text-gray-800 mb-2">
-                  15
-                </div>
-                <div className="text-gray-400 text-sm tracking-wider">
-                  proyectos
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-extralight text-gray-800 mb-2">
-                  27
-                </div>
-                <div className="text-gray-400 text-sm tracking-wider">
-                  diseños
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-extralight text-gray-800 mb-2">
-                  80
-                </div>
-                <div className="text-gray-400 text-sm tracking-wider">
-                  sitios web
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-5xl font-extralight text-gray-800 mb-2">
-                  23
-                </div>
-                <div className="text-gray-400 text-sm tracking-wider">
-                  fotografía
-                </div>
-              </div>
-            </div>
+            <Stats
+              options={[
+                { label: "Proyectos", value: "10" },
+                { label: "Empresas", value: "8" },
+                { label: "Años de experiencia", value: "10" },
+                { label: "T", value: "10" },
+              ]}
+            />
           </motion.div>
 
           {/* Contact Form - Aparece encima */}
