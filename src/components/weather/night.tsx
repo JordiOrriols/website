@@ -49,7 +49,7 @@ export default function NightClear() {
       </div>
 
       {/* City Skyline */}
-      <CitySkyline fill="#2D4A6B" />
+      <CitySkyline fill="#293D5F" />
 
       <style>{`
         @keyframes twinkle {
