@@ -2,8 +2,10 @@ import React from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
 import Clouds from "./elements/cloud";
+import { WeatherType } from "@/pages/portfolio";
 
-export default function AfternoonSunny() {
+export default function AfternoonSunny(props: { weather: WeatherType }) {
+  const clouds = props.weather === "clear" ? 7 : 25;
   return (
     <div className="absolute inset-0 bg-gradient-to-b from-[#FFB347] via-[#FFCC70] to-[#FFA500]">
       {/* Bright Sun */}
@@ -28,7 +30,7 @@ export default function AfternoonSunny() {
       </div>
 
       {/* Warm Clouds */}
-      <Clouds maxNumber={8} />
+      <Clouds maxNumber={clouds} />
 
       {/* City Skyline */}
       <CitySkyline fill="#CC8400" />

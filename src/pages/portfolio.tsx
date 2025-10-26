@@ -18,8 +18,10 @@ import ThunderstormScene from "../components/weather/thunderstorm";
 import Avatar from "../components/avatar";
 import ContactForm from "../components/contact-form";
 
+export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm";
+
 export default function Portfolio() {
-  const [weather, setWeather] = useState(null);
+  const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState("night");
   const [loading, setLoading] = useState(true);
   const [weatherMode, setWeatherMode] = useState("auto");
@@ -52,7 +54,7 @@ export default function Portfolio() {
       setWeather(response);
     } catch (error) {
       console.error("Error fetching weather:", error);
-      setWeather({ condition: "clear" });
+      setWeather("clear");
     } finally {
       setLoading(false);
     }
@@ -65,31 +67,29 @@ export default function Portfolio() {
     if (value.includes("afternoon")) setTimeOfDay("afternoon");
     if (value.includes("night")) setTimeOfDay("night");
 
-    if (value.includes("clear")) setWeather({ condition: "clear" });
-    if (value.includes("rain")) setWeather({ condition: "rain" });
-    if (value.includes("thunderstorm"))
-      setWeather({ condition: "thunderstorm" });
+    if (value.includes("clear")) setWeather("clear");
+    if (value.includes("cloudy")) setWeather("cloudy");
+    if (value.includes("rain")) setWeather("rain");
+    if (value.includes("thunderstorm")) setWeather("thunderstorm");
   };
 
   const getBackgroundComponent = () => {
-    const condition = weather?.condition;
+    if (!weather) return <NightClear />;
 
-    if (!condition) return <NightClear />;
-
-    if (condition === "thunderstorm") {
+    if (weather === "thunderstorm") {
       return <ThunderstormScene />;
     }
 
-    if (condition === "rain") {
+    if (weather === "rain") {
       return <RainyScene timeOfDay={timeOfDay} />;
     }
 
     if (timeOfDay === "morning") {
-      return <MorningSunny />;
+      return <MorningSunny weather={weather} />;
     } else if (timeOfDay === "afternoon") {
-      return <AfternoonSunny />;
+      return <AfternoonSunny weather={weather} />;
     } else {
-      return <NightClear />;
+      return <NightClear weather={weather} />;
     }
   };
 
@@ -125,6 +125,7 @@ export default function Portfolio() {
             <SelectItem value="morning-clear">🌅 Mañana Soleada</SelectItem>
             <SelectItem value="afternoon-clear">☀️ Tarde Soleada</SelectItem>
             <SelectItem value="night-clear">🌙 Noche Despejada</SelectItem>
+            <SelectItem value="afternoon-cloudy">☀️ Tarde con Nubes</SelectItem>
             <SelectItem value="morning-rain">🌧️ Mañana de Lluvia</SelectItem>
             <SelectItem value="afternoon-rain">🌧️ Tarde de Lluvia</SelectItem>
             <SelectItem value="night-rain">🌧️ Noche de Lluvia</SelectItem>
@@ -179,7 +180,7 @@ export default function Portfolio() {
                     Jordi Orriols
                   </h1>
                   <p className="text-gray-400 text-sm tracking-wider">
-                    Multimedia Engineer
+                    Multimedia Engineer Lead
                   </p>
                 </div>
                 <Button
