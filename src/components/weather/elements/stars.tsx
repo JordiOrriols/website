@@ -13,7 +13,7 @@ export default function Stars(props: { max: number }) {
 
   useEffect(() => {
     setStars(generateStars(props.max));
-  }, []);
+  }, [props]);
 
   return (
     <>

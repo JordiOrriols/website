@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
 import Clouds from "./elements/cloud";
@@ -43,7 +43,11 @@ export default function ClearScene(props: {
   weather: WeatherType;
   timeOfDay: TimeOfDayType;
 }) {
-  const clouds = props.weather === "clear" ? 7 : 25;
+  const [clouds, setClouds] = useState<number>(7);
+
+  useEffect(() => {
+    setClouds(props.weather === "clear" ? 7 : 25);
+  }, [props.weather]);
 
   return (
     <div
@@ -53,7 +57,6 @@ export default function ClearScene(props: {
         config[props.timeOfDay].bgTo
       }]`}
     >
-
       {/* Bright Sun */}
       {props.timeOfDay !== "night" ? (
         <div className="absolute top-20 right-24">
