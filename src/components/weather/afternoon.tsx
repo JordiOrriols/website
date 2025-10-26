@@ -1,16 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
-import Cloud, { generateClouds, ICloud } from "./elements/cloud";
+import Clouds from "./elements/cloud";
 
 export default function AfternoonSunny() {
-  const [clouds, setClouds] = useState<ICloud>([]);
-
-  useEffect(() => {
-    const newClouds = generateClouds();
-    setClouds(newClouds);
-  }, []);
-
   return (
     <div className="absolute inset-0 bg-gradient-to-b from-[#FFB347] via-[#FFCC70] to-[#FFA500]">
       {/* Bright Sun */}
@@ -35,26 +28,13 @@ export default function AfternoonSunny() {
       </div>
 
       {/* Warm Clouds */}
-      {clouds.map((cloud) => (
-        <Cloud {...cloud} />
-      ))}
+      <Clouds max={8} color="white" />
 
       {/* City Skyline */}
       <CitySkyline fill="#CC8400" />
 
       {/* Logo */}
       <AppLogo />
-
-      <style>{`
-        @keyframes float {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(100vw);
-          }
-        }
-      `}</style>
     </div>
   );
 }

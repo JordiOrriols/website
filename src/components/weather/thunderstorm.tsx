@@ -1,26 +1,13 @@
 import React, { useEffect, useState } from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
+import Clouds from "./elements/cloud";
+import Rain from "./elements/rain";
 
 export default function ThunderstormScene({ timeOfDay }) {
-  const [raindrops, setRaindrops] = useState([]);
   const [lightning, setLightning] = useState(false);
 
   useEffect(() => {
-    const generateRain = () => {
-      const drops = [];
-      for (let i = 0; i < 70; i++) {
-        drops.push({
-          id: i,
-          left: Math.random() * 100,
-          delay: Math.random() * 2,
-          duration: Math.random() * 0.3 + 0.4,
-        });
-      }
-      setRaindrops(drops);
-    };
-    generateRain();
-
     // Lightning effect
     const lightningInterval = setInterval(() => {
       if (Math.random() > 0.7) {
@@ -39,26 +26,8 @@ export default function ThunderstormScene({ timeOfDay }) {
         <div className="absolute inset-0 bg-white opacity-40 animate-flash z-10"></div>
       )}
 
-      {/* Dark Storm Clouds */}
-      <div className="absolute top-0 left-0 right-0 h-80">
-        {[...Array(8)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute opacity-90"
-            style={{
-              top: `${Math.random() * 50}%`,
-              left: `${Math.random() * 80}%`,
-              animation: `float ${30 + Math.random() * 15}s linear infinite`,
-            }}
-          >
-            <div className="flex items-end gap-1">
-              <div className="w-24 h-20 bg-[#1F1B24] rounded-full blur-md"></div>
-              <div className="w-32 h-28 bg-[#16141A] rounded-full blur-md"></div>
-              <div className="w-28 h-24 bg-[#1F1B24] rounded-full blur-md"></div>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* Clouds */}
+      <Clouds max={50} color="black" />
 
       {/* Lightning Bolt */}
       {lightning && (
@@ -74,18 +43,8 @@ export default function ThunderstormScene({ timeOfDay }) {
         </svg>
       )}
 
-      {/* Heavy Rain */}
-      {raindrops.map((drop) => (
-        <div
-          key={drop.id}
-          className="absolute w-1 h-16 bg-gradient-to-b from-transparent via-blue-300 to-blue-400 opacity-70 animate-heavy-rain"
-          style={{
-            left: `${drop.left}%`,
-            animationDelay: `${drop.delay}s`,
-            animationDuration: `${drop.duration}s`,
-          }}
-        />
-      ))}
+      {/* Rain */}
+      <Rain max={50} />
 
       {/* City Skyline */}
       <CitySkyline fill="#0F0D12" />
@@ -94,31 +53,12 @@ export default function ThunderstormScene({ timeOfDay }) {
       <AppLogo />
 
       <style>{`
-        @keyframes heavy-rain {
-          from {
-            transform: translateY(-100vh);
-          }
-          to {
-            transform: translateY(100vh);
-          }
-        }
-        .animate-heavy-rain {
-          animation: heavy-rain 0.6s linear infinite;
-        }
         @keyframes flash {
           0%, 100% { opacity: 0; }
           50% { opacity: 0.4; }
         }
         .animate-flash {
           animation: flash 0.2s ease-in-out;
-        }
-        @keyframes float {
-          from {
-            transform: translateX(-20vw);
-          }
-          to {
-            transform: translateX(120vw);
-          }
         }
       `}</style>
     </div>
