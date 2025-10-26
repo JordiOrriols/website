@@ -22,7 +22,7 @@ export default function MorningSunny() {
       </div>
 
       {/* Clouds */}
-      <Clouds max={8} color="white" />
+      <Clouds max={8} />
 
       {/* City Skyline */}
       <CitySkyline fill="#5A8FB8" />

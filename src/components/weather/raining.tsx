@@ -18,7 +18,7 @@ export default function RainyScene({ timeOfDay }) {
   return (
     <div className={`absolute inset-0 bg-gradient-to-b ${getGradient()}`}>
       {/* Clouds */}
-      <Clouds max={50} color="black" />
+      <Clouds max={50}/>
 
       {/* Rain */}
       <Rain max={50} />
