@@ -10,8 +10,7 @@ import {
 } from "../components/ui/select";
 import { motion, AnimatePresence } from "framer-motion";
 
-import MorningSunny from "../components/weather/morning";
-import AfternoonSunny from "../components/weather/afternoon";
+import ClearScene from "../components/weather/clear";
 import NightClear from "../components/weather/night";
 import RainyScene from "../components/weather/raining";
 import ThunderstormScene from "../components/weather/thunderstorm";
@@ -19,10 +18,11 @@ import Avatar from "../components/avatar";
 import ContactForm from "../components/contact-form";
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm";
+export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
 
 export default function Portfolio() {
   const [weather, setWeather] = useState<WeatherType>("clear");
-  const [timeOfDay, setTimeOfDay] = useState("night");
+  const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
   const [loading, setLoading] = useState(true);
   const [weatherMode, setWeatherMode] = useState("auto");
   const [showContactForm, setShowContactForm] = useState(false);
@@ -40,7 +40,9 @@ export default function Portfolio() {
     const hour = new Date().getHours();
     if (hour >= 6 && hour < 12) {
       setTimeOfDay("morning");
-    } else if (hour >= 12 && hour < 20) {
+    } else if (hour >= 12 && hour < 16) {
+      setTimeOfDay("afternoon");
+    } else if (hour >= 16 && hour < 20) {
       setTimeOfDay("afternoon");
     } else {
       setTimeOfDay("night");
@@ -84,13 +86,7 @@ export default function Portfolio() {
       return <RainyScene timeOfDay={timeOfDay} />;
     }
 
-    if (timeOfDay === "morning") {
-      return <MorningSunny weather={weather} />;
-    } else if (timeOfDay === "afternoon") {
-      return <AfternoonSunny weather={weather} />;
-    } else {
-      return <NightClear weather={weather} />;
-    }
+    return <ClearScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
   if (loading && weatherMode === "auto") {
