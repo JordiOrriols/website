@@ -1,44 +1,13 @@
 import React, { useEffect, useState } from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
+import Stars from "./elements/stars";
 
 export default function NightClear() {
-  const [stars, setStars] = useState([]);
-
-  useEffect(() => {
-    const generateStars = () => {
-      const newStars = [];
-      for (let i = 0; i < 150; i++) {
-        newStars.push({
-          id: i,
-          top: Math.random() * 100,
-          left: Math.random() * 100,
-          size: Math.random() * 2 + 1,
-          delay: Math.random() * 3,
-        });
-      }
-      setStars(newStars);
-    };
-    generateStars();
-  }, []);
-
   return (
     <div className="absolute inset-0 bg-gradient-to-br from-[#4A6FA5] via-[#5B7FA8] to-[#4A6FA5]">
       {/* Stars */}
-      {stars.map((star) => (
-        <div
-          key={star.id}
-          className="absolute rounded-full bg-white animate-pulse"
-          style={{
-            top: `${star.top}%`,
-            left: `${star.left}%`,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            animationDelay: `${star.delay}s`,
-            animationDuration: "3s",
-          }}
-        />
-      ))}
+      <Stars max={150} />
 
       {/* Logo */}
       <AppLogo />
@@ -50,16 +19,6 @@ export default function NightClear() {
 
       {/* City Skyline */}
       <CitySkyline fill="#293D5F" />
-
-      <style>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.3; }
-          50% { opacity: 1; }
-        }
-        .animate-pulse {
-          animation: twinkle 3s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 }
