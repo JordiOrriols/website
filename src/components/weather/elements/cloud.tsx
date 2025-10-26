@@ -9,7 +9,7 @@ export interface ICloud {
   opacity: number;
 }
 
-interface CloudsProps {
+export interface CloudsProps {
   maxNumber: number;
   maxOpacity?: number;
   maxSize?: number;

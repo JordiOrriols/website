@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
-import Clouds from "./elements/cloud";
+import Clouds, { CloudsProps } from "./elements/cloud";
 import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
 import Stars from "./elements/stars";
 
@@ -33,13 +33,14 @@ export default function ClearScene(props: {
   weather: WeatherType;
   timeOfDay: TimeOfDayType;
 }) {
-  const [clouds, setClouds] = useState<number>(7);
+  const [clouds, setClouds] = useState<CloudsProps>({ maxNumber: 0 });
 
   useEffect(() => {
-    const newClouds =
-      props.timeOfDay === "night" ? 0 : props.weather === "clear" ? 5 : 25;
-    setClouds(newClouds);
-  }, [props.weather]);
+    if (props.timeOfDay === "night") setClouds({ maxNumber: 0 });
+    else if (props.weather === "clear") setClouds({ maxNumber: 8 });
+    else if (props.weather === "cloudy")
+      setClouds({ maxNumber: 50, maxSize: 5, maxOpacity: 0.3 });
+  }, [props]);
 
   return (
     <div
@@ -63,7 +64,7 @@ export default function ClearScene(props: {
       ) : null}
 
       {/* Clouds */}
-      <Clouds maxNumber={clouds} />
+      <Clouds {...clouds} />
 
       {/* City Skyline */}
       <CitySkyline fill={config[props.timeOfDay].skyline} />
