@@ -180,17 +180,17 @@ export default function Portfolio() {
             className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl w-full overflow-visible"
             style={{ transformStyle: "preserve-3d" }}
           >
-            <div className="relative pt-20 pb-12 px-8">
+            <div className="relative pt-20 pb-5 px-8">
               {/* Avatar */}
-              <div className="absolute -top-20 left-8">
-                <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl">
+              <div className="mt-[-200px]">
+                <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl m-auto">
                   <Avatar />
                 </div>
               </div>
 
               {/* Name and Title */}
-              <div className="ml-48 mr-4 flex justify-between items-start flex-wrap gap-4">
-                <div>
+              <div className="ml-4 mr-4 flex justify-between items-start flex-wrap gap-4">
+                <div className="text-center w-full mt-5">
                   <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide">
                     Jordi Orriols
                   </h1>
@@ -198,13 +198,6 @@ export default function Portfolio() {
                     Multimedia Engineer Lead
                   </p>
                 </div>
-                <Button
-                  onClick={() => setShowContactForm(true)}
-                  className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Enviar mensaje
-                </Button>
               </div>
             </div>
 
@@ -217,6 +210,15 @@ export default function Portfolio() {
                 { label: "Años de Experiencia", value: "12" },
               ]}
             />
+            {/* 
+            <Button
+              onClick={() => setShowContactForm(true)}
+              className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
+            >
+              <Mail className="w-4 h-4 mr-2" />
+              Enviar mensaje
+            </Button>
+            */}
           </motion.div>
 
           {/* Contact Form - Aparece encima */}
