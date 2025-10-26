@@ -11,13 +11,13 @@ import {
 } from '@/components/ui/select';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import MorningSunny from '../components/weather/MorningSunny';
-import AfternoonSunny from '../components/weather/AfternoonSunny';
-import NightClear from '../components/weather/NightClear';
-import RainyScene from '../components/weather/RainyScene';
-import ThunderstormScene from '../components/weather/ThunderstormScene';
-import Avatar from '../components/Avatar';
-import ContactForm from '../components/ContactForm';
+import MorningSunny from '../components/weather/morning';
+import AfternoonSunny from '../components/weather/afternoon';
+import NightClear from '../components/weather/night';
+import RainyScene from '../components/weather/raining';
+import ThunderstormScene from '../components/weather/thunderstorm';
+import Avatar from '../components/avatar';
+import ContactForm from '../components/contact-form';
 
 export default function Portfolio() {
     const [weather, setWeather] = useState(null);

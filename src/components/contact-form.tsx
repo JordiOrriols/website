@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { X, Send, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
+import { Label } from "./ui/label";
+import { X, Send, Loader2 } from "lucide-react";
 
 export default function ContactForm({ onClose }) {
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    message: ''
+    firstName: "",
+    lastName: "",
+    email: "",
+    message: "",
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -22,6 +21,7 @@ export default function ContactForm({ onClose }) {
     setSending(true);
 
     try {
+      /*
       await base44.integrations.Core.SendEmail({
         to: 'jordi@example.com',
         subject: `Nuevo mensaje de ${formData.firstName} ${formData.lastName}`,
@@ -33,20 +33,21 @@ export default function ContactForm({ onClose }) {
           ${formData.message}
         `
       });
+*/
 
       setSent(true);
       setTimeout(() => {
         onClose();
       }, 2000);
     } catch (error) {
-      console.error('Error al enviar el mensaje:', error);
+      console.error("Error al enviar el mensaje:", error);
     } finally {
       setSending(false);
     }
   };
 
   const handleChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
@@ -73,7 +74,8 @@ export default function ContactForm({ onClose }) {
                 Envíame un mensaje
               </h2>
               <p className="text-gray-500">
-                Me encantaría saber de ti. Completa el formulario y te responderé pronto.
+                Me encantaría saber de ti. Completa el formulario y te
+                responderé pronto.
               </p>
             </div>
 
@@ -86,7 +88,7 @@ export default function ContactForm({ onClose }) {
                   <Input
                     id="firstName"
                     value={formData.firstName}
-                    onChange={(e) => handleChange('firstName', e.target.value)}
+                    onChange={(e) => handleChange("firstName", e.target.value)}
                     placeholder="Tu nombre"
                     required
                     className="border-gray-300 focus:border-[#2D4A6B] focus:ring-[#2D4A6B]"
@@ -100,7 +102,7 @@ export default function ContactForm({ onClose }) {
                   <Input
                     id="lastName"
                     value={formData.lastName}
-                    onChange={(e) => handleChange('lastName', e.target.value)}
+                    onChange={(e) => handleChange("lastName", e.target.value)}
                     placeholder="Tu apellido"
                     required
                     className="border-gray-300 focus:border-[#2D4A6B] focus:ring-[#2D4A6B]"
@@ -116,7 +118,7 @@ export default function ContactForm({ onClose }) {
                   id="email"
                   type="email"
                   value={formData.email}
-                  onChange={(e) => handleChange('email', e.target.value)}
+                  onChange={(e) => handleChange("email", e.target.value)}
                   placeholder="tu@email.com"
                   required
                   className="border-gray-300 focus:border-[#2D4A6B] focus:ring-[#2D4A6B]"
@@ -130,7 +132,7 @@ export default function ContactForm({ onClose }) {
                 <Textarea
                   id="message"
                   value={formData.message}
-                  onChange={(e) => handleChange('message', e.target.value)}
+                  onChange={(e) => handleChange("message", e.target.value)}
                   placeholder="Escribe tu mensaje aquí..."
                   rows={6}
                   required
@@ -191,9 +193,7 @@ export default function ContactForm({ onClose }) {
             <h3 className="text-2xl font-light text-gray-800 mb-2">
               ¡Mensaje enviado!
             </h3>
-            <p className="text-gray-500">
-              Te responderé lo antes posible.
-            </p>
+            <p className="text-gray-500">Te responderé lo antes posible.</p>
           </motion.div>
         )}
       </div>
