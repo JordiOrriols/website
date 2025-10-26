@@ -53,7 +53,7 @@ export const generateStars = (max: number): IStar[] => {
       id: i,
       top: Math.random() * 100,
       left: Math.random() * 100,
-      size: Math.random() * 2 + 1,
+      size: Math.random() * 2 + 2,
       delay: Math.random() * 3,
     });
   }
