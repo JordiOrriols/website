@@ -1,26 +1,14 @@
 import React, { useEffect, useState } from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
-import Cloud from "./elements/cloud";
+import Cloud, { generateClouds } from "./elements/cloud";
 
 export default function MorningSunny() {
-  const [clouds, setClouds] = useState([]);
+  const [clouds, setClouds] = useState<ICloud>([]);
 
   useEffect(() => {
-    const generateClouds = () => {
-      const newClouds = [];
-      for (let i = 0; i < 5; i++) {
-        newClouds.push({
-          id: i,
-          top: Math.random() * 40 + 10,
-          left: Math.random() * 100,
-          size: Math.random() * 60 + 40,
-          duration: Math.random() * 40 + 60,
-        });
-      }
-      setClouds(newClouds);
-    };
-    generateClouds();
+    const newClouds = generateClouds();
+    setClouds(newClouds);
   }, []);
 
   return (

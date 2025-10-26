@@ -1,12 +1,14 @@
 import React from "react";
 
-export default function Cloud(cloud: {
+export interface ICloud {
   id: number;
   top: number;
   left: number;
   size: number;
   duration: number;
-}) {
+}
+
+export default function Cloud(cloud: ICloud) {
   return (
     <div
       key={cloud.id}
@@ -17,29 +19,26 @@ export default function Cloud(cloud: {
         animation: `float ${cloud.duration}s linear infinite`,
       }}
     >
-      <div className="flex items-end gap-1">
-        <div
-          className="w-12 h-12 bg-white rounded-full"
-          style={{
-            width: `${cloud.size * 0.5}px`,
-            height: `${cloud.size * 0.5}px`,
-          }}
-        ></div>
-        <div
-          className="w-16 h-16 bg-white rounded-full"
-          style={{
-            width: `${cloud.size * 0.7}px`,
-            height: `${cloud.size * 0.7}px`,
-          }}
-        ></div>
-        <div
-          className="w-12 h-12 bg-white rounded-full"
-          style={{
-            width: `${cloud.size * 0.5}px`,
-            height: `${cloud.size * 0.5}px`,
-          }}
-        ></div>
-      </div>
+      <div
+        className="w-12 h-12 bg-white rounded-full cloud"
+        style={{
+          transform: `scale(${cloud.size})`,
+        }}
+      ></div>
     </div>
   );
 }
+
+export const generateClouds = (): ICloud[] => {
+  const newClouds: ICloud[] = [];
+  for (let i = 0; i < 4; i++) {
+    newClouds.push({
+      id: i,
+      top: Math.random() * 30 + 15,
+      left: Math.random() * 100,
+      size: Math.random(),
+      duration: Math.random() * 50 + 70,
+    });
+  }
+  return newClouds;
+};
