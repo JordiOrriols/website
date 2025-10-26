@@ -1,8 +1,8 @@
 import React from "react";
-import CodeVisualizerPage from "./CodeVisualizer";
+import Portfolio from "./pages/portfolio";
 
 export default () => (
   <>
-      <CodeVisualizerPage/>
+      <Portfolio/>
   </>
 );
