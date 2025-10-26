@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 export default function Avatar() {
-  const [hidden, setHidden] = useState(true);
+  const [hover, setHover] = useState(false);
+  const [clicked, setClicked] = useState(false);
 
   const styles = {
     s0: { fill: "#f7b491" },
@@ -13,16 +14,9 @@ export default function Avatar() {
     s6: { fill: "#f27774" },
     s7: { fill: "#372a27" },
     s8: { fill: "#716558" },
-    s9: {
-      display: !hidden ? "none" : "inherit",
-      fill: "#181111",
-    },
-    s10: {
-      display: !hidden ? "none" : "inherit",
-      fill: "#fefefe",
-    },
+    s9: { fill: "#181111" },
+    s10: { fill: "#fefefe" },
     s11: {
-      display: hidden ? "none" : "inherit",
       fill: "none",
       stroke: "#231f20",
       "stroke-miterlimit": 10,
@@ -32,8 +26,12 @@ export default function Avatar() {
   return (
     <div
       className="w-full h-full rounded-full bg-gradient-to-br from-[#F2F1F5] to-[#D2D1D5] flex items-center justify-center overflow-hidden relative"
-      onMouseEnter={() => setHidden(false)}
-      onMouseLeave={() => setHidden(true)}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => {
+        setHover(false);
+        setClicked(false);
+      }}
+      onClick={() => setClicked(true)}
     >
       <svg
         version="1.2"
@@ -112,7 +110,12 @@ export default function Avatar() {
             style={styles.s8}
             d="m74.1 48.92c-2.35-3.31-5.07-6.11-8.45-8.24-0.02 1.7-0.26 3.31-0.71 4.17-0.91 1.75-2.05 2.81-7.22 5.47-5.16 2.66-19.14 4.64-19.14 4.64 0 0 10.18 0.76 15.8 0.76 5.62 0 15.12-0.99 17.7-2.97 1.1-0.84 1.84-2.15 2.33-3.38q-0.16-0.23-0.31-0.45z"
           />
-          <g id="Ull 9 ">
+          <g
+            id="Eye"
+            style={{
+              display: hover ? "none" : "inherit",
+            }}
+          >
             <path
               id="Path"
               style={styles.s9}
@@ -129,7 +132,12 @@ export default function Avatar() {
               d="m37.94 82.84c0 0.37-0.29 0.66-0.66 0.66-0.36 0-0.65-0.29-0.65-0.66 0-0.36 0.29-0.66 0.65-0.66 0.37 0 0.66 0.3 0.66 0.66z"
             />
           </g>
-          <g id="Ull 10 ">
+          <g
+            id="Eye"
+            style={{
+              display: clicked ? "none" : "inherit",
+            }}
+          >
             <path
               id="Path"
               style={styles.s9}
@@ -147,13 +155,13 @@ export default function Avatar() {
             />
           </g>
           <path
-            id="Ull Closed"
-            style={styles.s11}
+            id="Eye Closed"
+            style={{ ...styles.s11, display: !hover ? "none" : "inherit" }}
             d="m34.32 79.85l8.26 4.16-8.26 3.09"
           />
           <path
-            id="Ull Closed"
-            style={styles.s11}
+            id="Eye Closed"
+            style={{ ...styles.s11, display: !clicked ? "none" : "inherit" }}
             d="m63.32 79.57l-8.15 4.15 8.15 3.09"
           />
         </g>
