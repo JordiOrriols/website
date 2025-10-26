@@ -47,7 +47,7 @@ export default function ClearScene(props: {
 
   useEffect(() => {
     const newClouds =
-      props.timeOfDay === "night" ? 0 : props.weather === "clear" ? 7 : 25;
+      props.timeOfDay === "night" ? 0 : props.weather === "clear" ? 5 : 25;
     setClouds(newClouds);
   }, [props.weather]);
 

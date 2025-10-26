@@ -65,7 +65,7 @@ export const generateClouds = (config: CloudsProps): ICloud[] => {
       id: i,
       top: Math.random() * 30 + 15,
       left: Math.random() * 100,
-      size: (Math.random() * (config.maxSize || 1)) + 1,
+      size: (Math.random() * (config.maxSize || 1)) + 0.3,
       opacity: Math.random() * (config.maxOpacity || 1),
       duration: Math.random() * 50 + 70,
     });
