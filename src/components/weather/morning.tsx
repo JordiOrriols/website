@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AppLogo from "./elements/logo";
 import CitySkyline from "./elements/skyline";
-import Cloud, { generateClouds } from "./elements/cloud";
+import Cloud, { generateClouds, ICloud } from "./elements/cloud";
 
 export default function MorningSunny() {
   const [clouds, setClouds] = useState<ICloud>([]);
