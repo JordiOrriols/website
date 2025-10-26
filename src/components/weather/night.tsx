@@ -13,8 +13,11 @@ export default function NightClear() {
       <AppLogo />
 
       {/* Moon */}
-      <div className="absolute top-40 right-40 w-12 h-12 rounded-full bg-white/80 backdrop-blur-sm">
-        <div className="absolute top-1 left-2 w-10 h-10 rounded-full bg-[#5B7FA8]"></div>
+      <div className="absolute top-40 right-40 w-20 h-20 rounded-full bg-white/80 backdrop-blur-sm">
+        <div
+          className="absolute left-5 w-20 h-20 rounded-full bg-[#5B7FA8]"
+          style={{ top: -8 }}
+        ></div>
       </div>
 
       {/* City Skyline */}
