@@ -7,14 +7,19 @@ export interface ICloud {
   size: number;
   duration: number;
   opacity: number;
-  color?: string;
 }
 
-export default function Clouds(props: { max: number; color: string }) {
+interface CloudsProps {
+  maxNumber: number;
+  maxOpacity?: number;
+  maxSize?: number;
+}
+
+export default function Clouds(props: CloudsProps) {
   const [clouds, setClouds] = useState<ICloud>([]);
 
   useEffect(() => {
-    const newClouds = generateClouds(props.max);
+    const newClouds = generateClouds(props);
     setClouds(newClouds);
   }, []);
 
@@ -32,7 +37,7 @@ export default function Clouds(props: { max: number; color: string }) {
           }}
         >
           <div
-            className={`relative w-[200px] h-[60px] bg-${props.color} rounded-[200px] before:content-[''] before:absolute before:bg-${props.color} before:w-[100px] before:h-[80px] before:top-[-15px] before:left-[10px] before:rounded-[100px] before:rotate-[30deg] after:content-[''] after:absolute after:bg-${props.color} after:w-[120px] after:h-[120px] after:top-[-55px] after:right-[15px] after:rounded-[100px]`}
+            className={`relative w-[200px] h-[60px] bg-white rounded-[200px] before:content-[''] before:absolute before:bg-white before:w-[100px] before:h-[80px] before:top-[-15px] before:left-[10px] before:rounded-[100px] before:rotate-[30deg] after:content-[''] after:absolute after:bg-white after:w-[120px] after:h-[120px] after:top-[-55px] after:right-[15px] after:rounded-[100px]`}
             style={{
               transform: `scale(${cloud.size})`,
             }}
@@ -53,15 +58,15 @@ export default function Clouds(props: { max: number; color: string }) {
   );
 }
 
-export const generateClouds = (max: number): ICloud[] => {
+export const generateClouds = (config: CloudsProps): ICloud[] => {
   const newClouds: ICloud[] = [];
-  for (let i = 0; i < max; i++) {
+  for (let i = 0; i < config.maxNumber; i++) {
     newClouds.push({
       id: i,
       top: Math.random() * 30 + 15,
       left: Math.random() * 100,
-      size: Math.random(),
-      opacity: Math.random(),
+      size: Math.random() * (config.maxSize || 1),
+      opacity: Math.random() * (config.maxOpacity || 1),
       duration: Math.random() * 50 + 70,
     });
   }

@@ -28,7 +28,7 @@ export default function AfternoonSunny() {
       </div>
 
       {/* Warm Clouds */}
-      <Clouds max={8} />
+      <Clouds maxNumber={8} />
 
       {/* City Skyline */}
       <CitySkyline fill="#CC8400" />
