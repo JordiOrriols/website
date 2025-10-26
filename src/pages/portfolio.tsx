@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Mail, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,6 +9,10 @@ import ThunderstormScene from "../components/weather/thunderstorm";
 import Avatar from "../components/avatar";
 import ContactForm from "../components/contact-form";
 import Dropdown from "../components/dropdown";
+import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
+
+const BARCELONA_LAT = 41.3851;
+const BARCELONA_LON = 2.1734;
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
@@ -20,8 +24,13 @@ export default function Portfolio() {
   const [weatherMode, setWeatherMode] = useState<WeatherType>("auto");
   const [timeOfDayMode, setTimeOfDayMode] = useState<TimeOfDayType>("auto");
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [showContactForm, setShowContactForm] = useState(false);
+
+  useEffect(() => {
+    fetchWeather();
+    determineTimeOfDay();
+  }, []);
 
   const determineTimeOfDay = () => {
     const hour = new Date().getHours();
@@ -37,10 +46,11 @@ export default function Portfolio() {
   };
 
   const fetchWeather = async () => {
-    setLoading(true);
     try {
-      const response = "clear"; // Load Wheather
-      setWeather(response);
+      setLoading(true);
+      const response = await fetchCurrentWeather(BARCELONA_LAT, BARCELONA_LON);
+      console.log("Weather response:", response);
+      setWeather(getWeatherMode(response.current_weather.weathercode));
     } catch (error) {
       console.error("Error fetching weather:", error);
       setWeather("clear");
@@ -98,7 +108,7 @@ export default function Portfolio() {
       {/* Weather Mode Selector */}
       <div className="absolute top-4 right-4 z-30">
         <Dropdown
-          auto="Clima"
+          auto={weather}
           value={weatherMode}
           onValueChange={handleWeatherModeChange}
           options={[
@@ -114,7 +124,7 @@ export default function Portfolio() {
       {/* Day Time Mode Selector */}
       <div className="absolute top-15 right-4 z-30">
         <Dropdown
-          auto="Hora del dia"
+          auto={timeOfDay}
           value={timeOfDayMode}
           onValueChange={handleTimeOfDayModeChange}
           options={[
