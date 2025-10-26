@@ -20,10 +20,10 @@ const config: Record<TimeOfDayType, configType> = {
     bgTo: "#FFE4B5",
   },
   day: {
-    skyline: "#5A8FB8",
-    bgFrom: "#FFB347",
-    bgVia: "#FFB347",
-    bgTo: "#FFB347",
+    skyline: "#BEAEA2",
+    bgFrom: "#A1C8E3",
+    bgVia: "#B9D1E8",
+    bgTo: "#D0DAED",
   },
   afternoon: {
     skyline: "#CC8400",

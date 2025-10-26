@@ -11,7 +11,6 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 
 import ClearScene from "../components/weather/clear";
-import NightClear from "../components/weather/night";
 import RainyScene from "../components/weather/raining";
 import ThunderstormScene from "../components/weather/thunderstorm";
 import Avatar from "../components/avatar";
@@ -76,8 +75,6 @@ export default function Portfolio() {
   };
 
   const getBackgroundComponent = () => {
-    if (!weather) return <NightClear />;
-
     if (weather === "thunderstorm") {
       return <ThunderstormScene />;
     }
@@ -119,6 +116,7 @@ export default function Portfolio() {
               </div>
             </SelectItem>
             <SelectItem value="morning-clear">🌅 Mañana Soleada</SelectItem>
+            <SelectItem value="day-clear">☀️ Dia Soleada</SelectItem>
             <SelectItem value="afternoon-clear">☀️ Tarde Soleada</SelectItem>
             <SelectItem value="night-clear">🌙 Noche Despejada</SelectItem>
             <SelectItem value="afternoon-cloudy">☀️ Tarde con Nubes</SelectItem>
