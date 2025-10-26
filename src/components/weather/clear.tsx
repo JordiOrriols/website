@@ -7,35 +7,25 @@ import Stars from "./elements/stars";
 
 interface configType {
   skyline: string;
-  bgFrom: string;
-  bgVia: string;
-  bgTo: string;
+  bg: string;
 }
 
 const config: Record<TimeOfDayType, configType> = {
   morning: {
     skyline: "#5A8FB8",
-    bgFrom: "#87CEEB",
-    bgVia: "#B0E0E6",
-    bgTo: "#FFE4B5",
+    bg: "from-[#87CEEB] via-[#B0E0E6] to-[#FFE4B5]",
   },
   day: {
     skyline: "#BEAEA2",
-    bgFrom: "#87CEEB",
-    bgVia: "#B0E0E6",
-    bgTo: "#D0DAED",
+    bg: "from-[#87CEEB] via-[#B0E0E6] to-[#D0DAED]",
   },
   afternoon: {
     skyline: "#CC8400",
-    bgFrom: "#FFB347",
-    bgVia: "#FFCC70",
-    bgTo: "#FFA500",
+    bg: "from-[#FFB347] via-[#FFCC70] to-[#FFA500]",
   },
   night: {
     skyline: "#293D5F",
-    bgFrom: "#4A6FA5",
-    bgVia: "#5B7FA8",
-    bgTo: "#4A6FA5",
+    bg: "from-[#4A6FA5] via-[#5B7FA8] to-[#4A6FA5]",
   },
 };
 
@@ -53,11 +43,9 @@ export default function ClearScene(props: {
 
   return (
     <div
-      className={`absolute inset-0 bg-gradient-to-b from-[${
-        config[props.timeOfDay].bgFrom
-      }] via-[${config[props.timeOfDay].bgVia}] to-[${
-        config[props.timeOfDay].bgTo
-      }]`}
+      className={`absolute inset-0 bg-gradient-to-b ${
+        config[props.timeOfDay].bg
+      }`}
     >
       {/* Bright Sun */}
       {props.timeOfDay === "afternoon" || props.timeOfDay === "day" ? (
