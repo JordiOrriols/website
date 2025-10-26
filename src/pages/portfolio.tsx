@@ -1,13 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Mail, Loader2 } from "lucide-react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../components/ui/select";
 import { motion, AnimatePresence } from "framer-motion";
 
 import ClearScene from "../components/weather/clear";
@@ -15,6 +8,7 @@ import RainyScene from "../components/weather/raining";
 import ThunderstormScene from "../components/weather/thunderstorm";
 import Avatar from "../components/avatar";
 import ContactForm from "../components/contact-form";
+import Dropdown from "../components/dropdown";
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
@@ -22,25 +16,19 @@ export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
 export default function Portfolio() {
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
-  const [loading, setLoading] = useState(true);
-  const [weatherMode, setWeatherMode] = useState("auto");
-  const [showContactForm, setShowContactForm] = useState(false);
 
-  useEffect(() => {
-    if (weatherMode === "auto") {
-      fetchWeather();
-      determineTimeOfDay();
-    } else {
-      setLoading(false);
-    }
-  }, [weatherMode]);
+  const [weatherMode, setWeatherMode] = useState<WeatherType>("auto");
+  const [timeOfDayMode, setTimeOfDayMode] = useState<TimeOfDayType>("auto");
+
+  const [loading, setLoading] = useState(false);
+  const [showContactForm, setShowContactForm] = useState(false);
 
   const determineTimeOfDay = () => {
     const hour = new Date().getHours();
     if (hour >= 6 && hour < 12) {
       setTimeOfDay("morning");
     } else if (hour >= 12 && hour < 16) {
-      setTimeOfDay("afternoon");
+      setTimeOfDay("day");
     } else if (hour >= 16 && hour < 20) {
       setTimeOfDay("afternoon");
     } else {
@@ -63,15 +51,20 @@ export default function Portfolio() {
 
   const handleWeatherModeChange = (value) => {
     setWeatherMode(value);
-
-    if (value.includes("morning")) setTimeOfDay("morning");
-    if (value.includes("afternoon")) setTimeOfDay("afternoon");
-    if (value.includes("night")) setTimeOfDay("night");
-
     if (value.includes("clear")) setWeather("clear");
     if (value.includes("cloudy")) setWeather("cloudy");
     if (value.includes("rain")) setWeather("rain");
     if (value.includes("thunderstorm")) setWeather("thunderstorm");
+    if (value.includes("auto")) fetchWeather();
+  };
+
+  const handleTimeOfDayModeChange = (value) => {
+    setTimeOfDayMode(value);
+    if (value.includes("morning")) setTimeOfDay("morning");
+    if (value.includes("day")) setTimeOfDay("day");
+    if (value.includes("afternoon")) setTimeOfDay("afternoon");
+    if (value.includes("night")) setTimeOfDay("night");
+    if (value.includes("auto")) determineTimeOfDay();
   };
 
   const getBackgroundComponent = () => {
@@ -86,7 +79,7 @@ export default function Portfolio() {
     return <ClearScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
-  if (loading && weatherMode === "auto") {
+  if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]">
         <div className="text-center">
@@ -104,28 +97,34 @@ export default function Portfolio() {
 
       {/* Weather Mode Selector */}
       <div className="absolute top-4 right-4 z-30">
-        <Select value={weatherMode} onValueChange={handleWeatherModeChange}>
-          <SelectTrigger className="w-56 bg-white/90 backdrop-blur-sm border-white/50 shadow-lg">
-            <SelectValue placeholder="Seleccionar clima" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="auto">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                Auto (Barcelona)
-              </div>
-            </SelectItem>
-            <SelectItem value="morning-clear">🌅 Mañana Soleada</SelectItem>
-            <SelectItem value="day-clear">☀️ Dia Soleada</SelectItem>
-            <SelectItem value="afternoon-clear">☀️ Tarde Soleada</SelectItem>
-            <SelectItem value="night-clear">🌙 Noche Despejada</SelectItem>
-            <SelectItem value="afternoon-cloudy">☀️ Tarde con Nubes</SelectItem>
-            <SelectItem value="morning-rain">🌧️ Mañana de Lluvia</SelectItem>
-            <SelectItem value="afternoon-rain">🌧️ Tarde de Lluvia</SelectItem>
-            <SelectItem value="night-rain">🌧️ Noche de Lluvia</SelectItem>
-            <SelectItem value="thunderstorm">⚡ Tormenta</SelectItem>
-          </SelectContent>
-        </Select>
+        <Dropdown
+          auto="Clima"
+          value={weatherMode}
+          onValueChange={handleWeatherModeChange}
+          options={[
+            { label: "☀️ Despejado", value: "clear" },
+            { label: "☁️ Nublado", value: "cloudy" },
+            { label: "🌧️ Lluvioso", value: "rain" },
+            { label: "⚡ Tormenta", value: "thunderstorm" },
+          ]}
+          placeholder="Seleccionar clima"
+        />
+      </div>
+
+      {/* Day Time Mode Selector */}
+      <div className="absolute top-15 right-4 z-30">
+        <Dropdown
+          auto="Hora del dia"
+          value={timeOfDayMode}
+          onValueChange={handleTimeOfDayModeChange}
+          options={[
+            { label: "🌅 Mañana", value: "morning" },
+            { label: "☀️ Dia", value: "day" },
+            { label: "☀️ Tarde", value: "afternoon" },
+            { label: "🌙 Noche", value: "night" },
+          ]}
+          placeholder="Seleccionar clima"
+        />
       </div>
 
       {/* Cards Container */}
