@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import AppLogo from "../logo";
-import CitySkyline from "../skyline";
+import AppLogo from "./elements/logo";
+import CitySkyline from "./elements/skyline";
 
 export default function RainyScene({ timeOfDay }) {
   const [raindrops, setRaindrops] = useState([]);
