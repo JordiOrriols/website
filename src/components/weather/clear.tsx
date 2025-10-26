@@ -60,7 +60,7 @@ export default function ClearScene(props: {
       }]`}
     >
       {/* Bright Sun */}
-      {props.timeOfDay === "afternoon" ? (
+      {props.timeOfDay === "afternoon" || props.timeOfDay === "day" ? (
         <div className="absolute top-20 right-24">
           <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-[#FFD700] to-[#FFA500] shadow-2xl animate-pulse">
             {/* Glowing effect */}
@@ -71,12 +71,7 @@ export default function ClearScene(props: {
 
       {/* Moon */}
       {props.timeOfDay === "night" ? (
-        <div className="absolute top-40 right-40 w-20 h-20 rounded-full bg-white/80 backdrop-blur-sm">
-          <div
-            className="absolute left-5 w-20 h-20 rounded-full bg-[#5874A2]"
-            style={{ top: -8 }}
-          ></div>
-        </div>
+        <div className="absolute top-40 right-40 w-20 h-20 rounded-full bg-transparent shadow-[25px_10px_0_0_#F2F1F5] backdrop-blur-sm"></div>
       ) : null}
 
       {/* Clouds */}
