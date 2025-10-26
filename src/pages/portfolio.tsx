@@ -200,10 +200,10 @@ export default function Portfolio() {
             {/* Stats Section */}
             <Stats
               options={[
-                { label: "Proyectos", value: "10" },
-                { label: "Empresas", value: "8" },
-                { label: "Años de experiencia", value: "10" },
-                { label: "T", value: "10" },
+                { label: "Proyectos", value: "15" },
+                { label: "Empresas", value: "12" },
+                { label: "Años liderando", value: "3" },
+                { label: "Años de Experiencia", value: "12" },
               ]}
             />
           </motion.div>
