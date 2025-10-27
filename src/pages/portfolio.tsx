@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Loader2 } from "lucide-react";
+import { Mail, Loader2, Plane } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import ClearScene from "../components/weather/clear";
 import RainyScene from "../components/weather/raining";
 import ThunderstormScene from "../components/weather/thunderstorm";
 import Avatar from "../components/avatar";
-import ContactForm from "../components/contact-form";
+import ContactForm from "../components/sections/contact-form";
 import Dropdown from "../components/dropdown";
 import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
 import Stats from "@/components/stats";
+import PlaneController from "@/components/plane";
+import ProjectsGallery from "@/components/sections/projects";
+import DesignsGallery from "@/components/sections/designs";
+import WebsitesTimeline from "@/components/sections/websites";
+import PhotographyGallery from "@/components/sections/photography";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -28,7 +33,8 @@ export default function Portfolio() {
   const [currentWeather, setCurrentWeather] = useState<WeatherType>();
 
   const [loading, setLoading] = useState(true);
-  const [showContactForm, setShowContactForm] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
+  const [showPlane, setShowPlane] = useState(false);
 
   useEffect(() => {
     fetchWeather();
@@ -101,6 +107,16 @@ export default function Portfolio() {
     return <ClearScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
+  const handleStatClick = (statType) => {
+    setActiveModal(statType);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+  };
+
+  const isModalOpen = activeModal !== null;
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]">
@@ -116,6 +132,9 @@ export default function Portfolio() {
     <div className="relative min-h-screen overflow-hidden">
       {/* Dynamic Background */}
       {getBackgroundComponent()}
+
+      {/* Plane in background */}
+      <AnimatePresence>{showPlane && <PlaneController />}</AnimatePresence>
 
       {/* Weather Mode Selector */}
       <div className="absolute top-4 right-4 z-30">
@@ -149,16 +168,28 @@ export default function Portfolio() {
         />
       </div>
 
+      <Button
+        onClick={() => setShowPlane(!showPlane)}
+        className={`w-56 ${
+          showPlane
+            ? "bg-red-600 hover:bg-red-700"
+            : "bg-[#2D4A6B] hover:bg-[#1F3447]"
+        } text-white shadow-lg transition-all duration-300`}
+      >
+        <Plane className="w-4 h-4 mr-2" />
+        {showPlane ? "Ocultar Avión" : "Mostrar Avión"}
+      </Button>
+
       {/* Cards Container */}
       <div className="relative z-20 flex items-center justify-center min-h-screen px-4 py-12">
         <div
           className="relative w-full max-w-3xl"
           style={{ perspective: "1000px" }}
         >
-          {/* Profile Card - Con efecto Time Capsule */}
+          {/* Profile Card */}
           <motion.div
             animate={
-              showContactForm
+              isModalOpen
                 ? {
                     scale: 0.95,
                     opacity: 0.3,
@@ -204,31 +235,82 @@ export default function Portfolio() {
             {/* Stats Section */}
             <Stats
               options={[
-                { label: "Projects", value: "15" },
-                { label: "Companies", value: "12" },
-                { label: "Leading Years", value: "3" },
-                { label: "Experience Years", value: "12" },
+                {
+                  label: "Projects",
+                  value: "15",
+                  onClick: () => handleStatClick("projects"),
+                },
+                {
+                  label: "Companies",
+                  value: "12",
+                  onClick: () => handleStatClick("companies"),
+                },
+                {
+                  label: "Leading Years",
+                  value: "3",
+                  onClick: () => handleStatClick("leading_years"),
+                },
+                {
+                  label: "Experience Years",
+                  value: "12",
+                  onClick: () => handleStatClick("experience_years"),
+                },
               ]}
             />
-            {/* 
+
             <Button
-              onClick={() => setShowContactForm(true)}
+              onClick={() => setActiveModal("contact")}
               className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
             >
               <Mail className="w-4 h-4 mr-2" />
               Enviar mensaje
             </Button>
-            */}
           </motion.div>
 
-          {/* Contact Form - Aparece encima */}
+          {/* Modals */}
           <AnimatePresence>
-            {showContactForm && (
+            {activeModal === "contact" && (
               <div
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <ContactForm onClose={() => setShowContactForm(false)} />
+                <ContactForm onClose={closeModal} />
+              </div>
+            )}
+
+            {activeModal === "projects" && (
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <ProjectsGallery onClose={closeModal} />
+              </div>
+            )}
+
+            {activeModal === "designs" && (
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <DesignsGallery onClose={closeModal} />
+              </div>
+            )}
+
+            {activeModal === "websites" && (
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <WebsitesTimeline onClose={closeModal} />
+              </div>
+            )}
+
+            {activeModal === "photography" && (
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <PhotographyGallery onClose={closeModal} />
               </div>
             )}
           </AnimatePresence>
