@@ -2,50 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
-const designs = [
-  {
-    title: "PortAventura World",
-    image:
-      "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&h=300&fit=crop",
-  },
-  {
-    title: "Randstad",
-    image:
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop",
-  },
-  {
-    title: "Wefox",
-    image:
-      "https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=300&fit=crop",
-  },
-  {
-    title: "Mitek Systems",
-    image:
-      "https://images.unsplash.com/photo-1545235617-7a424c1a60cc?w=400&h=300&fit=crop",
-  },
-  {
-    title: "HP",
-    image:
-      "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
-  },
-  {
-    title: "ERNI",
-    image:
-      "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=400&h=300&fit=crop",
-  },
-  {
-    title: "Onnergy",
-    image:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop",
-  },
-  {
-    title: "Tibidabo",
-    image:
-      "https://images.unsplash.com/photo-1596524430615-b46475ddff6e?w=400&h=300&fit=crop",
-  },
-];
-
-export default function CompaniesGallery({ onClose }) {
+export default function Gallery({ options, onClose }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -70,7 +27,7 @@ export default function CompaniesGallery({ onClose }) {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto pr-2">
-          {designs.map((design, index) => (
+          {options.map((design, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.8 }}

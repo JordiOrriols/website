@@ -13,9 +13,10 @@ import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
 import Stats from "@/components/stats";
 import PlaneController from "@/components/plane";
 import ProjectsGallery from "@/components/sections/projects";
-import CompaniesGallery from "@/components/sections/companies";
+import Gallery from "@/components/sections/gallery";
 import WorkTimeline from "@/components/sections/experience";
-import PhotographyGallery from "@/components/sections/photography";
+import { companiesGallery } from "@/data/companies";
+import { experienceTimeline } from "@/data/experience";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -302,7 +303,7 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <CompaniesGallery onClose={closeModal} />
+                <Gallery options={companiesGallery} onClose={closeModal} />
               </div>
             )}
 
@@ -311,7 +312,7 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <PhotographyGallery onClose={closeModal} />
+                <Gallery options={companiesGallery} onClose={closeModal} />
               </div>
             )}
 
@@ -320,7 +321,10 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <WorkTimeline onClose={closeModal} />
+                <WorkTimeline
+                  options={experienceTimeline}
+                  onClose={closeModal}
+                />
               </div>
             )}
           </AnimatePresence>

@@ -2,52 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { X, Calendar, Globe } from "lucide-react";
 
-const websites = [
-  {
-    year: "2024",
-    title: "PortAventura (via RANDSTAD)",
-    description: "Plataforma completa con panel de administración",
-    tech: "ReactJS, React Native, ElectronJS, AWS",
-  },
-  {
-    year: "2024",
-    title: "Wefox",
-    description: "Tienda online con sistema de pagos integrado",
-    tech: "ReactJS, NextJS",
-  },
-  {
-    year: "2023",
-    title: "Mitek Systems",
-    description: "Portal de salud con sistema de citas",
-    tech: "ReactJS, React Native, AWS",
-  },
-  {
-    year: "2023",
-    title: "HP (via ERNI)",
-    description: "Portal inmobiliario con búsqueda avanzada",
-    tech: "React, ElectronJS",
-  },
-  {
-    year: "2023",
-    title: "Onnergy",
-    description: "Plataforma de cursos online",
-    tech: "Angular, Firebase",
-  },
-  {
-    year: "2022",
-    title: "Tibidabo",
-    description: "Sitio corporativo con reservas online",
-    tech: "WordPress, PHP",
-  },
-  {
-    year: "2022",
-    title: "Tothora",
-    description: "Dashboard financiero en tiempo real",
-    tech: "React, D3.js",
-  },
-];
-
-export default function WorkTimeline({ onClose }) {
+export default function WorkTimeline({ options, onClose }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -73,7 +28,7 @@ export default function WorkTimeline({ onClose }) {
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#2D4A6B] to-transparent"></div>
 
           <div className="space-y-8">
-            {websites.map((site, index) => (
+            {options.map((site, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
