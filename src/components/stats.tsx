@@ -2,7 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 
 interface Props {
-  options: { label: string; value: string; onClick: () => void }[];
+  options: {
+    label: string;
+    value: string;
+    unit?: string;
+    onClick: () => void;
+  }[];
 }
 
 export default function Stats(props: Props) {
@@ -22,6 +27,11 @@ export default function Stats(props: Props) {
             <div className="text-gray-400 text-sm tracking-wider">
               {option.label}
             </div>
+            {option.unit ? (
+              <div className="text-xs font-extralight text-gray-300">
+                (In {option.unit})
+              </div>
+            ) : null}
           </div>
         </motion.button>
       ))}
