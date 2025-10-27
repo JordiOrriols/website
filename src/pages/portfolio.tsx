@@ -13,8 +13,8 @@ import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
 import Stats from "@/components/stats";
 import PlaneController from "@/components/plane";
 import ProjectsGallery from "@/components/sections/projects";
-import DesignsGallery from "@/components/sections/designs";
-import WebsitesTimeline from "@/components/sections/websites";
+import CompaniesGallery from "@/components/sections/companies";
+import WorkTimeline from "@/components/sections/experience";
 import PhotographyGallery from "@/components/sections/photography";
 
 const BARCELONA_LAT = 41.3851;
@@ -174,17 +174,18 @@ export default function Portfolio() {
         />
       </div>
 
-      <Button
-        onClick={() => setShowPlane(!showPlane)}
-        className={`w-56 ${
-          showPlane
-            ? "bg-red-600 hover:bg-red-700"
-            : "bg-[#2D4A6B] hover:bg-[#1F3447]"
-        } text-white shadow-lg transition-all duration-300`}
-      >
-        <Plane className="w-4 h-4 mr-2" />
-        {showPlane ? "Ocultar Avión" : "Mostrar Avión"}
-      </Button>
+      <div className="absolute bottom-4 right-4 z-30">
+        <Button
+          onClick={() => setShowPlane(!showPlane)}
+          className={`${
+            showPlane
+              ? "bg-red-600 hover:bg-red-700"
+              : "bg-[#2D4A6B] hover:bg-[#1F3447]"
+          } shadow-lg transition-all duration-300 mt-3 float-right`}
+        >
+          <Plane className="w-4 h-4" />
+        </Button>
+      </div>
 
       {/* Cards Container */}
       <div className="relative z-20 flex items-center justify-center min-h-screen px-4 py-12">
@@ -265,14 +266,15 @@ export default function Portfolio() {
                 },
               ]}
             />
-
-            <Button
-              onClick={() => setActiveModal("contact")}
-              className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
-            >
-              <Mail className="w-4 h-4 mr-2" />
-              Enviar mensaje
-            </Button>
+            {false ? (
+              <Button
+                onClick={() => setActiveModal("contact")}
+                className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                Enviar mensaje
+              </Button>
+            ) : null}
           </motion.div>
 
           {/* Modals */}
@@ -300,7 +302,7 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <DesignsGallery onClose={closeModal} />
+                <CompaniesGallery onClose={closeModal} />
               </div>
             )}
 
@@ -318,7 +320,7 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <WebsitesTimeline onClose={closeModal} />
+                <WorkTimeline onClose={closeModal} />
               </div>
             )}
           </AnimatePresence>
