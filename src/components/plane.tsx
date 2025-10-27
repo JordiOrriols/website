@@ -8,10 +8,9 @@ export default function PlaneController() {
   const positionRef = useRef({ x: 100, y: 50 });
 
   useEffect(() => {
-    // Hide notification after 4 seconds
     const timer = setTimeout(() => {
       setShowNotification(false);
-    }, 4000);
+    }, 6000);
 
     // Keyboard controls
     const handleKeyDown = (e) => {
