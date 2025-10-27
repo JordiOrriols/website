@@ -219,7 +219,7 @@ export default function Portfolio() {
             className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl w-full overflow-visible"
             style={{ transformStyle: "preserve-3d" }}
           >
-            <div className="relative pt-20 pb-5 px-8">
+            <div className="relative pt-20 px-8">
               {/* Avatar */}
               <div className="mt-[-200px]">
                 <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl m-auto">
