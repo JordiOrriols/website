@@ -1,22 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Mail, Loader2, Plane } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Loader2, Plane } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
 
 import ClearScene from "../components/weather/clear";
 import RainyScene from "../components/weather/raining";
 import ThunderstormScene from "../components/weather/thunderstorm";
-import Avatar from "../components/avatar";
 import ContactForm from "../components/sections/contact-form";
 import Dropdown from "../components/dropdown";
 import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
-import Stats from "@/components/stats";
 import PlaneController from "@/components/plane";
 import ProjectsGallery from "@/components/sections/projects";
 import Gallery from "@/components/sections/gallery";
 import WorkTimeline from "@/components/sections/experience";
 import { companiesGallery } from "@/data/companies";
 import { experienceTimeline } from "@/data/experience";
+import HomeSection from "@/components/sections/home";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -194,89 +193,10 @@ export default function Portfolio() {
           className="relative w-full max-w-3xl"
           style={{ perspective: "1000px" }}
         >
-          {/* Profile Card */}
-          <motion.div
-            animate={
-              isModalOpen
-                ? {
-                    scale: 0.95,
-                    opacity: 0.3,
-                    z: -100,
-                    rotateX: 5,
-                  }
-                : {
-                    scale: 1,
-                    opacity: 1,
-                    z: 0,
-                    rotateX: 0,
-                  }
-            }
-            transition={{
-              type: "spring",
-              damping: 25,
-              stiffness: 200,
-            }}
-            className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl w-full overflow-visible"
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            <div className="relative pt-20 px-8">
-              {/* Avatar */}
-              <div className="mt-[-200px]">
-                <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl m-auto">
-                  <Avatar />
-                </div>
-              </div>
-
-              {/* Name and Title */}
-              <div className="ml-4 mr-4 mb-4 flex justify-between items-start flex-wrap gap-4">
-                <div className="text-center w-full mt-5">
-                  <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide">
-                    Jordi Orriols
-                  </h1>
-                  <p className="text-gray-400 text-m tracking-wider">
-                    Multimedia Engineer Lead
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Stats Section */}
-            <Stats
-              options={[
-                {
-                  label: "Projects",
-                  value: "15",
-                  onClick: () => handleStatClick("projects"),
-                },
-                {
-                  label: "Companies",
-                  value: "12",
-                  onClick: () => handleStatClick("companies"),
-                },
-                {
-                  label: "Leading",
-                  value: "3",
-                  unit: "years",
-                  onClick: () => handleStatClick("leading_years"),
-                },
-                {
-                  label: "Experience",
-                  value: "12",
-                  unit: "years",
-                  onClick: () => handleStatClick("experience_years"),
-                },
-              ]}
-            />
-            {false ? (
-              <Button
-                onClick={() => setActiveModal("contact")}
-                className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
-              >
-                <Mail className="w-4 h-4 mr-2" />
-                Enviar mensaje
-              </Button>
-            ) : null}
-          </motion.div>
+          <HomeSection
+            isModalOpen={isModalOpen}
+            handleStatClick={handleStatClick}
+          />
 
           {/* Modals */}
           <AnimatePresence>
