@@ -1,19 +1,53 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { X, Calendar, Globe } from 'lucide-react';
+import React from "react";
+import { motion } from "framer-motion";
+import { X, Calendar, Globe } from "lucide-react";
 
 const websites = [
-  { year: "2024", title: "Tech Startup Platform", description: "Plataforma completa con panel de administración", tech: "React, Node.js" },
-  { year: "2024", title: "E-commerce Fashion", description: "Tienda online con sistema de pagos integrado", tech: "Next.js, Stripe" },
-  { year: "2023", title: "Healthcare Portal", description: "Portal de salud con sistema de citas", tech: "Vue.js, Laravel" },
-  { year: "2023", title: "Real Estate Platform", description: "Portal inmobiliario con búsqueda avanzada", tech: "React, MongoDB" },
-  { year: "2023", title: "Educational Platform", description: "Plataforma de cursos online", tech: "Angular, Firebase" },
-  { year: "2022", title: "Restaurant Chain Website", description: "Sitio corporativo con reservas online", tech: "WordPress, PHP" },
-  { year: "2022", title: "Financial Dashboard", description: "Dashboard financiero en tiempo real", tech: "React, D3.js" },
-  { year: "2022", title: "Travel Booking Site", description: "Sistema de reservas de viajes", tech: "Vue.js, Express" }
+  {
+    year: "2024",
+    title: "PortAventura (via RANDSTAD)",
+    description: "Plataforma completa con panel de administración",
+    tech: "ReactJS, React Native, ElectronJS, AWS",
+  },
+  {
+    year: "2024",
+    title: "Wefox",
+    description: "Tienda online con sistema de pagos integrado",
+    tech: "ReactJS, NextJS",
+  },
+  {
+    year: "2023",
+    title: "Mitek Systems",
+    description: "Portal de salud con sistema de citas",
+    tech: "ReactJS, React Native, AWS",
+  },
+  {
+    year: "2023",
+    title: "HP (via ERNI)",
+    description: "Portal inmobiliario con búsqueda avanzada",
+    tech: "React, ElectronJS",
+  },
+  {
+    year: "2023",
+    title: "Onnergy",
+    description: "Plataforma de cursos online",
+    tech: "Angular, Firebase",
+  },
+  {
+    year: "2022",
+    title: "Tibidabo",
+    description: "Sitio corporativo con reservas online",
+    tech: "WordPress, PHP",
+  },
+  {
+    year: "2022",
+    title: "Tothora",
+    description: "Dashboard financiero en tiempo real",
+    tech: "React, D3.js",
+  },
 ];
 
-export default function WebsitesTimeline({ onClose }) {
+export default function WorkTimeline({ onClose }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -31,17 +65,13 @@ export default function WebsitesTimeline({ onClose }) {
 
       <div className="p-8 md:p-12">
         <div className="mb-8">
-          <h2 className="text-3xl font-light text-gray-800 mb-2">
-            Sitios Web
-          </h2>
-          <p className="text-gray-500">
-            Timeline de desarrollo web
-          </p>
+          <h2 className="text-3xl font-light text-gray-800 mb-2">Sitios Web</h2>
+          <p className="text-gray-500">Timeline de desarrollo web</p>
         </div>
 
         <div className="relative max-h-[60vh] overflow-y-auto pr-2">
           <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#2D4A6B] to-transparent"></div>
-          
+
           <div className="space-y-8">
             {websites.map((site, index) => (
               <motion.div
@@ -54,17 +84,26 @@ export default function WebsitesTimeline({ onClose }) {
                 <div className="absolute left-5 top-2 w-6 h-6 bg-[#2D4A6B] rounded-full border-4 border-white shadow-md flex items-center justify-center">
                   <Globe className="w-3 h-3 text-white" />
                 </div>
-                
+
                 <div className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow duration-300">
                   <div className="flex items-center gap-2 mb-2">
                     <Calendar className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm font-medium text-[#2D4A6B]">{site.year}</span>
+                    <span className="text-sm font-medium text-[#2D4A6B]">
+                      {site.year}
+                    </span>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">{site.title}</h3>
-                  <p className="text-gray-600 text-sm mb-2">{site.description}</p>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-1">
+                    {site.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-2">
+                    {site.description}
+                  </p>
                   <div className="flex gap-2 flex-wrap">
-                    {site.tech.split(', ').map((tech, i) => (
-                      <span key={i} className="px-2 py-1 bg-white rounded-md text-xs text-gray-600 border border-gray-200">
+                    {site.tech.split(", ").map((tech, i) => (
+                      <span
+                        key={i}
+                        className="px-2 py-1 bg-white rounded-md text-xs text-gray-600 border border-gray-200"
+                      >
                         {tech}
                       </span>
                     ))}
