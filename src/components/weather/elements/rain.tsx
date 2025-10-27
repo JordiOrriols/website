@@ -12,7 +12,7 @@ export default function Rain(props: { max: number }) {
 
   useEffect(() => {
     setRaindrops(generateRain(props.max));
-  }, [props]);
+  }, [props.max]);
 
   return (
     <>

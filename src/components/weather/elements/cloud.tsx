@@ -21,7 +21,7 @@ export default function Clouds(props: CloudsProps) {
   useEffect(() => {
     const newClouds = generateClouds(props);
     setClouds(newClouds);
-  }, [props]);
+  }, [props.maxNumber, props.maxOpacity, props.maxSize]);
 
   return (
     <>
