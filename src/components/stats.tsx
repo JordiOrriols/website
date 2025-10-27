@@ -1,21 +1,29 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 interface Props {
-  options: { label: string; value: string }[];
+  options: { label: string; value: string; onClick: () => void }[];
 }
 
 export default function Stats(props: Props) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-12">
       {props.options.map((option) => (
-        <div className="text-center">
-          <div className="text-5xl font-extralight text-gray-800 mb-2">
-            {option.value}
+        <motion.button
+          onClick={option.onClick}
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          className="text-center cursor-pointer hover:bg-gray-50 rounded-xl p-4 transition-colors duration-200"
+        >
+          <div className="text-center">
+            <div className="text-5xl font-extralight text-gray-800 mb-2">
+              {option.value}
+            </div>
+            <div className="text-gray-400 text-sm tracking-wider">
+              {option.label}
+            </div>
           </div>
-          <div className="text-gray-400 text-sm tracking-wider">
-            {option.label}
-          </div>
-        </div>
+        </motion.button>
       ))}
     </div>
   );
