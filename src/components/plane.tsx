@@ -8,20 +8,22 @@ export default function PlaneController() {
   const positionRef = useRef({ x: 100, y: 50 });
 
   useEffect(() => {
+    // Hide notification after 6 seconds
     const timer = setTimeout(() => {
       setShowNotification(false);
     }, 6000);
 
     // Keyboard controls
     const handleKeyDown = (e) => {
-      if (e.key === "ArrowUp") {
-        velocityYRef.current = Math.max(velocityYRef.current - 0.3, -2);
-      } else if (e.key === "ArrowDown") {
-        velocityYRef.current = Math.min(velocityYRef.current + 0.3, 2);
-      }
+      if (allowedKeys.includes(e.key)) keyRef.current = e.key;
+    };
+
+    const handleKeyUp = (e) => {
+      if (allowedKeys.includes(e.key)) keyRef.current = null;
     };
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
 
     // Animation loop
     const animate = () => {
