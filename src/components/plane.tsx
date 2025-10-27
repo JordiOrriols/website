@@ -7,6 +7,10 @@ export default function PlaneController() {
   const velocityYRef = useRef(0);
   const positionRef = useRef({ x: 100, y: 50 });
 
+  const keyRef = useRef(null);
+  const allowedKeys = ["ArrowUp", "ArrowDown"];
+  const acceleration = 0.05;
+
   useEffect(() => {
     // Hide notification after 6 seconds
     const timer = setTimeout(() => {
@@ -27,6 +31,14 @@ export default function PlaneController() {
 
     // Animation loop
     const animate = () => {
+      if (keyRef.current === "ArrowUp")
+        velocityYRef.current = Math.max(
+          velocityYRef.current - acceleration,
+          -2
+        );
+      else if (keyRef.current === "ArrowDown")
+        velocityYRef.current = Math.min(velocityYRef.current + acceleration, 2);
+
       // Move horizontally (always moving right)
       positionRef.current.x += 0.3;
 
@@ -83,11 +95,17 @@ export default function PlaneController() {
           transform: "translate(-50%, -50%)",
         }}
         animate={{
-          rotate: velocityYRef.current * 3,
+          rotate: velocityYRef.current * 15,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" style={{ width: 300, height: 300 }} viewBox="0 0 1024 1024">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1024"
+          height="1024"
+          style={{ width: 300, height: 300 }}
+          viewBox="0 0 1024 1024"
+        >
           <path
             fill="#D1D0D0"
             d="M130 394c6-6 40-3 49-5 10-1 16 14 20 21l14 24c6 11 19 36 30 42 11 5 24 6 36 10l16 4c13 5 14 5 28 3l23-3 27-3 15-2 6-4c-10-7-22-2-31-4-16-2-42-4-56-13-4-3-4-5-4-9 4-5 42-12 51-14 20-2 41 1 61 3l51 4 134 9 87 5c3 0 15 1 16 5l-2 2-8 3c-4 2-9 6-13 6-17 3-35 2-52 5l-3 2c1 3 4 10 7 11 33 5 66 7 100 16v5c-5 1-11 4-13 10-1 4-1 7 1 11v-1c5 6 7 8 14 11l-4 5 2-1c2 1 1 24 1 27h-1v1h-1v-17c-8 12-29 27-43 30-11 2-19 1-29 9-7 5-28 11-36 7v-1c-3-3-3-9-3-12l-27-1c-3-1-7-1-8 1h-1l-3-9-5 1c0 3 2 8 1 10-6-3-11 2-16-4l-38-2-15-2-14 2c-2-2 0-5 1-6l-8-1 4-7c-4-2-8-2-12-1l-2 6c-2-1-20-5-23-4-12 0-20 0-32-2a14469 14469 0 0 0-207-32c-6-1-19-4-23-1l-7 5-1-1-1 1-1-3-4-2v-1c-1-1 0-2 1-3l3-2 4-2c1-1 6-3 7 0h6l-3-1c4-2 3-5 2-9l-2-1-4-5-12-1-2-2v-1l2-1-4-1c-5 0-7 3-12 3l-33 2c-14 0-8-2-12-10l4-2 13-4-2-14-7-76c0-7-1-13 3-19Z"
