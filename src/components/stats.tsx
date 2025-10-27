@@ -12,7 +12,7 @@ interface Props {
 
 export default function Stats(props: Props) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-12">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-7">
       {props.options.map((option) => (
         <motion.button
           onClick={option.onClick}

@@ -41,7 +41,7 @@ export default function ClearScene(props: {
     else if (props.timeOfDay === "night") setClouds({ maxNumber: 0 });
     else if (props.weather === "clear") setClouds({ maxNumber: 8 });
     else setClouds({ maxNumber: 4 });
-  }, [props]);
+  }, [props.weather, props.timeOfDay]);
 
   return (
     <div
