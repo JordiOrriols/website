@@ -36,10 +36,11 @@ export default function ClearScene(props: {
   const [clouds, setClouds] = useState<CloudsProps>({ maxNumber: 0 });
 
   useEffect(() => {
-    if (props.timeOfDay === "night") setClouds({ maxNumber: 0 });
-    else if (props.weather === "clear") setClouds({ maxNumber: 8 });
-    else if (props.weather === "cloudy")
+    if (props.weather === "cloudy")
       setClouds({ maxNumber: 50, maxSize: 5, maxOpacity: 0.3 });
+    else if (props.timeOfDay === "night") setClouds({ maxNumber: 0 });
+    else if (props.weather === "clear") setClouds({ maxNumber: 8 });
+    else setClouds({ maxNumber: 4 });
   }, [props]);
 
   return (
