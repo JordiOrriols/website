@@ -195,7 +195,7 @@ export default function Portfolio() {
         >
           <HomeSection
             isModalOpen={isModalOpen}
-            handleStatClick={handleStatClick}
+            handleStatClick={() => {}}
           />
 
           {/* Modals */}
