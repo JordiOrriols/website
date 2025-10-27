@@ -2,10 +2,10 @@ import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function PlaneController() {
-  const [position, setPosition] = useState({ x: 100, y: 50 });
+  const [position, setPosition] = useState({ x: 100, y: 10 });
   const [showNotification, setShowNotification] = useState(true);
   const velocityYRef = useRef(0);
-  const positionRef = useRef({ x: 100, y: 50 });
+  const positionRef = useRef({ x: 100, y: 10 });
 
   const keyRef = useRef(null);
   const allowedKeys = ["ArrowUp", "ArrowDown"];
@@ -52,7 +52,7 @@ export default function PlaneController() {
 
       // Vertical boundaries (keep within viewport)
       if (positionRef.current.y < 0) positionRef.current.y = 0;
-      if (positionRef.current.y > 80) positionRef.current.y = 80;
+      if (positionRef.current.y > 83) positionRef.current.y = 83;
 
       setPosition({ x: positionRef.current.x, y: positionRef.current.y });
 
@@ -95,7 +95,7 @@ export default function PlaneController() {
           transform: "translate(-50%, -50%)",
         }}
         animate={{
-          rotate: velocityYRef.current * 15,
+          rotate: velocityYRef.current * 30,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
