@@ -22,6 +22,12 @@ const BARCELONA_LON = 2.1734;
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
+export type SectionsType =
+  | "projects"
+  | "companies"
+  | "leading_years"
+  | "experience_years"
+  | "contact";
 
 export default function Portfolio() {
   const [weather, setWeather] = useState<WeatherType>("clear");
@@ -33,7 +39,7 @@ export default function Portfolio() {
   const [currentWeather, setCurrentWeather] = useState<WeatherType>();
 
   const [loading, setLoading] = useState(true);
-  const [activeModal, setActiveModal] = useState(null);
+  const [activeModal, setActiveModal] = useState<SectionsType>(null);
   const [showPlane, setShowPlane] = useState(false);
 
   useEffect(() => {
@@ -107,7 +113,7 @@ export default function Portfolio() {
     return <ClearScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
-  const handleStatClick = (statType) => {
+  const handleStatClick = (statType: SectionsType) => {
     setActiveModal(statType);
   };
 
@@ -246,13 +252,15 @@ export default function Portfolio() {
                   onClick: () => handleStatClick("companies"),
                 },
                 {
-                  label: "Leading Years",
+                  label: "Leading",
                   value: "3",
+                  unit: "years",
                   onClick: () => handleStatClick("leading_years"),
                 },
                 {
-                  label: "Experience Years",
+                  label: "Experience",
                   value: "12",
+                  unit: "years",
                   onClick: () => handleStatClick("experience_years"),
                 },
               ]}
@@ -287,7 +295,7 @@ export default function Portfolio() {
               </div>
             )}
 
-            {activeModal === "designs" && (
+            {activeModal === "companies" && (
               <div
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
@@ -296,21 +304,21 @@ export default function Portfolio() {
               </div>
             )}
 
-            {activeModal === "websites" && (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <WebsitesTimeline onClose={closeModal} />
-              </div>
-            )}
-
-            {activeModal === "photography" && (
+            {activeModal === "leading_years" && (
               <div
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <PhotographyGallery onClose={closeModal} />
+              </div>
+            )}
+
+            {activeModal === "experience_years" && (
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <WebsitesTimeline onClose={closeModal} />
               </div>
             )}
           </AnimatePresence>
