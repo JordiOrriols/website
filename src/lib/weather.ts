@@ -8,6 +8,12 @@ export interface CurrentWeather {
   time: string;
 }
 
+export interface DailyWeather {
+  time: string[];
+  sunrise: string[];
+  sunset: string[];
+}
+
 export interface OpenMeteoResponse {
   latitude: number;
   longitude: number;
@@ -17,6 +23,7 @@ export interface OpenMeteoResponse {
   timezone_abbreviation: string;
   elevation: number;
   current_weather: CurrentWeather;
+  daily?: DailyWeather;
 }
 
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
@@ -29,6 +36,8 @@ export async function fetchCurrentWeather(
     latitude: lat.toString(),
     longitude: lon.toString(),
     current_weather: "true",
+    daily: "sunrise,sunset",
+    timezone: "auto",
   });
 
   const url = `${BASE_URL}?${params.toString()}`;

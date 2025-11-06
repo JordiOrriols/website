@@ -36,7 +36,11 @@ export default function Portfolio() {
   const [weatherMode, setWeatherMode] = useState<WeatherType>("auto");
   const [timeOfDayMode, setTimeOfDayMode] = useState<TimeOfDayType>("auto");
 
+  const [currentTimeOfDay, setCurrentTimeOfDay] = useState<TimeOfDayType>();
   const [currentWeather, setCurrentWeather] = useState<WeatherType>();
+
+  const [sunrise, setSunrise] = useState<string | null>(null);
+  const [sunset, setSunset] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(true);
   const [activeModal, setActiveModal] = useState<SectionsType>(null);
@@ -49,14 +53,33 @@ export default function Portfolio() {
 
   const determineTimeOfDay = () => {
     const hour = new Date().getHours();
-    if (hour >= 6 && hour < 12) {
+
+    const sunriseHour = sunrise ? new Date(sunrise).getHours() : 8;
+    const sunsetHour = sunset ? new Date(sunset).getHours() : 19;
+
+    console.log("Sunrise hour:", sunriseHour);
+    console.log("Sunset hour:", sunsetHour);
+
+    if (hour < sunriseHour) {
+      setTimeOfDay("night");
+      setCurrentTimeOfDay("night");
+      console.log("Setting time of day to night");
+    } else if (hour >= sunriseHour - 1 && hour < 12) {
       setTimeOfDay("morning");
+      setCurrentTimeOfDay("morning");
+      console.log("Setting time of day to morning");
     } else if (hour >= 12 && hour < 16) {
       setTimeOfDay("day");
-    } else if (hour >= 16 && hour < 20) {
+      setCurrentTimeOfDay("day");
+      console.log("Setting time of day to day");
+    } else if (hour >= sunsetHour - 1 && hour < sunsetHour + 1) {
       setTimeOfDay("afternoon");
+      setCurrentTimeOfDay("afternoon");
+      console.log("Setting time of day to afternoon");
     } else {
       setTimeOfDay("night");
+      setCurrentTimeOfDay("night");
+      console.log("Setting time of day to night");
     }
   };
 
@@ -69,12 +92,18 @@ export default function Portfolio() {
 
       setLoading(true);
       const response = await fetchCurrentWeather(BARCELONA_LAT, BARCELONA_LON);
+
       console.log("Weather response:", response);
+
       const selectedWeather = getWeatherMode(
         response.current_weather.weathercode
       );
+
       setCurrentWeather(selectedWeather);
       setWeather(selectedWeather);
+
+      setSunrise(response.daily?.sunrise?.[0] ?? null);
+      setSunset(response.daily?.sunset?.[0] ?? null);
     } catch (error) {
       console.error("Error fetching weather:", error);
       setWeather("clear");
@@ -145,7 +174,7 @@ export default function Portfolio() {
       {/* Weather Mode Selector */}
       <div className="absolute top-4 right-4 z-30">
         <Dropdown
-          auto={weather}
+          auto={currentWeather}
           value={weatherMode}
           onValueChange={handleWeatherModeChange}
           options={[
@@ -161,7 +190,7 @@ export default function Portfolio() {
       {/* Day Time Mode Selector */}
       <div className="absolute top-15 right-4 z-30">
         <Dropdown
-          auto={timeOfDay}
+          auto={currentTimeOfDay}
           value={timeOfDayMode}
           onValueChange={handleTimeOfDayModeChange}
           options={[
@@ -193,10 +222,7 @@ export default function Portfolio() {
           className="relative w-full max-w-3xl"
           style={{ perspective: "1000px" }}
         >
-          <HomeSection
-            isModalOpen={isModalOpen}
-            handleStatClick={() => {}}
-          />
+          <HomeSection isModalOpen={isModalOpen} handleStatClick={() => {}} />
 
           {/* Modals */}
           <AnimatePresence>
