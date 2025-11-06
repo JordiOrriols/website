@@ -275,6 +275,8 @@ export default function Portfolio() {
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <WorkTimeline
+                  title="Experience Timeline"
+                  subtitle="A detailed overview of my professional journey"
                   options={experienceTimeline}
                   onClose={closeModal}
                 />

@@ -1,8 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { X, Calendar, Globe } from "lucide-react";
+import { X, Calendar, Globe, CheckCircle2, Code } from "lucide-react";
+import { ExperienceEntry } from "@/data/experience";
 
-export default function WorkTimeline({ options, onClose }) {
+interface Props {
+  title: string;
+  subtitle: string;
+  options: ExperienceEntry[];
+  onClose: () => void;
+}
+
+export default function WorkTimeline({
+  title,
+  subtitle,
+  options,
+  onClose,
+}: Props): React.JSX.Element {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -20,8 +33,8 @@ export default function WorkTimeline({ options, onClose }) {
 
       <div className="p-8 md:p-12">
         <div className="mb-8">
-          <h2 className="text-3xl font-light text-gray-800 mb-2">Sitios Web</h2>
-          <p className="text-gray-500">Timeline de desarrollo web</p>
+          <h2 className="text-3xl font-light text-gray-800 mb-2">{title}</h2>
+          <p className="text-gray-500">{subtitle}</p>
         </div>
 
         <div className="relative max-h-[60vh] overflow-y-auto pr-2">
@@ -41,28 +54,81 @@ export default function WorkTimeline({ options, onClose }) {
                 </div>
 
                 <div className="bg-gray-50 rounded-xl p-5 hover:shadow-md transition-shadow duration-300">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Calendar className="w-4 h-4 text-gray-400" />
-                    <span className="text-sm font-medium text-[#2D4A6B]">
-                      {site.year}
-                    </span>
+                  {/* Header */}
+                  <div className="mb-8">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Calendar className="w-4 h-4 text-gray-400" />
+                      <span className="text-sm font-medium text-[#2D4A6B]">
+                        {site.period}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                      {site.title}
+                    </h3>
+                    <p className="text-gray-600 font-medium text-sm mb-2">
+                      {site.company}
+                    </p>
+                    <p className="text-gray-600 text-sm leading-relaxed">
+                      {site.description}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                    {site.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-2">
-                    {site.description}
-                  </p>
+
+                  {/* Objectives */}
+                  <div className="mb-8">
+                    <div className="flex items-center gap-2 mb-4">
+                      <CheckCircle2 className="w-4 h-4 text-green-600" />
+                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                        Goals & Achievements
+                      </span>
+                    </div>
+                    <ul className="space-y-2">
+                      {site.achievements.map((objective, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-2 text-sm text-gray-700"
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></div>
+                          <span>{objective}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Technologies */}
+
+                  {site.tech && site.tech.length > 0 ? (
+                    <div>
+                      <div className="flex items-center gap-2 mb-3">
+                        <Code className="w-4 h-4 text-gray-400" />
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                          Technologies
+                        </span>
+                      </div>
+
+                      <div className="flex gap-2 flex-wrap">
+                        {site.tech.map((tech, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-xs font-medium hover:border-[#2D4A6B] hover:text-[#2D4A6B] transition-colors duration-200 shadow-sm"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
+                  {/* Tags 
                   <div className="flex gap-2 flex-wrap">
-                    {site.tech.split(", ").map((tech, i) => (
+                    {site.tags.map((tag, i) => (
                       <span
                         key={i}
                         className="px-2 py-1 bg-white rounded-md text-xs text-gray-600 border border-gray-200"
                       >
-                        {tech}
+                        {tag}
                       </span>
                     ))}
-                  </div>
+                  </div>*/}
                 </div>
               </motion.div>
             ))}
