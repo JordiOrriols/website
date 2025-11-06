@@ -74,30 +74,31 @@ export default function WorkTimeline({
                   </div>
 
                   {/* Objectives */}
-                  <div className="mb-8">
-                    <div className="flex items-center gap-2 mb-4">
-                      <CheckCircle2 className="w-4 h-4 text-green-600" />
-                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-                        Goals & Achievements
-                      </span>
+                  {site.achievements && site.achievements.length > 0 ? (
+                    <div className="mb-4">
+                      <div className="flex items-center gap-2 mb-4">
+                        <CheckCircle2 className="w-4 h-4 text-green-600" />
+                        <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                          Goals & Achievements
+                        </span>
+                      </div>
+                      <ul className="space-y-2">
+                        {site.achievements.map((objective, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-2 text-sm text-gray-700"
+                          >
+                            <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></div>
+                            <span>{objective}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <ul className="space-y-2">
-                      {site.achievements.map((objective, i) => (
-                        <li
-                          key={i}
-                          className="flex items-start gap-2 text-sm text-gray-700"
-                        >
-                          <div className="w-1.5 h-1.5 rounded-full bg-green-500 mt-1.5 flex-shrink-0"></div>
-                          <span>{objective}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                  ) : null}
 
                   {/* Technologies */}
-
                   {site.tech && site.tech.length > 0 ? (
-                    <div>
+                    <div className="mt-4">
                       <div className="flex items-center gap-2 mb-3">
                         <Code className="w-4 h-4 text-gray-400" />
                         <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
