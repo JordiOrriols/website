@@ -226,7 +226,10 @@ export default function Portfolio() {
           className="relative w-full max-w-3xl"
           style={{ perspective: "1000px" }}
         >
-          <HomeSection isModalOpen={isModalOpen} handleStatClick={() => {}} />
+          <HomeSection
+            isModalOpen={isModalOpen}
+            handleStatClick={handleStatClick}
+          />
 
           {/* Modals */}
           <AnimatePresence>

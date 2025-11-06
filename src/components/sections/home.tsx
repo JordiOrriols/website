@@ -64,18 +64,21 @@ export default function HomeSection(props: Props) {
           {
             label: "Projects",
             value: "15",
-            onClick: () => props.handleStatClick("projects"),
+            onClick: () => {},
+            // onClick: () => props.handleStatClick("projects"),
           },
           {
             label: "Companies",
             value: "12",
-            onClick: () => props.handleStatClick("companies"),
+            onClick: () => {},
+            // onClick: () => props.handleStatClick("companies"),
           },
           {
             label: "Leading",
             value: "3",
             unit: "years",
-            onClick: () => props.handleStatClick("leading_years"),
+            onClick: () => {},
+            // onClick: () => props.handleStatClick("leading_years"),
           },
           {
             label: "Experience",
