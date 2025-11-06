@@ -1,6 +1,7 @@
 export type ExperienceEntry = {
   period: string;
   title: string;
+  company: string;
   description: string;
   achievements?: string[];
   tech: string[];
@@ -10,7 +11,8 @@ export type ExperienceEntry = {
 export const experienceTimeline: ExperienceEntry[] = [
   {
     period: "Oct 2023 – Present",
-    title: "Tech Lead React Mobile — PortAventura World (via RANDSTAD)",
+    title: "Tech Lead React Mobile",
+    company: "PortAventura World (via RANDSTAD)",
     description:
       "Leading the Mobile Team (React / React Native) responsible for PortAventura’s official app, ensuring top user experience, stability, and optimized purchase flows.",
     achievements: [
@@ -38,7 +40,8 @@ export const experienceTimeline: ExperienceEntry[] = [
   },
   {
     period: "Oct 2022 – Oct 2023",
-    title: "Engineering Lead — wefox",
+    title: "Engineering Lead",
+    company: "wefox",
     description:
       "First-line management role leading a cross-functional team (~7 people) focused on product delivery, team performance, and agile culture.",
     achievements: [
@@ -64,7 +67,8 @@ export const experienceTimeline: ExperienceEntry[] = [
   },
   {
     period: "Jun 2020 – Oct 2022",
-    title: "Senior Software Engineer — Mitek Systems",
+    title: "Senior Software Engineer",
+    company: "Mitek Systems",
     description:
       "Led code quality initiatives and designed a serverless architecture for internal demos and R&D tooling.",
     achievements: [
@@ -91,7 +95,8 @@ export const experienceTimeline: ExperienceEntry[] = [
   },
   {
     period: "2017 – Jul 2020",
-    title: "R&D / FullStack Engineer — HP (via ERNI)",
+    title: "R&D / FullStack Engineer",
+    company: "HP (via ERNI)",
     description:
       "Architected frontend solutions and improved quality processes for R&D projects through component-driven development and testing culture.",
     achievements: [
@@ -117,7 +122,8 @@ export const experienceTimeline: ExperienceEntry[] = [
   },
   {
     period: "Mar 2016 – Jul 2017",
-    title: "Software Architect — Onnergy / Gadgeon (Belgium)",
+    title: "Software Architect",
+    company: "Onnergy / Gadgeon (Belgium)",
     description:
       "Technical architect standardizing code practices, designing cloud infrastructure, and leading customer integrations.",
     achievements: [
@@ -135,7 +141,8 @@ export const experienceTimeline: ExperienceEntry[] = [
   },
   {
     period: "Jul 2011 – Nov 2014",
-    title: "Software Architect / Founder — ClientArea",
+    title: "Software Architect / Founder",
+    company: "ClientArea (London, self-employed)",
     description:
       "End-to-end ownership of product and technology: architecture design, business strategy, and B2B client delivery.",
     achievements: [
@@ -156,7 +163,8 @@ export const experienceTimeline: ExperienceEntry[] = [
   },
   {
     period: "2009 – 2016 (various part-time roles)",
-    title: "Ride Operator & Product Design — Tibidabo Amusement Park",
+    title: "Ride Operator & Product Designer",
+    company: "Tibidabo Amusement Park",
     description:
       "Customer-facing role and early product design experiences focused on children’s entertainment.",
     achievements: [
