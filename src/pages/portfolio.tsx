@@ -46,8 +46,8 @@ export default function Portfolio() {
   const [activeModal, setActiveModal] = useState<SectionsType>(null);
   const [showPlane, setShowPlane] = useState(false);
 
-  useEffect(() => {
-    fetchWeather();
+  useEffect(async () => {
+    await fetchWeather();
     determineTimeOfDay();
   }, []);
 
@@ -106,6 +106,7 @@ export default function Portfolio() {
       setSunset(response.daily?.sunset?.[0] ?? null);
     } catch (error) {
       console.error("Error fetching weather:", error);
+      setCurrentWeather("clear");
       setWeather("clear");
     } finally {
       setLoading(false);
@@ -118,7 +119,7 @@ export default function Portfolio() {
     if (value.includes("cloudy")) setWeather("cloudy");
     if (value.includes("rain")) setWeather("rain");
     if (value.includes("thunderstorm")) setWeather("thunderstorm");
-    if (value.includes("auto")) fetchWeather();
+    if (value.includes("auto")) setWeather(currentWeather);
   };
 
   const handleTimeOfDayModeChange = (value) => {
