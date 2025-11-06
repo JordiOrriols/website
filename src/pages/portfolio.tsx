@@ -46,9 +46,12 @@ export default function Portfolio() {
   const [activeModal, setActiveModal] = useState<SectionsType>(null);
   const [showPlane, setShowPlane] = useState(false);
 
-  useEffect(async () => {
-    await fetchWeather();
-    determineTimeOfDay();
+  useEffect(() => {
+    async function fetchData() {
+      await fetchWeather();
+      determineTimeOfDay();
+    }
+    fetchData();
   }, []);
 
   const determineTimeOfDay = () => {
