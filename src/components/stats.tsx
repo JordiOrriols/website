@@ -15,6 +15,7 @@ export default function Stats(props: Props) {
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-7">
       {props.options.map((option) => (
         <motion.button
+          key={option.label}
           onClick={option.onClick}
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
