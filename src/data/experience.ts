@@ -1,3 +1,5 @@
+import { COMPANY } from "./companies";
+
 export type ExperienceEntry = {
   period: string;
   title: string;
@@ -12,7 +14,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
   {
     period: "Oct 2023 – Present",
     title: "Tech Lead React Mobile",
-    company: "PortAventura World (via RANDSTAD)",
+    company: COMPANY.PORTAVENTURA,
     description:
       "Leading the Mobile Team (React / React Native) responsible for PortAventura’s official app, ensuring top user experience, stability, and optimized purchase flows.",
     achievements: [
@@ -41,7 +43,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
   {
     period: "Oct 2022 – Oct 2023",
     title: "Engineering Lead",
-    company: "wefox",
+    company: COMPANY.WEFOX,
     description:
       "First-line management role leading a cross-functional team (~7 people) focused on product delivery, team performance, and agile culture.",
     achievements: [
@@ -68,7 +70,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
   {
     period: "Jun 2020 – Oct 2022",
     title: "Senior Software Engineer",
-    company: "Mitek Systems",
+    company: COMPANY.MITEK,
     description:
       "Led code quality initiatives and designed a serverless architecture for internal demos and R&D tooling.",
     achievements: [
@@ -96,7 +98,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
   {
     period: "2017 – Jul 2020",
     title: "R&D / FullStack Engineer",
-    company: "HP (via ERNI)",
+    company: COMPANY.HP,
     description:
       "Architected frontend solutions and improved quality processes for R&D projects through component-driven development and testing culture.",
     achievements: [
@@ -123,7 +125,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
   {
     period: "Mar 2016 – Jul 2017",
     title: "Software Architect",
-    company: "Onnergy / Gadgeon (Belgium)",
+    company: COMPANY.ONNERGY,
     description:
       "Technical architect standardizing code practices, designing cloud infrastructure, and leading customer integrations.",
     achievements: [
@@ -142,7 +144,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
   {
     period: "Jul 2011 – Nov 2014",
     title: "Software Architect / Founder",
-    company: "ClientArea (London, self-employed)",
+    company: COMPANY.CLIENTAREA,
     description:
       "End-to-end ownership of product and technology: architecture design, business strategy, and B2B client delivery.",
     achievements: [
@@ -164,7 +166,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
   {
     period: "2009 – 2016 (various part-time roles)",
     title: "Ride Operator & Product Designer",
-    company: "Tibidabo Amusement Park",
+    company: COMPANY.TIBIDABO,
     description:
       "Customer-facing role and early product design experiences focused on children’s entertainment.",
     achievements: [
@@ -180,7 +182,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
   {
     period: "Oct 2023 – Presente",
     title: "Tech Lead React Mobile",
-    company: "PortAventura World (vía RANDSTAD)",
+    company: COMPANY.PORTAVENTURA,
     description:
       "Liderando el equipo móvil (React / React Native) responsable de la app oficial de PortAventura, garantizando la mejor experiencia de usuario, estabilidad y flujos de compra optimizados.",
     achievements: [
@@ -209,7 +211,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
   {
     period: "Oct 2022 – Oct 2023",
     title: "Engineering Lead",
-    company: "wefox",
+    company: COMPANY.WEFOX,
     description:
       "Rol de gestión de primera línea liderando un equipo multifuncional (~7 personas) enfocado en la entrega de producto, el rendimiento del equipo y la cultura ágil.",
     achievements: [
@@ -236,7 +238,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
   {
     period: "Jun 2020 – Oct 2022",
     title: "Senior Software Engineer",
-    company: "Mitek Systems",
+    company: COMPANY.MITEK,
     description:
       "Lideré iniciativas de calidad de código y diseñé una arquitectura serverless para demos internas y herramientas de I+D.",
     achievements: [
@@ -264,7 +266,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
   {
     period: "2017 – Jul 2020",
     title: "Ingeniero FullStack / I+D",
-    company: "HP (vía ERNI)",
+    company: COMPANY.HP,
     description:
       "Diseñé soluciones frontend y mejoré procesos de calidad para proyectos de I+D mediante desarrollo basado en componentes y cultura de testing.",
     achievements: [
@@ -291,7 +293,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
   {
     period: "Mar 2016 – Jul 2017",
     title: "Arquitecto de Software",
-    company: "Onnergy / Gadgeon (Bélgica)",
+    company: COMPANY.ONNERGY,
     description:
       "Arquitecto técnico estandarizando prácticas de código, diseñando infraestructura cloud y liderando integraciones con clientes.",
     achievements: [
@@ -310,7 +312,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
   {
     period: "Jul 2011 – Nov 2014",
     title: "Arquitecto de Software / Fundador",
-    company: "ClientArea (Londres, autónomo)",
+    company: COMPANY.CLIENTAREA,
     description:
       "Responsable completo del producto y la tecnología: diseño de arquitectura, estrategia de negocio y entrega B2B.",
     achievements: [
@@ -348,7 +350,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
   {
     period: "Oct 2023 – Present",
     title: "Tech Lead React Mobile",
-    company: "PortAventura World (via RANDSTAD)",
+    company: COMPANY.PORTAVENTURA,
     description:
       "Liderant l’equip mòbil (React / React Native) responsable de l’app oficial de PortAventura, garantint la millor experiència d’usuari, estabilitat i fluxos de compra optimitzats.",
     achievements: [
@@ -377,7 +379,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
   {
     period: "Oct 2022 – Oct 2023",
     title: "Engineering Lead",
-    company: "wefox",
+    company: COMPANY.WEFOX,
     description:
       "Rol de gestió de primera línia liderant un equip multifuncional (~7 persones) enfocat en el lliurament de producte, el rendiment de l’equip i la cultura àgil.",
     achievements: [
@@ -404,7 +406,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
   {
     period: "Jun 2020 – Oct 2022",
     title: "Senior Software Engineer",
-    company: "Mitek Systems",
+    company: COMPANY.MITEK,
     description:
       "Vaig liderar iniciatives de qualitat de codi i vaig dissenyar una arquitectura serverless per a demos internes i eines de R+D.",
     achievements: [
@@ -427,7 +429,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
   {
     period: "2017 – Jul 2020",
     title: "Enginyer FullStack / R+D",
-    company: "HP (via ERNI)",
+    company: COMPANY.HP,
     description:
       "Vaig dissenyar solucions frontend i vaig millorar processos de qualitat per a projectes de R+D amb desenvolupament basat en components i cultura de testing.",
     achievements: [
@@ -454,7 +456,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
   {
     period: "Mar 2016 – Jul 2017",
     title: "Arquitecte de Software",
-    company: "Onnergy / Gadgeon (Bèlgica)",
+    company: COMPANY.ONNERGY,
     description:
       "Arquitecte tècnic estandarditzant pràctiques de codi, dissenyant infraestructura cloud i liderant integracions amb clients.",
     achievements: [
@@ -473,7 +475,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
   {
     period: "Jul 2011 – Nov 2014",
     title: "Arquitecte de Software / Fundador",
-    company: "ClientArea (Londres, autònom)",
+    company: COMPANY.CLIENTAREA,
     description:
       "Responsable complet del producte i la tecnologia: disseny d’arquitectura, estratègia de negoci i lliurament B2B.",
     achievements: [
@@ -495,7 +497,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
   {
     period: "2009 – 2016 (feines a temps parcial)",
     title: "Operador d’atraccions i Dissenyador de producte",
-    company: "Parc d’Atraccions Tibidabo",
+    company: COMPANY.TIBIDABO,
     description:
       "Rol d’atenció al client i primeres experiències en disseny de producte enfocat en l’entreteniment infantil.",
     achievements: [
