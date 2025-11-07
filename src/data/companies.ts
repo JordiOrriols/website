@@ -3,7 +3,7 @@ export const COMPANY = {
   RANDSTAD: "Randstad Digital",
   WEFOX: "Wefox",
   MITEK: "Mitek Systems",
-  HP: "HP (ERNI)",
+  HP: "Hewlett-Packard (ERNI)",
   ONNERGY: "Onnergy / Gadgeon",
   CLIENTAREA: "ClientArea (London)",
   TIBIDABO: "Tibidabo",
