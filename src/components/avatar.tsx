@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Avatar() {
+export default function Avatar(props: { onClickAvatar?: () => void }) {
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
 
@@ -23,6 +23,13 @@ export default function Avatar() {
     },
   };
 
+  const handleOnClick = () => {
+    setClicked(true);
+    if (props.onClickAvatar) {
+      props.onClickAvatar();
+    }
+  };
+
   return (
     <div
       className="w-full h-full rounded-full bg-gradient-to-br from-[#F2F1F5] to-[#D2D1D5] flex items-center justify-center overflow-hidden relative"
@@ -31,7 +38,7 @@ export default function Avatar() {
         setHover(false);
         setClicked(false);
       }}
-      onClick={() => setClicked(true)}
+      onClick={handleOnClick}
     >
       <svg
         version="1.2"

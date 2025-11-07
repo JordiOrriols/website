@@ -56,6 +56,7 @@ export default function Portfolio() {
   const [loading, setLoading] = useState(true);
   const [activeModal, setActiveModal] = useState<SectionsType>(null);
   const [showPlane, setShowPlane] = useState(false);
+  const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -131,7 +132,7 @@ export default function Portfolio() {
   const determineSeason = () => {
     const month = new Date().getMonth() + 1;
 
-    if ([12].includes(month)) {
+    if ([11, 12].includes(month)) {
       setSeason("christmas");
       setCurrentSeason("christmas");
     } else if ([1].includes(month)) {
@@ -143,7 +144,7 @@ export default function Portfolio() {
     } else if ([6, 7, 8].includes(month)) {
       setSeason("summer");
       setCurrentSeason("summer");
-    } else if ([10, 11].includes(month)) {
+    } else if ([10].includes(month)) {
       setSeason("halloween");
       setCurrentSeason("halloween");
     } else {
@@ -253,20 +254,24 @@ export default function Portfolio() {
       </div>
 
       {/* Season Mode Selector */}
-      <div className="absolute top-26 right-4 z-30">
-        <Dropdown
-          auto={t(currentSeason)}
-          value={seasonMode}
-          onValueChange={handleSeasonModeChange}
-          options={[
-            { label: `🌸 ${t("easter")}`, value: "easter" },
-            { label: `☀️ ${t("summer")}`, value: "summer" },
-            { label: `🍂 ${t("halloween")}`, value: "halloween" },
-            { label: `❄️ ${t("christmas")}`, value: "christmas" },
-          ]}
-          placeholder={t("selectSeason")}
-        />
-      </div>
+      {activeSpecialEvents && (
+        <div className="absolute top-26 right-4 z-30">
+          <Dropdown
+            auto={t(currentSeason)}
+            value={seasonMode}
+            onValueChange={handleSeasonModeChange}
+            options={[
+              { label: `🐣 ${t("easter")}`, value: "easter" },
+              { label: `☀️ ${t("summer")}`, value: "summer" },
+              { label: `👻 ${t("halloween")}`, value: "halloween" },
+              { label: `🎄 ${t("christmas")}`, value: "christmas" },
+              { label: `🎉 ${t("newYear")}`, value: "newYear" },
+              { label: `💼 ${t("none")}`, value: "none" },
+            ]}
+            placeholder={t("selectSeason")}
+          />
+        </div>
+      )}
 
       <div className="absolute bottom-4 right-4 z-30">
         <Button
@@ -290,6 +295,7 @@ export default function Portfolio() {
           <HomeSection
             isModalOpen={isModalOpen}
             handleStatClick={handleStatClick}
+            onClickAvatar={() => setActiveSpecialEvents(!activeSpecialEvents)}
           />
 
           {/* Modals */}
