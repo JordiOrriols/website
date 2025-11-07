@@ -1,4 +1,6 @@
-export const es = {
+import { Locale } from "./types";
+
+export const es: Locale = {
   translation: {
     // Weather System
     loadingWeather: "Cargando clima de Barcelona...",
