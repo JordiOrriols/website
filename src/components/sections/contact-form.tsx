@@ -5,8 +5,10 @@ import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { X, Send, Loader2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export default function ContactForm({ onClose }) {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -71,25 +73,22 @@ export default function ContactForm({ onClose }) {
           <>
             <div className="mb-8">
               <h2 className="text-3xl font-light text-gray-800 mb-2">
-                Envíame un mensaje
+                {t("contactTitle")}
               </h2>
-              <p className="text-gray-500">
-                Me encantaría saber de ti. Completa el formulario y te
-                responderé pronto.
-              </p>
+              <p className="text-gray-500">{t("contactSubtitle")}</p>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-gray-700">
-                    Nombre
+                    {t("firstName")}
                   </Label>
                   <Input
                     id="firstName"
                     value={formData.firstName}
                     onChange={(e) => handleChange("firstName", e.target.value)}
-                    placeholder="Tu nombre"
+                    placeholder={t("firstNamePlaceholder")}
                     required
                     className="border-gray-300 focus:border-[#2D4A6B] focus:ring-[#2D4A6B]"
                   />
@@ -97,13 +96,13 @@ export default function ContactForm({ onClose }) {
 
                 <div className="space-y-2">
                   <Label htmlFor="lastName" className="text-gray-700">
-                    Apellido
+                    {t("lastName")}
                   </Label>
                   <Input
                     id="lastName"
                     value={formData.lastName}
                     onChange={(e) => handleChange("lastName", e.target.value)}
-                    placeholder="Tu apellido"
+                    placeholder={t("lastNamePlaceholder")}
                     required
                     className="border-gray-300 focus:border-[#2D4A6B] focus:ring-[#2D4A6B]"
                   />
@@ -112,14 +111,14 @@ export default function ContactForm({ onClose }) {
 
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-gray-700">
-                  Correo electrónico
+                  {t("email")}
                 </Label>
                 <Input
                   id="email"
                   type="email"
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
-                  placeholder="tu@email.com"
+                  placeholder={t("emailPlaceholder")}
                   required
                   className="border-gray-300 focus:border-[#2D4A6B] focus:ring-[#2D4A6B]"
                 />
@@ -127,13 +126,13 @@ export default function ContactForm({ onClose }) {
 
               <div className="space-y-2">
                 <Label htmlFor="message" className="text-gray-700">
-                  Mensaje
+                  {t("message")}
                 </Label>
                 <Textarea
                   id="message"
                   value={formData.message}
                   onChange={(e) => handleChange("message", e.target.value)}
-                  placeholder="Escribe tu mensaje aquí..."
+                  placeholder={t("messagePlaceholder")}
                   rows={6}
                   required
                   className="border-gray-300 focus:border-[#2D4A6B] focus:ring-[#2D4A6B] resize-none"
@@ -147,7 +146,7 @@ export default function ContactForm({ onClose }) {
                   onClick={onClose}
                   className="px-6"
                 >
-                  Cancelar
+                  {t("cancel")}
                 </Button>
                 <Button
                   type="submit"
@@ -157,12 +156,12 @@ export default function ContactForm({ onClose }) {
                   {sending ? (
                     <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                      Enviando...
+                      {t("sending")}
                     </>
                   ) : (
                     <>
                       <Send className="w-4 h-4 mr-2" />
-                      Enviar mensaje
+                      {t("send")}
                     </>
                   )}
                 </Button>
@@ -191,9 +190,9 @@ export default function ContactForm({ onClose }) {
               </svg>
             </div>
             <h3 className="text-2xl font-light text-gray-800 mb-2">
-              ¡Mensaje enviado!
+              {t("messageSent")}
             </h3>
-            <p className="text-gray-500">Te responderé lo antes posible.</p>
+            <p className="text-gray-500">{t("messageResponse")}</p>
           </motion.div>
         )}
       </div>

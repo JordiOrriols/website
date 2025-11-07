@@ -1,7 +1,10 @@
 import React, { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function PlaneController() {
+  const { t } = useTranslation();
+
   const [position, setPosition] = useState({ x: 100, y: 10 });
   const [showNotification, setShowNotification] = useState(true);
   const velocityYRef = useRef(0);
@@ -70,19 +73,6 @@ export default function PlaneController() {
       cancelAnimationFrame(animationId);
     };
   }, []);
-
-  /*
-  
-   <animateTransform
-              attributeName="transform"
-              attributeType="XML"
-              type="rotate"
-              from="0 85 40"
-              to="360 85 40"
-              dur="0.2s"
-              repeatCount="indefinite"
-            />
-  */
 
   return (
     <>
@@ -370,9 +360,9 @@ export default function PlaneController() {
                 <span className="text-2xl">✈️</span>
               </div>
               <div>
-                <p className="font-semibold">¡Avión activado!</p>
+                <p className="font-semibold">{t("planeActivated")}</p>
                 <p className="text-sm text-white/80">
-                  Usa ↑ ↓ para controlarlo
+                  {t("planeControls")}
                 </p>
               </div>
             </div>

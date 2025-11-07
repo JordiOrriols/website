@@ -16,6 +16,7 @@ import WorkTimeline from "@/components/sections/experience";
 import { companiesGallery } from "@/data/companies";
 import { experienceTimeline } from "@/data/experience";
 import HomeSection from "@/components/sections/home";
+import { useTranslation } from "react-i18next";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -30,6 +31,8 @@ export type SectionsType =
   | "contact";
 
 export default function Portfolio() {
+  const { t } = useTranslation();
+
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
 
@@ -161,7 +164,7 @@ export default function Portfolio() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]">
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" />
-          <p className="text-white text-lg">Cargando clima de Barcelona...</p>
+          <p className="text-white text-lg">{t("loadingWeather")}</p>
         </div>
       </div>
     );
@@ -182,12 +185,12 @@ export default function Portfolio() {
           value={weatherMode}
           onValueChange={handleWeatherModeChange}
           options={[
-            { label: "☀️ Clear", value: "clear" },
-            { label: "☁️ Cloudy", value: "cloudy" },
-            { label: "🌧️ Rainy", value: "rain" },
-            { label: "⚡ Thunderstorm", value: "thunderstorm" },
+            { label: `☀️ ${t("clear")}`, value: "clear" },
+            { label: `☁️ ${t("cloudy")}`, value: "cloudy" },
+            { label: `🌧️ ${t("rain")}`, value: "rain" },
+            { label: `⚡ ${t("thunderstorm")}`, value: "thunderstorm" },
           ]}
-          placeholder="Select Weather"
+          placeholder={t("selectWeather")}
         />
       </div>
 
@@ -198,12 +201,12 @@ export default function Portfolio() {
           value={timeOfDayMode}
           onValueChange={handleTimeOfDayModeChange}
           options={[
-            { label: "🌅 Morning", value: "morning" },
-            { label: "☀️ Day", value: "day" },
-            { label: "☀️ Afternoon", value: "afternoon" },
-            { label: "🌙 Night", value: "night" },
+            { label: `🌅 ${t("morning")}`, value: "morning" },
+            { label: `☀️ ${t("day")}`, value: "day" },
+            { label: `☀️ ${t("afternoon")}`, value: "afternoon" },
+            { label: `🌙 ${t("night")}`, value: "night" },
           ]}
-          placeholder="Select moment"
+          placeholder={t("selectMoment")}
         />
       </div>
 
@@ -275,8 +278,8 @@ export default function Portfolio() {
                 style={{ transformStyle: "preserve-3d" }}
               >
                 <WorkTimeline
-                  title="Experience Timeline"
-                  subtitle="A detailed overview of my professional journey"
+                  title={t("workTimelineTitle")}
+                  subtitle={t("workTimelineSubtitle")}
                   options={experienceTimeline}
                   onClose={closeModal}
                 />

@@ -1,8 +1,21 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
+import { i } from "framer-motion/dist/types.d-BJcRxCew";
 
-export default function Gallery({ options, onClose }) {
+interface GalleryItem {
+  title: string;
+  image: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  options: GalleryItem[];
+  onClose: () => void;
+}
+
+export default function Gallery({ title, subtitle, options, onClose }: Props) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -20,10 +33,8 @@ export default function Gallery({ options, onClose }) {
 
       <div className="p-8 md:p-12">
         <div className="mb-8">
-          <h2 className="text-3xl font-light text-gray-800 mb-2">Companies</h2>
-          <p className="text-gray-500">
-            These companies trust me to create amazing projects
-          </p>
+          <h2 className="text-3xl font-light text-gray-800 mb-2">{title}</h2>
+          <p className="text-gray-500">{subtitle}</p>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-h-[60vh] overflow-y-auto pr-2">

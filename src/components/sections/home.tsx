@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import { SectionsType } from "@/pages/portfolio";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
+import LanguageSelector from "../language-selector";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   isModalOpen: boolean;
@@ -12,6 +14,7 @@ interface Props {
 }
 
 export default function HomeSection(props: Props) {
+  const { t } = useTranslation();
   return (
     <motion.div
       animate={
@@ -49,41 +52,41 @@ export default function HomeSection(props: Props) {
         <div className="ml-4 mr-4 mb-4 flex justify-between items-start flex-wrap gap-4">
           <div className="text-center w-full mt-5">
             <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide">
-              Jordi Orriols
+              {t("name")}
             </h1>
-            <p className="text-gray-400 text-m tracking-wider">
-              Multimedia Engineer Lead
-            </p>
+            <p className="text-gray-400 text-m tracking-wider">{t("title")}</p>
           </div>
         </div>
       </div>
+
+      <LanguageSelector />
 
       {/* Stats Section */}
       <Stats
         options={[
           {
-            label: "Projects",
+            label: t("projects"),
             value: "15",
             onClick: () => {},
             // onClick: () => props.handleStatClick("projects"),
           },
           {
-            label: "Companies",
+            label: t("companies"),
             value: "12",
             onClick: () => {},
             // onClick: () => props.handleStatClick("companies"),
           },
           {
-            label: "Leading",
+            label: t("leading"),
             value: "3",
-            unit: "years",
+            unit: t("years"),
             onClick: () => {},
             // onClick: () => props.handleStatClick("leading_years"),
           },
           {
-            label: "Experience",
+            label: t("experience"),
             value: "12",
-            unit: "years",
+            unit: t("years"),
             onClick: () => props.handleStatClick("experience_years"),
           },
         ]}
@@ -94,7 +97,7 @@ export default function HomeSection(props: Props) {
           className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
         >
           <Mail className="w-4 h-4 mr-2" />
-          Enviar mensaje
+          {t("sendMessage")}
         </Button>
       ) : null}
     </motion.div>

@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { X, Calendar, Globe, CheckCircle2, Code } from "lucide-react";
 import { ExperienceEntry } from "@/data/experience";
+import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   title: string;
@@ -16,6 +18,7 @@ export default function WorkTimeline({
   options,
   onClose,
 }: Props): React.JSX.Element {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -79,7 +82,7 @@ export default function WorkTimeline({
                       <div className="flex items-center gap-2 mb-4">
                         <CheckCircle2 className="w-4 h-4 text-green-600" />
                         <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-                          Goals & Achievements
+                          {t("goalsAndAchievements")}
                         </span>
                       </div>
                       <ul className="space-y-2">
@@ -102,7 +105,7 @@ export default function WorkTimeline({
                       <div className="flex items-center gap-2 mb-3">
                         <Code className="w-4 h-4 text-gray-400" />
                         <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-                          Technologies
+                          {t("technologies")}
                         </span>
                       </div>
 

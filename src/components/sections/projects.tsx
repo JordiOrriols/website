@@ -13,7 +13,7 @@ const projects = [
   { title: "Product Launch", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop" }
 ];
 
-export default function ProjectsGallery({ onClose }) {
+export default function ProjectsGallery({ title, subtitle, onClose }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -32,10 +32,10 @@ export default function ProjectsGallery({ onClose }) {
       <div className="p-8 md:p-12">
         <div className="mb-8">
           <h2 className="text-3xl font-light text-gray-800 mb-2">
-            Mis Proyectos
+            {title}
           </h2>
           <p className="text-gray-500">
-            Una selección de mis trabajos más destacados
+            {subtitle}
           </p>
         </div>
 
