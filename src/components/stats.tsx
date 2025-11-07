@@ -30,7 +30,7 @@ export default function Stats(props: Props) {
             </div>
             {option.unit ? (
               <div className="text-xs font-extralight text-gray-300">
-                (In {option.unit})
+                ({option.unit})
               </div>
             ) : null}
           </div>
