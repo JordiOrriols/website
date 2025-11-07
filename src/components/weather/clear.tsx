@@ -17,8 +17,9 @@ const configClear: Record<TimeOfDayType, configType> = {
     bg: "from-[#87CEEB] via-[#B0E0E6] to-[#FFE4B5]",
   },
   day: {
-    skyline: "#4AA0FF",
-    bg: "from-[#5EC4FF] via-[#90E0FF] to-[#E6F7FF]",
+    // Cielo despejado: azul intenso y limpio.
+    skyline: "#5CA9E6",
+    bg: "from-[#6EC6FF] via-[#9EDCFF] to-[#E0F6FF]",
   },
   afternoon: {
     skyline: "#CC8400",
