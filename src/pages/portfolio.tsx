@@ -141,10 +141,6 @@ export default function Portfolio() {
       return <ThunderstormScene />;
     }
 
-    if (weather === "rain") {
-      return <RainyScene timeOfDay={timeOfDay} />;
-    }
-
     return <ClearScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
