@@ -14,7 +14,6 @@ import ProjectsGallery from "@/components/sections/projects";
 import Gallery from "@/components/sections/gallery";
 import WorkTimeline from "@/components/sections/experience";
 import { companiesGallery } from "@/data/companies";
-import { experienceTimeline } from "@/data/experience";
 import HomeSection from "@/components/sections/home";
 import { useTranslation } from "react-i18next";
 
@@ -170,6 +169,8 @@ export default function Portfolio() {
     );
   }
 
+  const experienceTimeline = t("experienceTimeline", { returnObjects: true });
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Dynamic Background */}
@@ -250,7 +251,11 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <ProjectsGallery onClose={closeModal} />
+                <ProjectsGallery
+                  title={""}
+                  subtitle={""}
+                  onClose={closeModal}
+                />
               </div>
             )}
 
@@ -259,7 +264,12 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <Gallery options={companiesGallery} onClose={closeModal} />
+                <Gallery
+                  title={""}
+                  subtitle={""}
+                  options={companiesGallery}
+                  onClose={closeModal}
+                />
               </div>
             )}
 
@@ -268,7 +278,12 @@ export default function Portfolio() {
                 className="absolute inset-0 flex items-center justify-center"
                 style={{ transformStyle: "preserve-3d" }}
               >
-                <Gallery options={companiesGallery} onClose={closeModal} />
+                <Gallery
+                  title={""}
+                  subtitle={""}
+                  options={companiesGallery}
+                  onClose={closeModal}
+                />
               </div>
             )}
 

@@ -1,3 +1,4 @@
+import { experienceTimelineEn } from "@/data/experience";
 import { Locale } from "./types";
 
 export const en: Locale = {
@@ -45,6 +46,7 @@ export const en: Locale = {
     workTimelineSubtitle: "A detailed view of my professional journey",
     goalsAndAchievements: "Goals and Achievements",
     technologies: "Technologies",
+    experienceTimeline: experienceTimelineEn,
 
     // Contact Form
     contactTitle: "Send me a message",

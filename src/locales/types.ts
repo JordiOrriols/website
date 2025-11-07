@@ -1,3 +1,5 @@
+import { ExperienceEntry } from "@/data/experience";
+
 export interface Translation {
   // Weather System
   loadingWeather: string;
@@ -61,6 +63,8 @@ export interface Translation {
   sending: string;
   messageSent: string;
   messageResponse: string;
+
+  experienceTimeline: ExperienceEntry[];
 }
 
 export interface Locale {

@@ -1,3 +1,4 @@
+import { experienceTimelineCa } from "@/data/experience";
 import { Locale } from "./types";
 
 export const ca: Locale = {
@@ -46,6 +47,7 @@ export const ca: Locale = {
       "Una visió detallada de la meva trajectòria professional",
     goalsAndAchievements: "Objectius i Assoliments",
     technologies: "Tecnologies",
+    experienceTimeline: experienceTimelineCa,
 
     // Contact Form
     contactTitle: "Envia'm un missatge",
