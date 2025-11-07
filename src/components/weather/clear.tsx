@@ -26,8 +26,9 @@ const configClear: Record<TimeOfDayType, configType> = {
     bg: "from-[#FFB347] via-[#FFCC70] to-[#FFA500]",
   },
   night: {
-    skyline: "#293D5F",
-    bg: "from-[#4A6FA5] via-[#5B7FA8] to-[#4A6FA5]",
+    // Azul profundo con toque violeta por luz urbana.
+    skyline: "#1E2A44",
+    bg: "from-[#0B1A33] via-[#1F3A5F] to-[#2B4C7E]",
   },
 };
 
