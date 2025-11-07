@@ -4,7 +4,6 @@ import { Loader2, Plane } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 
 import ClearScene from "../components/weather/clear";
-import RainyScene from "../components/weather/raining";
 import ThunderstormScene from "../components/weather/thunderstorm";
 import ContactForm from "../components/sections/contact-form";
 import Dropdown from "../components/dropdown";
@@ -22,6 +21,13 @@ const BARCELONA_LON = 2.1734;
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
+export type SeasonType =
+  | "easter"
+  | "summer"
+  | "halloween"
+  | "christmas"
+  | "newYear"
+  | "none";
 export type SectionsType =
   | "projects"
   | "companies"
@@ -34,12 +40,15 @@ export default function Portfolio() {
 
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
+  const [season, setSeason] = useState<SeasonType>("none");
 
   const [weatherMode, setWeatherMode] = useState<WeatherType>("auto");
   const [timeOfDayMode, setTimeOfDayMode] = useState<TimeOfDayType>("auto");
+  const [seasonMode, setSeasonMode] = useState<SeasonType>("auto");
 
   const [currentTimeOfDay, setCurrentTimeOfDay] = useState<TimeOfDayType>();
   const [currentWeather, setCurrentWeather] = useState<WeatherType>();
+  const [currentSeason, setCurrentSeason] = useState<SeasonType>();
 
   const [sunrise, setSunrise] = useState<string | null>(null);
   const [sunset, setSunset] = useState<string | null>(null);
@@ -52,9 +61,40 @@ export default function Portfolio() {
     async function fetchData() {
       await fetchWeather();
       determineTimeOfDay();
+      determineSeason();
     }
     fetchData();
   }, []);
+
+  const fetchWeather = async () => {
+    try {
+      if (currentWeather) {
+        setWeather(currentWeather);
+        return;
+      }
+
+      setLoading(true);
+      const response = await fetchCurrentWeather(BARCELONA_LAT, BARCELONA_LON);
+
+      console.log("Weather response:", response);
+
+      const selectedWeather = getWeatherMode(
+        response.current_weather.weathercode
+      );
+
+      setCurrentWeather(selectedWeather);
+      setWeather(selectedWeather);
+
+      setSunrise(response.daily?.sunrise?.[0] ?? null);
+      setSunset(response.daily?.sunset?.[0] ?? null);
+    } catch (error) {
+      console.error("Error fetching weather:", error);
+      setCurrentWeather("clear");
+      setWeather("clear");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const determineTimeOfDay = () => {
     const hour = new Date().getHours();
@@ -88,52 +128,57 @@ export default function Portfolio() {
     }
   };
 
-  const fetchWeather = async () => {
-    try {
-      if (currentWeather) {
-        setWeather(currentWeather);
-        return;
-      }
+  const determineSeason = () => {
+    const month = new Date().getMonth() + 1;
 
-      setLoading(true);
-      const response = await fetchCurrentWeather(BARCELONA_LAT, BARCELONA_LON);
-
-      console.log("Weather response:", response);
-
-      const selectedWeather = getWeatherMode(
-        response.current_weather.weathercode
-      );
-
-      setCurrentWeather(selectedWeather);
-      setWeather(selectedWeather);
-
-      setSunrise(response.daily?.sunrise?.[0] ?? null);
-      setSunset(response.daily?.sunset?.[0] ?? null);
-    } catch (error) {
-      console.error("Error fetching weather:", error);
-      setCurrentWeather("clear");
-      setWeather("clear");
-    } finally {
-      setLoading(false);
+    if ([12].includes(month)) {
+      setSeason("christmas");
+      setCurrentSeason("christmas");
+    } else if ([1].includes(month)) {
+      setSeason("newYear");
+      setCurrentSeason("newYear");
+    } else if ([4].includes(month)) {
+      setSeason("easter");
+      setCurrentSeason("easter");
+    } else if ([6, 7, 8].includes(month)) {
+      setSeason("summer");
+      setCurrentSeason("summer");
+    } else if ([10, 11].includes(month)) {
+      setSeason("halloween");
+      setCurrentSeason("halloween");
+    } else {
+      setSeason("none");
+      setCurrentSeason("none");
     }
   };
 
   const handleWeatherModeChange = (value) => {
     setWeatherMode(value);
     if (value.includes("clear")) setWeather("clear");
-    if (value.includes("cloudy")) setWeather("cloudy");
-    if (value.includes("rain")) setWeather("rain");
-    if (value.includes("thunderstorm")) setWeather("thunderstorm");
-    if (value.includes("auto")) setWeather(currentWeather);
+    else if (value.includes("cloudy")) setWeather("cloudy");
+    else if (value.includes("rain")) setWeather("rain");
+    else if (value.includes("thunderstorm")) setWeather("thunderstorm");
+    else if (value.includes("auto")) setWeather(currentWeather);
   };
 
   const handleTimeOfDayModeChange = (value) => {
     setTimeOfDayMode(value);
     if (value.includes("morning")) setTimeOfDay("morning");
-    if (value.includes("day")) setTimeOfDay("day");
-    if (value.includes("afternoon")) setTimeOfDay("afternoon");
-    if (value.includes("night")) setTimeOfDay("night");
-    if (value.includes("auto")) determineTimeOfDay();
+    else if (value.includes("day")) setTimeOfDay("day");
+    else if (value.includes("afternoon")) setTimeOfDay("afternoon");
+    else if (value.includes("night")) setTimeOfDay("night");
+    else if (value.includes("auto")) determineTimeOfDay();
+  };
+
+  const handleSeasonModeChange = (value) => {
+    setSeasonMode(value);
+    if (value.includes("christmas")) setSeason("christmas");
+    else if (value.includes("newYear")) setSeason("newYear");
+    else if (value.includes("easter")) setSeason("easter");
+    else if (value.includes("summer")) setSeason("summer");
+    else if (value.includes("halloween")) setSeason("halloween");
+    else if (value.includes("none")) setSeason("none");
+    else if (value.includes("auto")) determineSeason();
   };
 
   const getBackgroundComponent = () => {
@@ -178,7 +223,7 @@ export default function Portfolio() {
       {/* Weather Mode Selector */}
       <div className="absolute top-4 right-4 z-30">
         <Dropdown
-          auto={currentWeather}
+          auto={t(currentWeather)}
           value={weatherMode}
           onValueChange={handleWeatherModeChange}
           options={[
@@ -194,7 +239,7 @@ export default function Portfolio() {
       {/* Day Time Mode Selector */}
       <div className="absolute top-15 right-4 z-30">
         <Dropdown
-          auto={currentTimeOfDay}
+          auto={t(currentTimeOfDay)}
           value={timeOfDayMode}
           onValueChange={handleTimeOfDayModeChange}
           options={[
@@ -204,6 +249,22 @@ export default function Portfolio() {
             { label: `🌙 ${t("night")}`, value: "night" },
           ]}
           placeholder={t("selectMoment")}
+        />
+      </div>
+
+      {/* Season Mode Selector */}
+      <div className="absolute top-26 right-4 z-30">
+        <Dropdown
+          auto={t(currentSeason)}
+          value={seasonMode}
+          onValueChange={handleSeasonModeChange}
+          options={[
+            { label: `🌸 ${t("easter")}`, value: "easter" },
+            { label: `☀️ ${t("summer")}`, value: "summer" },
+            { label: `🍂 ${t("halloween")}`, value: "halloween" },
+            { label: `❄️ ${t("christmas")}`, value: "christmas" },
+          ]}
+          placeholder={t("selectSeason")}
         />
       </div>
 

@@ -22,9 +22,10 @@ export const es: Locale = {
     selectSeason: "Seleccionar temporada",
     christmas: "Navidad",
     halloween: "Halloween",
+    summer: "Verano",
     easter: "Pascua",
-    valentine: "San Valentín",
     newYear: "Año Nuevo",
+    none: "Ninguna",
 
     // Plane System
     planeActivated: "¡Avión activado!",

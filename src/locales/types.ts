@@ -20,9 +20,10 @@ export interface Translation {
   selectSeason: string;
   christmas: string;
   halloween: string;
+  summer: string;
   easter: string;
-  valentine: string;
   newYear: string;
+  none: string;
 
   // Plane System
   planeActivated: string;
