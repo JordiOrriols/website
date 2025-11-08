@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import { Howl } from "howler";
 import { WeatherType } from "@/pages/portfolio";
 
@@ -11,7 +11,6 @@ const audioFiles: Record<AmbientAudioKey, string> = {
   night: "/audio/night-01.mp3",
 };
 
-// Configuración por escena
 export const sceneAudioConfig: Record<
   WeatherType,
   {
@@ -40,6 +39,7 @@ export const sceneAudioConfig: Record<
 export const useAmbientAudio = (weather: WeatherType) => {
   const howlsRef = useRef<Map<AmbientAudioKey, Howl>>(new Map());
   const timersRef = useRef<number[]>([]);
+  const [muted, setMuted] = useState(false);
 
   // Carga un sonido si no existe
   const loadSound = useCallback((key: AmbientAudioKey) => {
@@ -61,10 +61,10 @@ export const useAmbientAudio = (weather: WeatherType) => {
     ) => {
       const sound = howlsRef.current.get(key) ?? loadSound(key);
       sound.loop(loop);
-      sound.volume(volume);
+      sound.volume(muted ? 0 : volume);
       sound.play();
     },
-    [loadSound]
+    [loadSound, muted]
   );
 
   // Trueno manual
@@ -92,6 +92,16 @@ export const useAmbientAudio = (weather: WeatherType) => {
     [playSound]
   );
 
+  // Cambia mute global
+  const toggleMute = useCallback(() => {
+    setMuted((prev) => {
+      const next = !prev;
+      // Aplica mute global a todos los sonidos
+      howlsRef.current.forEach((howl) => howl.mute(next));
+      return next;
+    });
+  }, []);
+
   // Cambio de escena
   useEffect(() => {
     timersRef.current.forEach(clearTimeout);
@@ -114,5 +124,5 @@ export const useAmbientAudio = (weather: WeatherType) => {
     };
   }, [weather, playSound, scheduleRandom]);
 
-  return { playThunder };
+  return { playThunder, toggleMute, muted };
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2, Plane } from "lucide-react";
+import { Loader2, Pause, Plane, Play } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 
 import ClearScene from "../components/weather/clear";
@@ -16,7 +16,6 @@ import { companiesGallery } from "@/data/companies";
 import HomeSection from "@/components/sections/home";
 import { useTranslation } from "react-i18next";
 import { useAmbientAudio } from "@/lib/ambient";
-import { AmbientControls } from "@/components/audio-controls";
 import { ErrorBoundary } from "react-error-boundary";
 
 const BARCELONA_LAT = 41.3851;
@@ -61,7 +60,7 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
-  const { playThunder } = useAmbientAudio(weather);
+  const { playThunder, toggleMute, muted } = useAmbientAudio(weather);
 
   useEffect(() => {
     async function fetchData() {
@@ -290,7 +289,7 @@ export default function Portfolio() {
         )}
       </ErrorBoundary>
 
-      <div className="absolute bottom-4 right-4 z-30">
+      <div className="absolute bottom-4 right-16 z-30">
         <Button
           onClick={() => setShowPlane(!showPlane)}
           className={`${
@@ -301,8 +300,19 @@ export default function Portfolio() {
         >
           <Plane className="w-4 h-4" />
         </Button>
+      </div>
 
-        <AmbientControls></AmbientControls>
+      <div className="absolute bottom-4 right-4 z-30">
+        <Button
+          onClick={() => toggleMute(!muted)}
+          className={`${
+            muted
+              ? "bg-[#2D4A6B] hover:bg-[#1F3447]"
+              : "bg-red-600 hover:bg-red-700"
+          } shadow-lg transition-all duration-300 mt-3 float-right`}
+        >
+          {muted ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+        </Button>
       </div>
 
       {/* Cards Container */}
