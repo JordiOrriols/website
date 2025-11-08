@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import AppLogo from "./elements/logo";
-import CitySkyline from "./elements/skyline";
-import Clouds, { CloudsProps } from "./elements/cloud";
+import AppLogo from "../elements/logo";
+import CitySkyline from "../elements/skyline";
+import Clouds, { CloudsProps } from "../elements/cloud";
 import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
-import Stars from "./elements/stars";
-import Rain from "./elements/rain";
-import Snow from "./elements/snow";
-import Moon from "./elements/moon";
-import Sun from "./elements/sun";
+import Stars from "../elements/stars";
+import Rain from "../elements/rain";
+import Snow from "../elements/snow";
+import Moon from "../elements/moon";
+import Sun from "../elements/sun";
 
 interface configType {
   skyline: string;

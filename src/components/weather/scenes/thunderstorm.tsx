@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import AppLogo from "./elements/logo";
-import CitySkyline from "./elements/skyline";
-import Clouds from "./elements/cloud";
-import Rain from "./elements/rain";
-import Lightning from "./elements/lightning";
+import AppLogo from "../elements/logo";
+import CitySkyline from "../elements/skyline";
+import Clouds from "../elements/cloud";
+import Rain from "../elements/rain";
+import Lightning from "../elements/lightning";
 
 interface Props {
   playThunder: () => void;

@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Pause, Plane, Play, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 
-import ClearScene from "../components/weather/clear";
-import ThunderstormScene from "../components/weather/thunderstorm";
+import ClearScene from "../components/weather/scenes/clear";
+import ThunderstormScene from "../components/weather/scenes/thunderstorm";
 import ContactForm from "../components/sections/contact-form";
 import Dropdown from "../components/dropdown";
 import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
