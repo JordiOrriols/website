@@ -18,7 +18,6 @@ const audioFiles: Record<AmbientAudioKey, string> = {
   thunderThree: "/audio/thunder-03.mp3",
   morning: "/audio/morning-01.mp3",
   night: "/audio/night-01.mp3",
-
   click: "/audio/click-01.mp3",
 };
 
@@ -37,20 +36,10 @@ const getAudioConfig = (
   timeOfDay: TimeOfDayType
 ): AmbientConfig => {
   if (weather === "thunderstorm" || weather === "rain")
-    return {
-      background: ["rain"],
-    };
-  else if (timeOfDay === "morning")
-    return {
-      background: ["morning"],
-    };
-  else if (timeOfDay === "night")
-    return {
-      background: ["night"],
-    };
-  return {
-    background: ["morning"],
-  };
+    return { background: ["rain"] };
+  if (timeOfDay === "morning") return { background: ["morning"] };
+  if (timeOfDay === "night") return { background: ["night"] };
+  return { background: ["morning"] };
 };
 
 export const useAmbientAudio = (
@@ -59,9 +48,9 @@ export const useAmbientAudio = (
 ) => {
   const howlsRef = useRef<Map<AmbientAudioKey, Howl>>(new Map());
   const timersRef = useRef<number[]>([]);
+  const lastConfigRef = useRef<AmbientConfig | null>(null);
   const [muted, setMuted] = useState(false);
 
-  // Carga un sonido si no existe
   const loadSound = useCallback((key: AmbientAudioKey) => {
     if (howlsRef.current.has(key)) return howlsRef.current.get(key)!;
     const sound = new Howl({
@@ -73,7 +62,6 @@ export const useAmbientAudio = (
     return sound;
   }, []);
 
-  // Reproduce un sonido (loop o one-shot)
   const playSound = useCallback(
     (
       key: AmbientAudioKey,
@@ -82,20 +70,18 @@ export const useAmbientAudio = (
       const sound = howlsRef.current.get(key) ?? loadSound(key);
       sound.loop(loop);
       sound.volume(muted ? 0 : volume);
-      sound.play();
+      if (!sound.playing()) sound.play();
     },
     [loadSound, muted]
   );
 
-  // Trueno manual
   const playThunder = useCallback(() => {
     const key = ["thunderOne", "thunderTwo", "thunderThree"][
       Math.floor(Math.random() * 3)
-    ];
+    ] as AmbientAudioKey;
     playSound(key, { loop: false, volume: 0.4 });
   }, [playSound]);
 
-  // Programador de sonidos aleatorios
   const scheduleRandom = useCallback(
     (random?: AmbientConfig["random"]) => {
       if (!random) return;
@@ -115,35 +101,46 @@ export const useAmbientAudio = (
     [playSound]
   );
 
-  // Cambia mute global
   const toggleMute = useCallback(() => {
     setMuted((prev) => {
       const next = !prev;
-      // Aplica mute global a todos los sonidos
       howlsRef.current.forEach((howl) => howl.mute(next));
       return next;
     });
   }, []);
 
-  // Cambio de escena
   useEffect(() => {
+    const newCfg = getAudioConfig(weather, timeOfDay);
+    const lastCfg = lastConfigRef.current;
+
+    // Verifica si realmente cambió la configuración
+    const sameBackground =
+      lastCfg &&
+      newCfg.background.length === lastCfg.background.length &&
+      newCfg.background.every((key, i) => key === lastCfg.background[i]);
+
+    if (sameBackground) return; // No reiniciar audio si no cambia la escena
+
+    lastConfigRef.current = newCfg;
+
+    // Limpieza de timers anteriores
     timersRef.current.forEach(clearTimeout);
     timersRef.current = [];
 
-    const cfg = getAudioConfig(weather, timeOfDay);
+    // Detiene todos los sonidos previos
+    howlsRef.current.forEach((howl) => howl.stop());
 
-    // reproducir los de fondo
-    cfg.background.forEach((key) => {
+    // Reproduce nuevos fondos
+    newCfg.background.forEach((key) => {
       playSound(key, { loop: true, volume: 0.7 });
     });
 
-    // programar aleatorios
-    scheduleRandom(cfg.random);
+    // Programa sonidos aleatorios
+    scheduleRandom(newCfg.random);
 
     return () => {
       timersRef.current.forEach(clearTimeout);
       timersRef.current = [];
-      howlsRef.current.forEach((howl) => howl.stop());
     };
   }, [weather, timeOfDay, playSound, scheduleRandom]);
 
