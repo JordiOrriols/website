@@ -78,17 +78,14 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       src.buffer = buf;
 
       const dropGain = ctx.createGain();
-      // envelope
       dropGain.gain.setValueAtTime(0.0001, when);
       dropGain.gain.exponentialRampToValueAtTime(volume, when + 0.005);
       dropGain.gain.exponentialRampToValueAtTime(0.0001, when + duration);
 
-      // highpass to remove low rumble and a little band shaping
       const hp = ctx.createBiquadFilter();
       hp.type = "highpass";
-      hp.frequency.value = 600 + Math.random() * 300; // random timbre per drop
+      hp.frequency.value = 600 + Math.random() * 300;
 
-      // small resonant peak to simulate impact
       const bp = ctx.createBiquadFilter();
       bp.type = "bandpass";
       bp.frequency.value = 2500 + Math.random() * 2000;
@@ -297,40 +294,22 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
     clearAll();
 
     if (weatherCondition === "rain" || weatherCondition === "thunderstorm") {
-      // master volume for rain
       amb.masterGain.gain.setValueAtTime(0.45, ctx.currentTime);
 
-      // 1) light sparkle layer (high band)
       playNoiseLayer({ filterFreq: 6000, q: 0.8, gain: 0.035, pan: -0.3 });
-
-      // 2) body of rain (mid band, more energy)
-      playNoiseLayer({
-        filterFreq: 1800,
-        q: 0.9,
-        gain: 0.12,
-        pan: 0.4,
-        lowpassAfter: 800,
-      });
-
-      // 3) lower rumble / heavy drops layer (when heavy rain)
+      playNoiseLayer({ filterFreq: 1800, q: 0.9, gain: 0.12, pan: 0.4, lowpassAfter: 800 });
       playNoiseLayer({ filterFreq: 400, q: 0.8, gain: 0.06, pan: 0.1 });
 
-      // 4) schedule many small raindrops with stochastic timing
-      // create a burst generator for the next N seconds (cleared on cleanup)
       const scheduleDrops = (durationSec = 20) => {
         const t0 = ctx.currentTime;
         const end = t0 + durationSec;
         let cursor = t0;
         while (cursor < end) {
-          // inter-drop spacing random: 0.02 - 0.5s (more dense for heavy)
           const spacing = 0.02 + Math.random() * 0.45;
           cursor += spacing;
-          const when = cursor;
-          // amplitude and duration vary
           const vol = 0.03 + Math.random() * 0.18;
           const dur = 0.03 + Math.random() * 0.15;
-          // convert to setTimeout scheduling to allow cleanup reference easily
-          const msDelay = Math.max(0, (when - ctx.currentTime) * 1000);
+          const msDelay = Math.max(0, (cursor - ctx.currentTime) * 1000);
           const tId = window.setTimeout(() => {
             playRainDrop(ctx.currentTime, {
               pan: Math.random() * 2 - 1,
@@ -341,7 +320,6 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
           amb.timers.push(tId);
         }
 
-        // re-schedule if still in rain
         const rescheduleId = window.setTimeout(() => {
           if (
             ref.current &&
@@ -349,50 +327,41 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
           ) {
             scheduleDrops(durationSec);
           }
-        }, durationSec * 1000 - 200); // slightly before end
+        }, durationSec * 1000 - 200);
         amb.timers.push(rescheduleId);
       };
 
-      scheduleDrops(12); // schedule first wave of drops
+      scheduleDrops(12);
 
-      // 5) Thunder logic (if storm)
       if (weatherCondition === "thunderstorm") {
-        // schedule random thunder over a window
         const scheduleThunderCycle = () => {
-          // next thunder in 2s - 18s
           const nextMs = 2000 + Math.random() * 16000;
           const id = window.setTimeout(() => {
-            // chance to play multiple rumbles
             const rumbles = 1 + Math.floor(Math.random() * 3);
             for (let i = 0; i < rumbles; i++) {
-              const delay = Math.random() * 1200; // ms offset
+              const delay = Math.random() * 1200;
               const tId = window.setTimeout(() => playThunder(), delay);
               amb.timers.push(tId);
             }
-            // schedule next thunder if still storming
-            if (ref.current && weatherCondition === "thunderstorm")
-              scheduleThunderCycle();
+            if (ref.current && weatherCondition === "thunderstorm") scheduleThunderCycle();
           }, nextMs);
           amb.timers.push(id);
         };
         scheduleThunderCycle();
       }
     } else if (weatherCondition === "clear") {
-      // calmer ambient pads for night
       amb.masterGain.gain.setValueAtTime(0.18, ctx.currentTime);
 
-      // two slow oscillators slightly detuned
       const osc1 = ctx.createOscillator();
       const osc2 = ctx.createOscillator();
       osc1.type = "sine";
       osc2.type = "sine";
       osc1.frequency.value = 220;
-      osc2.frequency.value = 220 * 1.02; // slight detune
+      osc2.frequency.value = 220 * 1.02;
 
       const padGain = ctx.createGain();
       padGain.gain.value = 0.04;
 
-      // gentle lowpass to soften
       const lp = ctx.createBiquadFilter();
       lp.type = "lowpass";
       lp.frequency.value = 1200;
@@ -422,16 +391,11 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
         },
       });
     } else {
-      // no ambient
       amb.masterGain.gain.setValueAtTime(0.0, ctx.currentTime);
     }
 
-    // cleanup when weatherCondition changes or unmount
-    return () => {
-      clearAll();
-    };
-  }, [weatherCondition]);
+    return () => clearAll();
+  }, [weatherCondition, playThunder]);
 
-  // hook returns nothing (side-effect only)
-  return null;
+  return { playThunder };
 };
