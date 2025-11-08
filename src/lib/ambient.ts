@@ -51,6 +51,8 @@ export const useAmbientAudio = (
   const lastConfigRef = useRef<AmbientConfig | null>(null);
   const [muted, setMuted] = useState(false);
 
+  const FADE_DURATION = 1500; // ms
+
   const loadSound = useCallback((key: AmbientAudioKey) => {
     if (howlsRef.current.has(key)) return howlsRef.current.get(key)!;
     const sound = new Howl({
@@ -69,8 +71,9 @@ export const useAmbientAudio = (
     ) => {
       const sound = howlsRef.current.get(key) ?? loadSound(key);
       sound.loop(loop);
-      sound.volume(muted ? 0 : volume);
-      if (!sound.playing()) sound.play();
+      sound.volume(muted ? 0 : 0); // start muted for fade-in
+      const id = sound.play();
+      sound.fade(0, muted ? 0 : volume, FADE_DURATION, id);
     },
     [loadSound, muted]
   );
@@ -113,35 +116,34 @@ export const useAmbientAudio = (
     const newCfg = getAudioConfig(weather, timeOfDay);
     const lastCfg = lastConfigRef.current;
 
-    // Verifica si realmente cambió la configuración
     const sameBackground =
       lastCfg &&
       newCfg.background.length === lastCfg.background.length &&
       newCfg.background.every((key, i) => key === lastCfg.background[i]);
 
-    if (sameBackground) return; // No reiniciar audio si no cambia la escena
+    if (sameBackground) return;
 
     lastConfigRef.current = newCfg;
 
-    // Limpieza de timers anteriores
+    // Fade out de los sonidos previos
+    howlsRef.current.forEach((howl) => {
+      if (howl.playing()) {
+        const id = howl.playing();
+        if (id) howl.fade(howl.volume(), 0, FADE_DURATION, id);
+        setTimeout(() => howl.stop(), FADE_DURATION);
+      }
+    });
+
     timersRef.current.forEach(clearTimeout);
     timersRef.current = [];
 
-    // Detiene todos los sonidos previos
-    howlsRef.current.forEach((howl) => howl.stop());
-
-    // Reproduce nuevos fondos
-    newCfg.background.forEach((key) => {
-      playSound(key, { loop: true, volume: 0.7 });
-    });
-
-    // Programa sonidos aleatorios
-    scheduleRandom(newCfg.random);
-
-    return () => {
-      timersRef.current.forEach(clearTimeout);
-      timersRef.current = [];
-    };
+    // Delay para que fade out termine antes de iniciar nuevos
+    setTimeout(() => {
+      newCfg.background.forEach((key) => {
+        playSound(key, { loop: true, volume: 0.7 });
+      });
+      scheduleRandom(newCfg.random);
+    }, FADE_DURATION);
   }, [weather, timeOfDay, playSound, scheduleRandom]);
 
   return { playThunder, toggleMute, muted };
