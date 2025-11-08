@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Pause, Plane, Play, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 
-import ClearScene from "../components/weather/scenes/clear";
+import DynamicScene from "../components/weather/scenes/dynamic";
 import ThunderstormScene from "../components/weather/scenes/thunderstorm";
 import ContactForm from "../components/sections/contact-form";
 import Dropdown from "../components/dropdown";
@@ -193,7 +193,7 @@ export default function Portfolio() {
       return <ThunderstormScene playThunder={playThunder} />;
     }
 
-    return <ClearScene weather={weather} timeOfDay={timeOfDay} />;
+    return <DynamicScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
   const handleStatClick = (statType: SectionsType) => {

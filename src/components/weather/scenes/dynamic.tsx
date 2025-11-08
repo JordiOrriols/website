@@ -58,7 +58,7 @@ const configRain: Record<TimeOfDayType, configType> = {
   },
 };
 
-export default function ClearScene(props: {
+export default function DynamicScene(props: {
   weather: WeatherType;
   timeOfDay: TimeOfDayType;
 }) {
