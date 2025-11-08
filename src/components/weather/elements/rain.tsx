@@ -1,3 +1,4 @@
+import { TimeOfDayType } from "@/pages/portfolio";
 import React, { useEffect, useState } from "react";
 
 export interface IRain {
@@ -7,12 +8,16 @@ export interface IRain {
   duration: number;
 }
 
-export default function Rain(props: { max: number }) {
+export default function Rain(props: { max: number; timeOfDay: TimeOfDayType }) {
   const [raindrops, setRaindrops] = useState([]);
 
   useEffect(() => {
     setRaindrops(generateRain(props.max));
   }, [props.max]);
+
+  const lightDrop = ["afternoon", "night"].includes(props.timeOfDay);
+  const colorStart = lightDrop ? "via-blue-200" : "via-slate-500";
+  const colorEnd = lightDrop ? "to-blue-300" : "to-slate-600";
 
   return (
     <>
@@ -20,7 +25,7 @@ export default function Rain(props: { max: number }) {
       {raindrops.map((drop) => (
         <div
           key={drop.id}
-          className="absolute w-0.5 h-12 bg-gradient-to-b from-transparent via-blue-200 to-blue-300 opacity-60 animate-rain"
+          className={`absolute w-0.5 h-12 bg-gradient-to-b from-transparent ${colorStart} ${colorEnd} opacity-60 animate-rain`}
           style={{
             top: `-50px`,
             left: `${drop.left}%`,

@@ -50,8 +50,8 @@ const configRain: Record<TimeOfDayType, configType> = {
   },
   night: {
     // Noche lluviosa: baja luminosidad, más azul profundo y uniforme.
-    skyline: "#111827",
-    bg: "from-[#1E2530] via-[#2C3442] to-[#3C4756]",
+    skyline: "#1F2937",
+    bg: "from-[#374151] via-[#4B5563] to-[#6B7280]",
   },
 };
 
@@ -94,7 +94,7 @@ export default function ClearScene(props: {
       ƒ{/* Clouds */}
       <Clouds {...clouds} />
       {/* Rain */}
-      {props.weather === "rain" ? <Rain max={50} /> : null}
+      {props.weather === "rain" ? <Rain max={50} timeOfDay={props.timeOfDay} /> : null}
       {/* City Skyline */}
       <CitySkyline fill={config.skyline} />
       {/* Stars */}
