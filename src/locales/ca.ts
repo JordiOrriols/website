@@ -18,6 +18,7 @@ export const ca: Locale = {
     cloudy: "Ennuvolat",
     rain: "Pluja",
     thunderstorm: "Tempesta",
+    snow: "Neu",
 
     selectSeason: "Selecciona la temporada",
     christmas: "Nadal",

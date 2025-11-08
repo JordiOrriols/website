@@ -20,7 +20,7 @@ import { useAmbientSound } from "@/lib/ambient";
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
 
-export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm";
+export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm" | "snow";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
 export type SeasonType =
   | "easter"
@@ -162,6 +162,7 @@ export default function Portfolio() {
     else if (value.includes("cloudy")) setWeather("cloudy");
     else if (value.includes("rain")) setWeather("rain");
     else if (value.includes("thunderstorm")) setWeather("thunderstorm");
+    else if (value.includes("snow")) setWeather("snow");
     else if (value.includes("auto")) setWeather(currentWeather);
   };
 
@@ -218,65 +219,74 @@ export default function Portfolio() {
     returnObjects: true,
   }) as any;
 
+  const fallbackComponent = null;
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Dynamic Background */}
-      {getBackgroundComponent()}
+      <ErrorBoundary fallback={fallbackComponent}>
+        {getBackgroundComponent()}
+      </ErrorBoundary>
 
       {/* Plane in background */}
-      <AnimatePresence>{showPlane && <PlaneController />}</AnimatePresence>
+      <ErrorBoundary fallback={fallbackComponent}>
+        <AnimatePresence>{showPlane && <PlaneController />}</AnimatePresence>
+      </ErrorBoundary>
 
-      {/* Weather Mode Selector */}
-      <div className="absolute top-4 right-4 z-30">
-        <Dropdown
-          auto={t(currentWeather)}
-          value={weatherMode}
-          onValueChange={handleWeatherModeChange}
-          options={[
-            { label: `☀️ ${t("clear")}`, value: "clear" },
-            { label: `☁️ ${t("cloudy")}`, value: "cloudy" },
-            { label: `🌧️ ${t("rain")}`, value: "rain" },
-            { label: `⚡ ${t("thunderstorm")}`, value: "thunderstorm" },
-          ]}
-          placeholder={t("selectWeather")}
-        />
-      </div>
-
-      {/* Day Time Mode Selector */}
-      <div className="absolute top-15 right-4 z-30">
-        <Dropdown
-          auto={t(currentTimeOfDay)}
-          value={timeOfDayMode}
-          onValueChange={handleTimeOfDayModeChange}
-          options={[
-            { label: `🌅 ${t("morning")}`, value: "morning" },
-            { label: `☀️ ${t("day")}`, value: "day" },
-            { label: `☀️ ${t("afternoon")}`, value: "afternoon" },
-            { label: `🌙 ${t("night")}`, value: "night" },
-          ]}
-          placeholder={t("selectMoment")}
-        />
-      </div>
-
-      {/* Season Mode Selector */}
-      {activeSpecialEvents && (
-        <div className="absolute top-26 right-4 z-30">
+      <ErrorBoundary fallback={fallbackComponent}>
+        {/* Weather Mode Selector */}
+        <div className="absolute top-4 right-4 z-30">
           <Dropdown
-            auto={t(currentSeason)}
-            value={seasonMode}
-            onValueChange={handleSeasonModeChange}
+            auto={t(currentWeather)}
+            value={weatherMode}
+            onValueChange={handleWeatherModeChange}
             options={[
-              { label: `🐣 ${t("easter")}`, value: "easter" },
-              { label: `☀️ ${t("summer")}`, value: "summer" },
-              { label: `👻 ${t("halloween")}`, value: "halloween" },
-              { label: `🎄 ${t("christmas")}`, value: "christmas" },
-              { label: `🎉 ${t("newYear")}`, value: "newYear" },
-              { label: `💼 ${t("none")}`, value: "none" },
+              { label: `☀️ ${t("clear")}`, value: "clear" },
+              { label: `☁️ ${t("cloudy")}`, value: "cloudy" },
+              { label: `🌧️ ${t("rain")}`, value: "rain" },
+              { label: `⚡ ${t("thunderstorm")}`, value: "thunderstorm" },
+              { label: `❄️ ${t("snow")}`, value: "snow" },
             ]}
-            placeholder={t("selectSeason")}
+            placeholder={t("selectWeather")}
           />
         </div>
-      )}
+
+        {/* Day Time Mode Selector */}
+        <div className="absolute top-15 right-4 z-30">
+          <Dropdown
+            auto={t(currentTimeOfDay)}
+            value={timeOfDayMode}
+            onValueChange={handleTimeOfDayModeChange}
+            options={[
+              { label: `🌅 ${t("morning")}`, value: "morning" },
+              { label: `☀️ ${t("day")}`, value: "day" },
+              { label: `☀️ ${t("afternoon")}`, value: "afternoon" },
+              { label: `🌙 ${t("night")}`, value: "night" },
+            ]}
+            placeholder={t("selectMoment")}
+          />
+        </div>
+
+        {/* Season Mode Selector */}
+        {activeSpecialEvents && (
+          <div className="absolute top-26 right-4 z-30">
+            <Dropdown
+              auto={t(currentSeason)}
+              value={seasonMode}
+              onValueChange={handleSeasonModeChange}
+              options={[
+                { label: `🐣 ${t("easter")}`, value: "easter" },
+                { label: `☀️ ${t("summer")}`, value: "summer" },
+                { label: `👻 ${t("halloween")}`, value: "halloween" },
+                { label: `🎄 ${t("christmas")}`, value: "christmas" },
+                { label: `🎉 ${t("newYear")}`, value: "newYear" },
+                { label: `💼 ${t("none")}`, value: "none" },
+              ]}
+              placeholder={t("selectSeason")}
+            />
+          </div>
+        )}
+      </ErrorBoundary>
 
       <div className="absolute bottom-4 right-4 z-30">
         <Button
@@ -297,76 +307,88 @@ export default function Portfolio() {
           className="relative w-full max-w-3xl"
           style={{ perspective: "1000px" }}
         >
-          <HomeSection
-            isModalOpen={isModalOpen}
-            handleStatClick={handleStatClick}
-            onClickAvatar={() => setActiveSpecialEvents(!activeSpecialEvents)}
-          />
+          <ErrorBoundary fallback={fallbackComponent}>
+            <HomeSection
+              isModalOpen={isModalOpen}
+              handleStatClick={handleStatClick}
+              onClickAvatar={() => setActiveSpecialEvents(!activeSpecialEvents)}
+            />
+          </ErrorBoundary>
 
           {/* Modals */}
           <AnimatePresence>
             {activeModal === "contact" && (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <ContactForm onClose={closeModal} />
-              </div>
+              <ErrorBoundary fallback={fallbackComponent}>
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <ContactForm onClose={closeModal} />
+                </div>
+              </ErrorBoundary>
             )}
 
             {activeModal === "projects" && (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <ProjectsGallery
-                  title={""}
-                  subtitle={""}
-                  onClose={closeModal}
-                />
-              </div>
+              <ErrorBoundary fallback={fallbackComponent}>
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <ProjectsGallery
+                    title={""}
+                    subtitle={""}
+                    onClose={closeModal}
+                  />
+                </div>
+              </ErrorBoundary>
             )}
 
             {activeModal === "companies" && (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <Gallery
-                  title={""}
-                  subtitle={""}
-                  options={companiesGallery}
-                  onClose={closeModal}
-                />
-              </div>
+              <ErrorBoundary fallback={fallbackComponent}>
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <Gallery
+                    title={""}
+                    subtitle={""}
+                    options={companiesGallery}
+                    onClose={closeModal}
+                  />
+                </div>
+              </ErrorBoundary>
             )}
 
             {activeModal === "leading_years" && (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <Gallery
-                  title={""}
-                  subtitle={""}
-                  options={companiesGallery}
-                  onClose={closeModal}
-                />
-              </div>
+              <ErrorBoundary fallback={fallbackComponent}>
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <Gallery
+                    title={""}
+                    subtitle={""}
+                    options={companiesGallery}
+                    onClose={closeModal}
+                  />
+                </div>
+              </ErrorBoundary>
             )}
 
             {activeModal === "experience_years" && (
-              <div
-                className="absolute inset-0 flex items-center justify-center"
-                style={{ transformStyle: "preserve-3d" }}
-              >
-                <WorkTimeline
-                  title={t("workTimelineTitle")}
-                  subtitle={t("workTimelineSubtitle")}
-                  options={experienceTimeline}
-                  onClose={closeModal}
-                />
-              </div>
+              <ErrorBoundary fallback={fallbackComponent}>
+                <div
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ transformStyle: "preserve-3d" }}
+                >
+                  <WorkTimeline
+                    title={t("workTimelineTitle")}
+                    subtitle={t("workTimelineSubtitle")}
+                    options={experienceTimeline}
+                    onClose={closeModal}
+                  />
+                </div>
+              </ErrorBoundary>
             )}
           </AnimatePresence>
         </div>

@@ -18,6 +18,7 @@ export const es: Locale = {
     cloudy: "Nublado",
     rain: "Lluvia",
     thunderstorm: "Tormenta",
+    snow: "Nieve",
 
     selectSeason: "Seleccionar temporada",
     christmas: "Navidad",

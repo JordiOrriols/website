@@ -16,6 +16,7 @@ export interface Translation {
   cloudy: string;
   rain: string;
   thunderstorm: string;
+  snow: string;
 
   selectSeason: string;
   christmas: string;
