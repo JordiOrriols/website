@@ -276,23 +276,6 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       };
 
       scheduleDrops(12);
-
-      if (weatherCondition === "thunderstorm") {
-        const scheduleThunderCycle = () => {
-          const nextMs = 2000 + Math.random() * 16000;
-          const id = window.setTimeout(() => {
-            const rumbles = 1 + Math.floor(Math.random() * 3);
-            for (let i = 0; i < rumbles; i++) {
-              const delay = Math.random() * 1200;
-              const tId = window.setTimeout(() => playThunder(), delay);
-              amb.timers.push(tId);
-            }
-            if (ref.current && weatherCondition === "thunderstorm") scheduleThunderCycle();
-          }, nextMs);
-          amb.timers.push(id);
-        };
-        scheduleThunderCycle();
-      }
     } else if (weatherCondition === "clear") {
       amb.masterGain.gain.setValueAtTime(0.18, ctx.currentTime);
 
