@@ -78,9 +78,13 @@ export const useAmbientAudio = (
     ) => {
       const sound = howlsRef.current.get(key) ?? loadSound(key);
       sound.loop(loop);
-      sound.volume(muted ? 0 : fade ? 0 : volume); // start muted for fade-in
+      const startVol = muted ? 0 : fade ? 0 : volume;
+      sound.volume(startVol);
       const id = sound.play();
-      if (fade) sound.fade(0, muted ? 0 : volume, FADE_DURATION, id);
+      if (fade) {
+        sound.fade(0, muted ? 0 : volume, FADE_DURATION, id);
+      }
+      return id;
     },
     [loadSound, muted]
   );
@@ -140,7 +144,7 @@ export const useAmbientAudio = (
 
     lastConfigRef.current = newCfg;
 
-    // Fade out de los sonidos previos
+    // --- FADE OUT de sonidos activos ---
     howlsRef.current.forEach((howl) => {
       if (howl.playing()) {
         const id = howl.playing();
@@ -149,6 +153,7 @@ export const useAmbientAudio = (
       }
     });
 
+    // limpiar timers previos
     timersRef.current.forEach(clearTimeout);
     timersRef.current = [];
 
