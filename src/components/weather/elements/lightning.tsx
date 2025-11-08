@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export default function Lightning() {
+export default function Lightning(playThunder) {
   const [lightning, setLightning] = useState(false);
 
   useEffect(() => {
@@ -8,6 +8,7 @@ export default function Lightning() {
     const lightningInterval = setInterval(() => {
       if (Math.random() > 0.7) {
         setLightning(true);
+        playThunder();
         setTimeout(() => setLightning(false), 200);
       }
     }, 1000);

@@ -59,6 +59,8 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
+  const { playThunder } = useAmbientSound(weather);
+
   useEffect(() => {
     async function fetchData() {
       await fetchWeather();
@@ -67,8 +69,6 @@ export default function Portfolio() {
     }
     fetchData();
   }, []);
-
-  useAmbientSound(weather);
 
   const fetchWeather = async () => {
     try {
@@ -187,7 +187,7 @@ export default function Portfolio() {
 
   const getBackgroundComponent = () => {
     if (weather === "thunderstorm") {
-      return <ThunderstormScene />;
+      return <ThunderstormScene playThunder={playThunder} />;
     }
 
     return <ClearScene weather={weather} timeOfDay={timeOfDay} />;
@@ -214,7 +214,9 @@ export default function Portfolio() {
     );
   }
 
-  const experienceTimeline = t("experienceTimeline", { returnObjects: true });
+  const experienceTimeline = t("experienceTimeline", {
+    returnObjects: true,
+  }) as any;
 
   return (
     <div className="relative min-h-screen overflow-hidden">

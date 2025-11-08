@@ -5,16 +5,16 @@ import Clouds from "./elements/cloud";
 import Rain from "./elements/rain";
 import Lightning from "./elements/lightning";
 
-export default function ThunderstormScene() {
+export default function ThunderstormScene(playThunder) {
   return (
     <div className="absolute inset-0 bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]">
-      <Lightning />
+      <Lightning playThunder={playThunder}/>
 
       {/* Clouds */}
       <Clouds maxNumber={50} maxSize={5} maxOpacity={0.03} />
 
       {/* Rain */}
-      <Rain max={500} />
+      <Rain timeOfDay={"night"} max={500} />
 
       {/* City Skyline */}
       <CitySkyline fill="#0F0D12" />
