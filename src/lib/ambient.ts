@@ -1,5 +1,5 @@
 import { WeatherType } from "@/pages/portfolio";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback } from "react";
 
 type SourceHandle = {
   node: AudioNode;
@@ -10,7 +10,7 @@ type AmbientRef = {
   context: AudioContext;
   masterGain: GainNode;
   sources: SourceHandle[];
-  timers: number[]; // window.setTimeout ids
+  timers: number[];
 };
 
 const resumeContextIfNeeded = async (ctx: AudioContext) => {
@@ -18,7 +18,7 @@ const resumeContextIfNeeded = async (ctx: AudioContext) => {
     try {
       await ctx.resume();
     } catch {
-      // ignore; user gesture may be needed
+      // ignore
     }
   }
 };
@@ -27,12 +27,10 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
   const ref = useRef<AmbientRef | null>(null);
 
   useEffect(() => {
-    // create audio context if needed
     if (!ref.current) {
-      const context = new (window.AudioContext ||
-        (window as any).webkitAudioContext)();
+      const context = new (window.AudioContext || (window as any).webkitAudioContext)();
       const masterGain = context.createGain();
-      masterGain.gain.value = 0.6; // global volume (tweakable)
+      masterGain.gain.value = 0.6;
       masterGain.connect(context.destination);
       ref.current = { context, masterGain, sources: [], timers: [] };
     }
@@ -40,31 +38,20 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
     const amb = ref.current;
     const ctx = amb.context;
 
-    // Ensure context is running (many browsers require user gesture)
     resumeContextIfNeeded(ctx);
 
-    // helper: cleanup all scheduled things
     const clearAll = () => {
-      // stop sources
       amb.sources.forEach((s) => {
         try {
-          if ("stop" in (s as any) && typeof (s as any).stop === "function") {
-            (s as any).stop();
-          }
-        } catch {}
-        // disconnect nodes
-        try {
+          if (s.stop) s.stop();
           s.node.disconnect();
         } catch {}
       });
       amb.sources = [];
-
-      // clear timers
-      amb.timers.forEach((tId) => clearTimeout(tId));
+      amb.timers.forEach(clearTimeout);
       amb.timers = [];
     };
 
-    // helper: create a noise buffer (white noise)
     const createNoiseBuffer = (durationSec = 1) => {
       const sampleRate = ctx.sampleRate;
       const length = Math.ceil(durationSec * sampleRate);
