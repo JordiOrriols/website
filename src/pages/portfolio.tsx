@@ -15,6 +15,7 @@ import WorkTimeline from "@/components/sections/experience";
 import { companiesGallery } from "@/data/companies";
 import HomeSection from "@/components/sections/home";
 import { useTranslation } from "react-i18next";
+import { useAmbientSound } from "@/lib/ambient";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -66,6 +67,8 @@ export default function Portfolio() {
     }
     fetchData();
   }, []);
+
+  useAmbientSound(weather);
 
   const fetchWeather = async () => {
     try {
