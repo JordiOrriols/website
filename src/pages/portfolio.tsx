@@ -60,7 +60,10 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
-  const { playThunder, toggleMute, muted } = useAmbientAudio(weather);
+  const { playThunder, toggleMute, muted } = useAmbientAudio(
+    weather,
+    timeOfDay
+  );
 
   useEffect(() => {
     async function fetchData() {

@@ -1,42 +1,62 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { Howl } from "howler";
-import { WeatherType } from "@/pages/portfolio";
+import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
 
-export type AmbientAudioKey = "rain" | "thunder" | "click" | "night";
+export type AmbientAudioKey =
+  | "rain"
+  | "thunderOne"
+  | "thunderTwo"
+  | "thunderThree"
+  | "click"
+  | "morning"
+  | "night";
 
 const audioFiles: Record<AmbientAudioKey, string> = {
   rain: "/audio/rain-02.mp3",
-  thunder: "/audio/thunder-03.mp3",
-  click: "/audio/click-01.mp3",
+  thunderOne: "/audio/thunder-01.mp3",
+  thunderTwo: "/audio/thunder-02.mp3",
+  thunderThree: "/audio/thunder-03.mp3",
+  morning: "/audio/morning-01.mp3",
   night: "/audio/night-01.mp3",
+
+  click: "/audio/click-01.mp3",
 };
 
-export const sceneAudioConfig: Record<
-  WeatherType,
-  {
-    background: AmbientAudioKey[];
-    random?: {
-      key: AmbientAudioKey;
-      minDelay: number;
-      maxDelay: number;
-      volume?: number;
-    }[];
-  }
-> = {
-  clear: { background: [] },
-  cloudy: { background: [] },
-  snow: { background: [] },
-  rain: {
-    background: ["rain"],
-    // random: [{ key: "thunder", minDelay: 8, maxDelay: 20, volume: 0.9 }],
-  },
-  thunderstorm: {
-    background: ["rain"],
-    // random: [{ key: "thunder", minDelay: 8, maxDelay: 20, volume: 0.9 }],
-  },
+interface AmbientConfig {
+  background: AmbientAudioKey[];
+  random?: {
+    key: AmbientAudioKey;
+    minDelay: number;
+    maxDelay: number;
+    volume?: number;
+  }[];
+}
+
+const getAudioConfig = (
+  weather: WeatherType,
+  timeOfDay: TimeOfDayType
+): AmbientConfig => {
+  if (weather === "thunderstorm" || weather === "rain")
+    return {
+      background: ["rain"],
+    };
+  else if (timeOfDay === "morning")
+    return {
+      background: ["morning"],
+    };
+  else if (timeOfDay === "night")
+    return {
+      background: ["night"],
+    };
+  return {
+    background: ["morning"],
+  };
 };
 
-export const useAmbientAudio = (weather: WeatherType) => {
+export const useAmbientAudio = (
+  weather: WeatherType,
+  timeOfDay: TimeOfDayType
+) => {
   const howlsRef = useRef<Map<AmbientAudioKey, Howl>>(new Map());
   const timersRef = useRef<number[]>([]);
   const [muted, setMuted] = useState(false);
@@ -47,7 +67,7 @@ export const useAmbientAudio = (weather: WeatherType) => {
     const sound = new Howl({
       src: [audioFiles[key]],
       loop: false,
-      volume: 1,
+      volume: 0.6,
     });
     howlsRef.current.set(key, sound);
     return sound;
@@ -69,12 +89,15 @@ export const useAmbientAudio = (weather: WeatherType) => {
 
   // Trueno manual
   const playThunder = useCallback(() => {
-    playSound("thunder", { loop: false, volume: 1 });
+    const key = ["thunderOne", "thunderTwo", "thunderThree"][
+      Math.floor(Math.random() * 3)
+    ];
+    playSound(key, { loop: false, volume: 0.4 });
   }, [playSound]);
 
   // Programador de sonidos aleatorios
   const scheduleRandom = useCallback(
-    (random?: (typeof sceneAudioConfig)[WeatherType]["random"]) => {
+    (random?: AmbientConfig["random"]) => {
       if (!random) return;
       random.forEach((item) => {
         const loop = () => {
@@ -107,7 +130,7 @@ export const useAmbientAudio = (weather: WeatherType) => {
     timersRef.current.forEach(clearTimeout);
     timersRef.current = [];
 
-    const cfg = sceneAudioConfig[weather] || { background: [] };
+    const cfg = getAudioConfig(weather, timeOfDay);
 
     // reproducir los de fondo
     cfg.background.forEach((key) => {
@@ -122,7 +145,7 @@ export const useAmbientAudio = (weather: WeatherType) => {
       timersRef.current = [];
       howlsRef.current.forEach((howl) => howl.stop());
     };
-  }, [weather, playSound, scheduleRandom]);
+  }, [weather, timeOfDay, playSound, scheduleRandom]);
 
   return { playThunder, toggleMute, muted };
 };
