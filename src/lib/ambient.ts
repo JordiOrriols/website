@@ -39,9 +39,10 @@ const getAudioConfig = (
 ): AmbientConfig => {
   if (weather === "thunderstorm" || weather === "rain")
     return { background: ["rain"] };
-  if (timeOfDay === "morning") return { background: ["morning"] };
-  if (timeOfDay === "night") return { background: ["night"] };
-  return { background: ["morning"] };
+  else if (weather === "snow") return { background: [] };
+  else if (timeOfDay === "morning") return { background: ["morning"] };
+  else if (timeOfDay === "night") return { background: ["night"] };
+  return { background: [] };
 };
 
 export const useAmbientAudio = (
