@@ -61,13 +61,19 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
     const startF = 1500 + Math.random() * 800;
     const endF = 200 + Math.random() * 200;
     sweep.frequency.setValueAtTime(startF, now);
-    sweep.frequency.exponentialRampToValueAtTime(endF, now + (2 + Math.random() * 3));
+    sweep.frequency.exponentialRampToValueAtTime(
+      endF,
+      now + (2 + Math.random() * 3)
+    );
 
     const gain = ctx.createGain();
     const peak = 0.6 + Math.random() * 0.6;
     gain.gain.setValueAtTime(0.0001, now);
     gain.gain.exponentialRampToValueAtTime(peak, now + 0.05);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + (2.5 + Math.random() * 4));
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + (2.5 + Math.random() * 4)
+    );
 
     const panner = ctx.createStereoPanner();
     panner.pan.value = Math.random() * 2 - 1;
@@ -100,14 +106,49 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
 
     src.start(now);
 
-    amb.sources.push({ node: src, stop: () => src.stop() });
+    // small second, distant rumble after main with random tiny delay
+    const secondDelay = (500 + Math.random() * 1800) / 1000;
+    const buf2 = createNoiseBuffer(1 + Math.random() * 2);
+    const src2 = ctx.createBufferSource();
+    src2.buffer = buf2;
+    const g2 = ctx.createGain();
+    g2.gain.setValueAtTime(0.0001, now + secondDelay);
+    g2.gain.exponentialRampToValueAtTime(
+      0.15 + Math.random() * 0.3,
+      now + secondDelay + 0.02
+    );
+    g2.gain.exponentialRampToValueAtTime(
+      0.0001,
+      now + secondDelay + (1 + Math.random() * 2)
+    );
+    src2.connect(g2);
+    g2.connect(amb.masterGain);
+    src2.start(now + secondDelay);
+
+    amb.sources.push({
+      node: src,
+      stop: () => {
+        try {
+          src.stop();
+        } catch {}
+      },
+    });
+    amb.sources.push({
+      node: src2,
+      stop: () => {
+        try {
+          src2.stop();
+        } catch {}
+      },
+    });
     amb.sources.push({ node: delay1 });
     amb.sources.push({ node: delay2 });
   }, []);
 
   useEffect(() => {
     if (!ref.current) {
-      const context = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const context = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
       const masterGain = context.createGain();
       masterGain.gain.value = 0.6;
       masterGain.connect(context.destination);
@@ -140,8 +181,15 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       return buffer;
     };
 
-    const playRainDrop = (when: number, options?: { pan?: number; volume?: number; duration?: number }) => {
-      const { pan = Math.random() * 2 - 1, volume = 0.15, duration = 0.07 } = options || {};
+    const playRainDrop = (
+      when: number,
+      options?: { pan?: number; volume?: number; duration?: number }
+    ) => {
+      const {
+        pan = Math.random() * 2 - 1,
+        volume = 0.15,
+        duration = 0.07,
+      } = options || {};
       const buf = createNoiseBuffer(duration);
       const src = ctx.createBufferSource();
       src.buffer = buf;
@@ -170,23 +218,16 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       panner.connect(amb.masterGain);
 
       src.start(when);
-      // stop after a little longer to free resources
-      const stopFn = () => {
-        try {
-          src.stop();
-        } catch {}
-        try {
-          src.disconnect();
-        } catch {}
-        try {
-          dropGain.disconnect();
-        } catch {}
-      };
-
-      amb.sources.push({ node: src, stop: stopFn });
+      amb.sources.push({ node: src, stop: () => src.stop() });
     };
 
-    const playNoiseLayer = (opts: { filterFreq: number; q?: number; gain: number; pan?: number; lowpassAfter?: number | null }) => {
+    const playNoiseLayer = (opts: {
+      filterFreq: number;
+      q?: number;
+      gain: number;
+      pan?: number;
+      lowpassAfter?: number | null;
+    }) => {
       const buffer = createNoiseBuffer(2);
       const src = ctx.createBufferSource();
       src.buffer = buffer;
@@ -244,7 +285,13 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       amb.masterGain.gain.setValueAtTime(0.45, ctx.currentTime);
 
       playNoiseLayer({ filterFreq: 6000, q: 0.8, gain: 0.035, pan: -0.3 });
-      playNoiseLayer({ filterFreq: 1800, q: 0.9, gain: 0.12, pan: 0.4, lowpassAfter: 800 });
+      playNoiseLayer({
+        filterFreq: 1800,
+        q: 0.9,
+        gain: 0.12,
+        pan: 0.4,
+        lowpassAfter: 800,
+      });
       playNoiseLayer({ filterFreq: 400, q: 0.8, gain: 0.06, pan: 0.1 });
 
       const scheduleDrops = (durationSec = 20) => {
@@ -268,7 +315,10 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
         }
 
         const rescheduleId = window.setTimeout(() => {
-          if (ref.current && (weatherCondition === "rain" || weatherCondition === "thunderstorm")) {
+          if (
+            ref.current &&
+            (weatherCondition === "rain" || weatherCondition === "thunderstorm")
+          ) {
             scheduleDrops(durationSec);
           }
         }, durationSec * 1000 - 200);
