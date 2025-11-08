@@ -6,6 +6,8 @@ import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
 import Stars from "./elements/stars";
 import Rain from "./elements/rain";
 import Snow from "./elements/snow";
+import Moon from "./elements/moon";
+import Sun from "./elements/sun";
 
 interface configType {
   skyline: string;
@@ -86,17 +88,10 @@ export default function ClearScene(props: {
       {/* Bright Sun */}
       {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
       props.weather !== "rain" ? (
-        <div className="absolute top-20 right-24">
-          <div className="relative w-28 h-28 rounded-full bg-gradient-to-br from-[#FFD700] to-[#FFA500] shadow-2xl animate-pulse">
-            {/* Glowing effect */}
-            <div className="absolute inset-0 rounded-full bg-[#FFD700] opacity-40 blur-2xl animate-pulse"></div>
-          </div>
-        </div>
+        <Sun></Sun>
       ) : null}
       {/* Moon */}
-      {props.timeOfDay === "night" ? (
-        <div className="absolute top-40 right-40 w-20 h-20 rounded-full bg-transparent shadow-[25px_10px_0_0_#F2F1F5] backdrop-blur-sm"></div>
-      ) : null}
+      {props.timeOfDay === "night" ? <Moon></Moon> : null}
       {/* Clouds */}
       <Clouds {...clouds} />
       {/* Rain */}
