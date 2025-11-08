@@ -60,10 +60,8 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
-  const { playThunder, toggleMute, muted } = useAmbientAudio(
-    weather,
-    timeOfDay
-  );
+  const { playThunder, playClick, playNotification, toggleMute, muted } =
+    useAmbientAudio(weather, timeOfDay);
 
   useEffect(() => {
     async function fetchData() {
@@ -200,10 +198,17 @@ export default function Portfolio() {
 
   const handleStatClick = (statType: SectionsType) => {
     setActiveModal(statType);
+    playClick();
   };
 
   const closeModal = () => {
     setActiveModal(null);
+    playClick();
+  };
+
+  const handleShowPlane = () => {
+    setShowPlane(!showPlane);
+    if (!showPlane) playNotification();
   };
 
   const isModalOpen = activeModal !== null;
@@ -294,7 +299,7 @@ export default function Portfolio() {
 
       <div className="absolute bottom-4 right-16 z-30">
         <Button
-          onClick={() => setShowPlane(!showPlane)}
+          onClick={handleShowPlane}
           className={`${
             showPlane
               ? "bg-red-600 hover:bg-red-700"
@@ -314,7 +319,11 @@ export default function Portfolio() {
               : "bg-red-600 hover:bg-red-700"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
-          {muted ? <VolumeOff className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+          {muted ? (
+            <VolumeOff className="w-4 h-4" />
+          ) : (
+            <Volume2 className="w-4 h-4" />
+          )}
         </Button>
       </div>
 

@@ -8,6 +8,7 @@ export type AmbientAudioKey =
   | "thunderTwo"
   | "thunderThree"
   | "click"
+  | "notification"
   | "morning"
   | "night";
 
@@ -19,6 +20,7 @@ const audioFiles: Record<AmbientAudioKey, string> = {
   morning: "/audio/morning-01.mp3",
   night: "/audio/night-01.mp3",
   click: "/audio/click-01.mp3",
+  notification: "/audio/notification-01.mp3",
 };
 
 interface AmbientConfig {
@@ -67,13 +69,17 @@ export const useAmbientAudio = (
   const playSound = useCallback(
     (
       key: AmbientAudioKey,
-      { loop = false, volume = 1 }: { loop?: boolean; volume?: number } = {}
+      {
+        loop = false,
+        volume = 1,
+        fade = false,
+      }: { loop?: boolean; volume?: number; fade?: boolean } = {}
     ) => {
       const sound = howlsRef.current.get(key) ?? loadSound(key);
       sound.loop(loop);
-      sound.volume(muted ? 0 : 0); // start muted for fade-in
+      sound.volume(muted ? 0 : fade ? 0 : volume); // start muted for fade-in
       const id = sound.play();
-      sound.fade(0, muted ? 0 : volume, FADE_DURATION, id);
+      if (fade) sound.fade(0, muted ? 0 : volume, FADE_DURATION, id);
     },
     [loadSound, muted]
   );
@@ -83,6 +89,14 @@ export const useAmbientAudio = (
       Math.floor(Math.random() * 3)
     ] as AmbientAudioKey;
     playSound(key, { loop: false, volume: 0.4 });
+  }, [playSound]);
+
+  const playClick = useCallback(() => {
+    playSound("click", { loop: false, volume: 1 });
+  }, [playSound]);
+
+  const playNotification = useCallback(() => {
+    playSound("notification", { loop: false, volume: 1 });
   }, [playSound]);
 
   const scheduleRandom = useCallback(
@@ -140,11 +154,11 @@ export const useAmbientAudio = (
     // Delay para que fade out termine antes de iniciar nuevos
     setTimeout(() => {
       newCfg.background.forEach((key) => {
-        playSound(key, { loop: true, volume: 0.7 });
+        playSound(key, { loop: true, volume: 0.6, fade: true });
       });
       scheduleRandom(newCfg.random);
     }, FADE_DURATION);
   }, [weather, timeOfDay, playSound, scheduleRandom]);
 
-  return { playThunder, toggleMute, muted };
+  return { playThunder, playClick, playNotification, toggleMute, muted };
 };
