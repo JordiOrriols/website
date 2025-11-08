@@ -26,6 +26,85 @@ const resumeContextIfNeeded = async (ctx: AudioContext) => {
 export const useAmbientSound = (weatherCondition: WeatherType) => {
   const ref = useRef<AmbientRef | null>(null);
 
+  const playThunder = useCallback(async () => {
+    const amb = ref.current;
+    if (!amb) return;
+
+    const ctx = amb.context;
+    await resumeContextIfNeeded(ctx);
+
+    const createNoiseBuffer = (durationSec = 1) => {
+      const sampleRate = ctx.sampleRate;
+      const length = Math.ceil(durationSec * sampleRate);
+      const buffer = ctx.createBuffer(1, length, sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
+      return buffer;
+    };
+
+    const now = ctx.currentTime;
+    const buf = createNoiseBuffer(3 + Math.random() * 3);
+    const src = ctx.createBufferSource();
+    src.buffer = buf;
+
+    const lp = ctx.createBiquadFilter();
+    lp.type = "lowpass";
+    lp.frequency.value = 300 + Math.random() * 200;
+
+    const bp = ctx.createBiquadFilter();
+    bp.type = "bandpass";
+    bp.frequency.value = 800 + Math.random() * 1000;
+    bp.Q.value = 0.6;
+
+    const sweep = ctx.createBiquadFilter();
+    sweep.type = "lowpass";
+    const startF = 1500 + Math.random() * 800;
+    const endF = 200 + Math.random() * 200;
+    sweep.frequency.setValueAtTime(startF, now);
+    sweep.frequency.exponentialRampToValueAtTime(endF, now + (2 + Math.random() * 3));
+
+    const gain = ctx.createGain();
+    const peak = 0.6 + Math.random() * 0.6;
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(peak, now + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + (2.5 + Math.random() * 4));
+
+    const panner = ctx.createStereoPanner();
+    panner.pan.value = Math.random() * 2 - 1;
+
+    const delay1 = ctx.createDelay();
+    delay1.delayTime.value = 0.12 + Math.random() * 0.2;
+    const delay2 = ctx.createDelay();
+    delay2.delayTime.value = 0.25 + Math.random() * 0.3;
+    const fb1 = ctx.createGain();
+    fb1.gain.value = 0.35 + Math.random() * 0.3;
+    const fb2 = ctx.createGain();
+    fb2.gain.value = 0.25 + Math.random() * 0.25;
+
+    src.connect(lp);
+    lp.connect(bp);
+    bp.connect(sweep);
+    sweep.connect(gain);
+    gain.connect(panner);
+    panner.connect(amb.masterGain);
+
+    panner.connect(delay1);
+    delay1.connect(fb1);
+    fb1.connect(delay1);
+    fb1.connect(amb.masterGain);
+
+    panner.connect(delay2);
+    delay2.connect(fb2);
+    fb2.connect(delay2);
+    fb2.connect(amb.masterGain);
+
+    src.start(now);
+
+    amb.sources.push({ node: src, stop: () => src.stop() });
+    amb.sources.push({ node: delay1 });
+    amb.sources.push({ node: delay2 });
+  }, []);
+
   useEffect(() => {
     if (!ref.current) {
       const context = new (window.AudioContext || (window as any).webkitAudioContext)();
