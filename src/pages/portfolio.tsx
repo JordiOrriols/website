@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2, Pause, Plane, Play } from "lucide-react";
+import { Loader2, Pause, Plane, Play, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 
 import ClearScene from "../components/weather/clear";
@@ -314,7 +314,7 @@ export default function Portfolio() {
               : "bg-red-600 hover:bg-red-700"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
-          {muted ? <Play className="w-4 h-4" /> : <Pause className="w-4 h-4" />}
+          {muted ? <VolumeOff className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </Button>
       </div>
 
