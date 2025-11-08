@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Globe } from "lucide-react";
 import i18n from "@/lib/i18n";
 
 export default function LanguageSelector() {

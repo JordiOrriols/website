@@ -47,10 +47,10 @@ export default function Clouds(props: CloudsProps) {
       <style>{`
         @keyframes float {
           from {
-            transform: translateX(-80vw);
+            transform: translateX(-50vw);
           }
           to {
-            transform: translateX(180vw);
+            transform: translateX(150vw);
           }
         }
       `}</style>
