@@ -34,20 +34,24 @@ const configClear: Record<TimeOfDayType, configType> = {
 
 const configRain: Record<TimeOfDayType, configType> = {
   morning: {
+    // Amanecer lluvioso: más claro y ligeramente cálido, aún con bruma fría.
     skyline: "#1F2937",
-    bg: "from-[#6B7280] via-[#8B92A0] to-[#9CA3AF]",
+    bg: "from-[#9CA3AF] via-[#AAB3BF] to-[#B6BEC9]",
   },
   day: {
+    // Día lluvioso: gris azulado neutro, más brillante y con contraste suave.
     skyline: "#1F2937",
-    bg: "from-[#6B7280] via-[#8B92A0] to-[#9CA3AF]",
+    bg: "from-[#7B8799] via-[#8C97A8] to-[#A3ACB9]",
   },
   afternoon: {
+    // Referencia base: tono más equilibrado, frío y húmedo.
     skyline: "#1F2937",
     bg: "from-[#64748B] via-[#7B8799] to-[#94A3B8]",
   },
   night: {
-    skyline: "#1F2937",
-    bg: "from-[#374151] via-[#4B5563] to-[#6B7280]",
+    // Noche lluviosa: baja luminosidad, más azul profundo y uniforme.
+    skyline: "#111827",
+    bg: "from-[#1E2530] via-[#2C3442] to-[#3C4756]",
   },
 };
 
