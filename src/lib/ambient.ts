@@ -146,25 +146,33 @@ export const useAmbientAudio = (
 
     // --- FADE OUT de sonidos activos ---
     howlsRef.current.forEach((howl) => {
-      if (howl.playing()) {
-        const id = howl.playing();
-        if (id) howl.fade(howl.volume(), 0, FADE_DURATION, id);
-        setTimeout(() => howl.stop(), FADE_DURATION);
-      }
+      // obtener ids de reproducción activos
+      const ids: number[] = (howl["_sounds"] as any[])
+        .map((s) => s._id)
+        .filter((id) => howl.playing(id));
+      ids.forEach((id) => {
+        const currentVol = howl.volume(id);
+        howl.fade(currentVol, 0, FADE_DURATION, id);
+        const t = window.setTimeout(() => {
+          try {
+            howl.stop(id);
+          } catch (e) {}
+        }, FADE_DURATION);
+        timersRef.current.push(t);
+      });
     });
 
     // limpiar timers previos
     timersRef.current.forEach(clearTimeout);
     timersRef.current = [];
 
-    // Delay para que fade out termine antes de iniciar nuevos
-    setTimeout(() => {
-      newCfg.background.forEach((key) => {
-        playSound(key, { loop: true, volume: 0.6, fade: true });
-      });
-      scheduleRandom(newCfg.random);
-    }, FADE_DURATION);
-  }, [weather, timeOfDay, playSound, scheduleRandom]);
+    // --- START nuevos sonidos con fade-in al mismo tiempo ---
+    newCfg.background.forEach((key) => {
+      playSound(key, { loop: true, volume: 0.6, fade: true });
+    });
+
+    scheduleRandom(newCfg.random);
+  }, [weather, timeOfDay, playSound, scheduleRandom, muted]);
 
   return { playThunder, playClick, playNotification, toggleMute, muted };
 };
