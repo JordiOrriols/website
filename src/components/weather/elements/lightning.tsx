@@ -1,15 +1,22 @@
+import { useAmbientAudio } from "@/lib/ambient";
 import React, { useEffect, useState } from "react";
 
-export default function Lightning(playThunder) {
+interface Props {
+  playThunder: () => void;
+}
+
+export default function Lightning(props: Props) {
   const [lightning, setLightning] = useState(false);
 
   useEffect(() => {
     // Lightning effect
     const lightningInterval = setInterval(() => {
-      if (Math.random() > 0.7) {
-        setLightning(true);
-        playThunder();
-        setTimeout(() => setLightning(false), 200);
+      if (Math.random() > 0.8) {
+        try {
+          setLightning(true);
+          setTimeout(() => setLightning(false), 200);
+          props.playThunder();
+        } catch (error) {}
       }
     }, 1000);
 

@@ -5,10 +5,14 @@ import Clouds from "./elements/cloud";
 import Rain from "./elements/rain";
 import Lightning from "./elements/lightning";
 
-export default function ThunderstormScene(playThunder) {
+interface Props {
+  playThunder: () => void;
+}
+
+export default function ThunderstormScene(props: Props) {
   return (
     <div className="absolute inset-0 bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]">
-      <Lightning playThunder={playThunder}/>
+      <Lightning playThunder={props.playThunder} />
 
       {/* Clouds */}
       <Clouds maxNumber={50} maxSize={5} maxOpacity={0.03} />

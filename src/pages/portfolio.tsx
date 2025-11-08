@@ -15,7 +15,9 @@ import WorkTimeline from "@/components/sections/experience";
 import { companiesGallery } from "@/data/companies";
 import HomeSection from "@/components/sections/home";
 import { useTranslation } from "react-i18next";
-import { useAmbientSound } from "@/lib/ambient";
+import { useAmbientAudio } from "@/lib/ambient";
+import { AmbientControls } from "@/components/audio-controls";
+import { ErrorBoundary } from "react-error-boundary";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -59,7 +61,7 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
-  const { playThunder } = useAmbientSound(weather);
+  const { playThunder } = useAmbientAudio(weather);
 
   useEffect(() => {
     async function fetchData() {
@@ -299,6 +301,8 @@ export default function Portfolio() {
         >
           <Plane className="w-4 h-4" />
         </Button>
+
+        <AmbientControls></AmbientControls>
       </div>
 
       {/* Cards Container */}
