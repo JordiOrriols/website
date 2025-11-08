@@ -89,10 +89,10 @@ export default function Snow() {
       <style>{`
         @keyframes snow {
           0% {
-            transform: translateY(-100vh) translateX(0);
+            transform: translateY(-10vh) translateX(0);
           }
           100% {
-            transform: translateY(100vh) translateX(var(--drift));
+            transform: translateY(110vh) translateX(var(--drift));
           }
         }
         .animate-snow {

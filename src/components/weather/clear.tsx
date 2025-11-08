@@ -5,6 +5,7 @@ import Clouds, { CloudsProps } from "./elements/cloud";
 import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
 import Stars from "./elements/stars";
 import Rain from "./elements/rain";
+import Snow from "./elements/snow";
 
 interface configType {
   skyline: string;
@@ -63,12 +64,17 @@ export default function ClearScene(props: {
   const [config, setConfig] = useState<configType>(configClear.morning);
 
   useEffect(() => {
-    if (props.weather === "rain") setConfig(configRain[props.timeOfDay]);
+    if (props.weather === "rain" || props.weather === "snow")
+      setConfig(configRain[props.timeOfDay]);
     else setConfig(configClear[props.timeOfDay]);
   }, [props.weather, props.timeOfDay]);
 
   useEffect(() => {
-    if (props.weather === "cloudy" || props.weather === "rain")
+    if (
+      props.weather === "cloudy" ||
+      props.weather === "rain" ||
+      props.weather === "snow"
+    )
       setClouds({ maxNumber: 50, maxSize: 5, maxOpacity: 0.2 });
     else if (props.timeOfDay === "night") setClouds({ maxNumber: 0 });
     else if (props.weather === "clear") setClouds({ maxNumber: 8 });
@@ -91,16 +97,20 @@ export default function ClearScene(props: {
       {props.timeOfDay === "night" ? (
         <div className="absolute top-40 right-40 w-20 h-20 rounded-full bg-transparent shadow-[25px_10px_0_0_#F2F1F5] backdrop-blur-sm"></div>
       ) : null}
-      ƒ{/* Clouds */}
+      {/* Clouds */}
       <Clouds {...clouds} />
       {/* Rain */}
-      {props.weather === "rain" ? <Rain max={50} timeOfDay={props.timeOfDay} /> : null}
+      {props.weather === "rain" ? (
+        <Rain max={50} timeOfDay={props.timeOfDay} />
+      ) : null}
       {/* City Skyline */}
       <CitySkyline fill={config.skyline} />
       {/* Stars */}
       {props.timeOfDay === "night" ? <Stars max={150} /> : null}
       {/* Logo */}
       <AppLogo />
+      {/* Snow */}
+      {props.weather === "snow" ? <Snow></Snow> : null}
     </div>
   );
 }
