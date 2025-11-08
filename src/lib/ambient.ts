@@ -57,22 +57,12 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       const length = Math.ceil(durationSec * sampleRate);
       const buffer = ctx.createBuffer(1, length, sampleRate);
       const data = buffer.getChannelData(0);
-      for (let i = 0; i < length; i++) {
-        data[i] = Math.random() * 2 - 1;
-      }
+      for (let i = 0; i < length; i++) data[i] = Math.random() * 2 - 1;
       return buffer;
     };
 
-    // helper: schedule a short noise burst (raindrop)
-    const playRainDrop = (
-      when: number,
-      options?: { pan?: number; volume?: number; duration?: number }
-    ) => {
-      const {
-        pan = Math.random() * 2 - 1,
-        volume = 0.15,
-        duration = 0.07,
-      } = options || {};
+    const playRainDrop = (when: number, options?: { pan?: number; volume?: number; duration?: number }) => {
+      const { pan = Math.random() * 2 - 1, volume = 0.15, duration = 0.07 } = options || {};
       const buf = createNoiseBuffer(duration);
       const src = ctx.createBufferSource();
       src.buffer = buf;
@@ -117,15 +107,8 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       amb.sources.push({ node: src, stop: stopFn });
     };
 
-    // helper: create continuous noise layer (filtered white noise) for rain body
-    const playNoiseLayer = (opts: {
-      filterFreq: number;
-      q?: number;
-      gain: number;
-      pan?: number;
-      lowpassAfter?: number | null;
-    }) => {
-      const buffer = createNoiseBuffer(2); // loopable short buffer
+    const playNoiseLayer = (opts: { filterFreq: number; q?: number; gain: number; pan?: number; lowpassAfter?: number | null }) => {
+      const buffer = createNoiseBuffer(2);
       const src = ctx.createBufferSource();
       src.buffer = buffer;
       src.loop = true;
@@ -321,10 +304,7 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
         }
 
         const rescheduleId = window.setTimeout(() => {
-          if (
-            ref.current &&
-            (weatherCondition === "rain" || weatherCondition === "thunderstorm")
-          ) {
+          if (ref.current && (weatherCondition === "rain" || weatherCondition === "thunderstorm")) {
             scheduleDrops(durationSec);
           }
         }, durationSec * 1000 - 200);
@@ -374,22 +354,8 @@ export const useAmbientSound = (weatherCondition: WeatherType) => {
       osc1.start();
       osc2.start();
 
-      amb.sources.push({
-        node: osc1,
-        stop: () => {
-          try {
-            osc1.stop();
-          } catch {}
-        },
-      });
-      amb.sources.push({
-        node: osc2,
-        stop: () => {
-          try {
-            osc2.stop();
-          } catch {}
-        },
-      });
+      amb.sources.push({ node: osc1, stop: () => osc1.stop() });
+      amb.sources.push({ node: osc2, stop: () => osc2.stop() });
     } else {
       amb.masterGain.gain.setValueAtTime(0.0, ctx.currentTime);
     }
