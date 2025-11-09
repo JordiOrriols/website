@@ -101,7 +101,9 @@ export default function DynamicScene(props: {
       {/* City Skyline */}
       <CitySkyline fill={config.skyline} />
       {/* Stars */}
-      {props.timeOfDay === "night" ? <Stars max={150} /> : null}
+      {props.timeOfDay === "night" ? (
+        <Stars max={props.weather === "clear" ? 150 : 50} />
+      ) : null}
       {/* Logo */}
       <AppLogo />
       {/* Snow */}
