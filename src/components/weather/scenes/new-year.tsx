@@ -15,7 +15,7 @@ export default function NewYearScene(props: Props) {
     <div
       className={`absolute inset-0 bg-gradient-to-b ${configClear.night.bg}`}
     >
-      <Fireworks></Fireworks>
+      <Fireworks playFireworks={props.playFireworks}></Fireworks>
 
       <Moon></Moon>
 

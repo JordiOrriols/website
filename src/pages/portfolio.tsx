@@ -18,6 +18,7 @@ import { useTranslation } from "react-i18next";
 import { useAmbientAudio } from "@/lib/ambient";
 import { ErrorBoundary } from "react-error-boundary";
 import NewYearScene from "@/components/weather/scenes/new-year";
+import HalloweenScene from "@/components/weather/scenes/halloween";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -31,7 +32,7 @@ export type SeasonType =
   | "christmas"
   | "newYear"
   | "none";
-  
+
 export type SectionsType =
   | "projects"
   | "companies"
@@ -62,8 +63,14 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
-  const { playThunder, playClick, playNotification, toggleMute, muted } =
-    useAmbientAudio(weather, timeOfDay);
+  const {
+    playThunder,
+    playFireworks,
+    playClick,
+    playNotification,
+    toggleMute,
+    muted,
+  } = useAmbientAudio(weather, timeOfDay);
 
   useEffect(() => {
     async function fetchData() {
@@ -191,7 +198,9 @@ export default function Portfolio() {
   };
 
   const getBackgroundComponent = () => {
-    if (season === "newYear") return <NewYearScene></NewYearScene>;
+    if (season === "newYear")
+      return <NewYearScene playFireworks={playFireworks}></NewYearScene>;
+    if (season === "halloween") return <HalloweenScene></HalloweenScene>;
 
     if (weather === "thunderstorm") {
       return <ThunderstormScene playThunder={playThunder} />;
@@ -288,10 +297,10 @@ export default function Portfolio() {
               value={seasonMode}
               onValueChange={handleSeasonModeChange}
               options={[
-                { label: `🐣 ${t("easter")}`, value: "easter" },
-                { label: `☀️ ${t("summer")}`, value: "summer" },
-                { label: `👻 ${t("halloween")}`, value: "halloween" },
-                { label: `🎄 ${t("christmas")}`, value: "christmas" },
+                //  { label: `🐣 ${t("easter")}`, value: "easter" },
+                //  { label: `☀️ ${t("summer")}`, value: "summer" },
+                //  { label: `👻 ${t("halloween")}`, value: "halloween" },
+                //  { label: `🎄 ${t("christmas")}`, value: "christmas" },
                 { label: `🎉 ${t("newYear")}`, value: "newYear" },
                 { label: `💼 ${t("none")}`, value: "none" },
               ]}

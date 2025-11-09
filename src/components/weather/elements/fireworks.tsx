@@ -16,20 +16,28 @@ interface IFirework {
   particles: IFireworkParticle[];
 }
 
-export default function Fireworks() {
+interface Props {
+  playFireworks: () => void;
+}
+
+export default function Fireworks(props: Props) {
   const [fireworks, setFireworks] = useState([]);
 
   useEffect(() => {
     // Generate fireworks periodically
     const interval = setInterval(() => {
-      const newFirework = generateFirework();
-      setFireworks((prev) => [...prev.slice(-8), newFirework]);
+      if (Math.random() > 0.8) {
+        const newFirework = generateFirework();
+        setFireworks((prev) => [...prev.slice(-8), newFirework]);
 
-      // Remove firework after animation
-      setTimeout(() => {
-        setFireworks((prev) => prev.filter((fw) => fw.id !== newFirework.id));
-      }, 2000);
-    }, 600);
+        // Remove firework after animation
+        setTimeout(() => {
+          setFireworks((prev) => prev.filter((fw) => fw.id !== newFirework.id));
+        }, 2000);
+
+        props.playFireworks();
+      }
+    }, 200);
 
     return () => clearInterval(interval);
   }, []);

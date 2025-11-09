@@ -7,16 +7,22 @@ export type AmbientAudioKey =
   | "thunderOne"
   | "thunderTwo"
   | "thunderThree"
-  | "click"
-  | "notification"
+  | "fireworkOne"
+  | "fireworkTwo"
+  | "fireworkThree"
   | "morning"
-  | "night";
+  | "night"
+  | "click"
+  | "notification";
 
 const audioFiles: Record<AmbientAudioKey, string> = {
   rain: "/audio/rain-02.mp3",
   thunderOne: "/audio/thunder-01.mp3",
   thunderTwo: "/audio/thunder-02.mp3",
   thunderThree: "/audio/thunder-03.mp3",
+  fireworkOne: "/audio/fireworks-01.mp3",
+  fireworkTwo: "/audio/fireworks-02.mp3",
+  fireworkThree: "/audio/fireworks-03.mp3",
   morning: "/audio/morning-01.mp3",
   night: "/audio/night-01.mp3",
   click: "/audio/click-01.mp3",
@@ -94,6 +100,13 @@ export const useAmbientAudio = (
       Math.floor(Math.random() * 3)
     ] as AmbientAudioKey;
     playSound(key, { loop: false, volume: 0.4 });
+  }, [playSound]);
+
+  const playFireworks = useCallback(() => {
+    const key = ["fireworkOne", "fireworkTwo", "fireworkThree"][
+      Math.floor(Math.random() * 3)
+    ] as AmbientAudioKey;
+    playSound(key, { loop: false, volume: 0.5 });
   }, [playSound]);
 
   const playClick = useCallback(() => {
@@ -174,5 +187,12 @@ export const useAmbientAudio = (
     scheduleRandom(newCfg.random);
   }, [weather, timeOfDay, playSound, scheduleRandom, muted]);
 
-  return { playThunder, playClick, playNotification, toggleMute, muted };
+  return {
+    playThunder,
+    playFireworks,
+    playClick,
+    playNotification,
+    toggleMute,
+    muted,
+  };
 };
