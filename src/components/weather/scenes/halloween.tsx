@@ -8,7 +8,7 @@ import { configClear } from "./dynamic";
 
 const configHalloween = {
   bg: "from-[#1a0f2e] via-[#2d1b47] to-[#4a2c5e]",
-  skyline: "#FFD700",
+  skyline: "#0d0520",
 };
 
 export default function HalloweenScene() {
