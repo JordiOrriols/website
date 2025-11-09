@@ -2,13 +2,14 @@ import React from "react";
 import Avatar from "@/components/avatar";
 import Stats from "@/components/stats";
 import { motion } from "framer-motion";
-import { SectionsType } from "@/pages/portfolio";
+import { SeasonType, SectionsType } from "@/pages/portfolio";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import LanguageSelector from "../language-selector";
 import { useTranslation } from "react-i18next";
 
 interface Props {
+  season: SeasonType;
   isModalOpen: boolean;
   handleStatClick?: (section: SectionsType) => void;
   onClickAvatar?: () => void;
@@ -45,7 +46,7 @@ export default function HomeSection(props: Props) {
         {/* Avatar */}
         <div className="mt-[-200px]">
           <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl m-auto">
-            <Avatar onClickAvatar={props.onClickAvatar}/>
+            <Avatar season={props.season} onClickAvatar={props.onClickAvatar} />
           </div>
         </div>
 

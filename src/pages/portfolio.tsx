@@ -297,10 +297,10 @@ export default function Portfolio() {
               value={seasonMode}
               onValueChange={handleSeasonModeChange}
               options={[
-                //  { label: `🐣 ${t("easter")}`, value: "easter" },
-                //  { label: `☀️ ${t("summer")}`, value: "summer" },
-                //  { label: `👻 ${t("halloween")}`, value: "halloween" },
-                //  { label: `🎄 ${t("christmas")}`, value: "christmas" },
+                { label: `🐣 ${t("easter")}`, value: "easter" },
+                { label: `☀️ ${t("summer")}`, value: "summer" },
+                { label: `👻 ${t("halloween")}`, value: "halloween" },
+                { label: `🎄 ${t("christmas")}`, value: "christmas" },
                 { label: `🎉 ${t("newYear")}`, value: "newYear" },
                 { label: `💼 ${t("none")}`, value: "none" },
               ]}
@@ -348,6 +348,7 @@ export default function Portfolio() {
         >
           <ErrorBoundary fallback={fallbackComponent}>
             <HomeSection
+              season={season}
               isModalOpen={isModalOpen}
               handleStatClick={handleStatClick}
               onClickAvatar={() => setActiveSpecialEvents(!activeSpecialEvents)}
