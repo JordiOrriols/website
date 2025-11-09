@@ -117,22 +117,20 @@ export default function Portfolio() {
     const sunriseHour = sunrise ? new Date(sunrise).getHours() : 8;
     const sunsetHour = sunset ? new Date(sunset).getHours() : 19;
 
-    console.log("Sunrise hour:", sunriseHour);
-    console.log("Sunset hour:", sunsetHour);
+    const startMorning = sunriseHour - 1;
+    const endMorning = sunriseHour + 2;
+    const startAfternoon = sunriseHour - 2;
+    const endAfternoon = sunriseHour + 1;
 
-    if (hour < sunriseHour) {
-      setTimeOfDay("night");
-      setCurrentTimeOfDay("night");
-      console.log("Setting time of day to night");
-    } else if (hour >= sunriseHour - 1 && hour < 12) {
+    if (hour >= startMorning && hour < endMorning) {
       setTimeOfDay("morning");
       setCurrentTimeOfDay("morning");
       console.log("Setting time of day to morning");
-    } else if (hour >= 12 && hour < 16) {
+    } else if (hour >= endMorning && hour < startAfternoon) {
       setTimeOfDay("day");
       setCurrentTimeOfDay("day");
       console.log("Setting time of day to day");
-    } else if (hour >= sunsetHour - 1 && hour < sunsetHour + 1) {
+    } else if (hour >= startAfternoon && hour < endAfternoon) {
       setTimeOfDay("afternoon");
       setCurrentTimeOfDay("afternoon");
       console.log("Setting time of day to afternoon");
@@ -197,7 +195,7 @@ export default function Portfolio() {
     else if (value.includes("day")) setTimeOfDay("day");
     else if (value.includes("afternoon")) setTimeOfDay("afternoon");
     else if (value.includes("night")) setTimeOfDay("night");
-    else if (value.includes("auto")) determineTimeOfDay();
+    else if (value.includes("auto")) setTimeOfDay(currentTimeOfDay);
   };
 
   const handleSeasonModeChange = (value) => {
@@ -208,7 +206,7 @@ export default function Portfolio() {
     else if (value.includes("summer")) setSeason("summer");
     else if (value.includes("halloween")) setSeason("halloween");
     else if (value.includes("none")) setSeason("none");
-    else if (value.includes("auto")) determineSeason();
+    else if (value.includes("auto")) setSeason(currentSeason);
   };
 
   const getBackgroundComponent = () => {
