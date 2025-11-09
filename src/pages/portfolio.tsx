@@ -152,19 +152,30 @@ export default function Portfolio() {
     if ((month === 12 && day >= 29) || (month === 1 && day <= 2)) {
       setSeason("newYear");
       setCurrentSeason("newYear");
-    } else if ([11, 12].includes(month)) {
-      setSeason("christmas");
-      setCurrentSeason("christmas");
-    } else if (month === 4) {
-      setSeason("easter");
-      setCurrentSeason("easter");
-    } else if ([6, 7, 8].includes(month)) {
-      setSeason("summer");
-      setCurrentSeason("summer");
-    } else if (month === 10) {
+    }
+    // Halloween: del 25 al 31 de octubre
+    else if (month === 10 && day >= 25 && day <= 31) {
       setSeason("halloween");
       setCurrentSeason("halloween");
-    } else {
+    }
+    // Navidad: noviembre y diciembre (excepto 29–31 dic, ya cubiertos por newYear)
+    else if ([11, 12].includes(month)) {
+      setSeason("christmas");
+      setCurrentSeason("christmas");
+    }
+    // Pascua: abril
+    else if (month === 4) {
+      setSeason("easter");
+      setCurrentSeason("easter");
+    }
+
+    // Verano: junio, julio, agosto
+    else if ([6, 7, 8].includes(month)) {
+      setSeason("summer");
+      setCurrentSeason("summer");
+    }
+    // Sin temporada especial
+    else {
       setSeason("none");
       setCurrentSeason("none");
     }
