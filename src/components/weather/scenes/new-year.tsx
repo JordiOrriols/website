@@ -4,6 +4,7 @@ import CitySkyline from "../elements/skyline";
 import Fireworks from "../elements/fireworks";
 import Stars from "../elements/stars";
 import Moon from "../elements/moon";
+import { configClear } from "./dynamic";
 
 interface Props {
   playFireworks: () => void;
@@ -11,13 +12,15 @@ interface Props {
 
 export default function NewYearScene(props: Props) {
   return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]">
+    <div
+      className={`absolute inset-0 bg-gradient-to-b ${configClear.night.bg}`}
+    >
       <Fireworks></Fireworks>
 
       <Moon></Moon>
 
       {/* City Skyline */}
-      <CitySkyline fill="#1E2A44" />
+      <CitySkyline fill={configClear.night.skyline} />
 
       {/* Stars */}
       <Stars max={150} />

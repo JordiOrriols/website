@@ -29,7 +29,7 @@ export default function Fireworks() {
       setTimeout(() => {
         setFireworks((prev) => prev.filter((fw) => fw.id !== newFirework.id));
       }, 2000);
-    }, 400);
+    }, 600);
 
     return () => clearInterval(interval);
   }, []);
@@ -160,8 +160,8 @@ export default function Fireworks() {
 export const generateFirework = (): IFirework => {
   return {
     id: Date.now(),
-    x: 20 + Math.random() * 60,
-    y: 20 + Math.random() * 40,
+    x: 10 + Math.random() * 80,
+    y: 10 + Math.random() * 30,
     color: [
       "#FFD700",
       "#FF1493",

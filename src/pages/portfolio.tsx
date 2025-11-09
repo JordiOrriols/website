@@ -17,6 +17,7 @@ import HomeSection from "@/components/sections/home";
 import { useTranslation } from "react-i18next";
 import { useAmbientAudio } from "@/lib/ambient";
 import { ErrorBoundary } from "react-error-boundary";
+import NewYearScene from "@/components/weather/scenes/new-year";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -30,6 +31,7 @@ export type SeasonType =
   | "christmas"
   | "newYear"
   | "none";
+  
 export type SectionsType =
   | "projects"
   | "companies"
@@ -189,6 +191,8 @@ export default function Portfolio() {
   };
 
   const getBackgroundComponent = () => {
+    if (season === "newYear") return <NewYearScene></NewYearScene>;
+
     if (weather === "thunderstorm") {
       return <ThunderstormScene playThunder={playThunder} />;
     }

@@ -14,7 +14,7 @@ interface configType {
   bg: string;
 }
 
-const configClear: Record<TimeOfDayType, configType> = {
+export const configClear: Record<TimeOfDayType, configType> = {
   morning: {
     skyline: "#5A8FB8",
     bg: "from-[#87CEEB] via-[#B0E0E6] to-[#FFE4B5]",
@@ -35,7 +35,7 @@ const configClear: Record<TimeOfDayType, configType> = {
   },
 };
 
-const configRain: Record<TimeOfDayType, configType> = {
+export const configRain: Record<TimeOfDayType, configType> = {
   morning: {
     // Amanecer lluvioso: más claro y ligeramente cálido, aún con bruma fría.
     skyline: "#1F2937",
