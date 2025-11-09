@@ -5,6 +5,7 @@ import Fireworks from "../elements/fireworks";
 import Stars from "../elements/stars";
 import Moon from "../elements/moon";
 import { configClear } from "./dynamic";
+import Ghosts from "../elements/ghosts";
 
 const configHalloween = {
   bg: "from-[#1a0f2e] via-[#2d1b47] to-[#4a2c5e]",
@@ -15,6 +16,8 @@ export default function HalloweenScene() {
   return (
     <div className={`absolute inset-0 bg-gradient-to-b ${configHalloween.bg}`}>
       <Moon></Moon>
+
+      <Ghosts max={6}></Ghosts>
 
       {/* City Skyline */}
       <CitySkyline fill={configHalloween.skyline} />
