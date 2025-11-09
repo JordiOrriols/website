@@ -99,7 +99,10 @@ export default function Avatar(props: {
               style={{ fill: "#f27774", fillRule: "nonzero" }}
             />
           </g>
-          <g id="rightEyeOpened">
+          <g
+            id="rightEyeOpened"
+            style={{ display: hover ? "none" : "inherit" }}
+          >
             <path
               id="_-Path-11"
               d="M41.095,52.654c0,1.413 -0.7,2.555 -1.56,2.555c-0.865,0 -1.56,-1.142 -1.56,-2.555c0,-1.407 0.695,-2.549 1.56,-2.549c0.859,0 1.56,1.142 1.56,2.549Z"
@@ -116,7 +119,10 @@ export default function Avatar(props: {
               style={{ fill: "#fefefe", fillRule: "nonzero" }}
             />
           </g>
-          <g id="leftEyeOpened">
+          <g
+            id="leftEyeOpened"
+            style={{ display: clicked ? "none" : "inherit" }}
+          >
             <path
               id="_-Path-14"
               d="M29.323,52.654c0,1.413 -0.7,2.555 -1.56,2.555c-0.865,0 -1.56,-1.142 -1.56,-2.555c0,-1.407 0.695,-2.549 1.56,-2.549c0.859,0 1.56,1.142 1.56,2.549Z"
@@ -141,7 +147,7 @@ export default function Avatar(props: {
               fillRule: "nonzero",
               stroke: "#231f20",
               strokeWidth: 0.52,
-              display: "none",
+              display: clicked ? "inherit" : "none",
             }}
           />
           <path
@@ -152,7 +158,7 @@ export default function Avatar(props: {
               fillRule: "nonzero",
               stroke: "#231f20",
               strokeWidth: 0.52,
-              display: "none",
+              display: hover ? "inherit" : "none",
             }}
           />
 
