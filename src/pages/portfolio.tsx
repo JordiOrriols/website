@@ -144,21 +144,24 @@ export default function Portfolio() {
   };
 
   const determineSeason = () => {
-    const month = new Date().getMonth() + 1;
+    const now = new Date();
+    const month = now.getMonth() + 1; // 1–12
+    const day = now.getDate(); // 1–31
 
-    if ([11, 12].includes(month)) {
-      setSeason("christmas");
-      setCurrentSeason("christmas");
-    } else if ([1].includes(month)) {
+    // Año nuevo: del 29 de diciembre al 2 de enero
+    if ((month === 12 && day >= 29) || (month === 1 && day <= 2)) {
       setSeason("newYear");
       setCurrentSeason("newYear");
-    } else if ([4].includes(month)) {
+    } else if ([11, 12].includes(month)) {
+      setSeason("christmas");
+      setCurrentSeason("christmas");
+    } else if (month === 4) {
       setSeason("easter");
       setCurrentSeason("easter");
     } else if ([6, 7, 8].includes(month)) {
       setSeason("summer");
       setCurrentSeason("summer");
-    } else if ([10].includes(month)) {
+    } else if (month === 10) {
       setSeason("halloween");
       setCurrentSeason("halloween");
     } else {

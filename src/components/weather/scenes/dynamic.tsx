@@ -87,7 +87,8 @@ export default function DynamicScene(props: {
     <div className={`absolute inset-0 bg-gradient-to-b ${config.bg}`}>
       {/* Bright Sun */}
       {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
-      props.weather !== "rain" ? (
+      props.weather !== "rain" &&
+      props.weather !== "snow" ? (
         <Sun></Sun>
       ) : null}
       {/* Moon */}
