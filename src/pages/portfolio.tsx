@@ -255,6 +255,8 @@ export default function Portfolio() {
 
   const fallbackComponent = null;
 
+  const disabledDropdown = season === "newYear" || season === "halloween"
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Dynamic Background */}
@@ -274,6 +276,7 @@ export default function Portfolio() {
             auto={t(currentWeather)}
             value={weatherMode}
             onValueChange={handleWeatherModeChange}
+            disabled={disabledDropdown}
             options={[
               { label: `☀️ ${t("clear")}`, value: "clear" },
               { label: `☁️ ${t("cloudy")}`, value: "cloudy" },
@@ -291,6 +294,7 @@ export default function Portfolio() {
             auto={t(currentTimeOfDay)}
             value={timeOfDayMode}
             onValueChange={handleTimeOfDayModeChange}
+            disabled={disabledDropdown}
             options={[
               { label: `🌅 ${t("morning")}`, value: "morning" },
               { label: `☀️ ${t("day")}`, value: "day" },

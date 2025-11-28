@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 interface Props {
   auto: string;
   placeholder: string;
+  disabled: boolean;
   options: { label: string; value: string }[];
   value: string;
   onValueChange: (value: string) => void;
@@ -23,7 +24,7 @@ function capitalizeFirstLetter(val) {
 export default function Dropdown(props: Props) {
   const { t } = useTranslation();
   return (
-    <Select value={props.value} onValueChange={props.onValueChange}>
+    <Select value={props.value} onValueChange={props.onValueChange} disabled={props.disabled}>
       <SelectTrigger className="w-56 bg-white/90 backdrop-blur-sm border-white/50 shadow-lg">
         <SelectValue placeholder={props.placeholder} />
       </SelectTrigger>
