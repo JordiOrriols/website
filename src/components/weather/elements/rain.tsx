@@ -1,7 +1,7 @@
 import { TimeOfDayType } from "@/pages/portfolio";
 import React, { useEffect, useState } from "react";
 
-export interface IRain {
+interface IRain {
   id: number;
   left: number;
   delay: number;
@@ -52,7 +52,7 @@ export default function Rain(props: { max: number; timeOfDay: TimeOfDayType }) {
   );
 }
 
-export const generateRain = (max: number): IRain[] => {
+const generateRain = (max: number): IRain[] => {
   const drops = [];
   for (let i = 0; i < max; i++) {
     drops.push({

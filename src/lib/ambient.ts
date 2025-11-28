@@ -2,7 +2,7 @@ import { useEffect, useRef, useCallback, useState } from "react";
 import { Howl } from "howler";
 import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
 
-export type AmbientAudioKey =
+type AmbientAudioKey =
   | "rain"
   | "thunderOne"
   | "thunderTwo"

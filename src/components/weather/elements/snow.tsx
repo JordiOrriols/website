@@ -1,7 +1,7 @@
 import { TimeOfDayType } from "@/pages/portfolio";
 import React, { useEffect, useState } from "react";
 
-export interface ISnow {
+interface ISnow {
   id: number;
   left: number;
   size: number;
@@ -54,7 +54,7 @@ export default function Snow() {
   );
 }
 
-export const generateSnowflakes = (max: number): ISnow[] => {
+const generateSnowflakes = (max: number): ISnow[] => {
   const flakes = [];
   for (let i = 0; i < max; i++) {
     flakes.push({

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export interface IGhost {
+interface IGhost {
   id: number;
   top: number;
   left: number;
@@ -272,7 +272,7 @@ export default function Ghosts(props: { max: number }) {
   );
 }
 
-export const generateGhosts = (max: number): IGhost[] => {
+const generateGhosts = (max: number): IGhost[] => {
   const ghosts = [];
   for (let i = 0; i < max; i++) {
     ghosts.push({

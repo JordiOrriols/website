@@ -1,6 +1,6 @@
 import { ExperienceEntry } from "@/data/experience";
 
-export interface Translation {
+interface Translation {
   // Weather System
   loadingWeather: string;
   current: string;

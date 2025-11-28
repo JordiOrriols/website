@@ -165,7 +165,7 @@ export default function Fireworks(props: Props) {
   );
 }
 
-export const generateFirework = (): IFirework => {
+const generateFirework = (): IFirework => {
   return {
     id: Date.now(),
     x: 10 + Math.random() * 80,

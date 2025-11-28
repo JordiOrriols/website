@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export interface ICloud {
+interface ICloud {
   id: number;
   top: number;
   left: number;
@@ -58,14 +58,14 @@ export default function Clouds(props: CloudsProps) {
   );
 }
 
-export const generateClouds = (config: CloudsProps): ICloud[] => {
+const generateClouds = (config: CloudsProps): ICloud[] => {
   const newClouds: ICloud[] = [];
   for (let i = 0; i < config.maxNumber; i++) {
     newClouds.push({
       id: i,
       top: Math.random() * 30 + 15,
       left: Math.random() * 100,
-      size: (Math.random() * (config.maxSize || 1)) + 0.3,
+      size: Math.random() * (config.maxSize || 1) + 0.3,
       opacity: Math.random() * (config.maxOpacity || 1),
       duration: Math.random() * 50 + 70,
     });

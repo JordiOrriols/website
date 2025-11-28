@@ -1,6 +1,6 @@
 import { WeatherType } from "@/pages/portfolio";
 
-export interface CurrentWeather {
+interface CurrentWeather {
   temperature: number;
   windspeed: number;
   winddirection: number;
@@ -8,13 +8,13 @@ export interface CurrentWeather {
   time: string;
 }
 
-export interface DailyWeather {
+interface DailyWeather {
   time: string[];
   sunrise: string[];
   sunset: string[];
 }
 
-export interface OpenMeteoResponse {
+interface OpenMeteoResponse {
   latitude: number;
   longitude: number;
   generationtime_ms: number;

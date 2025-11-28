@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export interface IStar {
+interface IStar {
   id: number;
   top: number;
   left: number;
@@ -46,7 +46,7 @@ export default function Stars(props: { max: number }) {
   );
 }
 
-export const generateStars = (max: number): IStar[] => {
+const generateStars = (max: number): IStar[] => {
   const newStars: IStar[] = [];
   for (let i = 0; i < max; i++) {
     newStars.push({
