@@ -119,8 +119,8 @@ export default function Portfolio() {
 
     const startMorning = sunriseHour - 1;
     const endMorning = sunriseHour + 2;
-    const startAfternoon = sunriseHour - 2;
-    const endAfternoon = sunriseHour + 1;
+    const startAfternoon = sunsetHour - 2;
+    const endAfternoon = sunsetHour + 1;
 
     if (hour >= startMorning && hour < endMorning) {
       setTimeOfDay("morning");
