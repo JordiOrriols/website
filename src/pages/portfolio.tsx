@@ -269,7 +269,7 @@ export default function Portfolio() {
 
       <ErrorBoundary fallback={fallbackComponent}>
         {/* Weather Mode Selector */}
-        <div className="absolute top-4 right-4 z-30">
+        <div className="absolute top-4 right-4 z-30 hidden md:block">
           <Dropdown
             auto={t(currentWeather)}
             value={weatherMode}
@@ -286,7 +286,7 @@ export default function Portfolio() {
         </div>
 
         {/* Day Time Mode Selector */}
-        <div className="absolute top-15 right-4 z-30">
+        <div className="absolute top-15 right-4 z-30 hidden md:block">
           <Dropdown
             auto={t(currentTimeOfDay)}
             value={timeOfDayMode}
@@ -303,7 +303,7 @@ export default function Portfolio() {
 
         {/* Season Mode Selector */}
         {activeSpecialEvents && (
-          <div className="absolute top-26 right-4 z-30">
+          <div className="absolute top-26 right-4 z-30 hidden md:block">
             <Dropdown
               auto={t(currentSeason)}
               value={seasonMode}
@@ -322,7 +322,7 @@ export default function Portfolio() {
         )}
       </ErrorBoundary>
 
-      <div className="absolute bottom-4 right-16 z-30">
+      <div className="absolute bottom-4 right-16 z-30 hidden md:block">
         <Button
           onClick={handleShowPlane}
           className={`${
