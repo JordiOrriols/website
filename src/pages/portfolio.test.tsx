@@ -181,7 +181,7 @@ describe("Portfolio Component", () => {
     });
 
     const closeBtn = getByTestId("projects-gallery").querySelector("button");
-    fireEvent.click(closeBtn!);
+    if (closeBtn) fireEvent.click(closeBtn);
 
     await waitFor(() => {
       expect(queryByTestId("projects-gallery")).toBeFalsy();

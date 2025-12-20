@@ -41,7 +41,7 @@ export async function fetchCurrentWeather(lat: number, lon: number): Promise<Ope
 
   const resp = await fetch(url);
   if (!resp.ok) {
-    throw new Error(`Weather API error: ${resp.status} ${resp.statusText}`);
+    throw new Error(`Weather API error: ${resp.status.toString()} ${resp.statusText}`);
   }
   const data: OpenMeteoResponse = await resp.json();
   return data;
