@@ -3,38 +3,48 @@ import { getWeatherMode, fetchCurrentWeather } from './weather';
 
 describe('Weather', () => {
   describe('getWeatherMode', () => {
-    it('returns "clear" for clear weather codes', () => {
-      expect(getWeatherMode(0)).toBe('clear');
-      expect(getWeatherMode(1)).toBe('clear');
+    it.each([
+      [0, 'clear'],
+      [1, 'clear'],
+    ])('returns clear for code %i', (code, expected) => {
+      expect(getWeatherMode(code)).toBe(expected);
     });
 
-    it('returns "cloudy" for cloudy weather codes', () => {
-      expect(getWeatherMode(2)).toBe('cloudy');
-      expect(getWeatherMode(3)).toBe('cloudy');
-      expect(getWeatherMode(45)).toBe('cloudy');
-      expect(getWeatherMode(48)).toBe('cloudy');
+    it.each([
+      [2, 'cloudy'],
+      [3, 'cloudy'],
+      [45, 'cloudy'],
+      [48, 'cloudy'],
+    ])('returns cloudy for code %i', (code, expected) => {
+      expect(getWeatherMode(code)).toBe(expected);
     });
 
-    it('returns "rain" for rain weather codes', () => {
-      expect(getWeatherMode(51)).toBe('rain');
-      expect(getWeatherMode(61)).toBe('rain');
-      expect(getWeatherMode(80)).toBe('rain');
-      expect(getWeatherMode(82)).toBe('rain');
+    it.each([
+      [51, 'rain'],
+      [61, 'rain'],
+      [80, 'rain'],
+      [82, 'rain'],
+    ])('returns rain for code %i', (code, expected) => {
+      expect(getWeatherMode(code)).toBe(expected);
     });
 
-    it('returns "thunderstorm" for thunderstorm codes', () => {
-      expect(getWeatherMode(95)).toBe('thunderstorm');
-      expect(getWeatherMode(96)).toBe('thunderstorm');
-      expect(getWeatherMode(99)).toBe('thunderstorm');
+    it.each([
+      [95, 'thunderstorm'],
+      [96, 'thunderstorm'],
+      [99, 'thunderstorm'],
+    ])('returns thunderstorm for code %i', (code, expected) => {
+      expect(getWeatherMode(code)).toBe(expected);
     });
 
-    it('returns "snow" for snow weather codes', () => {
-      expect(getWeatherMode(71)).toBe('snow');
-      expect(getWeatherMode(73)).toBe('snow');
-      expect(getWeatherMode(75)).toBe('snow');
+    it.each([
+      [71, 'snow'],
+      [73, 'snow'],
+      [75, 'snow'],
+    ])('returns snow for code %i', (code, expected) => {
+      expect(getWeatherMode(code)).toBe(expected);
     });
 
-    it('returns "clear" for unknown weather codes', () => {
+    it('returns clear for unknown weather codes', () => {
       expect(getWeatherMode(999)).toBe('clear');
     });
   });
