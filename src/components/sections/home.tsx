@@ -75,8 +75,7 @@ export default function HomeSection(props: Props) {
           {
             label: t("companies"),
             value: "12",
-            onClick: () => {},
-            // onClick: () => props.handleStatClick("companies"),
+            onClick: () => props.handleStatClick("companies"),
           },
           {
             label: t("leading"),
