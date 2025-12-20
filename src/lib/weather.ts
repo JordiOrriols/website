@@ -28,10 +28,7 @@ interface OpenMeteoResponse {
 
 const BASE_URL = "https://api.open-meteo.com/v1/forecast";
 
-export async function fetchCurrentWeather(
-  lat: number,
-  lon: number
-): Promise<OpenMeteoResponse> {
+export async function fetchCurrentWeather(lat: number, lon: number): Promise<OpenMeteoResponse> {
   const params = new URLSearchParams({
     latitude: lat.toString(),
     longitude: lon.toString(),
@@ -53,8 +50,7 @@ export async function fetchCurrentWeather(
 export function getWeatherMode(code: number): WeatherType {
   if ([0, 1].includes(code)) return "clear";
   else if ([2, 3, 45, 48].includes(code)) return "cloudy";
-  else if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82))
-    return "rain";
+  else if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return "rain";
   else if ([95, 96, 99].includes(code)) return "thunderstorm";
   else if ([71, 73, 75].includes(code)) return "snow";
   return "clear"; // fallback

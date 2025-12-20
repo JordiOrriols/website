@@ -73,12 +73,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
       "Developed a dynamic demo platform for sales enablement and partner showcases.",
     ],
     tech: TECH_MITEK,
-    tags: [
-      "Serverless -70% cost",
-      "Mentoring",
-      "CI/CD",
-      "Product Demo Platform",
-    ],
+    tags: ["Serverless -70% cost", "Mentoring", "CI/CD", "Product Demo Platform"],
   },
   {
     period: "2017 – Jul 2020",
@@ -92,12 +87,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
       "Introduced Docker-based dev setup, Visual Regression Testing, and Jenkins automation.",
     ],
     tech: TECH_HP,
-    tags: [
-      "TypeScript Migration",
-      "Unit Tests 20%→90%",
-      "Visual Regression",
-      "Dev Tooling",
-    ],
+    tags: ["TypeScript Migration", "Unit Tests 20%→90%", "Visual Regression", "Dev Tooling"],
   },
   {
     period: "Mar 2016 – Jul 2017",
@@ -111,12 +101,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
       "Delivered real-time APIs (Socket.io) and supported clients during deployment phases.",
     ],
     tech: TECH_ONNERGY,
-    tags: [
-      "Cloud Architecture",
-      "Code Reuse",
-      "Client Delivery",
-      "Scalable Systems",
-    ],
+    tags: ["Cloud Architecture", "Code Reuse", "Client Delivery", "Scalable Systems"],
   },
   {
     period: "Jul 2011 – Nov 2014",
@@ -199,12 +184,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
       "Desarrollé una plataforma de demos dinámica para ventas y presentaciones a partners.",
     ],
     tech: TECH_MITEK,
-    tags: [
-      "Serverless -70% coste",
-      "Mentoría",
-      "CI/CD",
-      "Plataforma de demos de producto",
-    ],
+    tags: ["Serverless -70% coste", "Mentoría", "CI/CD", "Plataforma de demos de producto"],
   },
   {
     period: "2017 – Jul 2020",

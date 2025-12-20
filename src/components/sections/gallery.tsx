@@ -27,7 +27,11 @@ export default function Gallery({ title, subtitle, options, onClose }: Props) {
             transition={{ delay: index * 0.04 }}
             className="group relative overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 aspect-square"
           >
-            <img src={design.image} alt={design.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" />
+            <img
+              src={design.image}
+              alt={design.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+            />
             <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
               <h3 className="text-white font-medium text-center px-2">{design.title}</h3>
             </div>

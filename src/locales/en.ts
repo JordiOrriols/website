@@ -45,8 +45,7 @@ export const en: Locale = {
 
     // Companies
     companiesTitle: "Companies",
-    companiesSubtitle:
-      "Some of the companies I've had the pleasure to work with",
+    companiesSubtitle: "Some of the companies I've had the pleasure to work with",
 
     // Work Timeline
     workTimelineTitle: "Work Timeline",
@@ -57,8 +56,7 @@ export const en: Locale = {
 
     // Contact Form
     contactTitle: "Send me a message",
-    contactSubtitle:
-      "I’d love to hear from you. Fill out the form and I’ll get back to you soon.",
+    contactSubtitle: "I’d love to hear from you. Fill out the form and I’ll get back to you soon.",
     firstName: "First name",
     lastName: "Last name",
     email: "Email",

@@ -109,9 +109,7 @@ export default function Fireworks(props: Props) {
               }}
               animate={{
                 x: Math.cos(particle.angle + 0.1) * (particle.velocity * 0.6),
-                y:
-                  Math.sin(particle.angle + 0.1) * (particle.velocity * 0.6) +
-                  20,
+                y: Math.sin(particle.angle + 0.1) * (particle.velocity * 0.6) + 20,
                 scale: [1, 0.8, 0],
                 opacity: [0.7, 0.5, 0],
               }}
@@ -170,15 +168,9 @@ const generateFirework = (): IFirework => {
     id: Date.now(),
     x: 10 + Math.random() * 80,
     y: 10 + Math.random() * 30,
-    color: [
-      "#FFD700",
-      "#FF1493",
-      "#00CED1",
-      "#FF4500",
-      "#9370DB",
-      "#32CD32",
-      "#FF69B4",
-    ][Math.floor(Math.random() * 7)],
+    color: ["#FFD700", "#FF1493", "#00CED1", "#FF4500", "#9370DB", "#32CD32", "#FF69B4"][
+      Math.floor(Math.random() * 7)
+    ],
     particles: Array.from({ length: 50 }, (_, i) => {
       const angle = (i / 50) * Math.PI * 2;
       const velocity = 80 + Math.random() * 40;

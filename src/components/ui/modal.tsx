@@ -38,9 +38,7 @@ export default function Modal({
       {/* Header: stays fixed and not part of the scrollable area */}
       {(title || subtitle) && (
         <div className="p-8 md:p-12">
-          {title && (
-            <h2 className="text-3xl font-light text-gray-800 mb-2">{title}</h2>
-          )}
+          {title && <h2 className="text-3xl font-light text-gray-800 mb-2">{title}</h2>}
           {subtitle && <p className="text-gray-500">{subtitle}</p>}
         </div>
       )}

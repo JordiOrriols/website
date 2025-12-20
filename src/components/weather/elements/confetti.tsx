@@ -10,10 +10,7 @@ export interface IPiece {
   color: string;
 }
 
-export default function Confetti(props: {
-  max: number;
-  timeOfDay: TimeOfDayType;
-}) {
+export default function Confetti(props: { max: number; timeOfDay: TimeOfDayType }) {
   const [confetti, setConfetti] = useState([]);
 
   useEffect(() => {
@@ -56,9 +53,7 @@ export const generateConfetti = (max: number): IPiece[] => {
       delay: Math.random() * 3,
       duration: 3 + Math.random() * 2,
       rotation: Math.random() * 360,
-      color: ["#FFD700", "#FF1493", "#00CED1", "#FF4500", "#9370DB"][
-        Math.floor(Math.random() * 5)
-      ],
+      color: ["#FFD700", "#FF1493", "#00CED1", "#FF4500", "#9370DB"][Math.floor(Math.random() * 5)],
     });
   }
   return pieces;

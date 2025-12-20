@@ -12,7 +12,12 @@ interface Props {
   onClose: () => void;
 }
 
-export default function WorkTimeline({ title, subtitle, options, onClose }: Props): React.JSX.Element {
+export default function WorkTimeline({
+  title,
+  subtitle,
+  options,
+  onClose,
+}: Props): React.JSX.Element {
   const { t } = useTranslation();
   return (
     <Modal title={title} subtitle={subtitle} onClose={onClose} maxWidth="max-w-4xl">
@@ -49,7 +54,9 @@ export default function WorkTimeline({ title, subtitle, options, onClose }: Prop
                   <div className="mb-4">
                     <div className="flex items-center gap-2 mb-4">
                       <CheckCircle2 className="w-4 h-4 text-green-600" />
-                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">{t("goalsAndAchievements")}</span>
+                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                        {t("goalsAndAchievements")}
+                      </span>
                     </div>
                     <ul className="space-y-2">
                       {site.achievements.map((objective, i) => (
@@ -67,12 +74,19 @@ export default function WorkTimeline({ title, subtitle, options, onClose }: Prop
                   <div className="mt-4">
                     <div className="flex items-center gap-2 mb-3">
                       <Code className="w-4 h-4 text-gray-400" />
-                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">{t("technologies")}</span>
+                      <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                        {t("technologies")}
+                      </span>
                     </div>
 
                     <div className="flex gap-2 flex-wrap">
                       {site.tech.map((tech, i) => (
-                        <span key={i} className="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-xs font-medium hover:border-[#2D4A6B] hover:text-[#2D4A6B] transition-colors duration-200 shadow-sm">{tech}</span>
+                        <span
+                          key={i}
+                          className="px-3 py-1.5 bg-white border border-gray-200 text-gray-700 rounded-lg text-xs font-medium hover:border-[#2D4A6B] hover:text-[#2D4A6B] transition-colors duration-200 shadow-sm"
+                        >
+                          {tech}
+                        </span>
                       ))}
                     </div>
                   </div>

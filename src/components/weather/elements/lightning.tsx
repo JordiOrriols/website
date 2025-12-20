@@ -26,9 +26,7 @@ export default function Lightning(props: Props) {
   return (
     <>
       {/* Lightning Flash */}
-      {lightning && (
-        <div className="absolute inset-0 bg-white opacity-40 animate-flash z-10"></div>
-      )}
+      {lightning && <div className="absolute inset-0 bg-white opacity-40 animate-flash z-10"></div>}
       <style>{`
         @keyframes flash {
           0%, 100% { opacity: 0; }

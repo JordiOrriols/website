@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest';
-import { render } from '@testing-library/react';
+import { describe, it, expect } from "vitest";
+import { render } from "@testing-library/react";
 import {
   Dialog,
   DialogTrigger,
@@ -8,10 +8,10 @@ import {
   DialogTitle,
   DialogDescription,
   DialogClose,
-} from './dialog';
+} from "./dialog";
 
-describe('Dialog Components', () => {
-  it('renders Dialog wrapper component', () => {
+describe("Dialog Components", () => {
+  it("renders Dialog wrapper component", () => {
     const { container } = render(
       <Dialog open>
         <div>Test</div>
@@ -20,58 +20,58 @@ describe('Dialog Components', () => {
     expect(container).toBeTruthy();
   });
 
-  it('renders DialogTrigger', () => {
+  it("renders DialogTrigger", () => {
     const { container } = render(
       <Dialog>
         <DialogTrigger>Open</DialogTrigger>
       </Dialog>
     );
-    expect(container.textContent).toContain('Open');
+    expect(container.textContent).toContain("Open");
   });
 
-  it('renders DialogTitle inside Dialog context', () => {
+  it("renders DialogTitle inside Dialog context", () => {
     const { container } = render(
       <Dialog>
         <DialogTitle>Test Title</DialogTitle>
       </Dialog>
     );
-    expect(container.textContent).toContain('Test Title');
+    expect(container.textContent).toContain("Test Title");
     expect(container.querySelector('[data-slot="dialog-title"]')).toBeTruthy();
   });
 
-  it('renders DialogTitle with custom className', () => {
+  it("renders DialogTitle with custom className", () => {
     const { container } = render(
       <Dialog>
         <DialogTitle className="custom-class">Title</DialogTitle>
       </Dialog>
     );
     const title = container.querySelector('[data-slot="dialog-title"]');
-    expect(title?.className).toContain('custom-class');
-    expect(title?.className).toContain('text-lg');
+    expect(title?.className).toContain("custom-class");
+    expect(title?.className).toContain("text-lg");
   });
 
-  it('renders DialogDescription inside Dialog context', () => {
+  it("renders DialogDescription inside Dialog context", () => {
     const { container } = render(
       <Dialog>
         <DialogDescription>Test Description</DialogDescription>
       </Dialog>
     );
-    expect(container.textContent).toContain('Test Description');
+    expect(container.textContent).toContain("Test Description");
     expect(container.querySelector('[data-slot="dialog-description"]')).toBeTruthy();
   });
 
-  it('renders DialogDescription with custom className', () => {
+  it("renders DialogDescription with custom className", () => {
     const { container } = render(
       <Dialog>
         <DialogDescription className="custom-desc">Desc</DialogDescription>
       </Dialog>
     );
     const desc = container.querySelector('[data-slot="dialog-description"]');
-    expect(desc?.className).toContain('custom-desc');
-    expect(desc?.className).toContain('text-sm');
+    expect(desc?.className).toContain("custom-desc");
+    expect(desc?.className).toContain("text-sm");
   });
 
-  it('renders DialogHeader with children', () => {
+  it("renders DialogHeader with children", () => {
     const { container } = render(
       <Dialog>
         <DialogHeader>
@@ -80,23 +80,23 @@ describe('Dialog Components', () => {
         </DialogHeader>
       </Dialog>
     );
-    expect(container.textContent).toContain('Title');
-    expect(container.textContent).toContain('Desc');
+    expect(container.textContent).toContain("Title");
+    expect(container.textContent).toContain("Desc");
     expect(container.querySelector('[data-slot="dialog-header"]')).toBeTruthy();
   });
 
-  it('renders DialogHeader with custom className', () => {
+  it("renders DialogHeader with custom className", () => {
     const { container } = render(
       <Dialog>
         <DialogHeader className="custom-header">Content</DialogHeader>
       </Dialog>
     );
     const header = container.querySelector('[data-slot="dialog-header"]');
-    expect(header?.className).toContain('custom-header');
-    expect(header?.className).toContain('flex');
+    expect(header?.className).toContain("custom-header");
+    expect(header?.className).toContain("flex");
   });
 
-  it('renders DialogFooter component', () => {
+  it("renders DialogFooter component", () => {
     const { container } = render(
       <Dialog>
         <DialogFooter>
@@ -104,11 +104,11 @@ describe('Dialog Components', () => {
         </DialogFooter>
       </Dialog>
     );
-    expect(container.textContent).toContain('Action');
+    expect(container.textContent).toContain("Action");
     expect(container.querySelector('[data-slot="dialog-footer"]')).toBeTruthy();
   });
 
-  it('renders DialogFooter with custom className', () => {
+  it("renders DialogFooter with custom className", () => {
     const { container } = render(
       <Dialog>
         <DialogFooter className="custom-footer">
@@ -117,11 +117,11 @@ describe('Dialog Components', () => {
       </Dialog>
     );
     const footer = container.querySelector('[data-slot="dialog-footer"]');
-    expect(footer?.className).toContain('custom-footer');
-    expect(footer?.className).toContain('flex');
+    expect(footer?.className).toContain("custom-footer");
+    expect(footer?.className).toContain("flex");
   });
 
-  it('renders DialogClose inside Dialog context', () => {
+  it("renders DialogClose inside Dialog context", () => {
     const { container } = render(
       <Dialog>
         <DialogClose>Close</DialogClose>
@@ -130,7 +130,7 @@ describe('Dialog Components', () => {
     expect(container.querySelector('[data-slot="dialog-close"]')).toBeTruthy();
   });
 
-  it('renders DialogClose with disabled state', () => {
+  it("renders DialogClose with disabled state", () => {
     const { container } = render(
       <Dialog>
         <DialogClose disabled>Close</DialogClose>
@@ -140,7 +140,7 @@ describe('Dialog Components', () => {
     expect(closeBtn?.disabled).toBe(true);
   });
 
-  it('Dialog components compose together', () => {
+  it("Dialog components compose together", () => {
     const { container } = render(
       <Dialog>
         <DialogHeader>

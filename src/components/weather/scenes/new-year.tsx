@@ -12,9 +12,7 @@ interface Props {
 
 export default function NewYearScene(props: Props) {
   return (
-    <div
-      className={`absolute inset-0 bg-gradient-to-b ${configClear.night.bg}`}
-    >
+    <div className={`absolute inset-0 bg-gradient-to-b ${configClear.night.bg}`}>
       <Fireworks playFireworks={props.playFireworks}></Fireworks>
 
       <Moon></Moon>

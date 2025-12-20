@@ -39,22 +39,15 @@ interface AmbientConfig {
   }[];
 }
 
-const getAudioConfig = (
-  weather: WeatherType,
-  timeOfDay: TimeOfDayType
-): AmbientConfig => {
-  if (weather === "thunderstorm" || weather === "rain")
-    return { background: ["rain"] };
+const getAudioConfig = (weather: WeatherType, timeOfDay: TimeOfDayType): AmbientConfig => {
+  if (weather === "thunderstorm" || weather === "rain") return { background: ["rain"] };
   else if (weather === "snow") return { background: [] };
   else if (timeOfDay === "morning") return { background: ["morning"] };
   else if (timeOfDay === "night") return { background: ["night"] };
   return { background: [] };
 };
 
-export const useAmbientAudio = (
-  weather: WeatherType,
-  timeOfDay: TimeOfDayType
-) => {
+export const useAmbientAudio = (weather: WeatherType, timeOfDay: TimeOfDayType) => {
   const howlsRef = useRef<Map<AmbientAudioKey, Howl>>(new Map());
   const timersRef = useRef<number[]>([]);
   const lastConfigRef = useRef<AmbientConfig | null>(null);
@@ -122,8 +115,7 @@ export const useAmbientAudio = (
       if (!random) return;
       random.forEach((item) => {
         const loop = () => {
-          const delay =
-            item.minDelay + Math.random() * (item.maxDelay - item.minDelay);
+          const delay = item.minDelay + Math.random() * (item.maxDelay - item.minDelay);
           const timer = window.setTimeout(() => {
             playSound(item.key, { loop: false, volume: item.volume ?? 1 });
             loop();

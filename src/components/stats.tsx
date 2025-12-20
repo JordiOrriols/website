@@ -22,16 +22,10 @@ export default function Stats(props: Props) {
           className="text-center cursor-pointer hover:bg-gray-100 rounded-xl p-4 transition-colors duration-200"
         >
           <div className="text-center">
-            <div className="text-5xl font-extralight text-gray-800 mb-2">
-              {option.value}
-            </div>
-            <div className="text-gray-400 text-sm tracking-wider">
-              {option.label}
-            </div>
+            <div className="text-5xl font-extralight text-gray-800 mb-2">{option.value}</div>
+            <div className="text-gray-400 text-sm tracking-wider">{option.label}</div>
             {option.unit ? (
-              <div className="text-xs font-extralight text-gray-300">
-                ({option.unit})
-              </div>
+              <div className="text-xs font-extralight text-gray-300">({option.unit})</div>
             ) : null}
           </div>
         </motion.button>

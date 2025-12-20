@@ -1,10 +1,7 @@
 import { SeasonType } from "@/pages/portfolio";
 import React, { useState } from "react";
 
-export default function Avatar(props: {
-  season: SeasonType;
-  onClickAvatar?: () => void;
-}) {
+export default function Avatar(props: { season: SeasonType; onClickAvatar?: () => void }) {
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
 
@@ -99,10 +96,7 @@ export default function Avatar(props: {
               style={{ fill: "#f27774", fillRule: "nonzero" }}
             />
           </g>
-          <g
-            id="rightEyeOpened"
-            style={{ display: hover ? "none" : "inherit" }}
-          >
+          <g id="rightEyeOpened" style={{ display: hover ? "none" : "inherit" }}>
             <path
               id="_-Path-11"
               d="M41.095,52.654c0,1.413 -0.7,2.555 -1.56,2.555c-0.865,0 -1.56,-1.142 -1.56,-2.555c0,-1.407 0.695,-2.549 1.56,-2.549c0.859,0 1.56,1.142 1.56,2.549Z"
@@ -119,10 +113,7 @@ export default function Avatar(props: {
               style={{ fill: "#fefefe", fillRule: "nonzero" }}
             />
           </g>
-          <g
-            id="leftEyeOpened"
-            style={{ display: clicked ? "none" : "inherit" }}
-          >
+          <g id="leftEyeOpened" style={{ display: clicked ? "none" : "inherit" }}>
             <path
               id="_-Path-14"
               d="M29.323,52.654c0,1.413 -0.7,2.555 -1.56,2.555c-0.865,0 -1.56,-1.142 -1.56,-2.555c0,-1.407 0.695,-2.549 1.56,-2.549c0.859,0 1.56,1.142 1.56,2.549Z"
@@ -182,10 +173,7 @@ export default function Avatar(props: {
           </g>
 
           {/* glasses */}
-          <g
-            id="glasses"
-            style={{ display: props.season === "summer" ? "" : "none" }}
-          >
+          <g id="glasses" style={{ display: props.season === "summer" ? "" : "none" }}>
             <path
               d="M41.244,48.816c1.249,-0.058 3.815,-0.219 4.953,0.766c1.138,0.985 0.417,5.236 -1.01,6.549c-1.427,1.313 -4.729,1.297 -6.508,0.391c-1.779,-0.907 -2.517,-4.423 -2.1,-5.705c0.417,-1.282 0.978,-1.829 4.664,-2.001"
               style={{ fill: "#46415a", fillRule: "nonzero" }}
@@ -209,10 +197,7 @@ export default function Avatar(props: {
           </g>
 
           {/* christmasHat */}
-          <g
-            id="christmasHat"
-            style={{ display: props.season === "christmas" ? "" : "none" }}
-          >
+          <g id="christmasHat" style={{ display: props.season === "christmas" ? "" : "none" }}>
             <path
               d="M52.487,39.795c-0.402,-2.282 -1.721,-4.309 -2.345,-6.402c-0.624,-2.093 0.426,-3.851 0.707,-5.467c0.281,-1.616 0.705,-3.036 0.705,-3.036c0,0 4.197,2.419 5.839,4.837c1.641,2.417 2.874,5.291 3.026,4.908c0.152,-0.383 1.542,-2.869 1.513,-3.371c-0.029,-0.502 -0.84,-2.328 -4.167,-9.015c-3.326,-6.687 -8.037,-8.922 -11.316,-9.359c-3.279,-0.438 -7.608,0.883 -11.45,3.755c-3.842,2.871 -11.205,6.767 -12.983,8.36c-1.777,1.592 -2.222,6.677 -2.222,6.677l32.694,8.113Z"
               style={{ fill: "#e50013" }}
@@ -240,10 +225,7 @@ export default function Avatar(props: {
           </g>
 
           {/* easterRabbit */}
-          <g
-            id="easterRabbit"
-            style={{ display: props.season === "easter" ? "" : "none" }}
-          >
+          <g id="easterRabbit" style={{ display: props.season === "easter" ? "" : "none" }}>
             <path
               d="M24.846,35.546c0,0 -8.895,-2.241 -11.351,-11.342c-2.456,-9.101 -0.617,-16.784 -0.617,-16.784c0,0 9.366,5.297 13.251,13.796c3.565,7.8 2.076,10.574 2.076,10.574c-0.459,1.428 -2.131,3.273 -3.359,3.756"
               style={{ fill: "#fff", fillRule: "nonzero" }}
@@ -336,10 +318,7 @@ export default function Avatar(props: {
           </g>
 
           {/* newYearHat */}
-          <g
-            id="newYearHat"
-            style={{ display: props.season === "newYear" ? "" : "none" }}
-          >
+          <g id="newYearHat" style={{ display: props.season === "newYear" ? "" : "none" }}>
             <path
               d="M57.505,29.309c-0.52,-2.47 -12.054,-2.132 -25.762,0.754c-13.708,2.886 -24.399,7.228 -23.879,9.698c0.52,2.469 12.054,2.132 25.761,-0.754c13.707,-2.886 24.399,-7.228 23.879,-9.697"
               style={{ fill: "#222", fillRule: "nonzero" }}

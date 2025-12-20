@@ -1,9 +1,6 @@
 import React from "react";
 
-export default function CitySkyline(props: {
-  fill: string;
-  fillBackground?: string;
-}) {
+export default function CitySkyline(props: { fill: string; fillBackground?: string }) {
   const foregroundStyles = { fill: props.fill || "#d5bcb3", opacity: 1 };
   const backgroundStyles = {
     fill: props.fillBackground || props.fill || "#d5bcb3",

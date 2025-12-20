@@ -45,8 +45,7 @@ export const es: Locale = {
 
     // Companies
     companiesTitle: "Empresas",
-    companiesSubtitle:
-      "Algunas de las empresas con las que he tenido el placer de trabajar",
+    companiesSubtitle: "Algunas de las empresas con las que he tenido el placer de trabajar",
 
     // Work Timeline
     workTimelineTitle: "Línea de Tiempo Laboral",
@@ -57,8 +56,7 @@ export const es: Locale = {
 
     // Contact Form
     contactTitle: "Envíame un mensaje",
-    contactSubtitle:
-      "Me encantaría saber de ti. Completa el formulario y te responderé pronto.",
+    contactSubtitle: "Me encantaría saber de ti. Completa el formulario y te responderé pronto.",
     firstName: "Nombre",
     lastName: "Apellido",
     email: "Correo electrónico",

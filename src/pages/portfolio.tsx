@@ -25,13 +25,7 @@ const BARCELONA_LON = 2.1734;
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm" | "snow";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
-export type SeasonType =
-  | "easter"
-  | "summer"
-  | "halloween"
-  | "christmas"
-  | "newYear"
-  | "none";
+export type SeasonType = "easter" | "summer" | "halloween" | "christmas" | "newYear" | "none";
 
 export type SectionsType =
   | "projects"
@@ -63,14 +57,8 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
-  const {
-    playThunder,
-    playFireworks,
-    playClick,
-    playNotification,
-    toggleMute,
-    muted,
-  } = useAmbientAudio(weather, timeOfDay);
+  const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
+    useAmbientAudio(weather, timeOfDay);
 
   useEffect(() => {
     async function fetchData() {
@@ -93,9 +81,7 @@ export default function Portfolio() {
 
       console.log("Weather response:", response);
 
-      const selectedWeather = getWeatherMode(
-        response.current_weather.weathercode
-      );
+      const selectedWeather = getWeatherMode(response.current_weather.weathercode);
 
       setCurrentWeather(selectedWeather);
       setWeather(selectedWeather);
@@ -210,8 +196,7 @@ export default function Portfolio() {
   };
 
   const getBackgroundComponent = () => {
-    if (season === "newYear")
-      return <NewYearScene playFireworks={playFireworks}></NewYearScene>;
+    if (season === "newYear") return <NewYearScene playFireworks={playFireworks}></NewYearScene>;
     if (season === "halloween") return <HalloweenScene></HalloweenScene>;
 
     if (weather === "thunderstorm") {
@@ -255,14 +240,12 @@ export default function Portfolio() {
 
   const fallbackComponent = null;
 
-  const disabledDropdown = season === "newYear" || season === "halloween"
+  const disabledDropdown = season === "newYear" || season === "halloween";
 
   return (
     <div className="relative min-h-screen overflow-hidden">
       {/* Dynamic Background */}
-      <ErrorBoundary fallback={fallbackComponent}>
-        {getBackgroundComponent()}
-      </ErrorBoundary>
+      <ErrorBoundary fallback={fallbackComponent}>{getBackgroundComponent()}</ErrorBoundary>
 
       {/* Plane in background */}
       <ErrorBoundary fallback={fallbackComponent}>
@@ -330,9 +313,7 @@ export default function Portfolio() {
         <Button
           onClick={handleShowPlane}
           className={`${
-            showPlane
-              ? "bg-red-600 hover:bg-red-700"
-              : "bg-[#2D4A6B] hover:bg-[#1F3447]"
+            showPlane ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
           <Plane className="w-4 h-4" />
@@ -343,25 +324,16 @@ export default function Portfolio() {
         <Button
           onClick={() => toggleMute(!muted)}
           className={`${
-            muted
-              ? "bg-[#2D4A6B] hover:bg-[#1F3447]"
-              : "bg-red-600 hover:bg-red-700"
+            muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
-          {muted ? (
-            <VolumeOff className="w-4 h-4" />
-          ) : (
-            <Volume2 className="w-4 h-4" />
-          )}
+          {muted ? <VolumeOff className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
         </Button>
       </div>
 
       {/* Cards Container */}
       <div className="relative z-20 flex items-center justify-center min-h-screen px-4 py-12">
-        <div
-          className="relative w-full max-w-3xl"
-          style={{ perspective: "1000px" }}
-        >
+        <div className="relative w-full max-w-3xl" style={{ perspective: "1000px" }}>
           <ErrorBoundary fallback={fallbackComponent}>
             <HomeSection
               season={season}
@@ -390,11 +362,7 @@ export default function Portfolio() {
                   className="absolute inset-0 flex items-center justify-center"
                   style={{ transformStyle: "preserve-3d" }}
                 >
-                  <ProjectsGallery
-                    title={""}
-                    subtitle={""}
-                    onClose={closeModal}
-                  />
+                  <ProjectsGallery title={""} subtitle={""} onClose={closeModal} />
                 </div>
               </ErrorBoundary>
             )}

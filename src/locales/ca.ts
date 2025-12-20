@@ -45,21 +45,18 @@ export const ca: Locale = {
 
     // Companies
     companiesTitle: "Empreses",
-    companiesSubtitle:
-      "Algunes de les empreses amb les quals he tingut el plaer de treballar",
+    companiesSubtitle: "Algunes de les empreses amb les quals he tingut el plaer de treballar",
 
     // Work Timeline
     workTimelineTitle: "Línia de Temps Laboral",
-    workTimelineSubtitle:
-      "Una visió detallada de la meva trajectòria professional",
+    workTimelineSubtitle: "Una visió detallada de la meva trajectòria professional",
     goalsAndAchievements: "Objectius i Assoliments",
     technologies: "Tecnologies",
     experienceTimeline: experienceTimelineCa,
 
     // Contact Form
     contactTitle: "Envia'm un missatge",
-    contactSubtitle:
-      "M'encantaria saber de tu. Omple el formulari i et respondré aviat.",
+    contactSubtitle: "M'encantaria saber de tu. Omple el formulari i et respondré aviat.",
     firstName: "Nom",
     lastName: "Cognom",
     email: "Correu electrònic",

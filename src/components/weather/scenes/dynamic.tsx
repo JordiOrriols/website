@@ -58,10 +58,7 @@ const configRain: Record<TimeOfDayType, configType> = {
   },
 };
 
-export default function DynamicScene(props: {
-  weather: WeatherType;
-  timeOfDay: TimeOfDayType;
-}) {
+export default function DynamicScene(props: { weather: WeatherType; timeOfDay: TimeOfDayType }) {
   const [clouds, setClouds] = useState<CloudsProps>({ maxNumber: 0 });
   const [config, setConfig] = useState<configType>(configClear.morning);
 
@@ -72,11 +69,7 @@ export default function DynamicScene(props: {
   }, [props.weather, props.timeOfDay]);
 
   useEffect(() => {
-    if (
-      props.weather === "cloudy" ||
-      props.weather === "rain" ||
-      props.weather === "snow"
-    )
+    if (props.weather === "cloudy" || props.weather === "rain" || props.weather === "snow")
       setClouds({ maxNumber: 50, maxSize: 5, maxOpacity: 0.2 });
     else if (props.timeOfDay === "night") setClouds({ maxNumber: 0 });
     else if (props.weather === "clear") setClouds({ maxNumber: 8 });
@@ -96,15 +89,11 @@ export default function DynamicScene(props: {
       {/* Clouds */}
       <Clouds {...clouds} />
       {/* Rain */}
-      {props.weather === "rain" ? (
-        <Rain max={50} timeOfDay={props.timeOfDay} />
-      ) : null}
+      {props.weather === "rain" ? <Rain max={50} timeOfDay={props.timeOfDay} /> : null}
       {/* City Skyline */}
       <CitySkyline fill={config.skyline} />
       {/* Stars */}
-      {props.timeOfDay === "night" ? (
-        <Stars max={props.weather === "clear" ? 150 : 50} />
-      ) : null}
+      {props.timeOfDay === "night" ? <Stars max={props.weather === "clear" ? 150 : 50} /> : null}
       {/* Logo */}
       <AppLogo />
       {/* Snow */}

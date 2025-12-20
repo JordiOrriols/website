@@ -53,9 +53,7 @@ export default function HomeSection(props: Props) {
         {/* Name and Title */}
         <div className="ml-4 mr-4 mb-4 flex justify-between items-start flex-wrap gap-4">
           <div className="text-center w-full mt-5">
-            <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide">
-              {t("name")}
-            </h1>
+            <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide">{t("name")}</h1>
             <p className="text-gray-400 text-m tracking-wider">{t("title")}</p>
           </div>
         </div>
@@ -69,8 +67,7 @@ export default function HomeSection(props: Props) {
           {
             label: t("projects"),
             value: "15",
-            onClick: () => {},
-            // onClick: () => props.handleStatClick("projects"),
+            onClick: () => props.handleStatClick("projects"),
           },
           {
             label: t("companies"),
@@ -81,8 +78,7 @@ export default function HomeSection(props: Props) {
             label: t("leading"),
             value: "3",
             unit: t("years"),
-            onClick: () => {},
-            // onClick: () => props.handleStatClick("leading_years"),
+            onClick: () => props.handleStatClick("leading_years"),
           },
           {
             label: t("experience"),
