@@ -6,7 +6,7 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 // Mock dependencies
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
-    t: (key: string, opts?: any) => {
+    t: (key: string, opts?: Record<string, unknown>) => {
       if (opts?.returnObjects) return {};
       return key;
     },
