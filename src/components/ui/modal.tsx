@@ -25,7 +25,7 @@ export default function Modal({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9, y: 20 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
-      className={`relative bg-white rounded-3xl shadow-2xl w-full ${maxWidth} overflow-hidden ${className}`}
+      className={`relative bg-white rounded-3xl shadow-2xl w-full ${maxWidth} max-h-[70vh] overflow-hidden flex flex-col ${className}`}
     >
       <button
         onClick={onClose}
@@ -35,16 +35,24 @@ export default function Modal({
         <X className="w-5 h-5 text-gray-600" />
       </button>
 
-      <div className="p-8 md:p-12">
-        {(title || subtitle) && (
-          <div className="mb-8">
-            {title && (
-              <h2 className="text-3xl font-light text-gray-800 mb-2">{title}</h2>
-            )}
-            {subtitle && <p className="text-gray-500">{subtitle}</p>}
-          </div>
-        )}
+      {/* Header: stays fixed and not part of the scrollable area */}
+      {(title || subtitle) && (
+        <div className="p-8 md:p-12">
+          {title && (
+            <h2 className="text-3xl font-light text-gray-800 mb-2">{title}</h2>
+          )}
+          {subtitle && <p className="text-gray-500">{subtitle}</p>}
+        </div>
+      )}
 
+      {/* Scrollable content area: takes remaining space and handles scrolling */}
+      <div
+        className="px-8 md:px-12 pb-8 md:pb-12 flex-1 overscroll-contain"
+        style={{
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch",
+        }}
+      >
         <div>{children}</div>
       </div>
     </motion.div>

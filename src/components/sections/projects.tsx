@@ -17,7 +17,7 @@ const projects = [
 export default function ProjectsGallery({ title, subtitle, onClose }) {
   return (
     <Modal title={title} subtitle={subtitle} onClose={onClose} maxWidth="max-w-4xl">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[60vh] overflow-y-auto pr-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[60vh] pr-2">
         {projects.map((project, index) => (
           <motion.div
             key={index}

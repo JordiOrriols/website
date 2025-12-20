@@ -18,7 +18,7 @@ interface Props {
 export default function Gallery({ title, subtitle, options, onClose }: Props) {
   return (
     <Modal title={title} subtitle={subtitle} onClose={onClose} maxWidth="max-w-4xl">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 overflow-y-auto pr-2">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pr-2">
         {options.map((design, index) => (
           <motion.div
             key={index}

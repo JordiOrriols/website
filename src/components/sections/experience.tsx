@@ -16,7 +16,7 @@ export default function WorkTimeline({ title, subtitle, options, onClose }: Prop
   const { t } = useTranslation();
   return (
     <Modal title={title} subtitle={subtitle} onClose={onClose} maxWidth="max-w-4xl">
-      <div className="relative max-h-[60vh] overflow-y-auto pr-2">
+      <div className="relative h-full pr-2">
         <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#2D4A6B] to-transparent"></div>
 
         <div className="space-y-8">
