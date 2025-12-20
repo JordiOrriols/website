@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AppLogo from "../elements/logo";
 import CitySkyline from "../elements/skyline";
 import Clouds from "../elements/cloud";
@@ -60,22 +60,21 @@ const configRain: Record<TimeOfDayType, configType> = {
 };
 
 export default function DynamicScene(props: { weather: WeatherType; timeOfDay: TimeOfDayType }) {
-  const [clouds, setClouds] = useState<CloudsProps>({ maxNumber: 0 });
-  const [config, setConfig] = useState<configType>(configClear.morning);
+  const getConfig = (): configType => {
+    if (props.weather === "rain" || props.weather === "snow") return configRain[props.timeOfDay];
+    return configClear[props.timeOfDay];
+  };
 
-  useEffect(() => {
-    if (props.weather === "rain" || props.weather === "snow")
-      setConfig(configRain[props.timeOfDay]);
-    else setConfig(configClear[props.timeOfDay]);
-  }, [props.weather, props.timeOfDay]);
-
-  useEffect(() => {
+  const getClouds = (): CloudsProps => {
     if (props.weather === "cloudy" || props.weather === "rain" || props.weather === "snow")
-      setClouds({ maxNumber: 50, maxSize: 5, maxOpacity: 0.2 });
-    else if (props.timeOfDay === "night") setClouds({ maxNumber: 0 });
-    else if (props.weather === "clear") setClouds({ maxNumber: 8 });
-    else setClouds({ maxNumber: 4 });
-  }, [props.weather, props.timeOfDay]);
+      return { maxNumber: 50, maxSize: 5, maxOpacity: 0.2 };
+    if (props.timeOfDay === "night") return { maxNumber: 0 };
+    if (props.weather === "clear") return { maxNumber: 8 };
+    return { maxNumber: 4 };
+  };
+
+  const config = getConfig();
+  const clouds = getClouds();
 
   return (
     <div className={`absolute inset-0 bg-gradient-to-b ${config.bg}`}>
