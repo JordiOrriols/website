@@ -8,7 +8,7 @@
     "start": "vite",
     "preview": "vite preview",
     "build": "vite build",
-    "compile": "npx tsc -p tsconfig.app.json --noEmit",
+    "compile": "npx tsc --noEmit",
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
