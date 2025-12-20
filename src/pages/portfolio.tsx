@@ -245,7 +245,7 @@ export default function Portfolio() {
 
   const experienceTimeline = t("experienceTimeline", {
     returnObjects: true,
-  }) as unknown as import("@/data/experience").ExperienceEntry[];
+  }) as unknown as ExperienceEntry[];
 
   const fallbackComponent = null;
 

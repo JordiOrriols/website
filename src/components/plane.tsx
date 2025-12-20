@@ -11,7 +11,7 @@ export default function PlaneController() {
   const velocityYRef = useRef(0);
   const positionRef = useRef({ x: 100, y: 10 });
 
-  const keyRef = useRef(null);
+  const keyRef = useRef<string | null>(null);
   const allowedKeys = useMemo(() => ["ArrowUp", "ArrowDown"], []);
   const acceleration = 0.05;
 
