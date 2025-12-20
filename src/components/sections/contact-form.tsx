@@ -6,6 +6,7 @@ import { Textarea } from "../ui/textarea";
 import { Label } from "../ui/label";
 import { X, Send, Loader2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import Modal from "../ui/modal";
 
 export default function ContactForm({ onClose }) {
   const { t } = useTranslation();
@@ -53,32 +54,9 @@ export default function ContactForm({ onClose }) {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.9, y: 20 }}
-      transition={{ type: "spring", damping: 25, stiffness: 300 }}
-      className="relative bg-white rounded-3xl shadow-2xl w-full max-w-3xl overflow-hidden"
-    >
-      {/* Botón cerrar */}
-      <button
-        onClick={onClose}
-        className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
-      >
-        <X className="w-5 h-5 text-gray-600" />
-      </button>
-
-      <div className="p-8 md:p-12">
-        {!sent ? (
-          <>
-            <div className="mb-8">
-              <h2 className="text-3xl font-light text-gray-800 mb-2">
-                {t("contactTitle")}
-              </h2>
-              <p className="text-gray-500">{t("contactSubtitle")}</p>
-            </div>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
+    <Modal title={t("contactTitle")} subtitle={t("contactSubtitle")} onClose={onClose} maxWidth="max-w-3xl">
+      {!sent ? (
+        <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label htmlFor="firstName" className="text-gray-700">
@@ -167,35 +145,17 @@ export default function ContactForm({ onClose }) {
                 </Button>
               </div>
             </form>
-          </>
-        ) : (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="text-center py-12"
-          >
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-              <svg
-                className="w-10 h-10 text-green-600"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 13l4 4L19 7"
-                />
-              </svg>
-            </div>
-            <h3 className="text-2xl font-light text-gray-800 mb-2">
-              {t("messageSent")}
-            </h3>
-            <p className="text-gray-500">{t("messageResponse")}</p>
-          </motion.div>
-        )}
-      </div>
-    </motion.div>
+      ) : (
+        <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h3 className="text-2xl font-light text-gray-800 mb-2">{t("messageSent")}</h3>
+          <p className="text-gray-500">{t("messageResponse")}</p>
+        </motion.div>
+      )}
+    </Modal>
   );
 }
