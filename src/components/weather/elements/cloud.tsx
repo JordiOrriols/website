@@ -30,10 +30,10 @@ export default function Clouds(props: CloudsProps) {
           key={cloud.id}
           className="absolute animate-float"
           style={{
-            top: `${cloud.top}%`,
-            left: `${cloud.left}%`,
+            top: `${cloud.top.toString()}%`,
+            left: `${cloud.left.toString()}%`,
             opacity: cloud.opacity,
-            animation: `float ${cloud.duration}s linear infinite`,
+            animation: `float ${cloud.duration.toString()}s linear infinite`,
           }}
         >
           <div

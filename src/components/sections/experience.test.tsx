@@ -94,7 +94,7 @@ describe("WorkTimeline", () => {
     );
 
     mockExperienceData.forEach((exp) => {
-      exp.achievements?.forEach((achievement) => {
+      exp.achievements.forEach((achievement) => {
         expect(screen.getByText(achievement)).toBeInTheDocument();
       });
     });

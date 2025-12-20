@@ -11,7 +11,7 @@ export default function LanguageSelector() {
   const [language, setLanguage] = useState("en");
 
   useEffect(() => {
-    i18n.changeLanguage(language);
+    void i18n.changeLanguage(language);
   }, [language]);
 
   return (

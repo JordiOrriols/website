@@ -25,10 +25,10 @@ export default function Confetti(props: { max: number; timeOfDay: TimeOfDayType 
           key={piece.id}
           className="absolute w-2 h-3 opacity-80"
           style={{
-            left: piece.left + "%",
+            left: `${piece.left.toString()}%`,
             backgroundColor: piece.color,
-            animation: `fall ${piece.duration}s linear ${piece.delay}s infinite`,
-            transform: `rotate(${piece.rotation}deg)`,
+            animation: `fall ${piece.duration.toString()}s linear ${piece.delay.toString()}s infinite`,
+            transform: `rotate(${piece.rotation.toString()}deg)`,
           }}
         />
       ))}

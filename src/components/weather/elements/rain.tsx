@@ -28,9 +28,9 @@ export default function Rain(props: { max: number; timeOfDay: TimeOfDayType }) {
           className={`absolute w-0.5 h-12 bg-gradient-to-b from-transparent ${colorStart} ${colorEnd} opacity-60 animate-rain`}
           style={{
             top: `-50px`,
-            left: `${drop.left}%`,
-            animationDelay: `${drop.delay}s`,
-            animationDuration: `${drop.duration}s`,
+            left: `${drop.left.toString()}%`,
+            animationDelay: `${drop.delay.toString()}s`,
+            animationDuration: `${drop.duration.toString()}s`,
           }}
         />
       ))}

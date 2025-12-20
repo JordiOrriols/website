@@ -137,7 +137,7 @@ describe("Dialog Components", () => {
       </Dialog>
     );
     const closeBtn = container.querySelector('[data-slot="dialog-close"]') as HTMLButtonElement;
-    expect(closeBtn?.disabled).toBe(true);
+    expect(closeBtn.disabled).toBe(true);
   });
 
   it("Dialog components compose together", () => {

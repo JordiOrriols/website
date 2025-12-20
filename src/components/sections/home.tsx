@@ -98,15 +98,15 @@ export default function HomeSection(props: Props) {
         );
       })()}
 
-      {isContactAvailale ? (
+      {isContactAvailale && (
         <Button
-          onClick={() => (props.handleStatClick ? props.handleStatClick("contact") : undefined)}
+          onClick={() => props.handleStatClick?.("contact")}
           className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
         >
           <Mail className="w-4 h-4 mr-2" />
           {t("sendMessage")}
         </Button>
-      ) : null}
+      )}
     </motion.div>
   );
 }

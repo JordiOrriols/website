@@ -50,8 +50,8 @@ export default function Fireworks(props: Props) {
           key={firework.id}
           className="absolute"
           style={{
-            left: `${firework.x}%`,
-            top: `${firework.y}%`,
+            left: `${firework.x.toString()}%`,
+            top: `${firework.y.toString()}%`,
           }}
         >
           {/* Center bright flash */}
@@ -88,8 +88,8 @@ export default function Fireworks(props: Props) {
                 ease: "easeOut",
               }}
               style={{
-                width: particle.size + "px",
-                height: particle.size + "px",
+                width: `${particle.size.toString()}px`,
+                height: `${particle.size.toString()}px`,
                 backgroundColor: firework.color,
                 boxShadow: `0 0 4px ${firework.color}`,
               }}

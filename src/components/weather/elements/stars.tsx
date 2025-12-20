@@ -23,11 +23,11 @@ export default function Stars(props: { max: number }) {
           key={star.id}
           className="absolute rounded-full bg-white animate-pulse"
           style={{
-            top: `${star.top}%`,
-            left: `${star.left}%`,
-            width: `${star.size}px`,
-            height: `${star.size}px`,
-            animationDelay: `${star.delay}s`,
+            top: `${star.top.toString()}%`,
+            left: `${star.left.toString()}%`,
+            width: `${star.size.toString()}px`,
+            height: `${star.size.toString()}px`,
+            animationDelay: `${star.delay.toString()}s`,
             animationDuration: "3s",
           }}
         />

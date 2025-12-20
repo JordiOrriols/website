@@ -77,8 +77,8 @@ describe("Weather", () => {
         Promise.resolve({
           ok: true,
           json: () => Promise.resolve(mockResponse),
-        })
-      ) as any;
+        } as Response)
+      ) as typeof global.fetch;
 
       const result = await fetchCurrentWeather(41.3851, 2.1734);
 
@@ -92,8 +92,8 @@ describe("Weather", () => {
           ok: false,
           status: 500,
           statusText: "Internal Server Error",
-        })
-      ) as any;
+        } as Response)
+      ) as typeof global.fetch;
 
       await expect(fetchCurrentWeather(41.3851, 2.1734)).rejects.toThrow(/Weather API error/);
     });

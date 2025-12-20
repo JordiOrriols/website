@@ -23,6 +23,6 @@ const options: InitOptions = {
   },
 };
 
-i18n.use(LanguageDetector).use(initReactI18next).init(options);
+void i18n.use(LanguageDetector).use(initReactI18next).init(options);
 
 export default i18n;

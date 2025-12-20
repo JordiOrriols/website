@@ -21,10 +21,10 @@ export default function Ghosts(props: { max: number }) {
           className="absolute opacity-70"
           style={{
             width: "70px",
-            top: `${ghost.top}%`,
-            left: `${ghost.left}%`,
-            animation: `ghostFloat ${ghost.duration}s ease-in-out infinite`,
-            animationDelay: `${ghost.delay}s`,
+            top: `${ghost.top.toString()}%`,
+            left: `${ghost.left.toString()}%`,
+            animation: `ghostFloat ${ghost.duration.toString()}s ease-in-out infinite`,
+            animationDelay: `${ghost.delay.toString()}s`,
           }}
         >
           <svg

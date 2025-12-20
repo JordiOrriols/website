@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
+import type { ExperienceEntry } from "@/data/experience";
 
 import DynamicScene from "../components/weather/scenes/dynamic";
 import ThunderstormScene from "../components/weather/scenes/thunderstorm";
@@ -91,8 +92,8 @@ export default function Portfolio() {
       setCurrentWeather(selectedWeather);
       setWeather(selectedWeather);
 
-      setSunrise(response.daily?.sunrise?.[0] ?? null);
-      setSunset(response.daily?.sunset?.[0] ?? null);
+      setSunrise(response.daily?.sunrise[0] ?? null);
+      setSunset(response.daily?.sunset[0] ?? null);
     } catch (error) {
       console.error("Error fetching weather:", error);
       setCurrentWeather("clear");

@@ -20,7 +20,7 @@ describe("Utils", () => {
     });
 
     it("handles conditional classes", () => {
-      const isActive = true;
+      const isActive: boolean = true;
       const result = cn(isActive && "bg-blue-500", "px-2");
       expect(result).toContain("bg-blue-500");
       expect(result).toContain("px-2");

@@ -22,11 +22,11 @@ export default function PlaneController() {
     }, 6000);
 
     // Keyboard controls
-    const handleKeyDown = (e) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (allowedKeys.includes(e.key)) keyRef.current = e.key;
     };
 
-    const handleKeyUp = (e) => {
+    const handleKeyUp = (e: KeyboardEvent) => {
       if (allowedKeys.includes(e.key)) keyRef.current = null;
     };
 

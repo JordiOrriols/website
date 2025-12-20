@@ -56,7 +56,8 @@ export const useAmbientAudio = (weather: WeatherType, timeOfDay: TimeOfDayType) 
   const FADE_DURATION = 1500; // ms
 
   const loadSound = useCallback((key: AmbientAudioKey) => {
-    if (howlsRef.current.has(key)) return howlsRef.current.get(key)!;
+    const existing = howlsRef.current.get(key);
+    if (existing) return existing;
     const sound = new Howl({
       src: [audioFiles[key]],
       loop: false,

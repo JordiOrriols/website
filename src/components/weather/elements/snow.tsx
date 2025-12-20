@@ -24,14 +24,14 @@ export default function Snow() {
           key={flake.id}
           className="absolute -top-10 rounded-full bg-white animate-snow"
           style={{
-            left: `${flake.left}%`,
-            width: `${flake.size}px`,
-            height: `${flake.size}px`,
-            animationDelay: `${flake.delay}s`,
-            animationDuration: `${flake.duration}s`,
+            left: `${flake.left.toString()}%`,
+            width: `${flake.size.toString()}px`,
+            height: `${flake.size.toString()}px`,
+            animationDelay: `${flake.delay.toString()}s`,
+            animationDuration: `${flake.duration.toString()}s`,
             opacity: 0.8,
             boxShadow: "0 0 3px rgba(255,255,255,0.8)",
-            ...({ ["--drift"]: `${flake.drift}px` } as React.CSSProperties),
+            ...({ ["--drift"]: `${flake.drift.toString()}px` } as React.CSSProperties),
           }}
         />
       ))}
