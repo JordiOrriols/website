@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AppLogo from "../elements/logo";
 import CitySkyline from "../elements/skyline";
 import Fireworks from "../elements/fireworks";

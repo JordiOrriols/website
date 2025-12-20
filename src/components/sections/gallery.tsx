@@ -1,7 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Modal from "../ui/modal";
-import { X } from "lucide-react";
 
 interface GalleryItem {
   title: string;

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from "react";
 import { Howl } from "howler";
-import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
+import type { TimeOfDayType, WeatherType } from "@/pages/portfolio";
 
 type AmbientAudioKey =
   | "rain"
@@ -155,8 +155,8 @@ export const useAmbientAudio = (weather: WeatherType, timeOfDay: TimeOfDayType) 
       const sounds = (howl as unknown as { _sounds: Array<{ _id: number }> })._sounds;
       const ids: number[] = sounds.map((s) => s._id).filter((id) => howl.playing(id));
       ids.forEach((id) => {
-        const currentVol = howl.volume(id);
-        howl.fade(currentVol, 0, FADE_DURATION, id);
+        const currentVol = howl.volume(id as number) as number;
+        howl.fade(currentVol, 0, FADE_DURATION, id as number);
         const t = window.setTimeout(() => {
           try {
             howl.stop(id);

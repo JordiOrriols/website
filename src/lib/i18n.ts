@@ -7,11 +7,13 @@ import { es } from "../locales/es";
 import { en } from "../locales/en";
 import { ca } from "../locales/ca";
 
+import type { ResourceLanguage } from "i18next";
+
 const options: InitOptions = {
   resources: {
-    ca,
-    es,
-    en,
+    ca: ca as ResourceLanguage,
+    es: es as ResourceLanguage,
+    en: en as ResourceLanguage,
   },
   lng: "en",
   fallbackLng: "en",

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import AppLogo from "../elements/logo";
 import CitySkyline from "../elements/skyline";
-import Fireworks from "../elements/fireworks";
 import Stars from "../elements/stars";
 import Moon from "../elements/moon";
-import { configClear } from "./dynamic";
 import Ghosts from "../elements/ghosts";
 
 const configHalloween = {

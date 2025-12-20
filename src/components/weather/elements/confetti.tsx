@@ -46,14 +46,17 @@ export default function Confetti(props: { max: number; timeOfDay: TimeOfDayType 
 
 export const generateConfetti = (max: number): IPiece[] => {
   const pieces: IPiece[] = [];
+  const colors: string[] = ["#FFD700", "#FF1493", "#00CED1", "#FF4500", "#9370DB"];
   for (let i = 0; i < max; i++) {
+    const idx = Math.floor(Math.random() * colors.length);
+    const color = (colors[idx] ?? colors[0]) as string;
     pieces.push({
       id: i,
       left: Math.random() * 100,
       delay: Math.random() * 3,
       duration: 3 + Math.random() * 2,
       rotation: Math.random() * 360,
-      color: ["#FFD700", "#FF1493", "#00CED1", "#FF4500", "#9370DB"][Math.floor(Math.random() * 5)],
+      color,
     });
   }
   return pieces;

@@ -73,6 +73,8 @@ interface Translation {
   experienceTimeline: ExperienceEntry[];
 }
 
-export interface Locale {
+import type { ResourceLanguage } from "i18next";
+
+export interface Locale extends ResourceLanguage {
   translation: Translation;
 }

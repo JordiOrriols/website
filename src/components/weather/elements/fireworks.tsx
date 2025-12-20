@@ -164,7 +164,7 @@ export default function Fireworks(props: Props) {
 }
 
 const generateFirework = (): IFirework => {
-  const colors = [
+  const colors: string[] = [
     "#FFD700",
     "#FF1493",
     "#00CED1",
@@ -172,12 +172,12 @@ const generateFirework = (): IFirework => {
     "#9370DB",
     "#32CD32",
     "#FF69B4",
-  ] as const;
+  ];
   return {
     id: Date.now(),
     x: 10 + Math.random() * 80,
     y: 10 + Math.random() * 30,
-    color: colors[Math.floor(Math.random() * colors.length)],
+    color: (colors[Math.floor(Math.random() * colors.length)] ?? colors[0]) as string,
     particles: Array.from({ length: 50 }, (_, i) => {
       const angle = (i / 50) * Math.PI * 2;
       const velocity = 80 + Math.random() * 40;

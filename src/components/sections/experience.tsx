@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Calendar, Globe, CheckCircle2, Code } from "lucide-react";
-import { ExperienceEntry } from "@/data/experience";
+import type { ExperienceEntry } from "@/data/experience";
 import { useTranslation } from "react-i18next";
 import Modal from "../ui/modal";
 

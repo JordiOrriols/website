@@ -16,7 +16,7 @@ export interface CloudsProps {
 }
 
 export default function Clouds(props: CloudsProps) {
-  const [clouds, setClouds] = useState<ICloud>([]);
+  const [clouds, setClouds] = useState<ICloud[]>([]);
 
   useEffect(() => {
     const newClouds = generateClouds(props);

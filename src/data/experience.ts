@@ -1,6 +1,5 @@
 import { COMPANY } from "./companies";
 import {
-  TECH,
   TECH_CLIENTAREA,
   TECH_HP,
   TECH_MITEK,
