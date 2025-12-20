@@ -2,7 +2,7 @@ name: Build and Deploy Vite App
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   workflow_dispatch:
 
 permissions:
@@ -39,6 +39,12 @@ jobs:
 
       - name: Test Project with Coverage
         run: npm run test:coverage
+
+      - name: Lint Project
+        run: npm run lint
+
+      - name: Check Prettier
+        run: npm run format:check
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
