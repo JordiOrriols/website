@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "description": "",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "vite",
     "preview": "vite preview",
     "build": "vite build",
+    "compile": "npx tsc -p tsconfig.json",
     "test": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
