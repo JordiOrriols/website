@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2, Pause, Plane, Play, Volume2, VolumeOff } from "lucide-react";
+import { Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 
 import DynamicScene from "../components/weather/scenes/dynamic";
@@ -170,34 +170,37 @@ export default function Portfolio() {
     }
   };
 
-  const handleWeatherModeChange = (value: WeatherMode) => {
-    setWeatherMode(value);
-    if (value.includes("clear")) setWeather("clear");
-    else if (value.includes("cloudy")) setWeather("cloudy");
-    else if (value.includes("rain")) setWeather("rain");
-    else if (value.includes("thunderstorm")) setWeather("thunderstorm");
-    else if (value.includes("snow")) setWeather("snow");
-    else if (value.includes("auto")) setWeather(currentWeather ?? "clear");
+  const handleWeatherModeChange = (value: string) => {
+    const v = value as WeatherMode;
+    setWeatherMode(v);
+    if (v.includes("clear")) setWeather("clear");
+    else if (v.includes("cloudy")) setWeather("cloudy");
+    else if (v.includes("rain")) setWeather("rain");
+    else if (v.includes("thunderstorm")) setWeather("thunderstorm");
+    else if (v.includes("snow")) setWeather("snow");
+    else if (v.includes("auto")) setWeather(currentWeather ?? "clear");
   };
 
-  const handleTimeOfDayModeChange = (value: TimeOfDayMode) => {
-    setTimeOfDayMode(value);
-    if (value.includes("morning")) setTimeOfDay("morning");
-    else if (value.includes("day")) setTimeOfDay("day");
-    else if (value.includes("afternoon")) setTimeOfDay("afternoon");
-    else if (value.includes("night")) setTimeOfDay("night");
-    else if (value.includes("auto")) setTimeOfDay(currentTimeOfDay ?? "day");
+  const handleTimeOfDayModeChange = (value: string) => {
+    const v = value as TimeOfDayMode;
+    setTimeOfDayMode(v);
+    if (v.includes("morning")) setTimeOfDay("morning");
+    else if (v.includes("day")) setTimeOfDay("day");
+    else if (v.includes("afternoon")) setTimeOfDay("afternoon");
+    else if (v.includes("night")) setTimeOfDay("night");
+    else if (v.includes("auto")) setTimeOfDay(currentTimeOfDay ?? "day");
   };
 
-  const handleSeasonModeChange = (value: SeasonMode) => {
-    setSeasonMode(value);
-    if (value.includes("christmas")) setSeason("christmas");
-    else if (value.includes("newYear")) setSeason("newYear");
-    else if (value.includes("easter")) setSeason("easter");
-    else if (value.includes("summer")) setSeason("summer");
-    else if (value.includes("halloween")) setSeason("halloween");
-    else if (value.includes("none")) setSeason("none");
-    else if (value.includes("auto")) setSeason(currentSeason ?? "none");
+  const handleSeasonModeChange = (value: string) => {
+    const v = value as SeasonMode;
+    setSeasonMode(v);
+    if (v.includes("christmas")) setSeason("christmas");
+    else if (v.includes("newYear")) setSeason("newYear");
+    else if (v.includes("easter")) setSeason("easter");
+    else if (v.includes("summer")) setSeason("summer");
+    else if (v.includes("halloween")) setSeason("halloween");
+    else if (v.includes("none")) setSeason("none");
+    else if (v.includes("auto")) setSeason(currentSeason ?? "none");
   };
 
   const getBackgroundComponent = () => {

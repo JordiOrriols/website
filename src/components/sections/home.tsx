@@ -47,7 +47,10 @@ export default function HomeSection(props: Props) {
         {/* Avatar */}
         <div className="mt-[-200px]">
           <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl m-auto">
-            <Avatar season={props.season} onClickAvatar={props.onClickAvatar} />
+            <Avatar
+              season={props.season}
+              {...(props.onClickAvatar ? { onClickAvatar: props.onClickAvatar } : {})}
+            />
           </div>
         </div>
 
@@ -63,35 +66,41 @@ export default function HomeSection(props: Props) {
       <LanguageSelector />
 
       {/* Stats Section */}
-      <Stats
-        options={[
-          {
-            label: t("projects"),
-            value: "15",
-            onClick: () => props.handleStatClick("projects"),
-          },
-          {
-            label: t("companies"),
-            value: "12",
-            onClick: () => props.handleStatClick("companies"),
-          },
-          {
-            label: t("leading"),
-            value: "3",
-            unit: t("years"),
-            onClick: () => props.handleStatClick("leading_years"),
-          },
-          {
-            label: t("experience"),
-            value: "12",
-            unit: t("years"),
-            onClick: () => props.handleStatClick("experience_years"),
-          },
-        ]}
-      />
+      {(() => {
+        const handle = props.handleStatClick ?? (() => undefined);
+        return (
+          <Stats
+            options={[
+              {
+                label: t("projects"),
+                value: "15",
+                onClick: () => handle("projects"),
+              },
+              {
+                label: t("companies"),
+                value: "12",
+                onClick: () => handle("companies"),
+              },
+              {
+                label: t("leading"),
+                value: "3",
+                unit: t("years"),
+                onClick: () => handle("leading_years"),
+              },
+              {
+                label: t("experience"),
+                value: "12",
+                unit: t("years"),
+                onClick: () => handle("experience_years"),
+              },
+            ]}
+          />
+        );
+      })()}
+
       {isContactAvailale ? (
         <Button
-          onClick={() => props.handleStatClick("contact")}
+          onClick={() => (props.handleStatClick ? props.handleStatClick("contact") : undefined)}
           className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
         >
           <Mail className="w-4 h-4 mr-2" />
