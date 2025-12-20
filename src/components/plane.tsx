@@ -79,8 +79,8 @@ export default function PlaneController() {
       <motion.div
         className="fixed z-10 pointer-events-none"
         style={{
-          top: `${position.y}%`,
-          left: `${position.x}%`,
+          top: `${position.y.toString()}%`,
+          left: `${position.x.toString()}%`,
           transform: "translate(-50%, -50%)",
         }}
         animate={{
