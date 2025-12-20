@@ -2,7 +2,7 @@ import React from "react";
 import Avatar from "@/components/avatar";
 import Stats from "@/components/stats";
 import { motion } from "framer-motion";
-import { SeasonType, SectionsType } from "@/pages/portfolio";
+import type { SeasonType, SectionsType } from "@/pages/portfolio";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import LanguageSelector from "../language-selector";
@@ -17,6 +17,7 @@ interface Props {
 
 export default function HomeSection(props: Props) {
   const { t } = useTranslation();
+  const isContactAvailale = false;
   return (
     <motion.div
       animate={
@@ -88,7 +89,7 @@ export default function HomeSection(props: Props) {
           },
         ]}
       />
-      {false ? (
+      {isContactAvailale ? (
         <Button
           onClick={() => props.handleStatClick("contact")}
           className="bg-[#2D4A6B] hover:bg-[#1F3447] text-white px-6 py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-105"
