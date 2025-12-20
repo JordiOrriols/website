@@ -41,6 +41,10 @@ interface Translation {
 
   sendMessage: string;
 
+  // Companies
+  companiesTitle: string;
+  companiesSubtitle: string;
+
   // Work Timeline
   workTimelineTitle: string;
   workTimelineSubtitle: string;

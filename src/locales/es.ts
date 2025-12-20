@@ -43,6 +43,11 @@ export const es: Locale = {
 
     sendMessage: "Enviar mensaje",
 
+    // Companies
+    companiesTitle: "Empresas",
+    companiesSubtitle:
+      "Algunas de las empresas con las que he tenido el placer de trabajar",
+
     // Work Timeline
     workTimelineTitle: "Línea de Tiempo Laboral",
     workTimelineSubtitle: "Una visión detallada de mi trayectoria profesional",

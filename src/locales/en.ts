@@ -43,6 +43,11 @@ export const en: Locale = {
 
     sendMessage: "Send message",
 
+    // Companies
+    companiesTitle: "Companies",
+    companiesSubtitle:
+      "Some of the companies I've had the pleasure to work with",
+
     // Work Timeline
     workTimelineTitle: "Work Timeline",
     workTimelineSubtitle: "A detailed view of my professional journey",

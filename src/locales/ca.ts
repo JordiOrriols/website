@@ -43,6 +43,11 @@ export const ca: Locale = {
 
     sendMessage: "Envia missatge",
 
+    // Companies
+    companiesTitle: "Empreses",
+    companiesSubtitle:
+      "Algunes de les empreses amb les quals he tingut el plaer de treballar",
+
     // Work Timeline
     workTimelineTitle: "Línia de Temps Laboral",
     workTimelineSubtitle:

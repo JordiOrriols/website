@@ -406,8 +406,8 @@ export default function Portfolio() {
                   style={{ transformStyle: "preserve-3d" }}
                 >
                   <Gallery
-                    title={""}
-                    subtitle={""}
+                    title={t("companiesTitle")}
+                    subtitle={t("companiesSubtitle")}
                     options={companiesGallery}
                     onClose={closeModal}
                   />
