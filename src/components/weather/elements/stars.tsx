@@ -9,7 +9,7 @@ interface IStar {
 }
 
 export default function Stars(props: { max: number }) {
-  const [stars, setStars] = useState([]);
+  const [stars, setStars] = useState<IStar[]>([]);
 
   useEffect(() => {
     setStars(generateStars(props.max));

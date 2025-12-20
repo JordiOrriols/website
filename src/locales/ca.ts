@@ -1,5 +1,5 @@
 import { experienceTimelineCa } from "@/data/experience";
-import { Locale } from "./types";
+import type { Locale } from "./types";
 
 export const ca: Locale = {
   translation: {

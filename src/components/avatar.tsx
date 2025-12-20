@@ -1,4 +1,4 @@
-import { SeasonType } from "@/pages/portfolio";
+import type { SeasonType } from "@/pages/portfolio";
 import React, { useState } from "react";
 
 export default function Avatar(props: { season: SeasonType; onClickAvatar?: () => void }) {

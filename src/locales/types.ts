@@ -1,4 +1,4 @@
-import { ExperienceEntry } from "@/data/experience";
+import type { ExperienceEntry } from "@/data/experience";
 
 interface Translation {
   // Weather System

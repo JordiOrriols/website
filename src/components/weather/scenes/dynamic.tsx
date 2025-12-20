@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AppLogo from "../elements/logo";
 import CitySkyline from "../elements/skyline";
-import Clouds, { CloudsProps } from "../elements/cloud";
-import { TimeOfDayType, WeatherType } from "@/pages/portfolio";
+import Clouds from "../elements/cloud";
+import type { CloudsProps } from "../elements/cloud";
+import type { TimeOfDayType, WeatherType } from "@/pages/portfolio";
 import Stars from "../elements/stars";
 import Rain from "../elements/rain";
 import Snow from "../elements/snow";

@@ -269,7 +269,7 @@ export default function Ghosts(props: { max: number }) {
 }
 
 const generateGhosts = (max: number): IGhost[] => {
-  const ghosts = [];
+  const ghosts: IGhost[] = [];
   for (let i = 0; i < max; i++) {
     ghosts.push({
       id: i,

@@ -1,4 +1,4 @@
-import { WeatherType } from "@/pages/portfolio";
+import type { WeatherType } from "@/pages/portfolio";
 
 interface CurrentWeather {
   temperature: number;

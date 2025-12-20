@@ -1,4 +1,4 @@
-import { TimeOfDayType } from "@/pages/portfolio";
+import type { TimeOfDayType } from "@/pages/portfolio";
 import React, { useEffect, useState } from "react";
 
 export interface IPiece {
@@ -11,7 +11,7 @@ export interface IPiece {
 }
 
 export default function Confetti(props: { max: number; timeOfDay: TimeOfDayType }) {
-  const [confetti, setConfetti] = useState([]);
+  const [confetti, setConfetti] = useState<IPiece[]>([]);
 
   useEffect(() => {
     setConfetti(generateConfetti(props.max));
@@ -45,7 +45,7 @@ export default function Confetti(props: { max: number; timeOfDay: TimeOfDayType 
 }
 
 export const generateConfetti = (max: number): IPiece[] => {
-  const pieces = [];
+  const pieces: IPiece[] = [];
   for (let i = 0; i < max; i++) {
     pieces.push({
       id: i,

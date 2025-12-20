@@ -1,5 +1,5 @@
 import { experienceTimelineEn } from "@/data/experience";
-import { Locale } from "./types";
+import type { Locale } from "./types";
 
 export const en: Locale = {
   translation: {

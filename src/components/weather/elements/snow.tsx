@@ -1,4 +1,3 @@
-import { TimeOfDayType } from "@/pages/portfolio";
 import React, { useEffect, useState } from "react";
 
 interface ISnow {
@@ -11,7 +10,7 @@ interface ISnow {
 }
 
 export default function Snow() {
-  const [snowflakes, setSnowflakes] = useState([]);
+  const [snowflakes, setSnowflakes] = useState<ISnow[]>([]);
 
   useEffect(() => {
     setSnowflakes(generateSnowflakes(100));
@@ -30,9 +29,9 @@ export default function Snow() {
             height: `${flake.size}px`,
             animationDelay: `${flake.delay}s`,
             animationDuration: `${flake.duration}s`,
-            "--drift": `${flake.drift}px`,
             opacity: 0.8,
             boxShadow: "0 0 3px rgba(255,255,255,0.8)",
+            ...( { ["--drift"]: `${flake.drift}px` } as React.CSSProperties ),
           }}
         />
       ))}
@@ -55,7 +54,7 @@ export default function Snow() {
 }
 
 const generateSnowflakes = (max: number): ISnow[] => {
-  const flakes = [];
+  const flakes: ISnow[] = [];
   for (let i = 0; i < max; i++) {
     flakes.push({
       id: i,
