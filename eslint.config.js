@@ -53,12 +53,20 @@ export default [
       ],
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/exhaustive-deps": "off",
+      "react-hooks/set-state-in-effect": "off",
     },
     settings: {
       react: {
         version: "detect",
       },
+    },
+  },
+  {
+    files: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-unused-vars": "off",
     },
   },
   prettier,

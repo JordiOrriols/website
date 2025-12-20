@@ -1,4 +1,3 @@
-import { useAmbientAudio } from "@/lib/ambient";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -16,7 +15,10 @@ export default function Lightning(props: Props) {
           setLightning(true);
           setTimeout(() => setLightning(false), 200);
           props.playThunder();
-        } catch (error) {}
+        } catch (error) {
+          // noop
+          void error;
+        }
       }
     }, 1000);
 

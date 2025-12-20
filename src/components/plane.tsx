@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
@@ -6,12 +6,13 @@ export default function PlaneController() {
   const { t } = useTranslation();
 
   const [position, setPosition] = useState({ x: 100, y: 10 });
+  const [rotation, setRotation] = useState(0);
   const [showNotification, setShowNotification] = useState(true);
   const velocityYRef = useRef(0);
   const positionRef = useRef({ x: 100, y: 10 });
 
   const keyRef = useRef(null);
-  const allowedKeys = ["ArrowUp", "ArrowDown"];
+  const allowedKeys = useMemo(() => ["ArrowUp", "ArrowDown"], []);
   const acceleration = 0.05;
 
   useEffect(() => {
@@ -55,6 +56,7 @@ export default function PlaneController() {
       if (positionRef.current.y > 83) positionRef.current.y = 83;
 
       setPosition({ x: positionRef.current.x, y: positionRef.current.y });
+      setRotation(velocityYRef.current * 30);
 
       // Damping for vertical movement
       velocityYRef.current *= 0.95;
@@ -69,7 +71,7 @@ export default function PlaneController() {
       window.removeEventListener("keydown", handleKeyDown);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [allowedKeys]);
 
   return (
     <>
@@ -82,7 +84,7 @@ export default function PlaneController() {
           transform: "translate(-50%, -50%)",
         }}
         animate={{
-          rotate: velocityYRef.current * 30,
+          rotate: rotation,
         }}
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
@@ -126,8 +128,8 @@ export default function PlaneController() {
               y2="525"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0" stop-color="#AAA9AA" />
-              <stop offset="1" stop-color="#CCC7C4" />
+              <stop offset="0" stopColor="#AAA9AA" />
+              <stop offset="1" stopColor="#CCC7C4" />
             </linearGradient>
           </defs>
           <path fill="url(#a)" d="M204 513c10 0 37 0 46-3v9h-35l-23 1-12-1-2-2v-1l2-1-4-1 28-1Z" />
@@ -169,8 +171,8 @@ export default function PlaneController() {
               y2="510"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0" stop-color="#85B5D5" />
-              <stop offset="1" stop-color="#B9D1E1" />
+              <stop offset="0" stopColor="#85B5D5" />
+              <stop offset="1" stopColor="#B9D1E1" />
             </linearGradient>
           </defs>
           <path fill="url(#b)" d="M558 525h10l98 1 53 1c-1 4-1 7 1 11h-12l-155-4 5-9Z" />
@@ -196,8 +198,8 @@ export default function PlaneController() {
               y2="593.4"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0" stop-color="#A0A59D" />
-              <stop offset="1" stop-color="#CBCFC7" />
+              <stop offset="0" stopColor="#A0A59D" />
+              <stop offset="1" stopColor="#CBCFC7" />
             </linearGradient>
           </defs>
           <path
@@ -235,8 +237,8 @@ export default function PlaneController() {
               y2="564.6"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0" stop-color="#ADB0A8" />
-              <stop offset="1" stop-color="#C7C5C8" />
+              <stop offset="0" stopColor="#ADB0A8" />
+              <stop offset="1" stopColor="#C7C5C8" />
             </linearGradient>
           </defs>
           <path

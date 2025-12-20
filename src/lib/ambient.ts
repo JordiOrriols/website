@@ -152,16 +152,18 @@ export const useAmbientAudio = (weather: WeatherType, timeOfDay: TimeOfDayType) 
     // --- FADE OUT de sonidos activos ---
     howlsRef.current.forEach((howl) => {
       // obtener ids de reproducción activos
-      const ids: number[] = (howl["_sounds"] as any[])
-        .map((s) => s._id)
-        .filter((id) => howl.playing(id));
+      const sounds = (howl as unknown as { _sounds: Array<{ _id: number }> })._sounds;
+      const ids: number[] = sounds.map((s) => s._id).filter((id) => howl.playing(id));
       ids.forEach((id) => {
         const currentVol = howl.volume(id);
         howl.fade(currentVol, 0, FADE_DURATION, id);
         const t = window.setTimeout(() => {
           try {
             howl.stop(id);
-          } catch (e) {}
+          } catch (e) {
+            // noop: stopping a howl may throw if already stopped
+            void e;
+          }
         }, FADE_DURATION);
         timersRef.current.push(t);
       });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 interface IGhost {
   id: number;
@@ -10,11 +10,7 @@ interface IGhost {
 }
 
 export default function Ghosts(props: { max: number }) {
-  const [ghosts, setGhosts] = useState([]);
-
-  useEffect(() => {
-    setGhosts(generateGhosts(props.max));
-  }, [props.max]);
+  const ghosts = useMemo(() => generateGhosts(props.max), [props.max]);
 
   return (
     <>
@@ -37,8 +33,8 @@ export default function Ghosts(props: { max: number }) {
             viewBox="0 0 204 172"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            xml:space="preserve"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            xmlSpace="preserve"
             style={{
               fillRule: "evenodd",
               clipRule: "evenodd",
