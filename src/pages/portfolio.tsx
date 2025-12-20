@@ -27,6 +27,11 @@ export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm" | "snow";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
 export type SeasonType = "easter" | "summer" | "halloween" | "christmas" | "newYear" | "none";
 
+// Mode types include "auto" for selectors
+type WeatherMode = WeatherType | "auto";
+type TimeOfDayMode = TimeOfDayType | "auto";
+type SeasonMode = SeasonType | "auto";
+
 export type SectionsType =
   | "projects"
   | "companies"
@@ -41,19 +46,19 @@ export default function Portfolio() {
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
   const [season, setSeason] = useState<SeasonType>("none");
 
-  const [weatherMode, setWeatherMode] = useState<WeatherType>("auto");
-  const [timeOfDayMode, setTimeOfDayMode] = useState<TimeOfDayType>("auto");
-  const [seasonMode, setSeasonMode] = useState<SeasonType>("auto");
+  const [weatherMode, setWeatherMode] = useState<WeatherMode>("auto");
+  const [timeOfDayMode, setTimeOfDayMode] = useState<TimeOfDayMode>("auto");
+  const [seasonMode, setSeasonMode] = useState<SeasonMode>("auto");
 
-  const [currentTimeOfDay, setCurrentTimeOfDay] = useState<TimeOfDayType>();
-  const [currentWeather, setCurrentWeather] = useState<WeatherType>();
-  const [currentSeason, setCurrentSeason] = useState<SeasonType>();
+  const [currentTimeOfDay, setCurrentTimeOfDay] = useState<TimeOfDayType | undefined>();
+  const [currentWeather, setCurrentWeather] = useState<WeatherType | undefined>();
+  const [currentSeason, setCurrentSeason] = useState<SeasonType | undefined>();
 
   const [sunrise, setSunrise] = useState<string | null>(null);
   const [sunset, setSunset] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(true);
-  const [activeModal, setActiveModal] = useState<SectionsType>(null);
+  const [activeModal, setActiveModal] = useState<SectionsType | null>(null);
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
 
@@ -165,26 +170,26 @@ export default function Portfolio() {
     }
   };
 
-  const handleWeatherModeChange = (value) => {
+  const handleWeatherModeChange = (value: WeatherMode) => {
     setWeatherMode(value);
     if (value.includes("clear")) setWeather("clear");
     else if (value.includes("cloudy")) setWeather("cloudy");
     else if (value.includes("rain")) setWeather("rain");
     else if (value.includes("thunderstorm")) setWeather("thunderstorm");
     else if (value.includes("snow")) setWeather("snow");
-    else if (value.includes("auto")) setWeather(currentWeather);
+    else if (value.includes("auto")) setWeather(currentWeather ?? "clear");
   };
 
-  const handleTimeOfDayModeChange = (value) => {
+  const handleTimeOfDayModeChange = (value: TimeOfDayMode) => {
     setTimeOfDayMode(value);
     if (value.includes("morning")) setTimeOfDay("morning");
     else if (value.includes("day")) setTimeOfDay("day");
     else if (value.includes("afternoon")) setTimeOfDay("afternoon");
     else if (value.includes("night")) setTimeOfDay("night");
-    else if (value.includes("auto")) setTimeOfDay(currentTimeOfDay);
+    else if (value.includes("auto")) setTimeOfDay(currentTimeOfDay ?? "day");
   };
 
-  const handleSeasonModeChange = (value) => {
+  const handleSeasonModeChange = (value: SeasonMode) => {
     setSeasonMode(value);
     if (value.includes("christmas")) setSeason("christmas");
     else if (value.includes("newYear")) setSeason("newYear");
@@ -192,7 +197,7 @@ export default function Portfolio() {
     else if (value.includes("summer")) setSeason("summer");
     else if (value.includes("halloween")) setSeason("halloween");
     else if (value.includes("none")) setSeason("none");
-    else if (value.includes("auto")) setSeason(currentSeason);
+    else if (value.includes("auto")) setSeason(currentSeason ?? "none");
   };
 
   const getBackgroundComponent = () => {
@@ -256,7 +261,7 @@ export default function Portfolio() {
         {/* Weather Mode Selector */}
         <div className="absolute top-4 right-4 z-30 hidden md:block">
           <Dropdown
-            auto={t(currentWeather)}
+            auto={t(currentWeather ?? "clear")}
             value={weatherMode}
             onValueChange={handleWeatherModeChange}
             disabled={disabledDropdown}
@@ -274,7 +279,7 @@ export default function Portfolio() {
         {/* Day Time Mode Selector */}
         <div className="absolute top-15 right-4 z-30 hidden md:block">
           <Dropdown
-            auto={t(currentTimeOfDay)}
+            auto={t(currentTimeOfDay ?? "day")}
             value={timeOfDayMode}
             onValueChange={handleTimeOfDayModeChange}
             disabled={disabledDropdown}
@@ -292,9 +297,10 @@ export default function Portfolio() {
         {activeSpecialEvents && (
           <div className="absolute top-26 right-4 z-30 hidden md:block">
             <Dropdown
-              auto={t(currentSeason)}
+              auto={t(currentSeason ?? "none")}
               value={seasonMode}
               onValueChange={handleSeasonModeChange}
+              disabled={false}
               options={[
                 { label: `🐣 ${t("easter")}`, value: "easter" },
                 { label: `☀️ ${t("summer")}`, value: "summer" },
@@ -322,7 +328,7 @@ export default function Portfolio() {
 
       <div className="absolute bottom-4 right-4 z-30">
         <Button
-          onClick={() => toggleMute(!muted)}
+          onClick={() => toggleMute()}
           className={`${
             muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
           } shadow-lg transition-all duration-300 mt-3 float-right`}

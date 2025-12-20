@@ -1,4 +1,5 @@
 import i18n from "i18next";
+import type { InitOptions } from "i18next";
 import { initReactI18next } from "react-i18next";
 
 import LanguageDetector from "i18next-browser-languagedetector";
@@ -6,26 +7,20 @@ import { es } from "../locales/es";
 import { en } from "../locales/en";
 import { ca } from "../locales/ca";
 
-i18n
-  .use(LanguageDetector)
-  // pass the i18n instance to react-i18next.
-  .use(initReactI18next)
-  // init i18next
-  // for all options read: https://www.i18next.com/overview/configuration-options
-  .init({
-    resources: {
-      ca: ca,
-      es: es,
-      en: en,
-    },
+const options: InitOptions = {
+  resources: {
+    ca,
+    es,
+    en,
+  },
+  lng: "en",
+  fallbackLng: "en",
+  debug: true,
+  interpolation: {
+    escapeValue: false,
+  },
+};
 
-    lng: "en",
-    fallbackLng: "en",
-    debug: true,
-
-    interpolation: {
-      escapeValue: false, // not needed for react as it escapes by default
-    },
-  });
+i18n.use(LanguageDetector).use(initReactI18next).init(options);
 
 export default i18n;

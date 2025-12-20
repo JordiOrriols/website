@@ -164,7 +164,15 @@ export default function Fireworks(props: Props) {
 }
 
 const generateFirework = (): IFirework => {
-  const colors = ["#FFD700", "#FF1493", "#00CED1", "#FF4500", "#9370DB", "#32CD32", "#FF69B4"] as const;
+  const colors = [
+    "#FFD700",
+    "#FF1493",
+    "#00CED1",
+    "#FF4500",
+    "#9370DB",
+    "#32CD32",
+    "#FF69B4",
+  ] as const;
   return {
     id: Date.now(),
     x: 10 + Math.random() * 80,

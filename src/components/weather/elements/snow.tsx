@@ -31,7 +31,7 @@ export default function Snow() {
             animationDuration: `${flake.duration}s`,
             opacity: 0.8,
             boxShadow: "0 0 3px rgba(255,255,255,0.8)",
-            ...( { ["--drift"]: `${flake.drift}px` } as React.CSSProperties ),
+            ...({ ["--drift"]: `${flake.drift}px` } as React.CSSProperties),
           }}
         />
       ))}
