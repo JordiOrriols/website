@@ -13,7 +13,7 @@ describe("Textarea", () => {
 
   it("accepts input value", async () => {
     render(<Textarea placeholder="Enter text" />);
-    const textarea = screen.getByPlaceholderText("Enter text") as HTMLTextAreaElement;
+    const textarea = screen.getByPlaceholderText("Enter text");
 
     await userEvent.type(textarea, "Hello World");
     expect(textarea.value).toBe("Hello World");

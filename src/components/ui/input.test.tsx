@@ -13,7 +13,7 @@ describe("Input", () => {
 
   it("accepts input value", async () => {
     render(<Input placeholder="Enter text" />);
-    const input = screen.getByPlaceholderText("Enter text") as HTMLInputElement;
+    const input = screen.getByPlaceholderText("Enter text");
 
     await userEvent.type(input, "Hello");
     expect(input.value).toBe("Hello");
