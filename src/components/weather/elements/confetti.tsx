@@ -1,5 +1,5 @@
 import type { TimeOfDayType } from "@/pages/portfolio";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 export interface IPiece {
   id: number;
@@ -11,11 +11,7 @@ export interface IPiece {
 }
 
 export default function Confetti(props: { max: number; timeOfDay: TimeOfDayType }) {
-  const [confetti, setConfetti] = useState<IPiece[]>([]);
-
-  useEffect(() => {
-    setConfetti(generateConfetti(props.max));
-  }, [props.max]);
+  const confetti = useMemo(() => generateConfetti(props.max), [props.max]);
 
   return (
     <>

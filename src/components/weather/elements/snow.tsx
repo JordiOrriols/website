@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 interface ISnow {
   id: number;
@@ -10,11 +10,7 @@ interface ISnow {
 }
 
 export default function Snow() {
-  const [snowflakes, setSnowflakes] = useState<ISnow[]>([]);
-
-  useEffect(() => {
-    setSnowflakes(generateSnowflakes(100));
-  }, []);
+  const snowflakes = useMemo(() => generateSnowflakes(100), []);
 
   return (
     <>

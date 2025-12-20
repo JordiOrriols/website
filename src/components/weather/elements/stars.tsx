@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 interface IStar {
   id: number;
@@ -9,11 +9,7 @@ interface IStar {
 }
 
 export default function Stars(props: { max: number }) {
-  const [stars, setStars] = useState<IStar[]>([]);
-
-  useEffect(() => {
-    setStars(generateStars(props.max));
-  }, [props.max]);
+  const stars = useMemo(() => generateStars(props.max), [props.max]);
 
   return (
     <>

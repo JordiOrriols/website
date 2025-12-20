@@ -1,5 +1,5 @@
 import type { TimeOfDayType } from "@/pages/portfolio";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 interface IRain {
   id: number;
@@ -9,11 +9,7 @@ interface IRain {
 }
 
 export default function Rain(props: { max: number; timeOfDay: TimeOfDayType }) {
-  const [raindrops, setRaindrops] = useState<IRain[]>([]);
-
-  useEffect(() => {
-    setRaindrops(generateRain(props.max));
-  }, [props.max]);
+  const raindrops = useMemo(() => generateRain(props.max), [props.max]);
 
   const lightDrop = ["afternoon", "night"].includes(props.timeOfDay);
   const colorStart = lightDrop ? "via-blue-200" : "via-slate-500";

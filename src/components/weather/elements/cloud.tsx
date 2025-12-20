@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 
 interface ICloud {
   id: number;
@@ -16,12 +16,7 @@ export interface CloudsProps {
 }
 
 export default function Clouds(props: CloudsProps) {
-  const [clouds, setClouds] = useState<ICloud[]>([]);
-
-  useEffect(() => {
-    const newClouds = generateClouds(props);
-    setClouds(newClouds);
-  }, [props.maxNumber, props.maxOpacity, props.maxSize]);
+  const clouds = useMemo(() => generateClouds(props), [props.maxNumber, props.maxOpacity, props.maxSize]);
 
   return (
     <>
