@@ -33,10 +33,13 @@ describe("SafeAreaContainer", () => {
 
     const wrapper = container.firstChild as HTMLElement;
     expect(wrapper.className).toContain("fixed");
-    expect(wrapper.className).toContain("top-0");
-    expect(wrapper.className).toContain("left-0");
-    expect(wrapper.className).toContain("right-0");
-    expect(wrapper.className).toContain("bottom-0");
+    // Now uses inline styles for positioning instead of classes
+    const styleAttr = wrapper.getAttribute("style");
+    expect(styleAttr).toBeTruthy();
+    expect(styleAttr).toContain("top");
+    expect(styleAttr).toContain("bottom");
+    expect(styleAttr).toContain("left");
+    expect(styleAttr).toContain("right");
   });
 
   it("applies safe area inset styles", () => {

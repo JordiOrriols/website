@@ -128,12 +128,15 @@ body {
 }
 
 /* Fill iOS safe areas and use dynamic viewport height */
+html {
+  background-color: #0B1A33; /* Match darkest background color to avoid white flash */
+}
+
 html,
 body,
 #root {
   /* Use dvh when available, fallback to vh */
   min-height: 100dvh;
-  background-color: var(--background);
 }
 
 @supports not (min-height: 100dvh) {
