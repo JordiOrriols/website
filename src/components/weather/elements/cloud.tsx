@@ -16,7 +16,7 @@ export interface CloudsProps {
 }
 
 export default function Clouds(props: CloudsProps) {
-  const clouds = useMemo(() => generateClouds(props), [props.maxNumber, props.maxOpacity, props.maxSize]);
+  const clouds = useMemo(() => generateClouds(props), [props]);
 
   return (
     <>
