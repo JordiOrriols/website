@@ -16,7 +16,11 @@ export interface CloudsProps {
 }
 
 export default function Clouds(props: CloudsProps) {
-  const clouds = useMemo(() => generateClouds(props), [props]);
+  const { maxNumber, maxOpacity, maxSize } = props;
+  const clouds = useMemo(
+    () => generateClouds(maxNumber, maxSize, maxOpacity),
+    [maxNumber, maxSize, maxOpacity]
+  );
 
   return (
     <>
@@ -53,15 +57,19 @@ export default function Clouds(props: CloudsProps) {
   );
 }
 
-const generateClouds = (config: CloudsProps): ICloud[] => {
+const generateClouds = (
+  maxNumber: number,
+  maxSize?: number,
+  maxOpacity?: number
+): ICloud[] => {
   const newClouds: ICloud[] = [];
-  for (let i = 0; i < config.maxNumber; i++) {
+  for (let i = 0; i < maxNumber; i++) {
     newClouds.push({
       id: i,
       top: Math.random() * 30 + 15,
       left: Math.random() * 100,
-      size: Math.random() * (config.maxSize || 1) + 0.3,
-      opacity: Math.random() * (config.maxOpacity || 1),
+      size: Math.random() * (maxSize || 1) + 0.3,
+      opacity: Math.random() * (maxOpacity || 1),
       duration: Math.random() * 50 + 70,
     });
   }
