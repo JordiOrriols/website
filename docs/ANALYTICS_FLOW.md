@@ -72,6 +72,7 @@
 ## Event Examples by Component
 
 ### Portfolio Page (`portfolio.tsx`)
+
 ```typescript
 User clicks weather dropdown
   ↓
@@ -83,6 +84,7 @@ window.umami.track("weather_change", { mode: "rain", auto: false })
 ```
 
 ### Language Selector (`language-selector.tsx`)
+
 ```typescript
 User clicks language button
   ↓
@@ -94,6 +96,7 @@ window.umami.track("language_change", { language: "es" })
 ```
 
 ### Avatar Component (`avatar.tsx`)
+
 ```typescript
 User clicks avatar
   ↓
@@ -139,7 +142,7 @@ Is window.umami available?
   event: "modal_action",
   properties: {
     action: "open" | "close",
-    modal_type: "projects" | "companies" | "leading_years" | 
+    modal_type: "projects" | "companies" | "leading_years" |
                 "experience_years" | "contact"
   }
 }
@@ -209,23 +212,28 @@ Is window.umami available?
 ## Integration Points
 
 ### 1. Script Loading (index.html)
+
 ```html
-<script defer src="https://cloud.umami.is/script.js" 
-        data-website-id="b02f3e1f-36f9-43a7-a970-22862ca69948">
-</script>
+<script
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id="b02f3e1f-36f9-43a7-a970-22862ca69948"
+></script>
 ```
 
 ### 2. Service Import (components)
+
 ```typescript
-import { trackWeatherChange } from '@/lib/analytics';
+import { trackWeatherChange } from "@/lib/analytics";
 ```
 
 ### 3. Event Tracking (handlers)
+
 ```typescript
 const handleChange = (value: string) => {
   // Update state
   setValue(value);
-  
+
   // Track event
   trackWeatherChange(value, isAuto);
 };

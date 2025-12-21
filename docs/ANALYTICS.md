@@ -38,24 +38,25 @@ The analytics service is implemented in `src/lib/analytics.ts` and provides type
 
 ### User Interactions
 
-| Event | Description | Properties |
-|-------|-------------|------------|
-| `weather_change` | User changes weather mode | `mode`, `auto` |
-| `time_of_day_change` | User changes time of day | `time_of_day`, `auto` |
-| `season_change` | User changes season | `season`, `auto` |
-| `stat_click` | User clicks a stat card | `stat_type` |
-| `modal_action` | User opens/closes a modal | `action`, `modal_type` |
-| `plane_toggle` | User toggles plane mode | `enabled` |
-| `audio_toggle` | User mutes/unmutes audio | `muted` |
-| `language_change` | User changes language | `language` |
-| `avatar_click` | User clicks avatar | `action` |
-| `special_events_toggle` | User toggles special events | `enabled` |
-| `page_view` | Page load | `timestamp` |
-| `error` | Error occurred | `error`, `context` |
+| Event                   | Description                 | Properties             |
+| ----------------------- | --------------------------- | ---------------------- |
+| `weather_change`        | User changes weather mode   | `mode`, `auto`         |
+| `time_of_day_change`    | User changes time of day    | `time_of_day`, `auto`  |
+| `season_change`         | User changes season         | `season`, `auto`       |
+| `stat_click`            | User clicks a stat card     | `stat_type`            |
+| `modal_action`          | User opens/closes a modal   | `action`, `modal_type` |
+| `plane_toggle`          | User toggles plane mode     | `enabled`              |
+| `audio_toggle`          | User mutes/unmutes audio    | `muted`                |
+| `language_change`       | User changes language       | `language`             |
+| `avatar_click`          | User clicks avatar          | `action`               |
+| `special_events_toggle` | User toggles special events | `enabled`              |
+| `page_view`             | Page load                   | `timestamp`            |
+| `error`                 | Error occurred              | `error`, `context`     |
 
 ### Implementation Examples
 
 #### Weather Change
+
 ```typescript
 // In portfolio.tsx
 const handleWeatherModeChange = (value: string) => {
@@ -68,6 +69,7 @@ const handleWeatherModeChange = (value: string) => {
 ```
 
 #### Modal Actions
+
 ```typescript
 // Opening a modal
 const handleStatClick = (statType: SectionsType) => {
@@ -88,6 +90,7 @@ const closeModal = () => {
 ```
 
 #### Language Change
+
 ```typescript
 // In language-selector.tsx
 const handleLanguageChange = (langCode: string) => {
@@ -99,15 +102,19 @@ const handleLanguageChange = (langCode: string) => {
 ## Event Properties
 
 ### Weather Modes
+
 - `clear`, `cloudy`, `rain`, `thunderstorm`, `snow`, `auto`
 
 ### Time of Day
+
 - `morning`, `day`, `afternoon`, `night`, `auto`
 
 ### Seasons
+
 - `easter`, `summer`, `halloween`, `christmas`, `newYear`, `none`, `auto`
 
 ### Stat Types
+
 - `projects` - Projects gallery
 - `companies` - Companies gallery
 - `leading_years` - Leading experience
@@ -115,6 +122,7 @@ const handleLanguageChange = (langCode: string) => {
 - `contact` - Contact form
 
 ### Languages
+
 - `ca` - Catalan
 - `es` - Spanish
 - `en` - English
@@ -136,6 +144,7 @@ npm run test -- src/lib/analytics.test.ts
 ```
 
 Tests cover:
+
 - Event tracking with Umami available
 - Graceful degradation when Umami is unavailable
 - Error handling
@@ -145,6 +154,7 @@ Tests cover:
 ## Accessing Analytics Data
 
 Visit your Umami dashboard at https://cloud.umami.is to view:
+
 - Real-time visitor data
 - Event counts and trends
 - User flow analysis
@@ -154,6 +164,7 @@ Visit your Umami dashboard at https://cloud.umami.is to view:
 ## Privacy
 
 Umami is privacy-focused and GDPR compliant:
+
 - No cookies used
 - No personal data collected
 - No cross-site tracking
@@ -162,6 +173,7 @@ Umami is privacy-focused and GDPR compliant:
 ## Future Enhancements
 
 Potential improvements:
+
 - Track form submission success/failure
 - Track scroll depth
 - Track time spent on each section
