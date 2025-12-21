@@ -57,11 +57,7 @@ export default function Clouds(props: CloudsProps) {
   );
 }
 
-const generateClouds = (
-  maxNumber: number,
-  maxSize?: number,
-  maxOpacity?: number
-): ICloud[] => {
+const generateClouds = (maxNumber: number, maxSize?: number, maxOpacity?: number): ICloud[] => {
   const newClouds: ICloud[] = [];
   for (let i = 0; i < maxNumber; i++) {
     newClouds.push({
