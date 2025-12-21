@@ -50,15 +50,11 @@ describe("SafeAreaContainer", () => {
     );
 
     const wrapper = container.firstChild as HTMLElement;
-    const innerDiv = wrapper.firstChild as HTMLElement;
 
-    // Check that the inner div has a style attribute with safe area configuration
-    // jsdom doesn't support env() values, so we just verify the inner div has styles
-    const styleAttr = innerDiv.getAttribute("style");
+    // Check that wrapper has safe area inset styles
+    const styleAttr = wrapper.getAttribute("style");
     expect(styleAttr).toBeTruthy();
-    // The inner div should have width, height, and box-sizing properties
-    expect(styleAttr).toContain("width");
-    expect(styleAttr).toContain("height");
+    expect(styleAttr).toContain("top");
   });
 
   it("renders without className prop", () => {

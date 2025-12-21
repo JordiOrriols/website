@@ -129,7 +129,7 @@ body {
 
 /* Fill iOS safe areas and use dynamic viewport height */
 html {
-  background-color: #0B1A33; /* Match darkest background color to avoid white flash */
+  background-color: #0b1a33; /* Match darkest background color to avoid white flash */
 }
 
 html,
@@ -147,7 +147,4 @@ body,
   }
 }
 
-/* Allow content to scroll under iOS notch */
-body {
-  padding-bottom: env(safe-area-inset-bottom);
-}
+/* iOS safe area handling - no padding on body, let content flow under notch */
