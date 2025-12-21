@@ -22,7 +22,7 @@ export default function WorkTimeline({
   return (
     <Modal title={title} subtitle={subtitle} onClose={onClose} maxWidth="max-w-4xl">
       <div className="relative h-full pr-2">
-        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#2D4A6B] to-transparent"></div>
+        <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#2D4A6B] to-transparent hidden md:block"></div>
 
         <div className="space-y-8">
           {options.map((site, index) => (
@@ -31,9 +31,9 @@ export default function WorkTimeline({
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.08 }}
-              className="relative pl-20"
+              className="relative pl-0 md:pl-20"
             >
-              <div className="absolute left-5 top-2 w-6 h-6 bg-[#2D4A6B] rounded-full border-4 border-white shadow-md flex items-center justify-center">
+              <div className="absolute left-5 top-2 w-6 h-6 bg-[#2D4A6B] rounded-full border-4 border-white shadow-md flex items-center justify-center hidden md:flex">
                 <Globe className="w-3 h-3 text-white" />
               </div>
 
