@@ -18,8 +18,18 @@ import HomeSection from "@/components/sections/home";
 import { useTranslation } from "react-i18next";
 import { useAmbientAudio } from "@/lib/ambient";
 import { ErrorBoundary } from "react-error-boundary";
-import NewYearScene from "@/components/weather/scenes/new-year";
-import HalloweenScene from "@/components/weather/scenes/halloween";
+import NewYearScene from "../components/weather/scenes/new-year";
+import HalloweenScene from "../components/weather/scenes/halloween";
+import {
+  trackWeatherChange,
+  trackTimeOfDayChange,
+  trackSeasonChange,
+  trackStatClick,
+  trackModalAction,
+  trackPlaneToggle,
+  trackAudioToggle,
+  trackSpecialEventsToggle,
+} from "@/lib/analytics";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -174,34 +184,40 @@ export default function Portfolio() {
   const handleWeatherModeChange = (value: string) => {
     const v = value as WeatherMode;
     setWeatherMode(v);
+    const isAuto = v.includes("auto");
     if (v.includes("clear")) setWeather("clear");
     else if (v.includes("cloudy")) setWeather("cloudy");
     else if (v.includes("rain")) setWeather("rain");
     else if (v.includes("thunderstorm")) setWeather("thunderstorm");
     else if (v.includes("snow")) setWeather("snow");
-    else if (v.includes("auto")) setWeather(currentWeather ?? "clear");
+    else if (isAuto) setWeather(currentWeather ?? "clear");
+    trackWeatherChange(v, isAuto);
   };
 
   const handleTimeOfDayModeChange = (value: string) => {
     const v = value as TimeOfDayMode;
     setTimeOfDayMode(v);
+    const isAuto = v.includes("auto");
     if (v.includes("morning")) setTimeOfDay("morning");
     else if (v.includes("day")) setTimeOfDay("day");
     else if (v.includes("afternoon")) setTimeOfDay("afternoon");
     else if (v.includes("night")) setTimeOfDay("night");
-    else if (v.includes("auto")) setTimeOfDay(currentTimeOfDay ?? "day");
+    else if (isAuto) setTimeOfDay(currentTimeOfDay ?? "day");
+    trackTimeOfDayChange(v, isAuto);
   };
 
   const handleSeasonModeChange = (value: string) => {
     const v = value as SeasonMode;
     setSeasonMode(v);
+    const isAuto = v.includes("auto");
     if (v.includes("christmas")) setSeason("christmas");
     else if (v.includes("newYear")) setSeason("newYear");
     else if (v.includes("easter")) setSeason("easter");
     else if (v.includes("summer")) setSeason("summer");
     else if (v.includes("halloween")) setSeason("halloween");
     else if (v.includes("none")) setSeason("none");
-    else if (v.includes("auto")) setSeason(currentSeason ?? "none");
+    else if (isAuto) setSeason(currentSeason ?? "none");
+    trackSeasonChange(v, isAuto);
   };
 
   const getBackgroundComponent = () => {
@@ -218,16 +234,23 @@ export default function Portfolio() {
   const handleStatClick = (statType: SectionsType) => {
     setActiveModal(statType);
     playClick();
+    trackStatClick(statType);
+    trackModalAction("open", statType);
   };
 
   const closeModal = () => {
+    if (activeModal) {
+      trackModalAction("close", activeModal);
+    }
     setActiveModal(null);
     playClick();
   };
 
   const handleShowPlane = () => {
-    setShowPlane(!showPlane);
-    if (!showPlane) playNotification();
+    const newShowPlane = !showPlane;
+    setShowPlane(newShowPlane);
+    if (newShowPlane) playNotification();
+    trackPlaneToggle(newShowPlane);
   };
 
   const isModalOpen = activeModal !== null;
@@ -332,7 +355,10 @@ export default function Portfolio() {
 
       <div className="absolute bottom-4 right-4 z-30">
         <Button
-          onClick={() => toggleMute()}
+          onClick={() => {
+            toggleMute();
+            trackAudioToggle(!muted);
+          }}
           className={`${
             muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
@@ -349,7 +375,11 @@ export default function Portfolio() {
               season={season}
               isModalOpen={isModalOpen}
               handleStatClick={handleStatClick}
-              onClickAvatar={() => setActiveSpecialEvents(!activeSpecialEvents)}
+              onClickAvatar={() => {
+                const newState = !activeSpecialEvents;
+                setActiveSpecialEvents(newState);
+                trackSpecialEventsToggle(newState);
+              }}
             />
           </ErrorBoundary>
 

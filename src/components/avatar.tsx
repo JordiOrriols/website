@@ -1,5 +1,6 @@
 import type { SeasonType } from "@/pages/portfolio";
 import React, { useState } from "react";
+import { trackAvatarClick } from "@/lib/analytics";
 
 export default function Avatar(props: { season: SeasonType; onClickAvatar?: () => void }) {
   const [hover, setHover] = useState(false);
@@ -7,6 +8,7 @@ export default function Avatar(props: { season: SeasonType; onClickAvatar?: () =
 
   const handleOnClick = () => {
     setClicked(true);
+    trackAvatarClick("toggle_special_events");
     if (props.onClickAvatar) {
       props.onClickAvatar();
     }
