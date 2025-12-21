@@ -8,7 +8,7 @@ interface SafeAreaContainerProps {
 /**
  * Container that extends into iPhone safe areas (notch and home indicator)
  * while keeping content properly positioned with padding.
- * 
+ *
  * Use this for full-screen backgrounds that should fill edge-to-edge on iOS.
  */
 export default function SafeAreaContainer({ children, className = "" }: SafeAreaContainerProps) {

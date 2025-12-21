@@ -47,7 +47,7 @@ describe("SafeAreaContainer", () => {
     );
 
     const wrapper = container.firstChild as HTMLElement;
-    
+
     // Check that the style attribute includes safe area margin calculations
     // Note: React/jsdom may filter out env() values that aren't supported
     const styleAttr = wrapper.getAttribute("style");
