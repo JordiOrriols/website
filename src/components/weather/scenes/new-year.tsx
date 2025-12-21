@@ -5,6 +5,7 @@ import Fireworks from "../elements/fireworks";
 import Stars from "../elements/stars";
 import Moon from "../elements/moon";
 import { configClear } from "./dynamic";
+import SafeAreaContainer from "../SafeAreaContainer";
 
 interface Props {
   playFireworks: () => void;
@@ -12,7 +13,7 @@ interface Props {
 
 export default function NewYearScene(props: Props) {
   return (
-    <div className={`absolute inset-0 bg-gradient-to-b ${configClear.night.bg}`}>
+    <SafeAreaContainer className={`bg-gradient-to-b ${configClear.night.bg}`}>
       <Fireworks playFireworks={props.playFireworks}></Fireworks>
 
       <Moon></Moon>
@@ -25,6 +26,6 @@ export default function NewYearScene(props: Props) {
 
       {/* Logo */}
       <AppLogo />
-    </div>
+    </SafeAreaContainer>
   );
 }

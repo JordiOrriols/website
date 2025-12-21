@@ -9,6 +9,7 @@ import Rain from "../elements/rain";
 import Snow from "../elements/snow";
 import Moon from "../elements/moon";
 import Sun from "../elements/sun";
+import SafeAreaContainer from "../SafeAreaContainer";
 
 interface configType {
   skyline: string;
@@ -77,7 +78,7 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
   const clouds = getClouds();
 
   return (
-    <div className={`absolute inset-0 bg-gradient-to-b ${config.bg}`}>
+    <SafeAreaContainer className={`bg-gradient-to-b ${config.bg}`}>
       {/* Bright Sun */}
       {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
       props.weather !== "rain" &&
@@ -98,6 +99,6 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
       <AppLogo />
       {/* Snow */}
       {props.weather === "snow" ? <Snow></Snow> : null}
-    </div>
+    </SafeAreaContainer>
   );
 }

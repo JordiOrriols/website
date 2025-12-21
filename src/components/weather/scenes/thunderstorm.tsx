@@ -4,6 +4,7 @@ import CitySkyline from "../elements/skyline";
 import Clouds from "../elements/cloud";
 import Rain from "../elements/rain";
 import Lightning from "../elements/lightning";
+import SafeAreaContainer from "../SafeAreaContainer";
 
 interface Props {
   playThunder: () => void;
@@ -11,7 +12,7 @@ interface Props {
 
 export default function ThunderstormScene(props: Props) {
   return (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]">
+    <SafeAreaContainer className="bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]">
       <Lightning playThunder={props.playThunder} />
 
       {/* Clouds */}
@@ -25,6 +26,6 @@ export default function ThunderstormScene(props: Props) {
 
       {/* Logo */}
       <AppLogo />
-    </div>
+    </SafeAreaContainer>
   );
 }
