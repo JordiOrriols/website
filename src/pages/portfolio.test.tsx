@@ -249,11 +249,12 @@ describe("Portfolio Component", () => {
     );
   });
 
-  it("renders min-h-screen container", async () => {
+  it("renders full-height container", async () => {
     const { container } = render(<Portfolio />);
 
     await waitFor(() => {
-      const mainDiv = container.querySelector(".min-h-screen");
+      const mainDiv =
+        container.querySelector(".min-h-screen") || container.querySelector(".min-h-\\[100dvh\\]");
       expect(mainDiv).toBeTruthy();
     });
   });

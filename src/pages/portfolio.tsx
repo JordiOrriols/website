@@ -234,7 +234,7 @@ export default function Portfolio() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]">
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" />
           <p className="text-white text-lg">{t("loadingWeather")}</p>
@@ -252,7 +252,7 @@ export default function Portfolio() {
   const disabledDropdown = season === "newYear" || season === "halloween";
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-[100dvh] overflow-hidden">
       {/* Dynamic Background */}
       <ErrorBoundary fallback={fallbackComponent}>{getBackgroundComponent()}</ErrorBoundary>
 
@@ -342,7 +342,7 @@ export default function Portfolio() {
       </div>
 
       {/* Cards Container */}
-      <div className="relative z-20 flex items-center justify-center min-h-screen px-4 py-12">
+      <div className="relative z-20 flex items-center justify-center min-h-[100dvh] px-4 py-12">
         <div className="relative w-full max-w-3xl" style={{ perspective: "1000px" }}>
           <ErrorBoundary fallback={fallbackComponent}>
             <HomeSection

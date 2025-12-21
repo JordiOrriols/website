@@ -126,3 +126,26 @@ body {
   font-style: normal;
   font-variation-settings: "wdth" 100;
 }
+
+/* Fill iOS safe areas and use dynamic viewport height */
+html,
+body,
+#root {
+  /* Use dvh when available, fallback to vh */
+  min-height: 100dvh;
+  background-color: var(--background);
+}
+
+@supports not (min-height: 100dvh) {
+  html,
+  body,
+  #root {
+    min-height: 100vh;
+  }
+}
+
+/* Ensure background paints under iOS notch/toolbars */
+body {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
