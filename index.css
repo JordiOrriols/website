@@ -133,10 +133,17 @@ html {
 }
 
 html,
-body,
-#root {
+body {
+  margin: 0;
+  padding: 0;
   /* Use dvh when available, fallback to vh */
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
+}
+
+#root {
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
 }
 
 @supports not (min-height: 100dvh) {

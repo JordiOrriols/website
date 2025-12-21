@@ -2,12 +2,7 @@ import React from "react";
 
 export default function AppLogo() {
   return (
-    <div
-      className="absolute left-1/2 transform -translate-x-1/2 z-10"
-      style={{
-        top: "calc(env(safe-area-inset-top, 0px) + 2rem)",
-      }}
-    >
+    <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-10">
       <svg
         version="1.1"
         id="Logos"
