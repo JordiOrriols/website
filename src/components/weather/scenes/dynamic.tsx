@@ -78,29 +78,27 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
   const clouds = getClouds();
 
   return (
-    <div className={`fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-b ${config.bg}`}>
-      <SafeAreaContainer>
-        {/* Bright Sun */}
-        {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
-        props.weather !== "rain" &&
-        props.weather !== "snow" ? (
-          <Sun></Sun>
-        ) : null}
-        {/* Moon */}
-        {props.timeOfDay === "night" ? <Moon></Moon> : null}
-        {/* Clouds */}
-        <Clouds {...clouds} />
-        {/* Rain */}
-        {props.weather === "rain" ? <Rain max={50} timeOfDay={props.timeOfDay} /> : null}
-        {/* City Skyline */}
-        <CitySkyline fill={config.skyline} />
-        {/* Stars */}
-        {props.timeOfDay === "night" ? <Stars max={props.weather === "clear" ? 150 : 50} /> : null}
-        {/* Logo */}
-        <AppLogo />
-        {/* Snow */}
-        {props.weather === "snow" ? <Snow></Snow> : null}
-      </SafeAreaContainer>
-    </div>
+    <SafeAreaContainer className={`bg-gradient-to-b ${config.bg}`}>
+      {/* Bright Sun */}
+      {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
+      props.weather !== "rain" &&
+      props.weather !== "snow" ? (
+        <Sun></Sun>
+      ) : null}
+      {/* Moon */}
+      {props.timeOfDay === "night" ? <Moon></Moon> : null}
+      {/* Clouds */}
+      <Clouds {...clouds} />
+      {/* Rain */}
+      {props.weather === "rain" ? <Rain max={50} timeOfDay={props.timeOfDay} /> : null}
+      {/* City Skyline */}
+      <CitySkyline fill={config.skyline} />
+      {/* Stars */}
+      {props.timeOfDay === "night" ? <Stars max={props.weather === "clear" ? 150 : 50} /> : null}
+      {/* Logo */}
+      <AppLogo />
+      {/* Snow */}
+      {props.weather === "snow" ? <Snow></Snow> : null}
+    </SafeAreaContainer>
   );
 }

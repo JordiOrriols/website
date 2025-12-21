@@ -13,21 +13,19 @@ interface Props {
 
 export default function NewYearScene(props: Props) {
   return (
-    <div className={`fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-b ${configClear.night.bg}`}>
-      <SafeAreaContainer>
-        <Fireworks playFireworks={props.playFireworks}></Fireworks>
+    <SafeAreaContainer className={`bg-gradient-to-b ${configClear.night.bg}`}>
+      <Fireworks playFireworks={props.playFireworks}></Fireworks>
 
-        <Moon></Moon>
+      <Moon></Moon>
 
-        {/* City Skyline */}
-        <CitySkyline fill={configClear.night.skyline} />
+      {/* City Skyline */}
+      <CitySkyline fill={configClear.night.skyline} />
 
-        {/* Stars */}
-        <Stars max={50} />
+      {/* Stars */}
+      <Stars max={50} />
 
-        {/* Logo */}
-        <AppLogo />
-      </SafeAreaContainer>
-    </div>
+      {/* Logo */}
+      <AppLogo />
+    </SafeAreaContainer>
   );
 }
