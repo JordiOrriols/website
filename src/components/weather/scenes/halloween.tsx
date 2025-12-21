@@ -13,19 +13,21 @@ const configHalloween = {
 
 export default function HalloweenScene() {
   return (
-    <SafeAreaContainer className={`bg-gradient-to-b ${configHalloween.bg}`}>
-      <Moon></Moon>
+    <div className={`fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-b ${configHalloween.bg}`}>
+      <SafeAreaContainer>
+        <Moon></Moon>
 
-      <Ghosts max={6}></Ghosts>
+        <Ghosts max={6}></Ghosts>
 
-      {/* City Skyline */}
-      <CitySkyline fill={configHalloween.skyline} />
+        {/* City Skyline */}
+        <CitySkyline fill={configHalloween.skyline} />
 
-      {/* Stars */}
-      <Stars max={50} />
+        {/* Stars */}
+        <Stars max={50} />
 
-      {/* Logo */}
-      <AppLogo />
-    </SafeAreaContainer>
+        {/* Logo */}
+        <AppLogo />
+      </SafeAreaContainer>
+    </div>
   );
 }

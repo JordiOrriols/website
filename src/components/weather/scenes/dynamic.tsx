@@ -78,7 +78,8 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
   const clouds = getClouds();
 
   return (
-    <SafeAreaContainer className={`bg-gradient-to-b ${config.bg}`}>
+    <div className={`fixed top-0 left-0 right-0 bottom-0 bg-gradient-to-b ${config.bg}`}>
+      <SafeAreaContainer>
       {/* Bright Sun */}
       {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
       props.weather !== "rain" &&
@@ -99,6 +100,7 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
       <AppLogo />
       {/* Snow */}
       {props.weather === "snow" ? <Snow></Snow> : null}
-    </SafeAreaContainer>
+      </SafeAreaContainer>
+    </div>
   );
 }
