@@ -4,7 +4,7 @@ import CitySkyline from "../elements/skyline";
 import Clouds from "../elements/cloud";
 import Rain from "../elements/rain";
 import Lightning from "../elements/lightning";
-import SafeAreaContainer from "../SafeAreaContainer";
+import SafeAreaContainer from "../safe-area-container";
 
 interface Props {
   playThunder: () => void;

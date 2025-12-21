@@ -9,7 +9,7 @@ import Rain from "../elements/rain";
 import Snow from "../elements/snow";
 import Moon from "../elements/moon";
 import Sun from "../elements/sun";
-import SafeAreaContainer from "../SafeAreaContainer";
+import SafeAreaContainer from "../safe-area-container";
 
 interface configType {
   skyline: string;

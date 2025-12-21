@@ -5,7 +5,7 @@ import Fireworks from "../elements/fireworks";
 import Stars from "../elements/stars";
 import Moon from "../elements/moon";
 import { configClear } from "./dynamic";
-import SafeAreaContainer from "../SafeAreaContainer";
+import SafeAreaContainer from "../safe-area-container";
 
 interface Props {
   playFireworks: () => void;

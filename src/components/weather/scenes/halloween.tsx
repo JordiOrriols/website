@@ -4,7 +4,7 @@ import CitySkyline from "../elements/skyline";
 import Stars from "../elements/stars";
 import Moon from "../elements/moon";
 import Ghosts from "../elements/ghosts";
-import SafeAreaContainer from "../SafeAreaContainer";
+import SafeAreaContainer from "../safe-area-container";
 
 const configHalloween = {
   bg: "from-[#1a0f2e] via-[#2d1b47] to-[#4a2c5e]",

@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { render } from "@testing-library/react";
-import SafeAreaContainer from "./SafeAreaContainer";
+import SafeAreaContainer from "./safe-area-container";
 
 describe("SafeAreaContainer", () => {
   it("renders children correctly", () => {
