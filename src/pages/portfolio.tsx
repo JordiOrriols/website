@@ -516,24 +516,24 @@ export default function Portfolio() {
 
       {/* Flight Safety Confirmation Dialog */}
       <Dialog open={showFlightSafetyDialog} onOpenChange={setShowFlightSafetyDialog}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md p-8" showClose={false}>
           <DialogHeader>
             <DialogTitle className="text-xl font-bold text-red-600">
-              ⚠️ {t("dangerousFlyingTitle")}
+              {t("dangerousFlyingTitle")}
             </DialogTitle>
             <DialogDescription className="text-base pt-4">
               {getFlightSafetyMessage()}
             </DialogDescription>
           </DialogHeader>
-          <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-end">
+          <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:justify-end pt-2">
             <Button onClick={handleCancelFlight} variant="outline" className="w-full sm:w-auto">
-              {t("no")}
+              {t("skip")}
             </Button>
             <Button
               onClick={handleSetSafeConditions}
-              className="w-full sm:w-auto bg-green-600 hover:bg-green-700"
+              className="w-full sm:w-auto bg-[#2D4A6B] hover:bg-[#1F3447]"
             >
-              {t("yes")}
+              {t("changeConditions")}
             </Button>
           </DialogFooter>
         </DialogContent>
