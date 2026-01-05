@@ -373,6 +373,7 @@ export default function Portfolio() {
           <ErrorBoundary fallback={fallbackComponent}>
             <HomeSection
               season={season}
+              showPlane={showPlane}
               isModalOpen={isModalOpen}
               handleStatClick={handleStatClick}
               onClickAvatar={() => {

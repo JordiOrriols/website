@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 
 interface Props {
   season: SeasonType;
+  showPlane?: boolean;
   isModalOpen: boolean;
   handleStatClick?: (section: SectionsType) => void;
   onClickAvatar?: () => void;
@@ -48,7 +49,7 @@ export default function HomeSection(props: Props) {
         <div className="mt-[-200px]">
           <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl m-auto">
             <Avatar
-              season={props.season}
+              season={props.showPlane ? "aviator" : props.season}
               {...(props.onClickAvatar ? { onClickAvatar: props.onClickAvatar } : {})}
             />
           </div>
