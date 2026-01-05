@@ -3,6 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import type { ExperienceEntry } from "@/data/experience";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 import DynamicScene from "../components/weather/scenes/dynamic";
 import ThunderstormScene from "../components/weather/scenes/thunderstorm";
@@ -72,6 +80,7 @@ export default function Portfolio() {
   const [activeModal, setActiveModal] = useState<SectionsType | null>(null);
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
+  const [showFlightSafetyDialog, setShowFlightSafetyDialog] = useState(false);
 
   const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
     useAmbientAudio(weather, timeOfDay);
@@ -248,9 +257,55 @@ export default function Portfolio() {
 
   const handleShowPlane = () => {
     const newShowPlane = !showPlane;
+
+    // Check if conditions are dangerous before activating plane
+    if (newShowPlane && isDangerousToFly()) {
+      setShowFlightSafetyDialog(true);
+      return;
+    }
+
     setShowPlane(newShowPlane);
     if (newShowPlane) playNotification();
     trackPlaneToggle(newShowPlane);
+  };
+
+  const isDangerousToFly = (): boolean => {
+    const isDangerousWeather = ["thunderstorm", "rain", "snow"].includes(weather);
+    const isNight = timeOfDay === "night";
+    return isDangerousWeather || isNight;
+  };
+
+  const getFlightSafetyMessage = (): string => {
+    const isDangerousWeather = ["thunderstorm", "rain", "snow"].includes(weather);
+    const isNight = timeOfDay === "night";
+
+    if (isDangerousWeather && isNight) {
+      return t("dangerousFlyingMessageBoth").replace("{}", t(weather));
+    } else if (isNight) {
+      return t("dangerousFlyingMessageNight");
+    } else {
+      return t("dangerousFlyingMessage").replace("{}", t(weather));
+    }
+  };
+
+  const handleSetSafeConditions = () => {
+    // Set morning and clear weather
+    setTimeOfDay("morning");
+    setTimeOfDayMode("morning");
+    setWeather("clear");
+    setWeatherMode("clear");
+
+    // Close dialog and activate plane
+    setShowFlightSafetyDialog(false);
+    setShowPlane(true);
+    playNotification();
+    trackPlaneToggle(true);
+    trackWeatherChange("clear", false);
+    trackTimeOfDayChange("morning", false);
+  };
+
+  const handleCancelFlight = () => {
+    setShowFlightSafetyDialog(false);
   };
 
   const isModalOpen = activeModal !== null;
@@ -458,6 +513,31 @@ export default function Portfolio() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Flight Safety Confirmation Dialog */}
+      <Dialog open={showFlightSafetyDialog} onOpenChange={setShowFlightSafetyDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold text-red-600">
+              ⚠️ {t("dangerousFlyingTitle")}
+            </DialogTitle>
+            <DialogDescription className="text-base pt-4">
+              {getFlightSafetyMessage()}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-0 sm:justify-end">
+            <Button onClick={handleCancelFlight} variant="outline" className="w-full sm:w-auto">
+              {t("no")}
+            </Button>
+            <Button
+              onClick={handleSetSafeConditions}
+              className="w-full sm:w-auto bg-green-600 hover:bg-green-700"
+            >
+              {t("yes")}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

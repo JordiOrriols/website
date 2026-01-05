@@ -29,6 +29,12 @@ interface Translation {
   // Plane System
   planeActivated: string;
   planeControls: string;
+  dangerousFlyingTitle: string;
+  dangerousFlyingMessage: string;
+  dangerousFlyingMessageNight: string;
+  dangerousFlyingMessageBoth: string;
+  yes: string;
+  no: string;
 
   // Portfolio Page
   name: string;

@@ -31,6 +31,15 @@ export const en: Locale = {
     // Plane System
     planeActivated: "Plane activated!",
     planeControls: "Use ↑ ↓ to control it",
+    dangerousFlyingTitle: "Dangerous Flying Conditions!",
+    dangerousFlyingMessage:
+      "It's too dangerous to fly during {} conditions. Would you like to automatically set better conditions for flying?",
+    dangerousFlyingMessageNight:
+      "It's too dangerous to fly at night. Would you like to automatically set better conditions for flying?",
+    dangerousFlyingMessageBoth:
+      "It's too dangerous to fly at night with {} weather. Would you like to automatically set better conditions for flying?",
+    yes: "Yes",
+    no: "No",
 
     // Portfolio Page
     name: "Jordi Orriols",

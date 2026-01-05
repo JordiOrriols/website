@@ -31,6 +31,15 @@ export const es: Locale = {
     // Plane System
     planeActivated: "¡Avión activado!",
     planeControls: "Usa ↑ ↓ para controlarlo",
+    dangerousFlyingTitle: "¡Condiciones de Vuelo Peligrosas!",
+    dangerousFlyingMessage:
+      "Es demasiado peligroso volar con {}. ¿Quieres establecer automáticamente mejores condiciones para volar?",
+    dangerousFlyingMessageNight:
+      "Es demasiado peligroso volar de noche. ¿Quieres establecer automáticamente mejores condiciones para volar?",
+    dangerousFlyingMessageBoth:
+      "Es demasiado peligroso volar de noche con {}. ¿Quieres establecer automáticamente mejores condiciones para volar?",
+    yes: "Sí",
+    no: "No",
 
     // Portfolio Page
     name: "Jordi Orriols",
