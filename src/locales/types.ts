@@ -33,8 +33,8 @@ interface Translation {
   dangerousFlyingMessage: string;
   dangerousFlyingMessageNight: string;
   dangerousFlyingMessageBoth: string;
-  yes: string;
-  no: string;
+  changeConditions: string;
+  skip: string;
 
   // Portfolio Page
   name: string;

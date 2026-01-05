@@ -38,8 +38,8 @@ export const es: Locale = {
       "Es demasiado peligroso volar de noche. ¿Quieres establecer automáticamente mejores condiciones para volar?",
     dangerousFlyingMessageBoth:
       "Es demasiado peligroso volar de noche con {}. ¿Quieres establecer automáticamente mejores condiciones para volar?",
-    yes: "Sí",
-    no: "No",
+    changeConditions: "Cambiar Condiciones",
+    skip: "Omitir",
 
     // Portfolio Page
     name: "Jordi Orriols",

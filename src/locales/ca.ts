@@ -38,8 +38,8 @@ export const ca: Locale = {
       "És massa perillós volar de nit. Vols establir automàticament millors condicions per volar?",
     dangerousFlyingMessageBoth:
       "És massa perillós volar de nit amb {}. Vols establir automàticament millors condicions per volar?",
-    yes: "Sí",
-    no: "No",
+    changeConditions: "Canviar Condicions",
+    skip: "Ometre",
 
     // Portfolio Page
     name: "Jordi Orriols",

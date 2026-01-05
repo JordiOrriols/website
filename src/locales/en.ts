@@ -38,8 +38,8 @@ export const en: Locale = {
       "It's too dangerous to fly at night. Would you like to automatically set better conditions for flying?",
     dangerousFlyingMessageBoth:
       "It's too dangerous to fly at night with {} weather. Would you like to automatically set better conditions for flying?",
-    yes: "Yes",
-    no: "No",
+    changeConditions: "Change Conditions",
+    skip: "Skip",
 
     // Portfolio Page
     name: "Jordi Orriols",
