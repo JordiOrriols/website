@@ -15,7 +15,11 @@ const configHalloween = {
 
 export default function HalloweenScene() {
   return (
-    <SafeAreaContainer className={`bg-gradient-to-b ${configHalloween.bg}`} themeColor={configHalloween.themeColor} gradientColors={configHalloween.gradientColors}>
+    <SafeAreaContainer
+      className={`bg-gradient-to-b ${configHalloween.bg}`}
+      themeColor={configHalloween.themeColor}
+      gradientColors={configHalloween.gradientColors}
+    >
       <Moon></Moon>
 
       <Ghosts max={6}></Ghosts>

@@ -64,9 +64,7 @@ export default function SafeAreaContainer({
         }}
       />
       {/* Content layer - weather elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        {children}
-      </div>
+      <div className="absolute inset-0 overflow-hidden">{children}</div>
     </>
   );
 }

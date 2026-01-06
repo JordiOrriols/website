@@ -96,7 +96,11 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
   const clouds = getClouds();
 
   return (
-    <SafeAreaContainer className={`bg-gradient-to-b ${config.bg}`} themeColor={config.themeColor} gradientColors={config.gradientColors}>
+    <SafeAreaContainer
+      className={`bg-gradient-to-b ${config.bg}`}
+      themeColor={config.themeColor}
+      gradientColors={config.gradientColors}
+    >
       {/* Bright Sun */}
       {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
       props.weather !== "rain" &&

@@ -13,7 +13,11 @@ interface Props {
 
 export default function NewYearScene(props: Props) {
   return (
-    <SafeAreaContainer className={`bg-gradient-to-b ${configClear.night.bg}`} themeColor={configClear.night.themeColor} gradientColors={configClear.night.gradientColors}>
+    <SafeAreaContainer
+      className={`bg-gradient-to-b ${configClear.night.bg}`}
+      themeColor={configClear.night.themeColor}
+      gradientColors={configClear.night.gradientColors}
+    >
       <Fireworks playFireworks={props.playFireworks}></Fireworks>
 
       <Moon></Moon>
