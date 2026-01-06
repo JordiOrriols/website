@@ -115,7 +115,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }
 
@@ -129,21 +129,24 @@ body {
 
 /* Fill iOS safe areas and use dynamic viewport height */
 html {
-  background-color: #0b1a33; /* Match darkest background color to avoid white flash */
+  background-color: #0b1a33; /* Default background, dynamically updated by SafeAreaContainer */
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
+  background-color: #0b1a33;
   /* Use dvh when available, fallback to vh */
   min-height: 100dvh;
   min-height: -webkit-fill-available;
+  height: 100%;
 }
 
 #root {
   min-height: 100dvh;
   min-height: -webkit-fill-available;
+  height: 100%;
 }
 
 @supports not (min-height: 100dvh) {
@@ -151,7 +154,17 @@ body {
   body,
   #root {
     min-height: 100vh;
+    height: 100%;
   }
 }
 
 /* iOS safe area handling - no padding on body, let content flow under notch */
+/* Ensure full viewport coverage */
+#root {
+  position: relative;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
