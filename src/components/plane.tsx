@@ -77,7 +77,7 @@ export default function PlaneController() {
     <>
       {/* Plane SVG */}
       <motion.div
-        className="fixed z-10 pointer-events-none"
+        className="absolute z-10 pointer-events-none"
         style={{
           top: `${position.y.toString()}%`,
           left: `${position.x.toString()}%`,
@@ -310,7 +310,7 @@ export default function PlaneController() {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50"
+            className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-50"
           >
             <div className="bg-[#2D4A6B] text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3">
               <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
