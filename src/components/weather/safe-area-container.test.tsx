@@ -38,12 +38,12 @@ describe("SafeAreaContainer", () => {
     const backgroundLayer = container.childNodes[0] as HTMLElement;
     const contentLayer = container.childNodes[1] as HTMLElement;
 
-    expect(backgroundLayer.className).toContain("fixed");
-    expect(contentLayer.className).toContain("fixed");
+    expect(backgroundLayer.className).toContain("absolute");
+    expect(contentLayer.className).toContain("absolute");
     expect(contentLayer.className).toContain("inset-0");
   });
 
-  it("background layer has fixed positioning with inline styles", () => {
+  it("background layer has absolute positioning with inline styles", () => {
     const { container } = render(
       <SafeAreaContainer>
         <div>Content</div>
@@ -51,7 +51,7 @@ describe("SafeAreaContainer", () => {
     );
 
     const backgroundLayer = container.firstChild as HTMLElement;
-    expect(backgroundLayer.className).toContain("fixed");
+    expect(backgroundLayer.className).toContain("absolute");
     // Uses inline styles for positioning
     const style = backgroundLayer.getAttribute("style");
     expect(style).toContain("top");
@@ -66,7 +66,7 @@ describe("SafeAreaContainer", () => {
 
     const backgroundLayer = container.firstChild as HTMLElement;
     expect(backgroundLayer).toBeTruthy();
-    expect(backgroundLayer.className).toContain("fixed");
+    expect(backgroundLayer.className).toContain("absolute");
   });
 
   it("renders multiple children", () => {

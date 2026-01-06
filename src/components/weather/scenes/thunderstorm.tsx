@@ -12,7 +12,7 @@ interface Props {
 
 export default function ThunderstormScene(props: Props) {
   return (
-    <SafeAreaContainer className="bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]">
+    <SafeAreaContainer className="bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]" themeColor="#2C2B2F" gradientColors={["#2C2B2F", "#333238", "#3A444F"]}>
       <Lightning playThunder={props.playThunder} />
 
       {/* Clouds */}
