@@ -16,6 +16,7 @@ export default function ThunderstormScene(props: Props) {
       className="bg-gradient-to-b from-[#2C2B2F] to-[#3A444F]"
       themeColor="#2C2B2F"
       gradientColors={["#2C2B2F", "#333238", "#3A444F"]}
+      skylineFill="#0F0D12"
     >
       <Lightning playThunder={props.playThunder} />
 

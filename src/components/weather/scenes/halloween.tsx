@@ -19,6 +19,7 @@ export default function HalloweenScene() {
       className={`bg-gradient-to-b ${configHalloween.bg}`}
       themeColor={configHalloween.themeColor}
       gradientColors={configHalloween.gradientColors}
+      skylineFill={configHalloween.skyline}
     >
       <Moon></Moon>
 

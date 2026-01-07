@@ -17,6 +17,7 @@ export default function NewYearScene(props: Props) {
       className={`bg-gradient-to-b ${configClear.night.bg}`}
       themeColor={configClear.night.themeColor}
       gradientColors={configClear.night.gradientColors}
+      skylineFill={configClear.night.skyline}
     >
       <Fireworks playFireworks={props.playFireworks}></Fireworks>
 

@@ -100,6 +100,7 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
       className={`bg-gradient-to-b ${config.bg}`}
       themeColor={config.themeColor}
       gradientColors={config.gradientColors}
+      skylineFill={config.skyline}
     >
       {/* Bright Sun */}
       {(props.timeOfDay === "afternoon" || props.timeOfDay === "day") &&
