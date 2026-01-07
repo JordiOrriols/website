@@ -129,14 +129,18 @@ body {
 
 /* Fill iOS safe areas and use dynamic viewport height */
 html {
-  background-color: #0b1a33; /* Default background, dynamically updated by SafeAreaContainer */
+  background-color: #0b1a33; /* Default background for top overflow, dynamically updated by SafeAreaContainer */
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-html,
 body {
   margin: 0;
   padding: 0;
-  background-color: #0b1a33;
+  background-color: #2b4c7e; /* Default background for bottom overflow, dynamically updated by SafeAreaContainer */
   /* Use dvh when available, fallback to vh */
   min-height: 100dvh;
   min-height: -webkit-fill-available;
