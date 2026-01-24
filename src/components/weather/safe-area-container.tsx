@@ -9,7 +9,7 @@ interface SafeAreaContainerProps {
 }
 
 // Helper to blend two hex colors with a given alpha for the overlay
-function blendColors(baseHex: string, overlayHex: string, alpha: number): string {
+export function blendColors(baseHex: string, overlayHex: string, alpha: number): string {
   const parseHex = (hex: string) => {
     const h = hex.replace("#", "");
     return {
@@ -54,25 +54,14 @@ export default function SafeAreaContainer({
 
       // Set html background to top color (for top bounce scroll)
       document.documentElement.style.backgroundColor = themeColor;
-      
-      // Set body background to bottom color (for bottom bounce scroll)
-      document.body.style.backgroundColor = bottomColor;
+      document.documentElement.style.backgroundImage = "none";
 
-      // Apply gradient to both html and body for the visible area
-      if (gradientColors) {
-        const [from, via, to] = gradientColors;
-        const gradient = `linear-gradient(to bottom, ${from}, ${via}, ${to})`;
-        document.documentElement.style.backgroundImage = gradient;
-        document.body.style.backgroundImage = gradient;
-        document.documentElement.style.backgroundAttachment = "fixed";
-        document.body.style.backgroundAttachment = "fixed";
-        document.documentElement.style.backgroundSize = "100% 100%";
-        document.body.style.backgroundSize = "100% 100%";
-      } else {
-        // Clear gradient if no gradient colors
-        document.documentElement.style.backgroundImage = "none";
-        document.body.style.backgroundImage = "none";
-      }
+      // Set CSS variable for bottom extension color (used by #root::after)
+      document.documentElement.style.setProperty("--bottom-extension-color", bottomColor);
+
+      // Clear body background - let html show through
+      document.body.style.backgroundColor = "transparent";
+      document.body.style.backgroundImage = "none";
 
       // Update theme-color meta tag
       let themeColorMeta = document.querySelector('meta[name="theme-color"]');

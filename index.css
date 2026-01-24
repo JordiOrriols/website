@@ -172,3 +172,16 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+/* Bottom extension for bounce scroll - uses CSS variable set by SafeAreaContainer */
+#root::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 500px;
+  background-color: var(--bottom-extension-color, #2b4c7e);
+  pointer-events: none;
+  margin-bottom: -500px; /* Prevent adding scroll height */
+}

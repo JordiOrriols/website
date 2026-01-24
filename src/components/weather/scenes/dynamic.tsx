@@ -47,7 +47,7 @@ export const configClear: Record<TimeOfDayType, configType> = {
   },
 };
 
-const configRain: Record<TimeOfDayType, configType> = {
+export const configRain: Record<TimeOfDayType, configType> = {
   morning: {
     // Amanecer lluvioso: más claro y ligeramente cálido, aún con bruma fría.
     skyline: "#1F2937",
