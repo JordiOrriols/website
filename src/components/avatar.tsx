@@ -26,7 +26,10 @@ export default function Avatar(props: {
 
   return (
     <div
-      className="w-full h-full rounded-full bg-gradient-to-br from-[#F2F1F5] to-[#D2D1D5] flex items-center justify-center relative"
+      role="button"
+      tabIndex={0}
+      aria-label="Toggle special events mode"
+      className="w-full h-full rounded-full bg-gradient-to-br from-[#F2F1F5] to-[#D2D1D5] flex items-center justify-center relative cursor-pointer"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => {
         setHover(false);

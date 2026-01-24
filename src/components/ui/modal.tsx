@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 
@@ -19,8 +19,30 @@ export default function Modal({
   className = "",
   maxWidth = "max-w-4xl",
 }: Props) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const handleEscape = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      onClose();
+    }
+  }, [onClose]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleEscape);
+    // Focus the close button when modal opens
+    closeButtonRef.current?.focus();
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [handleEscape]);
+
   return (
     <motion.div
+      ref={modalRef}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby={title ? "modal-title" : undefined}
       initial={{ opacity: 0, scale: 0.9, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -28,17 +50,18 @@ export default function Modal({
       className={`relative bg-white rounded-3xl shadow-2xl w-full ${maxWidth} max-h-[70vh] overflow-hidden flex flex-col ${className}`}
     >
       <button
+        ref={closeButtonRef}
         onClick={onClose}
         className="absolute top-6 right-6 z-10 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-colors duration-200"
-        aria-label="close"
+        aria-label="Close modal"
       >
-        <X className="w-5 h-5 text-gray-600" />
+        <X className="w-5 h-5 text-gray-600" aria-hidden="true" />
       </button>
 
       {/* Header: stays fixed and not part of the scrollable area */}
       {(title || subtitle) && (
         <div className="p-8 md:p-12">
-          {title && <h2 className="text-3xl font-light text-gray-800 mb-2">{title}</h2>}
+          {title && <h2 id="modal-title" className="text-3xl font-light text-gray-800 mb-2">{title}</h2>}
           {subtitle && <p className="text-gray-500">{subtitle}</p>}
         </div>
       )}
