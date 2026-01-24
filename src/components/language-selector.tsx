@@ -21,13 +21,17 @@ export default function LanguageSelector() {
   };
 
   return (
-    <nav className="absolute top-5 right-5 flex items-center gap-1 bg-gray-100 rounded-full p-1" role="navigation" aria-label="Language selection">
+    <nav
+      className="absolute top-5 right-5 flex items-center gap-1 bg-gray-100 rounded-full p-1"
+      role="navigation"
+      aria-label="Language selection"
+    >
       {languages.map((lang) => (
         <button
           key={lang.code}
           onClick={() => handleLanguageChange(lang.code)}
           aria-pressed={language === lang.code}
-          aria-label={`Switch to ${lang.code === 'ca' ? 'Catalan' : lang.code === 'es' ? 'Spanish' : 'English'}`}
+          aria-label={`Switch to ${lang.code === "ca" ? "Catalan" : lang.code === "es" ? "Spanish" : "English"}`}
           className={`px-2 py-1 rounded-full text-xs font-medium transition-all duration-200 ${
             language === lang.code
               ? "bg-[#2D4A6B] text-white shadow-sm"

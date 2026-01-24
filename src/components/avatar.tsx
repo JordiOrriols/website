@@ -20,12 +20,15 @@ export default function Avatar({
     }
   }, [onClickAvatar]);
 
-  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      handleOnClick();
-    }
-  }, [handleOnClick]);
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        handleOnClick();
+      }
+    },
+    [handleOnClick]
+  );
 
   return (
     <div

@@ -22,18 +22,21 @@ export default function Modal({
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleEscape = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
-  }, [onClose]);
+  const handleEscape = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    },
+    [onClose]
+  );
 
   useEffect(() => {
-    document.addEventListener('keydown', handleEscape);
+    document.addEventListener("keydown", handleEscape);
     // Focus the close button when modal opens
     closeButtonRef.current?.focus();
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [handleEscape]);
 
@@ -61,7 +64,11 @@ export default function Modal({
       {/* Header: stays fixed and not part of the scrollable area */}
       {(title || subtitle) && (
         <div className="p-8 md:p-12">
-          {title && <h2 id="modal-title" className="text-3xl font-light text-gray-800 mb-2">{title}</h2>}
+          {title && (
+            <h2 id="modal-title" className="text-3xl font-light text-gray-800 mb-2">
+              {title}
+            </h2>
+          )}
           {subtitle && <p className="text-gray-500">{subtitle}</p>}
         </div>
       )}

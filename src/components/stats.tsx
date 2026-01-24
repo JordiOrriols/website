@@ -12,7 +12,11 @@ interface Props {
 
 export default function Stats(props: Props) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-7" role="group" aria-label="Statistics">
+    <div
+      className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-7"
+      role="group"
+      aria-label="Statistics"
+    >
       {props.options.map((option) => (
         <motion.button
           key={option.label}
@@ -20,7 +24,7 @@ export default function Stats(props: Props) {
           whileHover={{ scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
           className="text-center cursor-pointer hover:bg-gray-100 rounded-xl p-4 transition-colors duration-200"
-          aria-label={`${option.label}: ${option.value}${option.unit ? ` ${option.unit}` : ''}`}
+          aria-label={`${option.label}: ${option.value}${option.unit ? ` ${option.unit}` : ""}`}
         >
           <div className="text-center">
             <div className="text-5xl font-extralight text-gray-800 mb-2">{option.value}</div>

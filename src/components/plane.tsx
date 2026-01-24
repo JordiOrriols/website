@@ -38,7 +38,7 @@ export default function PlaneController() {
     let isRunning = true;
     const animate = () => {
       if (!isRunning) return;
-      
+
       if (keyRef.current === "ArrowUp")
         velocityYRef.current = Math.max(velocityYRef.current - acceleration, -2);
       else if (keyRef.current === "ArrowDown")

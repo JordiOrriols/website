@@ -306,7 +306,11 @@ export default function Portfolio() {
 
   if (loading) {
     return (
-      <div className="min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]" role="status" aria-live="polite">
+      <div
+        className="min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]"
+        role="status"
+        aria-live="polite"
+      >
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" aria-hidden="true" />
           <p className="text-white text-lg">{t("loadingWeather")}</p>
@@ -416,7 +420,11 @@ export default function Portfolio() {
             muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
-          {muted ? <VolumeOff className="w-4 h-4" aria-hidden="true" /> : <Volume2 className="w-4 h-4" aria-hidden="true" />}
+          {muted ? (
+            <VolumeOff className="w-4 h-4" aria-hidden="true" />
+          ) : (
+            <Volume2 className="w-4 h-4" aria-hidden="true" />
+          )}
         </Button>
       </div>
 
