@@ -29,6 +29,10 @@ interface Translation {
   // Plane System
   planeActivated: string;
   planeControls: string;
+  enablePlane: string;
+  disablePlane: string;
+  enableSound: string;
+  disableSound: string;
   dangerousFlyingTitle: string;
   dangerousFlyingMessage: string;
   dangerousFlyingMessageNight: string;

@@ -1,5 +1,5 @@
 import type { SeasonType } from "@/pages/portfolio";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { trackAvatarClick } from "@/lib/analytics";
 
 export default function Avatar(props: {
@@ -9,13 +9,20 @@ export default function Avatar(props: {
   const [hover, setHover] = useState(false);
   const [clicked, setClicked] = useState(false);
 
-  const handleOnClick = () => {
+  const handleOnClick = useCallback(() => {
     setClicked(true);
     trackAvatarClick("toggle_special_events");
     if (props.onClickAvatar) {
       props.onClickAvatar();
     }
-  };
+  }, [props.onClickAvatar]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleOnClick();
+    }
+  }, [handleOnClick]);
 
   return (
     <div
@@ -26,6 +33,7 @@ export default function Avatar(props: {
         setClicked(false);
       }}
       onClick={handleOnClick}
+      onKeyDown={handleKeyDown}
     >
       <svg
         width="100%"

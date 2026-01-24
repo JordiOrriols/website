@@ -104,8 +104,6 @@ export default function Portfolio() {
       setLoading(true);
       const response = await fetchCurrentWeather(BARCELONA_LAT, BARCELONA_LON);
 
-      console.log("Weather response:", response);
-
       const selectedWeather = getWeatherMode(response.current_weather.weathercode);
 
       setCurrentWeather(selectedWeather);
@@ -136,19 +134,15 @@ export default function Portfolio() {
     if (hour >= startMorning && hour < endMorning) {
       setTimeOfDay("morning");
       setCurrentTimeOfDay("morning");
-      console.log("Setting time of day to morning");
     } else if (hour >= endMorning && hour < startAfternoon) {
       setTimeOfDay("day");
       setCurrentTimeOfDay("day");
-      console.log("Setting time of day to day");
     } else if (hour >= startAfternoon && hour < endAfternoon) {
       setTimeOfDay("afternoon");
       setCurrentTimeOfDay("afternoon");
-      console.log("Setting time of day to afternoon");
     } else {
       setTimeOfDay("night");
       setCurrentTimeOfDay("night");
-      console.log("Setting time of day to night");
     }
   };
 
@@ -312,9 +306,9 @@ export default function Portfolio() {
 
   if (loading) {
     return (
-      <div className="min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]">
+      <div className="min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]" role="status" aria-live="polite">
         <div className="text-center">
-          <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" />
+          <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" aria-hidden="true" />
           <p className="text-white text-lg">{t("loadingWeather")}</p>
         </div>
       </div>
@@ -330,7 +324,7 @@ export default function Portfolio() {
   const disabledDropdown = season === "newYear" || season === "halloween";
 
   return (
-    <div className="relative min-h-[100dvh] overflow-hidden">
+    <main className="relative min-h-[100dvh] overflow-hidden">
       {/* Dynamic Background */}
       <ErrorBoundary fallback={fallbackComponent}>{getBackgroundComponent()}</ErrorBoundary>
 
@@ -400,11 +394,13 @@ export default function Portfolio() {
       <div className="absolute bottom-4 right-16 z-30 hidden md:block">
         <Button
           onClick={handleShowPlane}
+          aria-label={showPlane ? t("disablePlane") : t("enablePlane")}
+          aria-pressed={showPlane}
           className={`${
             showPlane ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
-          <Plane className="w-4 h-4" />
+          <Plane className="w-4 h-4" aria-hidden="true" />
         </Button>
       </div>
 
@@ -414,11 +410,13 @@ export default function Portfolio() {
             toggleMute();
             trackAudioToggle(!muted);
           }}
+          aria-label={muted ? t("enableSound") : t("disableSound")}
+          aria-pressed={!muted}
           className={`${
             muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
-          {muted ? <VolumeOff className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+          {muted ? <VolumeOff className="w-4 h-4" aria-hidden="true" /> : <Volume2 className="w-4 h-4" aria-hidden="true" />}
         </Button>
       </div>
 
@@ -538,6 +536,6 @@ export default function Portfolio() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </main>
   );
 }

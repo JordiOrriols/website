@@ -12,7 +12,7 @@ interface Props {
 
 export default function Stats(props: Props) {
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-7">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 px-8 pb-7" role="group" aria-label="Statistics">
       {props.options.map((option) => (
         <motion.button
           key={option.label}

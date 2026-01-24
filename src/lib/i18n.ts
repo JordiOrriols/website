@@ -17,7 +17,7 @@ const options: InitOptions = {
   },
   lng: "en",
   fallbackLng: "en",
-  debug: true,
+  debug: false,
   interpolation: {
     escapeValue: false,
   },

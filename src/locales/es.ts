@@ -31,6 +31,10 @@ export const es: Locale = {
     // Plane System
     planeActivated: "¡Avión activado!",
     planeControls: "Usa ↑ ↓ para controlarlo",
+    enablePlane: "Activar modo avión",
+    disablePlane: "Desactivar modo avión",
+    enableSound: "Activar sonido",
+    disableSound: "Desactivar sonido",
     dangerousFlyingTitle: "¡Condiciones de Vuelo Peligrosas!",
     dangerousFlyingMessage:
       "Es demasiado peligroso volar con {}. ¿Quieres establecer automáticamente mejores condiciones para volar?",

@@ -10,6 +10,7 @@ export default function PlaneController() {
   const [showNotification, setShowNotification] = useState(true);
   const velocityYRef = useRef(0);
   const positionRef = useRef({ x: 100, y: 10 });
+  const animationIdRef = useRef<number | null>(null);
 
   const keyRef = useRef<string | null>(null);
   const allowedKeys = useMemo(() => ["ArrowUp", "ArrowDown"], []);
@@ -33,8 +34,11 @@ export default function PlaneController() {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
 
-    // Animation loop
+    // Animation loop with proper cleanup
+    let isRunning = true;
     const animate = () => {
+      if (!isRunning) return;
+      
       if (keyRef.current === "ArrowUp")
         velocityYRef.current = Math.max(velocityYRef.current - acceleration, -2);
       else if (keyRef.current === "ArrowDown")
@@ -61,15 +65,19 @@ export default function PlaneController() {
       // Damping for vertical movement
       velocityYRef.current *= 0.95;
 
-      requestAnimationFrame(animate);
+      animationIdRef.current = requestAnimationFrame(animate);
     };
 
-    const animationId = requestAnimationFrame(animate);
+    animationIdRef.current = requestAnimationFrame(animate);
 
     return () => {
+      isRunning = false;
       clearTimeout(timer);
       window.removeEventListener("keydown", handleKeyDown);
-      cancelAnimationFrame(animationId);
+      window.removeEventListener("keyup", handleKeyUp);
+      if (animationIdRef.current !== null) {
+        cancelAnimationFrame(animationIdRef.current);
+      }
     };
   }, [allowedKeys]);
 

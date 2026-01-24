@@ -37,7 +37,7 @@ describe("LanguageSelector Component", () => {
         <LanguageSelector />
       </I18nextProvider>
     );
-    const wrapper = container.querySelector("div");
+    const wrapper = container.querySelector("nav");
     expect(wrapper?.className).toContain("bg-gray-100");
     expect(wrapper?.className).toContain("rounded-full");
   });
@@ -48,7 +48,7 @@ describe("LanguageSelector Component", () => {
         <LanguageSelector />
       </I18nextProvider>
     );
-    const wrapper = container.querySelector("div");
+    const wrapper = container.querySelector("nav");
     expect(wrapper?.className).toContain("absolute");
     expect(wrapper?.className).toContain("top-5");
     expect(wrapper?.className).toContain("right-5");
