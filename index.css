@@ -129,7 +129,7 @@ body {
 
 /* Fill iOS safe areas and use dynamic viewport height */
 html {
-  background-color: #0b1a33; /* Default background for top overflow, dynamically updated by SafeAreaContainer */
+  background-color: #0b1a33; /* Top overflow color - visible during iOS bounce up */
   min-height: 100dvh;
   min-height: -webkit-fill-available;
   height: 100%;
@@ -140,11 +140,27 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #2b4c7e; /* Default background for bottom overflow, dynamically updated by SafeAreaContainer */
+  background-color: transparent;
   /* Use dvh when available, fallback to vh */
   min-height: 100dvh;
   min-height: -webkit-fill-available;
   height: 100%;
+  /* Prevent intentional overscroll but allow iOS rubber-band effect */
+  overscroll-behavior: none;
+}
+
+/* Bottom extension for iOS bounce scroll effect */
+/* Uses CSS variable set by SafeAreaContainer - visible only during rubber-band bounce down */
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 100dvh;
+  height: 500px;
+  background-color: var(--bottom-extension-color, #2b4c7e);
+  pointer-events: none;
+  z-index: -1;
 }
 
 #root {
@@ -168,20 +184,5 @@ body {
   position: relative;
   min-height: 100dvh;
   min-height: -webkit-fill-available;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Bottom extension for bounce scroll - uses CSS variable set by SafeAreaContainer */
-#root::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 500px;
-  background-color: var(--bottom-extension-color, #2b4c7e);
-  pointer-events: none;
-  margin-bottom: -500px; /* Prevent adding scroll height */
+  overflow: hidden;
 }
