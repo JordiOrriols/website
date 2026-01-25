@@ -43,6 +43,7 @@ export default function HomeSection(props: Props) {
       }}
       className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl w-full overflow-visible"
       style={{ transformStyle: "preserve-3d" }}
+      data-testid="home-section"
     >
       <div className="relative pt-20 px-8">
         {/* Avatar */}
@@ -57,9 +58,9 @@ export default function HomeSection(props: Props) {
 
         {/* Name and Title */}
         <div className="ml-4 mr-4 mb-4 flex justify-between items-start flex-wrap gap-4">
-          <div className="text-center w-full mt-5">
-            <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide">{t("name")}</h1>
-            <p className="text-gray-400 text-m tracking-wider">{t("title")}</p>
+          <div className="text-center w-full mt-5" data-testid="profile-info">
+            <h1 className="text-4xl font-light text-gray-800 mb-1 tracking-wide" data-testid="profile-name">{t("name")}</h1>
+            <p className="text-gray-400 text-m tracking-wider" data-testid="profile-title">{t("title")}</p>
           </div>
         </div>
       </div>

@@ -310,6 +310,7 @@ export default function Portfolio() {
         className="min-h-[100dvh] flex items-center justify-center bg-gradient-to-br from-[#4A6FA5] to-[#2D4A6B]"
         role="status"
         aria-live="polite"
+        data-testid="loading-screen"
       >
         <div className="text-center">
           <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" aria-hidden="true" />
@@ -328,7 +329,7 @@ export default function Portfolio() {
   const disabledDropdown = season === "newYear" || season === "halloween";
 
   return (
-    <main className="relative min-h-[100dvh] overflow-hidden">
+    <main className="relative min-h-[100dvh] overflow-hidden" data-testid="main-content">
       {/* Dynamic Background */}
       <ErrorBoundary fallback={fallbackComponent}>{getBackgroundComponent()}</ErrorBoundary>
 
