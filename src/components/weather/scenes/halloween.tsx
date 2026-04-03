@@ -25,11 +25,11 @@ export default function HalloweenScene() {
 
       <Ghosts max={6}></Ghosts>
 
-      {/* City Skyline */}
-      <CitySkyline fill={configHalloween.skyline} />
-
       {/* Stars */}
       <Stars max={50} />
+
+      {/* City Skyline */}
+      <CitySkyline fill={configHalloween.skyline} />
 
       {/* Logo */}
       <AppLogo />
