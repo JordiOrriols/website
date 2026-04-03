@@ -24,7 +24,7 @@ export default function ThunderstormScene(props: Props) {
       <Clouds maxNumber={50} maxSize={5} maxOpacity={0.03} />
 
       {/* City Skyline */}
-      <CitySkyline fill="#0F0D12" />
+      <CitySkyline fill="#0F0D12" backgroundFill="#3A444F" />
 
       {/* Rain */}
       <Rain timeOfDay={"night"} max={500} />

@@ -115,7 +115,7 @@ export default function DynamicScene(props: { weather: WeatherType; timeOfDay: T
       {/* Stars */}
       {props.timeOfDay === "night" ? <Stars max={props.weather === "clear" ? 150 : 50} /> : null}
       {/* City Skyline */}
-      <CitySkyline fill={config.skyline} />
+      <CitySkyline fill={config.skyline} backgroundFill={config.gradientColors[2]} />
       {/* Rain */}
       {props.weather === "rain" ? <Rain max={50} timeOfDay={props.timeOfDay} /> : null}
       {/* Logo */}

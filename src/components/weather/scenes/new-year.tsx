@@ -27,7 +27,7 @@ export default function NewYearScene(props: Props) {
       <Stars max={50} />
 
       {/* City Skyline */}
-      <CitySkyline fill={configClear.night.skyline} />
+      <CitySkyline fill={configClear.night.skyline} backgroundFill={configClear.night.gradientColors[2]} />
 
       {/* Logo */}
       <AppLogo />
