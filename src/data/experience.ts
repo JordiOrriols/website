@@ -27,7 +27,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
     description:
       "Leading the Mobile Team (React / React Native) responsible for PortAventura’s official app, ensuring top user experience, stability, and optimized purchase flows.",
     achievements: [
-      "Raised app store rating from ~2.0 → ~4.0 by tackling key UX pain points and iterating through data-driven releases.",
+      "Raised app store rating from ~2.0 → ~4.2 by tackling key UX pain points and iterating through data-driven releases.",
       "Introduced Feature Flags and continuous feedback loops to prioritize work by business impact.",
       "Aligned product and tech through measurable goals and reduced critical production issues.",
     ],

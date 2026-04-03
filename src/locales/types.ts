@@ -81,6 +81,19 @@ interface Translation {
   messageResponse: string;
 
   experienceTimeline: ExperienceEntry[];
+
+  // About Me Section
+  aboutMeLabel: string;
+  aboutMeTitle: string;
+  aboutMeDescription1: string;
+  aboutMeDescription2: string;
+  aboutMeLocation: string;
+  aboutMeHighlights: string[];
+
+  // Philosophy Section
+  philosophyLabel: string;
+  philosophyTitle: string;
+  philosophyPrinciples: { number: string; title: string; description: string }[];
 }
 
 import type { ResourceLanguage } from "i18next";

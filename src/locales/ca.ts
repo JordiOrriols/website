@@ -85,5 +85,30 @@ export const ca: Locale = {
     sending: "Enviant...",
     messageSent: "Missatge enviat!",
     messageResponse: "Et respondré tan aviat com sigui possible.",
+
+    // About Me Section
+    aboutMeLabel: "Sobre mi",
+    aboutMeTitle: "Construint experiències digitals que importen",
+    aboutMeDescription1: "Soc un Multimedia Engineering Lead a Barcelona, apassionat per crear productes digitals innovadors que combinen tecnologia d'avantguarda amb un disseny acurat.",
+    aboutMeDescription2: "Amb més de 12 anys d'experiència en la indústria, he liderat equips i projectes en diversos sectors, sempre enfocat a oferir experiències d'usuari excepcionals.",
+    aboutMeLocation: "Barcelona, Espanya",
+    aboutMeHighlights: [
+      "Multimedia Engineering Lead",
+      "Més de 12 anys d'experiència",
+      "Lideratge d'equips i mentoria",
+      "Desenvolupament full-stack",
+      "Mentalitat orientada al producte",
+    ],
+
+    // Philosophy Section
+    philosophyLabel: "Filosofia",
+    philosophyTitle: "Principis que guien el meu treball",
+    philosophyPrinciples: [
+      { number: "01", title: "L'usuari primer", description: "Cada decisió comença amb l'usuari. La tecnologia ha de servir les persones, no al revés." },
+      { number: "02", title: "Simplicitat", description: "Les millors solucions són les més simples. La complexitat és fàcil; la simplicitat requereix comprensió profunda." },
+      { number: "03", title: "Artesania", description: "La qualitat no és negociable. Cada línia de codi, cada píxel, cada interacció importa." },
+      { number: "04", title: "Aprenentatge continu", description: "La tecnologia evoluciona ràpid. Mantenir-se curiós i adaptable és clau per construir el que ve." },
+      { number: "05", title: "Col·laboració", description: "Els grans productes els construeixen grans equips. La comunicació oberta i la propietat compartida generen resultats." },
+    ],
   },
 };

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
-import type { ExperienceEntry } from "@/data/experience";
 import {
   Dialog,
   DialogContent,
@@ -14,15 +13,13 @@ import {
 
 import DynamicScene from "../components/weather/scenes/dynamic";
 import ThunderstormScene from "../components/weather/scenes/thunderstorm";
-import ContactForm from "../components/sections/contact-form";
 import Dropdown from "../components/dropdown";
 import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
 import PlaneController from "@/components/plane";
-import ProjectsGallery from "@/components/sections/projects";
-import Gallery from "@/components/sections/gallery";
-import WorkTimeline from "@/components/sections/experience";
-import { companiesGallery } from "@/data/companies";
-import HomeSection from "@/components/sections/home";
+import ScrollCards from "@/components/scroll-cards";
+import ProfileCard from "@/components/sections/profile-card";
+import AboutMe from "@/components/sections/about-me";
+import Philosophy from "@/components/sections/philosophy";
 import { useTranslation } from "react-i18next";
 import { useAmbientAudio } from "@/lib/ambient";
 import { ErrorBoundary } from "react-error-boundary";
@@ -32,8 +29,6 @@ import {
   trackWeatherChange,
   trackTimeOfDayChange,
   trackSeasonChange,
-  trackStatClick,
-  trackModalAction,
   trackPlaneToggle,
   trackAudioToggle,
   trackSpecialEventsToggle,
@@ -77,7 +72,6 @@ export default function Portfolio() {
   const [sunset, setSunset] = useState<string | null>(null);
 
   const [loading, setLoading] = useState(true);
-  const [activeModal, setActiveModal] = useState<SectionsType | null>(null);
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
   const [showFlightSafetyDialog, setShowFlightSafetyDialog] = useState(false);
@@ -234,20 +228,7 @@ export default function Portfolio() {
     return <DynamicScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
-  const handleStatClick = (statType: SectionsType) => {
-    setActiveModal(statType);
-    playClick();
-    trackStatClick(statType);
-    trackModalAction("open", statType);
-  };
 
-  const closeModal = () => {
-    if (activeModal) {
-      trackModalAction("close", activeModal);
-    }
-    setActiveModal(null);
-    playClick();
-  };
 
   const handleShowPlane = () => {
     const newShowPlane = !showPlane;
@@ -302,8 +283,6 @@ export default function Portfolio() {
     setShowFlightSafetyDialog(false);
   };
 
-  const isModalOpen = activeModal !== null;
-
   if (loading) {
     return (
       <div
@@ -319,10 +298,6 @@ export default function Portfolio() {
       </div>
     );
   }
-
-  const experienceTimeline = t("experienceTimeline", {
-    returnObjects: true,
-  }) as unknown as ExperienceEntry[];
 
   const fallbackComponent = null;
 
@@ -430,95 +405,34 @@ export default function Portfolio() {
       </div>
 
       {/* Cards Container */}
-      <div className="relative z-20 flex items-center justify-center min-h-[100dvh] px-4 py-12">
-        <div className="relative w-full max-w-3xl" style={{ perspective: "1000px" }}>
-          <ErrorBoundary fallback={fallbackComponent}>
-            <HomeSection
-              season={season}
-              showPlane={showPlane}
-              isModalOpen={isModalOpen}
-              handleStatClick={handleStatClick}
-              onClickAvatar={() => {
-                const newState = !activeSpecialEvents;
-                setActiveSpecialEvents(newState);
-                trackSpecialEventsToggle(newState);
-              }}
-            />
-          </ErrorBoundary>
-
-          {/* Modals */}
-          <AnimatePresence>
-            {activeModal === "contact" && (
-              <ErrorBoundary fallback={fallbackComponent}>
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <ContactForm onClose={closeModal} />
-                </div>
-              </ErrorBoundary>
-            )}
-
-            {activeModal === "projects" && (
-              <ErrorBoundary fallback={fallbackComponent}>
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <ProjectsGallery title={""} subtitle={""} onClose={closeModal} />
-                </div>
-              </ErrorBoundary>
-            )}
-
-            {activeModal === "companies" && (
-              <ErrorBoundary fallback={fallbackComponent}>
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <Gallery
-                    title={t("companiesTitle")}
-                    subtitle={t("companiesSubtitle")}
-                    options={companiesGallery}
-                    onClose={closeModal}
-                  />
-                </div>
-              </ErrorBoundary>
-            )}
-
-            {activeModal === "leading_years" && (
-              <ErrorBoundary fallback={fallbackComponent}>
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <Gallery
-                    title={""}
-                    subtitle={""}
-                    options={companiesGallery}
-                    onClose={closeModal}
-                  />
-                </div>
-              </ErrorBoundary>
-            )}
-
-            {activeModal === "experience_years" && (
-              <ErrorBoundary fallback={fallbackComponent}>
-                <div
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  <WorkTimeline
-                    title={t("workTimelineTitle")}
-                    subtitle={t("workTimelineSubtitle")}
-                    options={experienceTimeline}
-                    onClose={closeModal}
-                  />
-                </div>
-              </ErrorBoundary>
-            )}
-          </AnimatePresence>
-        </div>
+      <div className="relative z-20">
+        <ScrollCards
+          cards={[
+            {
+              key: "profile",
+              component: (
+                <ProfileCard
+                  season={season}
+                  showPlane={showPlane}
+                  playClick={playClick}
+                  onClickAvatar={() => {
+                    const newState = !activeSpecialEvents;
+                    setActiveSpecialEvents(newState);
+                    trackSpecialEventsToggle(newState);
+                  }}
+                />
+              ),
+            },
+            {
+              key: "about-me",
+              component: <AboutMe />,
+            },
+            {
+              key: "philosophy",
+              component: <Philosophy />,
+            },
+          ]}
+        />
       </div>
 
       {/* Flight Safety Confirmation Dialog */}

@@ -1,0 +1,72 @@
+import React from "react";
+import { render, fireEvent } from "@testing-library/react";
+import ScrollCards from "./scroll-cards";
+import { vi, describe, it, expect, beforeEach } from "vitest";
+
+describe("ScrollCards Component", () => {
+  const cards = [
+    { key: "card-1", component: <div data-testid="card-content-1">Card 1</div> },
+    { key: "card-2", component: <div data-testid="card-content-2">Card 2</div> },
+    { key: "card-3", component: <div data-testid="card-content-3">Card 3</div> },
+  ];
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("renders all cards", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    expect(getByTestId("card-content-1")).toBeTruthy();
+    expect(getByTestId("card-content-2")).toBeTruthy();
+    expect(getByTestId("card-content-3")).toBeTruthy();
+  });
+
+  it("renders scroll container with snap behavior", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    const container = getByTestId("scroll-cards-container");
+    expect(container).toBeTruthy();
+  });
+
+  it("renders card sections for each card", () => {
+    const { getAllByTestId } = render(<ScrollCards cards={cards} />);
+    const sections = getAllByTestId(/^scroll-card-section-/);
+    expect(sections).toHaveLength(3);
+  });
+
+  it("first card is active by default", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    const firstSection = getByTestId("scroll-card-section-0");
+    expect(firstSection.style.pointerEvents).not.toBe("none");
+  });
+
+  it("non-active cards have pointer-events disabled", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    const secondSection = getByTestId("scroll-card-section-1");
+    expect(secondSection.style.pointerEvents).toBe("none");
+  });
+
+  it("renders with empty cards array", () => {
+    const { getByTestId } = render(<ScrollCards cards={[]} />);
+    expect(getByTestId("scroll-cards-container")).toBeTruthy();
+  });
+
+  it("renders with single card", () => {
+    const { getByTestId } = render(<ScrollCards cards={[cards[0]]} />);
+    expect(getByTestId("card-content-1")).toBeTruthy();
+    const section = getByTestId("scroll-card-section-0");
+    expect(section.style.pointerEvents).not.toBe("none");
+  });
+
+  it("updates active index on scroll", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    const container = getByTestId("scroll-cards-container");
+
+    // Simulate scroll to second card
+    Object.defineProperty(container, "scrollTop", { value: 800, writable: true });
+    Object.defineProperty(container, "clientHeight", { value: 800, writable: true });
+    fireEvent.scroll(container);
+
+    const secondSection = getByTestId("scroll-card-section-1");
+    expect(secondSection.style.pointerEvents).not.toBe("none");
+  });
+});

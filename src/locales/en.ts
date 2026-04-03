@@ -85,5 +85,28 @@ export const en: Locale = {
     sending: "Sending...",
     messageSent: "Message sent!",
     messageResponse: "I’ll reply as soon as possible.",
-  },
+    // About Me Section
+    aboutMeLabel: "About Me",
+    aboutMeTitle: "Building digital experiences that matter",
+    aboutMeDescription1: "I'm a Multimedia Engineering Lead based in Barcelona, passionate about creating innovative digital products that combine cutting-edge technology with thoughtful design.",
+    aboutMeDescription2: "With over 12 years of experience in the industry, I've led teams and projects across multiple sectors, always focusing on delivering exceptional user experiences.",
+    aboutMeLocation: "Barcelona, Spain",
+    aboutMeHighlights: [
+      "Multimedia Engineering Lead",
+      "12+ years of experience",
+      "Team leadership & mentoring",
+      "Full-stack development",
+      "Product-driven mindset",
+    ],
+
+    // Philosophy Section
+    philosophyLabel: "Philosophy",
+    philosophyTitle: "Principles that guide my work",
+    philosophyPrinciples: [
+      { number: "01", title: "User First", description: "Every decision starts with the user. Technology should serve people, not the other way around." },
+      { number: "02", title: "Simplicity", description: "The best solutions are the simplest ones. Complexity is easy; simplicity requires deep understanding." },
+      { number: "03", title: "Craftsmanship", description: "Quality is not negotiable. Every line of code, every pixel, every interaction matters." },
+      { number: "04", title: "Continuous Learning", description: "Technology evolves fast. Staying curious and adaptable is key to building what's next." },
+      { number: "05", title: "Collaboration", description: "Great products are built by great teams. Open communication and shared ownership drive results." },
+    ],  },
 };

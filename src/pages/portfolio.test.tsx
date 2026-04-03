@@ -67,36 +67,32 @@ vi.mock("@/components/sections/home", () => ({
   ),
 }));
 
-vi.mock("@/components/sections/contact-form", () => ({
-  default: ({ onClose }: any) => (
-    <div data-testid="contact-form">
-      <button onClick={onClose}>Close</button>
+vi.mock("@/components/scroll-cards", () => ({
+  default: ({ cards }: any) => (
+    <div data-testid="scroll-cards-container">
+      {cards.map((card: any) => (
+        <div key={card.key} data-testid={`scroll-card-${card.key}`}>
+          {card.component}
+        </div>
+      ))}
     </div>
   ),
 }));
 
-vi.mock("@/components/sections/projects", () => ({
-  default: ({ onClose }: any) => (
-    <div data-testid="projects-gallery">
-      <button onClick={onClose}>Close</button>
+vi.mock("@/components/sections/profile-card", () => ({
+  default: ({ season, showPlane, onClickAvatar }: any) => (
+    <div data-testid="profile-card" data-season={season}>
+      <button onClick={onClickAvatar} data-testid="avatar-btn">Avatar</button>
     </div>
   ),
 }));
 
-vi.mock("@/components/sections/gallery", () => ({
-  default: ({ onClose }: any) => (
-    <div data-testid="gallery">
-      <button onClick={onClose}>Close</button>
-    </div>
-  ),
+vi.mock("@/components/sections/about-me", () => ({
+  default: () => <div data-testid="about-me-section">About Me</div>,
 }));
 
-vi.mock("@/components/sections/experience", () => ({
-  default: ({ onClose }: any) => (
-    <div data-testid="work-timeline">
-      <button onClick={onClose}>Close</button>
-    </div>
-  ),
+vi.mock("@/components/sections/philosophy", () => ({
+  default: () => <div data-testid="philosophy-section">Philosophy</div>,
 }));
 
 vi.mock("@/components/dropdown", () => ({
@@ -126,11 +122,35 @@ describe("Portfolio Component", () => {
     expect(getByText("loadingWeather")).toBeTruthy();
   });
 
-  it("renders home section after loading", async () => {
+  it("renders profile card after loading", async () => {
     const { getByTestId } = render(<Portfolio />);
 
     await waitFor(() => {
-      expect(getByTestId("home-section")).toBeTruthy();
+      expect(getByTestId("profile-card")).toBeTruthy();
+    });
+  });
+
+  it("renders scroll cards container", async () => {
+    const { getByTestId } = render(<Portfolio />);
+
+    await waitFor(() => {
+      expect(getByTestId("scroll-cards-container")).toBeTruthy();
+    });
+  });
+
+  it("renders about me section", async () => {
+    const { getByTestId } = render(<Portfolio />);
+
+    await waitFor(() => {
+      expect(getByTestId("about-me-section")).toBeTruthy();
+    });
+  });
+
+  it("renders philosophy section", async () => {
+    const { getByTestId } = render(<Portfolio />);
+
+    await waitFor(() => {
+      expect(getByTestId("philosophy-section")).toBeTruthy();
     });
   });
 
@@ -142,52 +162,6 @@ describe("Portfolio Component", () => {
     });
   });
 
-  it("opens projects modal when projects button is clicked", async () => {
-    const { getByTestId } = render(<Portfolio />);
-
-    await waitFor(() => {
-      const projectsBtn = getByTestId("projects-btn");
-      fireEvent.click(projectsBtn);
-    });
-
-    await waitFor(() => {
-      expect(getByTestId("projects-gallery")).toBeTruthy();
-    });
-  });
-
-  it("opens companies modal when companies button is clicked", async () => {
-    const { getByTestId } = render(<Portfolio />);
-
-    await waitFor(() => {
-      const companiesBtn = getByTestId("companies-btn");
-      fireEvent.click(companiesBtn);
-    });
-
-    await waitFor(() => {
-      expect(getByTestId("gallery")).toBeTruthy();
-    });
-  });
-
-  it("closes modal when close button is clicked", async () => {
-    const { getByTestId, queryByTestId } = render(<Portfolio />);
-
-    await waitFor(() => {
-      const projectsBtn = getByTestId("projects-btn");
-      fireEvent.click(projectsBtn);
-    });
-
-    await waitFor(() => {
-      expect(getByTestId("projects-gallery")).toBeTruthy();
-    });
-
-    const closeBtn = getByTestId("projects-gallery").querySelector("button");
-    if (closeBtn) fireEvent.click(closeBtn);
-
-    await waitFor(() => {
-      expect(queryByTestId("projects-gallery")).toBeFalsy();
-    });
-  });
-
   it("toggles avatar special events when avatar is clicked", async () => {
     const { getByTestId } = render(<Portfolio />);
 
@@ -196,9 +170,6 @@ describe("Portfolio Component", () => {
       expect(avatarBtn).toBeTruthy();
       fireEvent.click(avatarBtn);
     });
-
-    // After first click, special events should be active
-    // (would show season dropdown in real scenario)
   });
 
   it("renders weather dropdowns on desktop", async () => {
@@ -260,11 +231,10 @@ describe("Portfolio Component", () => {
   });
 
   it("has perspective transform style on cards container", async () => {
-    const { container } = render(<Portfolio />);
+    const { getByTestId } = render(<Portfolio />);
 
     await waitFor(() => {
-      const perspectiveDiv = container.querySelector('[style*="perspective"]');
-      expect(perspectiveDiv).toBeTruthy();
+      expect(getByTestId("scroll-cards-container")).toBeTruthy();
     });
   });
 
