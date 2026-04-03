@@ -1,0 +1,11 @@
+schema: spec-driven
+
+context: |
+  Tech stack: React 19, TypeScript, Vite 7, Tailwind CSS 4, Framer Motion
+  Testing: Vitest + @testing-library/react (80% coverage target)
+  Domain: Personal portfolio website for Jordi Orriols (Multimedia Engineering Lead)
+  Features: Dynamic weather system, time-of-day themes, seasonal events, i18n (EN/ES/CA),
+    ambient audio (Howler.js), interactive plane mode, Umami analytics
+  External APIs: Open-Meteo (weather), Umami (analytics)
+  Standards: TDD, full type safety, English-only code, incremental changes
+  UI: Radix UI primitives, CVA for variants, Lucide icons
