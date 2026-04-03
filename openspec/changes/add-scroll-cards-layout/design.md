@@ -9,7 +9,9 @@ AboutMe and Philosophy follow the established card pattern: `bg-white/95 backdro
 ## Architecture Decisions
 
 ### Decision: ProfileCard Encapsulates Modal Logic
+
 Extracting HomeSection + all modals + activeModal state into a self-contained ProfileCard:
+
 - Portfolio.tsx is currently ~560 lines; this extracts ~100 lines of modal rendering
 - ProfileCard owns its own `activeModal` state, `handleStatClick`, `closeModal`
 - Receives only what it can't own: `season`, `showPlane`, `playClick`, `onClickAvatar`
@@ -17,20 +19,26 @@ Extracting HomeSection + all modals + activeModal state into a self-contained Pr
 - HomeSection remains untouched — ProfileCard wraps it
 
 ### Decision: ScrollCards as a Generic Container
+
 Using a generic container accepting `{ key: string; component: ReactNode }[]`:
+
 - New cards added by pushing to the array
 - No coupling between container and content
 - Follows existing declarative composition pattern
 
 ### Decision: Scroll-Snap Over Virtual Scroll
+
 Using CSS `scroll-snap-type: y mandatory` with `scroll-snap-align: start`:
+
 - Native browser behavior, performant
 - Works with Framer Motion animations
 - No library dependency needed
 - Accessible with keyboard and touch
 
 ### Decision: Translation Keys Over Hardcoded Text
+
 All text uses i18n translation keys:
+
 - Project supports EN, ES, CA via i18next
 - Follows existing `t("key")` pattern
 - Arrays accessed via `returnObjects: true`
@@ -47,17 +55,20 @@ ScrollCards (scroll container, manages activeIndex)
 ```
 
 ProfileCard receives from portfolio.tsx:
+
 - `season`, `showPlane` (for HomeSection/Avatar)
 - `playClick` (for sound on stat/modal clicks)
 - `onClickAvatar` (for special events toggle)
 
 ProfileCard owns internally:
+
 - `activeModal` state
 - `handleStatClick()`, `closeModal()`
 - `experienceTimeline` from translations
 - All modal rendering (ContactForm, ProjectsGallery, Gallery, WorkTimeline)
 
 CardSection animation states:
+
 - Active card: opacity 1, scale 1, y 0
 - Above card: opacity 0, scale 0.9, y -40
 - Below card: opacity 0.4, scale 0.96, y 40
@@ -65,6 +76,7 @@ CardSection animation states:
 ## File Changes
 
 ### New files:
+
 - `src/components/sections/profile-card.tsx` — ProfileCard wrapping HomeSection + modals + modal state
 - `src/components/sections/profile-card.test.tsx` — Tests for ProfileCard
 - `src/components/scroll-cards.tsx` — Generic scroll-snapped card stack container
@@ -75,6 +87,7 @@ CardSection animation states:
 - `src/components/sections/philosophy.test.tsx` — Tests for Philosophy
 
 ### Modified files:
+
 - `src/pages/portfolio.tsx` — Remove modal rendering, replace centered layout with ScrollCards
 - `src/locales/types.ts` — Add new Translation keys
 - `src/locales/en.ts` — English translations

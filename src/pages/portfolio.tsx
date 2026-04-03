@@ -228,8 +228,6 @@ export default function Portfolio() {
     return <DynamicScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
-
-
   const handleShowPlane = () => {
     const newShowPlane = !showPlane;
 

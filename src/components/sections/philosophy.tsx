@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import Card from "@/components/ui/card";
 
 interface Principle {
   number: string;
@@ -14,10 +15,7 @@ export default function Philosophy() {
   const principles = t("philosophyPrinciples", { returnObjects: true }) as Principle[];
 
   return (
-    <div
-      className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl w-full overflow-hidden"
-      data-testid="philosophy-section"
-    >
+    <Card data-testid="philosophy-section">
       <div className="p-8 md:p-12">
         <span className="text-sm font-semibold tracking-widest text-[#4A6FA5] uppercase">
           {t("philosophyLabel")}
@@ -57,6 +55,6 @@ export default function Philosophy() {
           ))}
         </motion.div>
       </div>
-    </div>
+    </Card>
   );
 }

@@ -2,6 +2,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { MapPin, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import Card from "@/components/ui/card";
+import ImageWithFallback from "@/components/ui/image-with-fallback";
 
 export default function AboutMe() {
   const { t } = useTranslation();
@@ -9,10 +11,7 @@ export default function AboutMe() {
   const highlights = t("aboutMeHighlights", { returnObjects: true }) as string[];
 
   return (
-    <div
-      className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl w-full overflow-hidden"
-      data-testid="about-me-section"
-    >
+    <Card data-testid="about-me-section">
       <div className="p-8 md:p-12">
         <span className="text-sm font-semibold tracking-widest text-[#4A6FA5] uppercase">
           {t("aboutMeLabel")}
@@ -23,8 +22,8 @@ export default function AboutMe() {
 
         <div className="flex flex-col md:flex-row gap-8 items-start">
           <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-lg shrink-0 mx-auto md:mx-0">
-            <img
-              src="/avatar.webp"
+            <ImageWithFallback
+              src="/images/image.jpeg"
               alt={t("aboutMeLabel")}
               className="w-full h-full object-cover"
               data-testid="about-me-photo"
@@ -72,6 +71,6 @@ export default function AboutMe() {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

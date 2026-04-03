@@ -17,13 +17,30 @@ vi.mock("react-i18next", () => ({
 // Mock HomeSection
 vi.mock("@/components/sections/home", () => ({
   default: ({ season, showPlane, isModalOpen, handleStatClick, onClickAvatar }: any) => (
-    <div data-testid="home-section" data-season={season} data-show-plane={showPlane} data-modal-open={isModalOpen}>
-      <button onClick={() => handleStatClick?.("companies")} data-testid="stat-companies">Companies</button>
-      <button onClick={() => handleStatClick?.("experience_years")} data-testid="stat-experience">Experience</button>
-      <button onClick={() => handleStatClick?.("projects")} data-testid="stat-projects">Projects</button>
-      <button onClick={() => handleStatClick?.("leading_years")} data-testid="stat-leading">Leading</button>
-      <button onClick={() => handleStatClick?.("contact")} data-testid="stat-contact">Contact</button>
-      <button onClick={onClickAvatar} data-testid="avatar-btn">Avatar</button>
+    <div
+      data-testid="home-section"
+      data-season={season}
+      data-show-plane={showPlane}
+      data-modal-open={isModalOpen}
+    >
+      <button onClick={() => handleStatClick?.("companies")} data-testid="stat-companies">
+        Companies
+      </button>
+      <button onClick={() => handleStatClick?.("experience_years")} data-testid="stat-experience">
+        Experience
+      </button>
+      <button onClick={() => handleStatClick?.("projects")} data-testid="stat-projects">
+        Projects
+      </button>
+      <button onClick={() => handleStatClick?.("leading_years")} data-testid="stat-leading">
+        Leading
+      </button>
+      <button onClick={() => handleStatClick?.("contact")} data-testid="stat-contact">
+        Contact
+      </button>
+      <button onClick={onClickAvatar} data-testid="avatar-btn">
+        Avatar
+      </button>
     </div>
   ),
 }));
@@ -32,7 +49,9 @@ vi.mock("@/components/sections/home", () => ({
 vi.mock("@/components/sections/contact-form", () => ({
   default: ({ onClose }: any) => (
     <div data-testid="contact-form">
-      <button onClick={onClose} data-testid="close-contact">Close</button>
+      <button onClick={onClose} data-testid="close-contact">
+        Close
+      </button>
     </div>
   ),
 }));
@@ -41,7 +60,9 @@ vi.mock("@/components/sections/contact-form", () => ({
 vi.mock("@/components/sections/projects", () => ({
   default: ({ onClose }: any) => (
     <div data-testid="projects-gallery">
-      <button onClick={onClose} data-testid="close-projects">Close</button>
+      <button onClick={onClose} data-testid="close-projects">
+        Close
+      </button>
     </div>
   ),
 }));
@@ -50,7 +71,9 @@ vi.mock("@/components/sections/projects", () => ({
 vi.mock("@/components/sections/gallery", () => ({
   default: ({ onClose, title }: any) => (
     <div data-testid="gallery" data-title={title}>
-      <button onClick={onClose} data-testid="close-gallery">Close</button>
+      <button onClick={onClose} data-testid="close-gallery">
+        Close
+      </button>
     </div>
   ),
 }));
@@ -59,7 +82,9 @@ vi.mock("@/components/sections/gallery", () => ({
 vi.mock("@/components/sections/experience", () => ({
   default: ({ onClose }: any) => (
     <div data-testid="work-timeline">
-      <button onClick={onClose} data-testid="close-timeline">Close</button>
+      <button onClick={onClose} data-testid="close-timeline">
+        Close
+      </button>
     </div>
   ),
 }));
@@ -164,7 +189,9 @@ describe("ProfileCard Component", () => {
 
   it("closes modal and plays click sound", () => {
     const playClick = vi.fn();
-    const { getByTestId, queryByTestId } = render(<ProfileCard {...defaultProps} playClick={playClick} />);
+    const { getByTestId, queryByTestId } = render(
+      <ProfileCard {...defaultProps} playClick={playClick} />
+    );
     fireEvent.click(getByTestId("stat-companies"));
     playClick.mockClear();
     fireEvent.click(getByTestId("close-gallery"));

@@ -7,6 +7,7 @@ Add a vertical scroll-snapped card stack layout to the portfolio page, replacing
 ## Scope
 
 In scope:
+
 - New `ProfileCard` component extracting HomeSection + all its modals (companies gallery, experience timeline, projects gallery, contact form) + modal state management + click handling into a self-contained card
 - New `ScrollCards` container component with scroll-snap vertical card stack behavior
 - New `AboutMe` section component with profile photo, bio text, location, and highlights
@@ -18,6 +19,7 @@ In scope:
 - Accessibility: semantic HTML, aria attributes
 
 Out of scope:
+
 - Changes to weather, time-of-day, season, or audio systems
 - Backend/API changes
 - Mobile-specific scroll behavior optimizations beyond basic responsiveness

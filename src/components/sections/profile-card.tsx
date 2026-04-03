@@ -19,7 +19,12 @@ interface ProfileCardProps {
   onClickAvatar: () => void;
 }
 
-export default function ProfileCard({ season, showPlane, playClick, onClickAvatar }: ProfileCardProps) {
+export default function ProfileCard({
+  season,
+  showPlane,
+  playClick,
+  onClickAvatar,
+}: ProfileCardProps) {
   const { t } = useTranslation();
   const [activeModal, setActiveModal] = useState<SectionsType | null>(null);
 
@@ -103,12 +108,7 @@ export default function ProfileCard({ season, showPlane, playClick, onClickAvata
               className="absolute inset-0 flex items-center justify-center"
               style={{ transformStyle: "preserve-3d" }}
             >
-              <Gallery
-                title={""}
-                subtitle={""}
-                options={companiesGallery}
-                onClose={closeModal}
-              />
+              <Gallery title={""} subtitle={""} options={companiesGallery} onClose={closeModal} />
             </div>
           </ErrorBoundary>
         )}

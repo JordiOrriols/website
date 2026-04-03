@@ -82,7 +82,9 @@ vi.mock("@/components/scroll-cards", () => ({
 vi.mock("@/components/sections/profile-card", () => ({
   default: ({ season, showPlane, onClickAvatar }: any) => (
     <div data-testid="profile-card" data-season={season}>
-      <button onClick={onClickAvatar} data-testid="avatar-btn">Avatar</button>
+      <button onClick={onClickAvatar} data-testid="avatar-btn">
+        Avatar
+      </button>
     </div>
   ),
 }));
