@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import Portfolio from "./portfolio";
 
 const routesMocks = vi.hoisted(() => ({
-  parsePortfolioPath: vi.fn(() => ({ locale: "en", section: "notes", slug: "shipping-under-pressure" })),
+  parsePortfolioPath: vi.fn(() => ({ locale: "en", section: "profile", slug: undefined })),
   isSupportedSection: vi.fn(() => true),
   normalizeLocale: vi.fn(() => "en"),
   buildPortfolioPath: vi.fn((locale: string, section: string, slug?: string) =>
@@ -55,7 +55,7 @@ vi.mock("@/lib/motion", () => ({
 
 function MockScrollCards({ onActiveCardChange }: { onActiveCardChange?: (cardKey: string) => void }) {
   useEffect(() => {
-    onActiveCardChange?.("notes");
+    onActiveCardChange?.("profile");
   }, [onActiveCardChange]);
 
   return <div data-testid="scroll-cards-container">Scroll Cards</div>;
@@ -124,8 +124,8 @@ describe("Portfolio routing stability", () => {
     await waitFor(() => {
       expect(routesMocks.replacePortfolioRoute).toHaveBeenCalledWith(
         "en",
-        "notes",
-        "shipping-under-pressure"
+        "profile",
+        undefined
       );
     });
   });

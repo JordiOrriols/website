@@ -19,12 +19,14 @@ export default function AnalyticsConsent() {
   };
 
   if (consent !== null && !isPreferencesOpen) {
+    const isGranted = consent === "granted";
+
     return (
       <div className="fixed bottom-4 left-4 z-30">
         <Button
           type="button"
-          variant="outline"
-          className="min-h-11 bg-white/95"
+          variant={isGranted ? "default" : "outline"}
+          className={`min-h-11 ${isGranted ? "bg-[#2D4A6B] text-white hover:bg-[#1F3447]" : "bg-white/95"}`}
           onClick={() => setIsPreferencesOpen(true)}
         >
           {t("analyticsConsentManage")}
@@ -50,7 +52,7 @@ export default function AnalyticsConsent() {
             <Button
               type="button"
               variant="outline"
-              className="min-h-11"
+              className="min-h-11 bg-white/95"
               onClick={() => applyConsent("denied")}
             >
               {t("analyticsConsentDecline")}

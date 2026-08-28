@@ -221,11 +221,11 @@ export const ca: Locale = {
     ],
 
     // Analytics Consent
-    analyticsConsentTitle: "Preferencies d'analitica",
+    analyticsConsentTitle: "Privacitat",
     analyticsConsentDescription:
       "Permet analitica anonima per entendre quines seccions veuen i obren els visitants.",
-    analyticsConsentAccept: "Permetre analitica",
-    analyticsConsentDecline: "Rebutjar analitica",
+    analyticsConsentAccept: "Permetre",
+    analyticsConsentDecline: "Rebutjar",
     analyticsConsentManage: "Privacitat",
   },
 };

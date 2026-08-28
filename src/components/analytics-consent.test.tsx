@@ -7,12 +7,12 @@ vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string) => {
       const textMap: Record<string, string> = {
-        analyticsConsentTitle: "Analytics preferences",
+        analyticsConsentTitle: "Privacy",
         analyticsConsentDescription:
           "Allow anonymous analytics to understand which sections people view and open.",
-        analyticsConsentAccept: "Allow analytics",
-        analyticsConsentDecline: "Decline analytics",
-        analyticsConsentManage: "Privacy settings",
+        analyticsConsentAccept: "Allow",
+        analyticsConsentDecline: "Decline",
+        analyticsConsentManage: "Privacy",
       };
 
       return textMap[key] ?? key;
@@ -38,9 +38,9 @@ describe("AnalyticsConsent", () => {
 
     render(<AnalyticsConsent />);
 
-    expect(screen.getByText("Analytics preferences")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Allow analytics" })).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: "Decline analytics" })).toBeInTheDocument();
+    expect(screen.getByText("Privacy")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Allow" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Decline" })).toBeInTheDocument();
   });
 
   it("accepts analytics and stores consent", () => {
@@ -48,7 +48,7 @@ describe("AnalyticsConsent", () => {
 
     render(<AnalyticsConsent />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Allow analytics" }));
+    fireEvent.click(screen.getByRole("button", { name: "Allow" }));
 
     expect(analyticsMocks.setAnalyticsConsent).toHaveBeenCalledWith("granted");
     expect(analyticsMocks.trackConsentDecision).toHaveBeenCalledWith("granted");
@@ -59,6 +59,6 @@ describe("AnalyticsConsent", () => {
 
     render(<AnalyticsConsent />);
 
-    expect(screen.getByRole("button", { name: "Privacy settings" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Privacy" })).toBeInTheDocument();
   });
 });

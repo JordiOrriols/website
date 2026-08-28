@@ -20,8 +20,6 @@ import ScrollCards from "@/components/scroll-cards";
 import ProfileCard from "@/components/sections/profile-card";
 import AboutMe from "@/components/sections/about-me";
 import Philosophy from "@/components/sections/philosophy";
-import NotesSection from "@/components/sections/notes";
-import SideProjectsSection from "@/components/sections/side-projects";
 import { useTranslation } from "react-i18next";
 import { useAmbientAudio } from "@/lib/ambient";
 import { ErrorBoundary } from "react-error-boundary";
@@ -65,10 +63,15 @@ export type SectionsType =
   | "experience_years"
   | "contact";
 
+const isTemporarilyHiddenSection = (section: string | null | undefined) =>
+  section === "notes" || section === "side-projects";
+
 export default function Portfolio() {
   const { t, i18n } = useTranslation();
   const initialRoute = parsePortfolioPath(typeof window !== "undefined" ? window.location.pathname : "/");
-  const initialSection = isSupportedSection(initialRoute.section) ? initialRoute.section : "profile";
+  const initialSection = isSupportedSection(initialRoute.section) && !isTemporarilyHiddenSection(initialRoute.section)
+    ? initialRoute.section
+    : "profile";
 
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
@@ -119,17 +122,25 @@ export default function Portfolio() {
   useEffect(() => {
     const applyRoute = (syncScroll: boolean, syncLocaleFromUrl: boolean) => {
       const route = parsePortfolioPath(window.location.pathname);
-      const nextSection = isSupportedSection(route.section) ? route.section : "profile";
+      const nextSection = isSupportedSection(route.section) && !isTemporarilyHiddenSection(route.section)
+        ? route.section
+        : "profile";
+      const nextSlug = nextSection === route.section ? route.slug : null;
+      const currentLocale = normalizeLocale(i18n.language);
 
       if (syncLocaleFromUrl) {
-        if (route.locale && route.locale !== normalizeLocale(i18n.language)) {
+        if (route.locale && route.locale !== currentLocale) {
           void i18n.changeLanguage(route.locale);
         }
-      } else {
-        const currentLocale = normalizeLocale(i18n.language);
-        if (route.locale && route.locale !== currentLocale) {
-          replacePortfolioRoute(currentLocale, nextSection, route.slug ?? undefined);
-        }
+      }
+
+      if (
+        (!syncLocaleFromUrl && route.locale && route.locale !== currentLocale) ||
+        nextSection !== route.section ||
+        nextSlug !== route.slug
+      ) {
+        const rewriteLocale = syncLocaleFromUrl && route.locale ? route.locale : currentLocale;
+        replacePortfolioRoute(rewriteLocale, nextSection, nextSlug ?? undefined);
       }
 
       const sectionChanged = nextSection !== activeCardKeyRef.current;
@@ -137,8 +148,8 @@ export default function Portfolio() {
         setActiveCardKey(nextSection);
       }
 
-      if (route.slug !== activeRouteSlugRef.current) {
-        setActiveRouteSlug(route.slug);
+      if (nextSlug !== activeRouteSlugRef.current) {
+        setActiveRouteSlug(nextSlug);
       }
 
       if (syncScroll && sectionChanged) {
@@ -531,18 +542,6 @@ export default function Portfolio() {
             {
               key: "philosophy",
               component: <Philosophy />,
-            },
-            {
-              key: "notes",
-              component: <NotesSection activeSlug={activeCardKey === "notes" ? activeRouteSlug : null} />,
-            },
-            {
-              key: "side-projects",
-              component: (
-                <SideProjectsSection
-                  activeSlug={activeCardKey === "side-projects" ? activeRouteSlug : null}
-                />
-              ),
             },
           ]}
         />

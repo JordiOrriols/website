@@ -221,11 +221,11 @@ export const es: Locale = {
     ],
 
     // Analytics Consent
-    analyticsConsentTitle: "Preferencias de analitica",
+    analyticsConsentTitle: "Privacidad",
     analyticsConsentDescription:
       "Permite analitica anonima para entender que secciones ven y abren los visitantes.",
-    analyticsConsentAccept: "Permitir analitica",
-    analyticsConsentDecline: "Rechazar analitica",
+    analyticsConsentAccept: "Permitir",
+    analyticsConsentDecline: "Rechazar",
     analyticsConsentManage: "Privacidad",
   },
 };
