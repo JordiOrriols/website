@@ -115,36 +115,40 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
-    const applyRoute = (syncScroll: boolean) => {
+    const applyRoute = (syncScroll: boolean, syncLocaleFromUrl: boolean) => {
       const route = parsePortfolioPath(window.location.pathname);
-      const localeFromRoute = route.locale ?? normalizeLocale(i18n.language);
-      const nextSection = route.section ?? "profile";
+      const nextSection = isSupportedSection(route.section) ? route.section : "profile";
 
-      if (localeFromRoute !== normalizeLocale(i18n.language)) {
-        void i18n.changeLanguage(localeFromRoute);
+      if (syncLocaleFromUrl) {
+        if (route.locale && route.locale !== normalizeLocale(i18n.language)) {
+          void i18n.changeLanguage(route.locale);
+        }
+      } else {
+        const currentLocale = normalizeLocale(i18n.language);
+        if (route.locale && route.locale !== currentLocale) {
+          replacePortfolioRoute(currentLocale, nextSection, route.slug ?? undefined);
+        }
       }
 
-      if (isSupportedSection(nextSection)) {
-        const sectionChanged = nextSection !== activeCardKeyRef.current;
-        if (nextSection !== activeCardKeyRef.current) {
-          setActiveCardKey(nextSection);
-        }
+      const sectionChanged = nextSection !== activeCardKeyRef.current;
+      if (sectionChanged) {
+        setActiveCardKey(nextSection);
+      }
 
-        if (route.slug !== activeRouteSlugRef.current) {
-          setActiveRouteSlug(route.slug);
-        }
+      if (route.slug !== activeRouteSlugRef.current) {
+        setActiveRouteSlug(route.slug);
+      }
 
-        if (syncScroll && sectionChanged) {
-          setScrollCardsInstance((current) => current + 1);
-        }
+      if (syncScroll && sectionChanged) {
+        setScrollCardsInstance((current) => current + 1);
       }
     };
 
     const handlePopState = () => {
-      applyRoute(true);
+      applyRoute(true, false);
     };
 
-    applyRoute(false);
+    applyRoute(false, true);
     window.addEventListener("popstate", handlePopState);
 
     return () => {

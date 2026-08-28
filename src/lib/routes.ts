@@ -69,6 +69,9 @@ export function buildPortfolioPath(locale: string, section: string, slug?: strin
 export function replacePortfolioRoute(locale: string, section: string, slug?: string): void {
   if (typeof window === "undefined") return;
   const nextPath = buildPortfolioPath(locale, section, slug);
+  if (window.location.pathname === nextPath) {
+    return;
+  }
   window.history.replaceState({}, "", nextPath);
 }
 

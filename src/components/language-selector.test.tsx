@@ -7,6 +7,7 @@ import LanguageSelector from "./language-selector";
 
 describe("LanguageSelector Component", () => {
   beforeEach(async () => {
+    window.history.replaceState({}, "", "/en/profile");
     await i18n.changeLanguage("en");
   });
 
@@ -132,5 +133,37 @@ describe("LanguageSelector Component", () => {
     const caButton = screen.getByText("CA");
     expect(caButton.className).toContain("text-xs");
     expect(caButton.className).toContain("font-medium");
+  });
+
+  it("preserves current section when switching language", async () => {
+    window.history.replaceState({}, "", "/en/philosophy");
+
+    render(
+      <I18nextProvider i18n={i18n}>
+        <LanguageSelector />
+      </I18nextProvider>
+    );
+
+    await userEvent.click(screen.getByText("ES"));
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/es/philosophy");
+    });
+  });
+
+  it("preserves current section slug when switching language", async () => {
+    window.history.replaceState({}, "", "/en/notes/shipping-under-pressure");
+
+    render(
+      <I18nextProvider i18n={i18n}>
+        <LanguageSelector />
+      </I18nextProvider>
+    );
+
+    await userEvent.click(screen.getByText("CA"));
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/ca/notes/shipping-under-pressure");
+    });
   });
 });

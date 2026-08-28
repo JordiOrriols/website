@@ -9,7 +9,12 @@ import {
   trackNoteLinkCopied,
   trackNoteOpened,
 } from "@/lib/analytics";
-import { buildPortfolioAbsoluteLink, normalizeLocale, pushPortfolioRoute } from "@/lib/routes";
+import {
+  buildPortfolioAbsoluteLink,
+  buildPortfolioPath,
+  normalizeLocale,
+  pushPortfolioRoute,
+} from "@/lib/routes";
 
 interface NoteEntry {
   title: string;
@@ -24,7 +29,7 @@ interface NotesSectionProps {
 
 function buildNoteShareLink(locale: string, slug: string): string {
   if (typeof window === "undefined") {
-    return `/en/notes/${slug}`;
+    return buildPortfolioPath(locale, "notes", slug);
   }
 
   const origin = window.location.origin;

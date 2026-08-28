@@ -1,10 +1,11 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import {
   parsePortfolioPath,
   buildPortfolioPath,
   normalizeLocale,
   isSupportedSection,
   buildPortfolioAbsoluteLink,
+  replacePortfolioRoute,
 } from "./routes";
 
 describe("routes helpers", () => {
@@ -63,5 +64,26 @@ describe("routes helpers", () => {
     expect(buildPortfolioAbsoluteLink("https://jordiorriols.cat", "en", "notes", "note-1")).toBe(
       "https://jordiorriols.cat/en/notes/note-1"
     );
+  });
+
+  it("does not replace history when target path is the same", () => {
+    window.history.replaceState({}, "", "/en/profile");
+    const replaceSpy = vi.spyOn(window.history, "replaceState");
+
+    replacePortfolioRoute("en", "profile");
+
+    expect(replaceSpy).not.toHaveBeenCalled();
+    replaceSpy.mockRestore();
+  });
+
+  it("replaces history when target path is different", () => {
+    window.history.replaceState({}, "", "/en/profile");
+    const replaceSpy = vi.spyOn(window.history, "replaceState");
+
+    replacePortfolioRoute("en", "notes", "shipping-under-pressure");
+
+    expect(replaceSpy).toHaveBeenCalledOnce();
+    expect(window.location.pathname).toBe("/en/notes/shipping-under-pressure");
+    replaceSpy.mockRestore();
   });
 });
