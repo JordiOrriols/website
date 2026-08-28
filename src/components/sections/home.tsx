@@ -87,7 +87,8 @@ export default function HomeSection(props: Props) {
                 {
                   label: t("projects"),
                   value: "15",
-                  onClick: () => handle("projects"),
+                  disabled: true,
+                  onClick: () => undefined,
                 },
                 {
                   label: t("companies"),
@@ -98,7 +99,8 @@ export default function HomeSection(props: Props) {
                   label: t("leading"),
                   value: "3",
                   unit: t("years"),
-                  onClick: () => handle("leading_years"),
+                  disabled: true,
+                  onClick: () => undefined,
                 },
                 {
                   label: t("experience"),

@@ -29,10 +29,10 @@ vi.mock("@/components/sections/home", () => ({
       <button onClick={() => handleStatClick?.("experience_years")} data-testid="stat-experience">
         Experience
       </button>
-      <button onClick={() => handleStatClick?.("projects")} data-testid="stat-projects">
+      <button disabled onClick={() => handleStatClick?.("projects")} data-testid="stat-projects">
         Projects
       </button>
-      <button onClick={() => handleStatClick?.("leading_years")} data-testid="stat-leading">
+      <button disabled onClick={() => handleStatClick?.("leading_years")} data-testid="stat-leading">
         Leading
       </button>
       <button onClick={() => handleStatClick?.("contact")} data-testid="stat-contact">
@@ -162,16 +162,16 @@ describe("ProfileCard Component", () => {
     expect(queryByTestId("contact-form")).toBeTruthy();
   });
 
-  it("opens projects modal on stat click", () => {
+  it("keeps projects stat disabled", () => {
     const { getByTestId, queryByTestId } = render(<ProfileCard {...defaultProps} />);
     fireEvent.click(getByTestId("stat-projects"));
-    expect(queryByTestId("projects-gallery")).toBeTruthy();
+    expect(queryByTestId("projects-gallery")).toBeNull();
   });
 
-  it("opens leading_years modal on stat click", () => {
+  it("keeps leading stat disabled", () => {
     const { getByTestId, queryByTestId } = render(<ProfileCard {...defaultProps} />);
     fireEvent.click(getByTestId("stat-leading"));
-    expect(queryByTestId("gallery")).toBeTruthy();
+    expect(queryByTestId("gallery")).toBeNull();
   });
 
   it("plays click sound when opening a modal", () => {

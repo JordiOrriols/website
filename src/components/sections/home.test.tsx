@@ -25,7 +25,7 @@ vi.mock("@/components/stats", () => ({
   default: ({ options }: any) => (
     <div data-testid="stats">
       {options.map((opt: any) => (
-        <button key={opt.label} onClick={opt.onClick} data-testid={`stat-${opt.label}`}>
+        <button key={opt.label} onClick={opt.onClick} disabled={opt.disabled} data-testid={`stat-${opt.label}`}>
           {opt.label}
         </button>
       ))}
@@ -77,16 +77,17 @@ describe("HomeSection Component", () => {
     expect(getByText("valueStatement")).toBeTruthy();
   });
 
-  it("calls handleStatClick when projects stat is clicked", () => {
+  it("disables projects stat click", () => {
     const handleStatClick = vi.fn();
     const { getByTestId } = render(
       <HomeSection season="summer" isModalOpen={false} handleStatClick={handleStatClick} />
     );
 
     const projectButton = getByTestId("stat-projects");
+    expect(projectButton).toBeDisabled();
     fireEvent.click(projectButton);
 
-    expect(handleStatClick).toHaveBeenCalledWith("projects");
+    expect(handleStatClick).not.toHaveBeenCalledWith("projects");
   });
 
   it("calls onClickAvatar when avatar is clicked", () => {
@@ -128,14 +129,18 @@ describe("HomeSection Component", () => {
       <HomeSection season="summer" isModalOpen={false} handleStatClick={handleStatClick} />
     );
 
-    fireEvent.click(getByTestId("stat-projects"));
-    expect(handleStatClick).toHaveBeenCalledWith("projects");
+    const projectsButton = getByTestId("stat-projects");
+    expect(projectsButton).toBeDisabled();
+    fireEvent.click(projectsButton);
+    expect(handleStatClick).not.toHaveBeenCalledWith("projects");
 
     fireEvent.click(getByTestId("stat-companies"));
     expect(handleStatClick).toHaveBeenCalledWith("companies");
 
-    fireEvent.click(getByTestId("stat-leading"));
-    expect(handleStatClick).toHaveBeenCalledWith("leading_years");
+    const leadingButton = getByTestId("stat-leading");
+    expect(leadingButton).toBeDisabled();
+    fireEvent.click(leadingButton);
+    expect(handleStatClick).not.toHaveBeenCalledWith("leading_years");
 
     fireEvent.click(getByTestId("stat-experience"));
     expect(handleStatClick).toHaveBeenCalledWith("experience_years");

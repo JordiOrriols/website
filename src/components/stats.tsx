@@ -7,6 +7,7 @@ interface Props {
     value: string;
     unit?: string;
     onClick: () => void;
+    disabled?: boolean;
   }[];
 }
 
@@ -22,10 +23,14 @@ export default function Stats(props: Props) {
         <motion.button
           key={option.label}
           onClick={option.onClick}
-          whileHover={{ scale: 1.1 }}
+          disabled={option.disabled}
+          whileHover={option.disabled ? undefined : { scale: 1.1 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          className="text-center cursor-pointer hover:bg-gray-100 rounded-xl p-4 transition-colors duration-200"
+          className={`text-center rounded-xl p-4 transition-colors duration-200 ${
+            option.disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-100"
+          }`}
           aria-label={`${option.label}: ${option.value}${option.unit ? ` ${option.unit}` : ""}`}
+          aria-disabled={option.disabled}
           data-testid={`stat-${option.label.toLowerCase().replace(/\s+/g, "-")}`}
         >
           <div className="text-center">
