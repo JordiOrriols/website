@@ -9,9 +9,14 @@ interface CardItem {
 interface ScrollCardsProps {
   cards: CardItem[];
   onActiveCardChange?: (cardKey: string, index: number) => void;
+  activeCardKey?: string;
 }
 
-export default function ScrollCards({ cards, onActiveCardChange }: ScrollCardsProps) {
+export default function ScrollCards({
+  cards,
+  onActiveCardChange,
+  activeCardKey,
+}: ScrollCardsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const notifiedIndexRef = useRef<number | null>(null);
@@ -32,6 +37,23 @@ export default function ScrollCards({ cards, onActiveCardChange }: ScrollCardsPr
     notifiedIndexRef.current = activeIndex;
     onActiveCardChange?.(activeCard.key, activeIndex);
   }, [activeIndex, cards, onActiveCardChange]);
+
+  useEffect(() => {
+    if (!activeCardKey) return;
+
+    const nextIndex = cards.findIndex((card) => card.key === activeCardKey);
+    if (nextIndex < 0 || nextIndex === activeIndex) return;
+
+    setActiveIndex(nextIndex);
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.scrollTo({
+      top: container.clientHeight * nextIndex,
+      behavior: "auto",
+    });
+  }, [activeCardKey, activeIndex, cards]);
 
   return (
     <div

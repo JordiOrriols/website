@@ -85,4 +85,25 @@ describe("ScrollCards Component", () => {
 
     expect(onActiveCardChange).toHaveBeenCalledWith("card-2", 1);
   });
+
+  it("moves to card from activeCardKey prop", () => {
+    const { getByTestId, rerender } = render(
+      <ScrollCards cards={cards} activeCardKey="card-1" />
+    );
+
+    const container = getByTestId("scroll-cards-container");
+    const scrollToMock = vi.fn();
+    Object.defineProperty(container, "scrollTo", { value: scrollToMock, writable: true });
+    Object.defineProperty(container, "clientHeight", { value: 800, writable: true });
+
+    rerender(<ScrollCards cards={cards} activeCardKey="card-3" />);
+
+    expect(scrollToMock).toHaveBeenCalledWith({
+      top: 1600,
+      behavior: "auto",
+    });
+
+    const thirdSection = getByTestId("scroll-card-section-2");
+    expect(thirdSection.style.pointerEvents).not.toBe("none");
+  });
 });

@@ -9,6 +9,7 @@ import {
   trackNoteLinkCopied,
   trackNoteOpened,
 } from "@/lib/analytics";
+import { buildPortfolioAbsoluteLink, normalizeLocale, pushPortfolioRoute } from "@/lib/routes";
 
 interface NoteEntry {
   title: string;
@@ -17,18 +18,21 @@ interface NoteEntry {
   slug: string;
 }
 
-function buildNoteShareLink(slug: string): string {
+interface NotesSectionProps {
+  activeSlug?: string | null;
+}
+
+function buildNoteShareLink(locale: string, slug: string): string {
   if (typeof window === "undefined") {
-    return `/notes/${slug}`;
+    return `/en/notes/${slug}`;
   }
 
   const origin = window.location.origin;
-  const path = window.location.pathname.replace(/\/$/, "");
-  return `${origin}${path}/notes/${slug}`;
+  return buildPortfolioAbsoluteLink(origin, locale, "notes", slug);
 }
 
-export default function NotesSection() {
-  const { t } = useTranslation();
+export default function NotesSection({ activeSlug = null }: NotesSectionProps) {
+  const { t, i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const visibleNotesRef = useRef<Set<string>>(new Set());
 
@@ -68,11 +72,18 @@ export default function NotesSection() {
   }, [notes]);
 
   const handleCopy = async (slug: string) => {
-    const link = buildNoteShareLink(slug);
+    const locale = normalizeLocale(i18n.language);
+    const link = buildNoteShareLink(locale, slug);
     if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(link);
     }
     trackNoteLinkCopied(slug);
+  };
+
+  const handleOpenNote = (slug: string) => {
+    const locale = normalizeLocale(i18n.language);
+    pushPortfolioRoute(locale, "notes", slug);
+    trackNoteOpened(slug);
   };
 
   return (
@@ -89,7 +100,9 @@ export default function NotesSection() {
             <article
               key={note.slug}
               data-note-slug={note.slug}
-              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+              className={`rounded-2xl border bg-white p-5 shadow-sm ${
+                activeSlug === note.slug ? "border-[#4A6FA5] ring-2 ring-[#4A6FA5]/20" : "border-gray-200"
+              }`}
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -112,7 +125,7 @@ export default function NotesSection() {
                   type="button"
                   variant="outline"
                   className="min-h-11"
-                  onClick={() => trackNoteOpened(note.slug)}
+                  onClick={() => handleOpenNote(note.slug)}
                 >
                   {t("openNote")}
                 </Button>

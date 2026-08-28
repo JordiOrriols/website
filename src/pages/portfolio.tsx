@@ -37,6 +37,12 @@ import {
   trackSpecialEventsToggle,
   trackSectionVisible,
 } from "@/lib/analytics";
+import {
+  normalizeLocale,
+  parsePortfolioPath,
+  replacePortfolioRoute,
+  isSupportedSection,
+} from "@/lib/routes";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -58,7 +64,7 @@ export type SectionsType =
   | "contact";
 
 export default function Portfolio() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
@@ -79,6 +85,8 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
   const [showFlightSafetyDialog, setShowFlightSafetyDialog] = useState(false);
+  const [activeCardKey, setActiveCardKey] = useState<string>("profile");
+  const [activeRouteSlug, setActiveRouteSlug] = useState<string | null>(null);
 
   const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
     useAmbientAudio(weather, timeOfDay);
@@ -91,6 +99,30 @@ export default function Portfolio() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const applyRoute = () => {
+      const route = parsePortfolioPath(window.location.pathname);
+      const localeFromRoute = route.locale ?? normalizeLocale(i18n.language);
+      const nextSection = route.section ?? "profile";
+
+      if (localeFromRoute !== normalizeLocale(i18n.language)) {
+        void i18n.changeLanguage(localeFromRoute);
+      }
+
+      if (isSupportedSection(nextSection)) {
+        setActiveCardKey(nextSection);
+        setActiveRouteSlug(route.slug);
+      }
+    };
+
+    applyRoute();
+    window.addEventListener("popstate", applyRoute);
+
+    return () => {
+      window.removeEventListener("popstate", applyRoute);
+    };
+  }, [i18n]);
 
   const fetchWeather = async () => {
     try {
@@ -409,8 +441,11 @@ export default function Portfolio() {
       {/* Cards Container */}
       <div className="relative z-20">
         <ScrollCards
+          activeCardKey={activeCardKey}
           onActiveCardChange={(cardKey) => {
             trackSectionVisible(cardKey);
+            const locale = normalizeLocale(i18n.language);
+            replacePortfolioRoute(locale, cardKey);
           }}
           cards={[
             {
@@ -438,11 +473,15 @@ export default function Portfolio() {
             },
             {
               key: "notes",
-              component: <NotesSection />,
+              component: <NotesSection activeSlug={activeCardKey === "notes" ? activeRouteSlug : null} />,
             },
             {
               key: "side-projects",
-              component: <SideProjectsSection />,
+              component: (
+                <SideProjectsSection
+                  activeSlug={activeCardKey === "side-projects" ? activeRouteSlug : null}
+                />
+              ),
             },
           ]}
         />

@@ -32,6 +32,19 @@
       src="https://cloud.umami.is/script.js"
       data-website-id="b02f3e1f-36f9-43a7-a970-22862ca69948"
     ></script>
+
+    <script>
+      (function () {
+        var query = window.location.search;
+        if (!query.startsWith("?p=")) return;
+
+        var encodedPath = query.slice(3);
+        if (!encodedPath) return;
+
+        var decodedPath = decodeURIComponent(encodedPath);
+        window.history.replaceState({}, "", decodedPath);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -31,6 +31,7 @@ vi.mock("react-i18next", () => ({
 
       return textMap[key] ?? key;
     },
+    i18n: { language: "en" },
   }),
 }));
 
@@ -41,7 +42,13 @@ const analyticsMocks = vi.hoisted(() => ({
   trackSideProjectLinkClicked: vi.fn(),
 }));
 
+const routesMocks = vi.hoisted(() => ({
+  normalizeLocale: vi.fn(() => "en"),
+  pushPortfolioRoute: vi.fn(),
+}));
+
 vi.mock("@/lib/analytics", () => analyticsMocks);
+vi.mock("@/lib/routes", () => routesMocks);
 
 describe("SideProjectsSection", () => {
   beforeEach(() => {
@@ -61,6 +68,7 @@ describe("SideProjectsSection", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Open project" }));
 
+    expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith("en", "side-projects", "watch-lab");
     expect(analyticsMocks.trackSideProjectOpened).toHaveBeenCalledWith("watch-lab");
   });
 
@@ -73,5 +81,12 @@ describe("SideProjectsSection", () => {
       "watch-lab",
       "https://example.com/watch-lab"
     );
+  });
+
+  it("highlights project when activeSlug matches", () => {
+    render(<SideProjectsSection activeSlug="watch-lab" />);
+
+    const projectCard = screen.getByText("Watch Lab").closest("article");
+    expect(projectCard?.className).toContain("border-[#4A6FA5]");
   });
 });

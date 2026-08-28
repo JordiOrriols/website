@@ -27,6 +27,7 @@ vi.mock("react-i18next", () => ({
 
       return textMap[key] ?? key;
     },
+    i18n: { language: "en" },
   }),
 }));
 
@@ -37,13 +38,21 @@ const analyticsMocks = vi.hoisted(() => ({
   trackNoteLinkCopied: vi.fn(),
 }));
 
+const routesMocks = vi.hoisted(() => ({
+  normalizeLocale: vi.fn(() => "en"),
+  pushPortfolioRoute: vi.fn(),
+  buildPortfolioAbsoluteLink: vi.fn(() => "https://jordiorriols.cat/en/notes/shipping-under-pressure"),
+}));
+
 vi.mock("@/lib/analytics", () => analyticsMocks);
+vi.mock("@/lib/routes", () => routesMocks);
 
 describe("NotesSection", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    Object.assign(navigator, {
-      clipboard: {
+    Object.defineProperty(navigator, "clipboard", {
+      configurable: true,
+      value: {
         writeText: vi.fn().mockResolvedValue(undefined),
       },
     });
@@ -62,6 +71,11 @@ describe("NotesSection", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "Open note" }));
 
+    expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith(
+      "en",
+      "notes",
+      "shipping-under-pressure"
+    );
     expect(analyticsMocks.trackNoteOpened).toHaveBeenCalledWith("shipping-under-pressure");
   });
 
@@ -74,5 +88,12 @@ describe("NotesSection", () => {
       expect(navigator.clipboard.writeText).toHaveBeenCalled();
       expect(analyticsMocks.trackNoteLinkCopied).toHaveBeenCalledWith("shipping-under-pressure");
     });
+  });
+
+  it("highlights note when activeSlug matches", () => {
+    render(<NotesSection activeSlug="shipping-under-pressure" />);
+
+    const noteCard = screen.getByText("Shipping under pressure").closest("article");
+    expect(noteCard?.className).toContain("border-[#4A6FA5]");
   });
 });

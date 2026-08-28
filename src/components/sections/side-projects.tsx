@@ -10,6 +10,7 @@ import {
   trackSideProjectLinkClicked,
   trackSideProjectOpened,
 } from "@/lib/analytics";
+import { normalizeLocale, pushPortfolioRoute } from "@/lib/routes";
 
 interface SideProjectEntry {
   title: string;
@@ -19,8 +20,12 @@ interface SideProjectEntry {
   images: string[];
 }
 
-export default function SideProjectsSection() {
-  const { t } = useTranslation();
+interface SideProjectsSectionProps {
+  activeSlug?: string | null;
+}
+
+export default function SideProjectsSection({ activeSlug = null }: SideProjectsSectionProps) {
+  const { t, i18n } = useTranslation();
   const containerRef = useRef<HTMLDivElement>(null);
   const visibleProjectsRef = useRef<Set<string>>(new Set());
 
@@ -59,6 +64,12 @@ export default function SideProjectsSection() {
     };
   }, [sideProjects]);
 
+  const handleOpenProject = (slug: string) => {
+    const locale = normalizeLocale(i18n.language);
+    pushPortfolioRoute(locale, "side-projects", slug);
+    trackSideProjectOpened(slug);
+  };
+
   return (
     <Card data-testid="side-projects-section">
       <div className="p-8 md:p-12" ref={containerRef}>
@@ -75,7 +86,11 @@ export default function SideProjectsSection() {
             <article
               key={project.slug}
               data-side-project-slug={project.slug}
-              className="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm"
+              className={`rounded-2xl border bg-white p-5 shadow-sm ${
+                activeSlug === project.slug
+                  ? "border-[#4A6FA5] ring-2 ring-[#4A6FA5]/20"
+                  : "border-gray-200"
+              }`}
             >
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div>
@@ -102,7 +117,7 @@ export default function SideProjectsSection() {
                   type="button"
                   variant="outline"
                   className="min-h-11"
-                  onClick={() => trackSideProjectOpened(project.slug)}
+                  onClick={() => handleOpenProject(project.slug)}
                 >
                   {t("openProject")}
                 </Button>
