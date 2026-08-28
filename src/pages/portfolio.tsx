@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
@@ -38,6 +38,7 @@ import {
   trackSectionVisible,
 } from "@/lib/analytics";
 import {
+  buildPortfolioPath,
   normalizeLocale,
   parsePortfolioPath,
   replacePortfolioRoute,
@@ -65,6 +66,8 @@ export type SectionsType =
 
 export default function Portfolio() {
   const { t, i18n } = useTranslation();
+  const initialRoute = parsePortfolioPath(typeof window !== "undefined" ? window.location.pathname : "/");
+  const initialSection = isSupportedSection(initialRoute.section) ? initialRoute.section : "profile";
 
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
@@ -85,11 +88,22 @@ export default function Portfolio() {
   const [showPlane, setShowPlane] = useState(false);
   const [activeSpecialEvents, setActiveSpecialEvents] = useState(false);
   const [showFlightSafetyDialog, setShowFlightSafetyDialog] = useState(false);
-  const [activeCardKey, setActiveCardKey] = useState<string>("profile");
-  const [activeRouteSlug, setActiveRouteSlug] = useState<string | null>(null);
+  const [activeCardKey, setActiveCardKey] = useState<string>(initialSection);
+  const [activeRouteSlug, setActiveRouteSlug] = useState<string | null>(initialRoute.slug);
+  const [scrollCardsInstance, setScrollCardsInstance] = useState(0);
+  const activeCardKeyRef = useRef(activeCardKey);
+  const activeRouteSlugRef = useRef(activeRouteSlug);
 
   const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
     useAmbientAudio(weather, timeOfDay);
+
+  useEffect(() => {
+    activeCardKeyRef.current = activeCardKey;
+  }, [activeCardKey]);
+
+  useEffect(() => {
+    activeRouteSlugRef.current = activeRouteSlug;
+  }, [activeRouteSlug]);
 
   useEffect(() => {
     async function fetchData() {
@@ -101,7 +115,7 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => {
-    const applyRoute = () => {
+    const applyRoute = (syncScroll: boolean) => {
       const route = parsePortfolioPath(window.location.pathname);
       const localeFromRoute = route.locale ?? normalizeLocale(i18n.language);
       const nextSection = route.section ?? "profile";
@@ -111,18 +125,32 @@ export default function Portfolio() {
       }
 
       if (isSupportedSection(nextSection)) {
-        setActiveCardKey(nextSection);
-        setActiveRouteSlug(route.slug);
+        const sectionChanged = nextSection !== activeCardKeyRef.current;
+        if (nextSection !== activeCardKeyRef.current) {
+          setActiveCardKey(nextSection);
+        }
+
+        if (route.slug !== activeRouteSlugRef.current) {
+          setActiveRouteSlug(route.slug);
+        }
+
+        if (syncScroll && sectionChanged) {
+          setScrollCardsInstance((current) => current + 1);
+        }
       }
     };
 
-    applyRoute();
-    window.addEventListener("popstate", applyRoute);
+    const handlePopState = () => {
+      applyRoute(true);
+    };
+
+    applyRoute(false);
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
-      window.removeEventListener("popstate", applyRoute);
+      window.removeEventListener("popstate", handlePopState);
     };
-  }, [i18n]);
+  }, [i18n, i18n.language]);
 
   const fetchWeather = async () => {
     try {
@@ -441,7 +469,8 @@ export default function Portfolio() {
       {/* Cards Container */}
       <div className="relative z-20">
         <ScrollCards
-          activeCardKey={activeCardKey}
+          key={scrollCardsInstance}
+          initialCardKey={activeCardKey}
           onActiveCardChange={(cardKey) => {
             if (cardKey !== activeCardKey) {
               setActiveCardKey(cardKey);
@@ -449,7 +478,10 @@ export default function Portfolio() {
             }
             trackSectionVisible(cardKey);
             const locale = normalizeLocale(i18n.language);
-            replacePortfolioRoute(locale, cardKey);
+            const nextPath = buildPortfolioPath(locale, cardKey);
+            if (window.location.pathname !== nextPath) {
+              replacePortfolioRoute(locale, cardKey);
+            }
           }}
           cards={[
             {
@@ -492,7 +524,14 @@ export default function Portfolio() {
       </div>
 
       {/* Flight Safety Confirmation Dialog */}
-      <Dialog open={showFlightSafetyDialog} onOpenChange={setShowFlightSafetyDialog}>
+      <Dialog
+        open={showFlightSafetyDialog}
+        onOpenChange={(open) => {
+          if (open !== showFlightSafetyDialog) {
+            setShowFlightSafetyDialog(open);
+          }
+        }}
+      >
         <DialogContent className="sm:max-w-md p-8" showClose={false}>
           <DialogHeader>
             <DialogTitle className="text-xl font-bold text-red-600">

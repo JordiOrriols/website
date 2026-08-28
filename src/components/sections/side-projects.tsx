@@ -122,17 +122,16 @@ export default function SideProjectsSection({ activeSlug = null }: SideProjectsS
                   {t("openProject")}
                 </Button>
 
-                <Button type="button" asChild className="min-h-11 bg-[#2D4A6B] hover:bg-[#1F3447]">
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={() => trackSideProjectLinkClicked(project.slug, project.link)}
-                  >
-                    <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    {t("projectLink")}
-                  </a>
-                </Button>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() => trackSideProjectLinkClicked(project.slug, project.link)}
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-[#2D4A6B] px-4 py-2 text-sm font-medium text-white shadow-xs transition-all hover:bg-[#1F3447]"
+                >
+                  <ExternalLink className="w-4 h-4" aria-hidden="true" />
+                  {t("projectLink")}
+                </a>
               </div>
             </article>
           ))}

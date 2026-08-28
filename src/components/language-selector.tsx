@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from "react";
-import i18n from "@/lib/i18n";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { trackLanguageChange } from "@/lib/analytics";
+import { normalizeLocale, parsePortfolioPath, replacePortfolioRoute } from "@/lib/routes";
 
 export default function LanguageSelector() {
+  const { i18n } = useTranslation();
   const languages = [
     { code: "ca", label: "CA" },
     { code: "es", label: "ES" },
     { code: "en", label: "EN" },
   ];
 
-  const [language, setLanguage] = useState("en");
-
-  useEffect(() => {
-    void i18n.changeLanguage(language);
-  }, [language]);
+  const language = normalizeLocale(i18n.language);
 
   const handleLanguageChange = (langCode: string) => {
-    setLanguage(langCode);
+    const normalizedLang = normalizeLocale(langCode);
+    const route = parsePortfolioPath(window.location.pathname);
+    const currentSection = route.section ?? "profile";
+    const currentSlug = route.slug ?? undefined;
+
+    replacePortfolioRoute(normalizedLang, currentSection, currentSlug);
+    void i18n.changeLanguage(normalizedLang);
     trackLanguageChange(langCode);
   };
 

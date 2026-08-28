@@ -9,15 +9,21 @@ interface CardItem {
 interface ScrollCardsProps {
   cards: CardItem[];
   onActiveCardChange?: (cardKey: string, index: number) => void;
-  activeCardKey?: string;
+  initialCardKey?: string;
 }
 
 export default function ScrollCards({
   cards,
   onActiveCardChange,
-  activeCardKey,
+  initialCardKey,
 }: ScrollCardsProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const getInitialIndex = () => {
+    if (!initialCardKey) return 0;
+    const initialIndex = cards.findIndex((card) => card.key === initialCardKey);
+    return initialIndex >= 0 ? initialIndex : 0;
+  };
+
+  const [activeIndex, setActiveIndex] = useState(getInitialIndex);
   const containerRef = useRef<HTMLDivElement>(null);
   const notifiedIndexRef = useRef<number | null>(null);
 
@@ -25,9 +31,11 @@ export default function ScrollCards({
     const container = containerRef.current;
     if (!container) return;
     const { scrollTop, clientHeight } = container;
+    if (clientHeight <= 0) return;
     const newIndex = Math.round(scrollTop / clientHeight);
-    setActiveIndex(newIndex);
-  }, []);
+    const boundedIndex = Math.max(0, Math.min(cards.length - 1, newIndex));
+    setActiveIndex((current) => (current === boundedIndex ? current : boundedIndex));
+  }, [cards.length]);
 
   useEffect(() => {
     const activeCard = cards[activeIndex];
@@ -39,21 +47,14 @@ export default function ScrollCards({
   }, [activeIndex, cards, onActiveCardChange]);
 
   useEffect(() => {
-    if (!activeCardKey) return;
-
-    const nextIndex = cards.findIndex((card) => card.key === activeCardKey);
-    if (nextIndex < 0 || nextIndex === activeIndex) return;
-
-    setActiveIndex(nextIndex);
-
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || activeIndex <= 0 || typeof container.scrollTo !== "function") return;
 
     container.scrollTo({
-      top: container.clientHeight * nextIndex,
+      top: container.clientHeight * activeIndex,
       behavior: "auto",
     });
-  }, [activeCardKey, activeIndex, cards]);
+  }, [activeIndex]);
 
   return (
     <div
