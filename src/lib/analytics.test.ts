@@ -1,6 +1,10 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
   trackEvent,
+  setAnalyticsConsent,
+  getAnalyticsConsent,
+  canTrackAnalytics,
+  trackConsentDecision,
   trackWeatherChange,
   trackTimeOfDayChange,
   trackSeasonChange,
@@ -26,6 +30,8 @@ describe("Analytics Service", () => {
   beforeEach(() => {
     // Reset window.umami before each test
     delete (window as Window & { umami?: unknown }).umami;
+    localStorage.removeItem("analytics_consent");
+    setAnalyticsConsent("granted");
   });
 
   describe("trackEvent", () => {
@@ -34,6 +40,8 @@ describe("Analytics Service", () => {
       (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
         track: mockTrack,
       };
+
+      setAnalyticsConsent("granted");
 
       trackEvent("test_event", { foo: "bar" });
 
@@ -62,6 +70,48 @@ describe("Analytics Service", () => {
 
       expect(consoleErrorSpy).toHaveBeenCalled();
       consoleErrorSpy.mockRestore();
+    });
+  });
+
+  describe("analytics consent", () => {
+    it("stores and reads granted consent", () => {
+      setAnalyticsConsent("granted");
+
+      expect(getAnalyticsConsent()).toBe("granted");
+      expect(canTrackAnalytics()).toBe(true);
+    });
+
+    it("stores and reads denied consent", () => {
+      setAnalyticsConsent("denied");
+
+      expect(getAnalyticsConsent()).toBe("denied");
+      expect(canTrackAnalytics()).toBe(false);
+    });
+
+    it("does not track regular events when consent is not granted", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      setAnalyticsConsent("denied");
+
+      trackEvent("test_event", { foo: "bar" });
+
+      expect(mockTrack).not.toHaveBeenCalled();
+    });
+
+    it("tracks consent event when granting consent", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackConsentDecision("granted");
+
+      expect(mockTrack).toHaveBeenCalledWith("analytics_consent", {
+        status: "granted",
+      });
     });
   });
 

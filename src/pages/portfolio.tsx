@@ -27,6 +27,7 @@ import { useAmbientAudio } from "@/lib/ambient";
 import { ErrorBoundary } from "react-error-boundary";
 import NewYearScene from "../components/weather/scenes/new-year";
 import HalloweenScene from "../components/weather/scenes/halloween";
+import AnalyticsConsent from "@/components/analytics-consent";
 import {
   trackWeatherChange,
   trackTimeOfDayChange,
@@ -471,6 +472,8 @@ export default function Portfolio() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <AnalyticsConsent />
     </main>
   );
 }

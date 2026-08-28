@@ -202,5 +202,13 @@ export const ca: Locale = {
         images: ["/images/image.jpeg", "/images/image.jpeg"],
       },
     ],
+
+    // Analytics Consent
+    analyticsConsentTitle: "Preferencies d'analitica",
+    analyticsConsentDescription:
+      "Permet analitica anonima per entendre quines seccions veuen i obren els visitants.",
+    analyticsConsentAccept: "Permetre analitica",
+    analyticsConsentDecline: "Rebutjar analitica",
+    analyticsConsentManage: "Privacitat",
   },
 };

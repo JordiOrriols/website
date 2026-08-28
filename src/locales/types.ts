@@ -121,6 +121,13 @@ interface Translation {
     link: string;
     images: string[];
   }[];
+
+  // Analytics Consent
+  analyticsConsentTitle: string;
+  analyticsConsentDescription: string;
+  analyticsConsentAccept: string;
+  analyticsConsentDecline: string;
+  analyticsConsentManage: string;
 }
 
 import type { ResourceLanguage } from "i18next";

@@ -12,6 +12,53 @@ declare global {
   }
 }
 
+type AnalyticsConsent = "granted" | "denied";
+
+const ANALYTICS_CONSENT_KEY = "analytics_consent";
+
+function dispatchEvent(
+  eventName: string,
+  properties?: Record<string, string | number | boolean>
+): void {
+  if (typeof window !== "undefined" && window.umami) {
+    window.umami.track(eventName, properties);
+  }
+}
+
+export function setAnalyticsConsent(consent: AnalyticsConsent): void {
+  if (typeof window === "undefined") return;
+  window.localStorage.setItem(ANALYTICS_CONSENT_KEY, consent);
+}
+
+export function getAnalyticsConsent(): AnalyticsConsent | null {
+  if (typeof window === "undefined") return null;
+
+  const stored = window.localStorage.getItem(ANALYTICS_CONSENT_KEY);
+  if (stored === "granted" || stored === "denied") {
+    return stored;
+  }
+
+  return null;
+}
+
+export function canTrackAnalytics(): boolean {
+  return getAnalyticsConsent() === "granted";
+}
+
+export function trackConsentDecision(status: AnalyticsConsent): void {
+  setAnalyticsConsent(status);
+
+  if (status === "granted") {
+    try {
+      dispatchEvent("analytics_consent", {
+        status,
+      });
+    } catch (error) {
+      console.error("Failed to track consent decision:", error);
+    }
+  }
+}
+
 /**
  * Track a custom event with Umami
  * @param eventName - Name of the event to track
@@ -22,9 +69,11 @@ export function trackEvent(
   properties?: Record<string, string | number | boolean>
 ): void {
   try {
-    if (typeof window !== "undefined" && window.umami) {
-      window.umami.track(eventName, properties);
+    if (!canTrackAnalytics()) {
+      return;
     }
+
+    dispatchEvent(eventName, properties);
   } catch (error) {
     console.error("Failed to track event:", eventName, error);
   }

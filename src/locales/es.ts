@@ -202,5 +202,13 @@ export const es: Locale = {
         images: ["/images/image.jpeg", "/images/image.jpeg"],
       },
     ],
+
+    // Analytics Consent
+    analyticsConsentTitle: "Preferencias de analitica",
+    analyticsConsentDescription:
+      "Permite analitica anonima para entender que secciones ven y abren los visitantes.",
+    analyticsConsentAccept: "Permitir analitica",
+    analyticsConsentDecline: "Rechazar analitica",
+    analyticsConsentManage: "Privacidad",
   },
 };
