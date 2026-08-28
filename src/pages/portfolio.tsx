@@ -482,9 +482,11 @@ export default function Portfolio() {
             }
             trackSectionVisible(cardKey);
             const locale = normalizeLocale(i18n.language);
-            const nextPath = buildPortfolioPath(locale, cardKey);
+            const preservedSlug =
+              cardKey === activeCardKeyRef.current ? activeRouteSlugRef.current ?? undefined : undefined;
+            const nextPath = buildPortfolioPath(locale, cardKey, preservedSlug);
             if (window.location.pathname !== nextPath) {
-              replacePortfolioRoute(locale, cardKey);
+              replacePortfolioRoute(locale, cardKey, preservedSlug);
             }
           }}
           cards={[
