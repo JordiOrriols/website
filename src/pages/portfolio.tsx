@@ -443,6 +443,10 @@ export default function Portfolio() {
         <ScrollCards
           activeCardKey={activeCardKey}
           onActiveCardChange={(cardKey) => {
+            if (cardKey !== activeCardKey) {
+              setActiveCardKey(cardKey);
+              setActiveRouteSlug(null);
+            }
             trackSectionVisible(cardKey);
             const locale = normalizeLocale(i18n.language);
             replacePortfolioRoute(locale, cardKey);
