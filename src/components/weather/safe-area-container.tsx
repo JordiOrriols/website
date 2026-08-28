@@ -9,7 +9,7 @@ interface SafeAreaContainerProps {
 }
 
 // Helper to blend two hex colors with a given alpha for the overlay
-export function blendColors(baseHex: string, overlayHex: string, alpha: number): string {
+function blendColors(baseHex: string, overlayHex: string, alpha: number): string {
   const parseHex = (hex: string) => {
     const h = hex.replace("#", "");
     return {

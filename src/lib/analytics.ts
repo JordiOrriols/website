@@ -13,18 +13,6 @@ declare global {
 }
 
 /**
- * Event categories for better organization
- */
-export type EventCategory =
-  | "weather"
-  | "time"
-  | "season"
-  | "navigation"
-  | "interaction"
-  | "audio"
-  | "modal";
-
-/**
  * Track a custom event with Umami
  * @param eventName - Name of the event to track
  * @param properties - Optional properties to attach to the event
