@@ -186,3 +186,10 @@ body::after {
   min-height: -webkit-fill-available;
   overflow: hidden;
 }
+
+.reduce-motion,
+.reduce-motion * {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}

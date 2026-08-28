@@ -1,6 +1,6 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import NotesSection from "./notes";
 
 vi.mock("react-i18next", () => ({
@@ -21,8 +21,7 @@ vi.mock("react-i18next", () => ({
         notesLabel: "Notes",
         notesTitle: "Small writing on engineering leadership",
         notesIntro: "Short notes I use to capture decisions and lessons learned.",
-        openNote: "Open note",
-        copyLink: "Copy link",
+        backToNotes: "Back to notes",
       };
 
       return textMap[key] ?? key;
@@ -35,13 +34,12 @@ const analyticsMocks = vi.hoisted(() => ({
   trackBlockVisible: vi.fn(),
   trackContentDisplayed: vi.fn(),
   trackNoteOpened: vi.fn(),
-  trackNoteLinkCopied: vi.fn(),
 }));
 
 const routesMocks = vi.hoisted(() => ({
   normalizeLocale: vi.fn(() => "en"),
   pushPortfolioRoute: vi.fn(),
-  buildPortfolioAbsoluteLink: vi.fn(() => "https://jordiorriols.cat/en/notes/shipping-under-pressure"),
+  replacePortfolioRoute: vi.fn(),
 }));
 
 vi.mock("@/lib/analytics", () => analyticsMocks);
@@ -50,12 +48,6 @@ vi.mock("@/lib/routes", () => routesMocks);
 describe("NotesSection", () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    Object.defineProperty(navigator, "clipboard", {
-      configurable: true,
-      value: {
-        writeText: vi.fn().mockResolvedValue(undefined),
-      },
-    });
   });
 
   it("renders localized notes content", () => {
@@ -66,10 +58,10 @@ describe("NotesSection", () => {
     expect(screen.getByText("#delivery")).toBeInTheDocument();
   });
 
-  it("tracks note open action", () => {
+  it("opens note detail when clicking a note card", () => {
     render(<NotesSection />);
 
-    fireEvent.click(screen.getByRole("button", { name: "Open note" }));
+    fireEvent.click(screen.getByRole("button", { name: /Shipping under pressure/i }));
 
     expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith(
       "en",
@@ -77,23 +69,21 @@ describe("NotesSection", () => {
       "shipping-under-pressure"
     );
     expect(analyticsMocks.trackNoteOpened).toHaveBeenCalledWith("shipping-under-pressure");
+    expect(screen.getByTestId("note-detail")).toBeInTheDocument();
   });
 
-  it("copies note link and tracks copy action", async () => {
-    render(<NotesSection />);
-
-    fireEvent.click(screen.getByRole("button", { name: "Copy link" }));
-
-    await waitFor(() => {
-      expect(navigator.clipboard.writeText).toHaveBeenCalled();
-      expect(analyticsMocks.trackNoteLinkCopied).toHaveBeenCalledWith("shipping-under-pressure");
-    });
-  });
-
-  it("highlights note when activeSlug matches", () => {
+  it("returns to notes root from detail view", () => {
     render(<NotesSection activeSlug="shipping-under-pressure" />);
 
-    const noteCard = screen.getByText("Shipping under pressure").closest("article");
-    expect(noteCard?.className).toContain("border-[#4A6FA5]");
+    fireEvent.click(screen.getByRole("button", { name: "Back to notes" }));
+
+    expect(routesMocks.replacePortfolioRoute).toHaveBeenCalledWith("en", "notes");
+  });
+
+  it("does not render open and copy actions in list view", () => {
+    render(<NotesSection />);
+
+    expect(screen.queryByRole("button", { name: "Open note" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("button", { name: "Copy link" })).not.toBeInTheDocument();
   });
 });

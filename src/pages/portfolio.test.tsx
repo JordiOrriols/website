@@ -35,6 +35,17 @@ vi.mock("@/lib/ambient", () => ({
   }),
 }));
 
+const motionMocks = vi.hoisted(() => ({
+  toggleReducedMotion: vi.fn(),
+}));
+
+vi.mock("@/lib/motion", () => ({
+  useMotionPreference: () => ({
+    reducedMotion: false,
+    toggleReducedMotion: motionMocks.toggleReducedMotion,
+  }),
+}));
+
 vi.mock("@/components/weather/scenes/dynamic", () => ({
   default: () => <div data-testid="dynamic-scene">Dynamic Scene</div>,
 }));
@@ -197,6 +208,24 @@ describe("Portfolio Component", () => {
     await waitFor(() => {
       const buttons = document.querySelectorAll("button");
       expect(buttons.length).toBeGreaterThan(0);
+    });
+  });
+
+  it("has reduced motion button next to mute controls", async () => {
+    render(<Portfolio />);
+
+    await waitFor(() => {
+      const reducedMotionButton = screen.getByLabelText("enableReducedMotion");
+      expect(reducedMotionButton).toBeTruthy();
+    });
+  });
+
+  it("calls reduced motion toggle when button is clicked", async () => {
+    render(<Portfolio />);
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByLabelText("enableReducedMotion"));
+      expect(motionMocks.toggleReducedMotion).toHaveBeenCalledOnce();
     });
   });
 

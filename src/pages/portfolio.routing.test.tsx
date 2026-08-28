@@ -46,6 +46,13 @@ vi.mock("@/lib/ambient", () => ({
   }),
 }));
 
+vi.mock("@/lib/motion", () => ({
+  useMotionPreference: () => ({
+    reducedMotion: false,
+    toggleReducedMotion: vi.fn(),
+  }),
+}));
+
 function MockScrollCards({ onActiveCardChange }: { onActiveCardChange?: (cardKey: string) => void }) {
   useEffect(() => {
     onActiveCardChange?.("notes");

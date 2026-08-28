@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
-import { AnimatePresence } from "framer-motion";
+import { Accessibility, Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import {
   Dialog,
   DialogContent,
@@ -44,6 +44,7 @@ import {
   replacePortfolioRoute,
   isSupportedSection,
 } from "@/lib/routes";
+import { useMotionPreference } from "@/lib/motion";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -93,6 +94,7 @@ export default function Portfolio() {
   const [scrollCardsInstance, setScrollCardsInstance] = useState(0);
   const activeCardKeyRef = useRef(activeCardKey);
   const activeRouteSlugRef = useRef(activeRouteSlug);
+  const { reducedMotion, toggleReducedMotion } = useMotionPreference();
 
   const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
     useAmbientAudio(weather, timeOfDay);
@@ -370,13 +372,17 @@ export default function Portfolio() {
   const disabledDropdown = season === "newYear" || season === "halloween";
 
   return (
-    <main className="relative min-h-[100dvh] overflow-hidden" data-testid="main-content">
+    <MotionConfig reducedMotion={reducedMotion ? "always" : "never"}>
+      <main
+        className={`relative min-h-[100dvh] overflow-hidden ${reducedMotion ? "reduce-motion" : ""}`}
+        data-testid="main-content"
+      >
       {/* Dynamic Background */}
       <ErrorBoundary fallback={fallbackComponent}>{getBackgroundComponent()}</ErrorBoundary>
 
       {/* Plane in background */}
       <ErrorBoundary fallback={fallbackComponent}>
-        <AnimatePresence>{showPlane && <PlaneController />}</AnimatePresence>
+        <AnimatePresence>{showPlane && <PlaneController reducedMotion={reducedMotion} />}</AnimatePresence>
       </ErrorBoundary>
 
       <ErrorBoundary fallback={fallbackComponent}>
@@ -437,7 +443,7 @@ export default function Portfolio() {
         )}
       </ErrorBoundary>
 
-      <div className="absolute bottom-4 right-16 z-30 hidden md:block">
+      <div className="absolute bottom-4 right-28 z-30 hidden md:block">
         <Button
           onClick={handleShowPlane}
           aria-label={showPlane ? t("disablePlane") : t("enablePlane")}
@@ -447,6 +453,19 @@ export default function Portfolio() {
           } shadow-lg transition-all duration-300 mt-3 float-right`}
         >
           <Plane className="w-4 h-4" aria-hidden="true" />
+        </Button>
+      </div>
+
+      <div className="absolute bottom-4 right-16 z-30">
+        <Button
+          onClick={toggleReducedMotion}
+          aria-label={reducedMotion ? t("disableReducedMotion") : t("enableReducedMotion")}
+          aria-pressed={reducedMotion}
+          className={`${
+            reducedMotion ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
+          } shadow-lg transition-all duration-300 mt-3 float-right`}
+        >
+          <Accessibility className="w-4 h-4" aria-hidden="true" />
         </Button>
       </div>
 
@@ -562,6 +581,7 @@ export default function Portfolio() {
       </Dialog>
 
       <AnalyticsConsent />
-    </main>
+      </main>
+    </MotionConfig>
   );
 }

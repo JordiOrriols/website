@@ -33,6 +33,8 @@ interface Translation {
   disablePlane: string;
   enableSound: string;
   disableSound: string;
+  enableReducedMotion: string;
+  disableReducedMotion: string;
   dangerousFlyingTitle: string;
   dangerousFlyingMessage: string;
   dangerousFlyingMessageNight: string;
@@ -102,11 +104,14 @@ interface Translation {
   notesLabel: string;
   notesTitle: string;
   notesIntro: string;
+  levelTwo: string;
+  backToNotes: string;
   openNote: string;
   copyLink: string;
   notesItems: {
     title: string;
     shortText: string;
+    longText?: string;
     tags: string[];
     slug: string;
   }[];
@@ -115,6 +120,7 @@ interface Translation {
   sideProjectsLabel: string;
   sideProjectsTitle: string;
   sideProjectsIntro: string;
+  backToProjects: string;
   openProject: string;
   projectLink: string;
   sideProjectsItems: {

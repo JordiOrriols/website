@@ -35,6 +35,8 @@ export const es: Locale = {
     disablePlane: "Desactivar modo avión",
     enableSound: "Activar sonido",
     disableSound: "Desactivar sonido",
+    enableReducedMotion: "Activar movimiento reducido",
+    disableReducedMotion: "Desactivar movimiento reducido",
     dangerousFlyingTitle: "¡Condiciones de Vuelo Peligrosas!",
     dangerousFlyingMessage:
       "Es demasiado peligroso volar con {}. ¿Quieres establecer automáticamente mejores condiciones para volar?",
@@ -149,29 +151,37 @@ export const es: Locale = {
     notesTitle: "Pequeños escritos sobre liderazgo en ingeniería",
     notesIntro:
       "Notas cortas donde recojo decisiones, trade-offs y aprendizajes de delivery.",
+    levelTwo: "Nivel 2",
+    backToNotes: "Volver a notas",
     openNote: "Abrir nota",
     copyLink: "Copiar enlace",
     notesItems: [
       {
         title: "Entregar bajo presión",
         shortText:
-          "Cómo dividir una hoja de ruta con mucha presión en releases medibles sin perder confianza.",
+          "Dividir objetivos con alta presión en entregas pequeñas protege la confianza y la calidad.",
+        longText:
+          "En programas con mucha presión, intentar cerrar todo en una única gran release suele ocultar riesgos y retrasar decisiones clave. Prefiero dividir en hitos pequeños con resultado medible, responsables claros y puntos de revisión definidos.\n\nEste enfoque mejora la conversación con producto, dirección y marketing, y reduce tensión innecesaria en el equipo. El progreso se vuelve visible antes, el feedback llega a tiempo y la confianza se construye con evidencia.",
         tags: ["delivery", "liderazgo"],
-        slug: "entregar-bajo-presion",
+        slug: "shipping-under-pressure",
       },
       {
         title: "La simplicidad como decisión de producto",
         shortText:
-          "Por qué reducir complejidad de arquitectura puede mejorar el time-to-value más que añadir funcionalidades.",
+          "Reducir complejidad de arquitectura suele mejorar más el time-to-value que añadir una feature extra.",
+        longText:
+          "La complejidad técnica no es gratis: frena al equipo, complica operaciones y aumenta la probabilidad de incidencias. Por eso trato la simplicidad como una decisión de producto, porque impacta directamente en velocidad, estabilidad y resultados de negocio.\n\nNo se trata de tener menos código, sino de tener sistemas claros que cualquier equipo pueda entender y evolucionar. Con trade-offs explícitos, priorizar valor hoy sin bloquear el mañana es mucho más realista.",
         tags: ["arquitectura", "producto"],
-        slug: "simplicidad-decision-producto",
+        slug: "simplicity-product-decision",
       },
       {
         title: "Autonomía de equipo con límites claros",
         shortText:
-          "El equilibrio entre alineación y libertad para avanzar más rápido con menos sorpresas.",
+          "La autonomía funciona cuando existe alineación clara, contexto compartido y límites explícitos.",
+        longText:
+          "Autonomía sin contexto genera deriva; control sin confianza bloquea decisiones. Liderar bien significa definir objetivos, límites y principios para que el equipo pueda decidir sin esperar aprobación en cada paso.\n\nCuando las expectativas son claras, los equipos coordinan mejor, aprenden más rápido y asumen ownership real de los resultados. Ahí es donde velocidad de delivery y crecimiento de personas se refuerzan.",
         tags: ["equipos", "proceso"],
-        slug: "autonomia-equipo-limites",
+        slug: "team-autonomy-guardrails",
       },
     ],
 
@@ -180,6 +190,7 @@ export const es: Locale = {
     sideProjectsTitle: "Cosas que construyo por curiosidad",
     sideProjectsIntro:
       "Experimentos pequeños para probar ideas de interacción, hipótesis de producto y límites técnicos.",
+    backToProjects: "Volver a proyectos",
     openProject: "Abrir proyecto",
     projectLink: "Visitar proyecto",
     sideProjectsItems: [

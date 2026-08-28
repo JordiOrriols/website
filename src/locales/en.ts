@@ -35,6 +35,8 @@ export const en: Locale = {
     disablePlane: "Disable plane mode",
     enableSound: "Enable sound",
     disableSound: "Disable sound",
+    enableReducedMotion: "Enable reduced motion",
+    disableReducedMotion: "Disable reduced motion",
     dangerousFlyingTitle: "Dangerous Flying Conditions!",
     dangerousFlyingMessage:
       "It's too dangerous to fly during {} conditions. Would you like to automatically set better conditions for flying?",
@@ -147,27 +149,34 @@ export const en: Locale = {
     notesLabel: "Notes",
     notesTitle: "Small writing on engineering leadership",
     notesIntro: "Short notes where I capture decisions, trade-offs, and lessons from delivery.",
+    levelTwo: "Level 2",
+    backToNotes: "Back to notes",
     openNote: "Open note",
     copyLink: "Copy link",
     notesItems: [
       {
         title: "Shipping under pressure",
-        shortText:
-          "How to split a high-pressure roadmap into measurable releases without losing trust.",
+        shortText: "Splitting high-pressure goals into small releases protects trust and delivery quality.",
+        longText:
+          "In high-pressure programs, promising one big release usually creates hidden risk and late surprises. I prefer to split delivery into smaller milestones with measurable outcomes, clear owners, and explicit review points.\n\nThis creates transparency with product, leadership, and marketing, while helping teams preserve focus under pressure. Progress becomes visible early, decisions get better with real feedback, and confidence is earned through evidence instead of optimism.",
         tags: ["delivery", "leadership"],
         slug: "shipping-under-pressure",
       },
       {
         title: "Simplicity as a product decision",
         shortText:
-          "Why reducing architecture complexity can improve time-to-value more than adding features.",
+          "Simpler architecture often improves time-to-value more than adding one more feature.",
+        longText:
+          "Technical complexity is not neutral: it slows onboarding, increases incidents, and delays change. I treat simplicity as a product decision because maintainability directly impacts speed, reliability, and user outcomes.\n\nThe goal is not minimal code, but clear systems teams can understand and evolve. When trade-offs are explicit, it becomes easier to prioritize what delivers business value now while keeping future options open.",
         tags: ["architecture", "product"],
         slug: "simplicity-product-decision",
       },
       {
         title: "Team autonomy with clear guardrails",
         shortText:
-          "The balance between alignment and freedom that helps teams move faster with fewer surprises.",
+          "Teams move faster when autonomy is paired with clear alignment and boundaries.",
+        longText:
+          "Autonomy without context creates drift, and control without trust creates bottlenecks. Effective leadership defines goals, boundaries, and decision principles so teams can move independently without losing coherence.\n\nWhen expectations are explicit, teams can decide faster, coordinate better across functions, and own outcomes end to end. This is where delivery speed and people growth reinforce each other.",
         tags: ["teams", "process"],
         slug: "team-autonomy-guardrails",
       },
@@ -178,6 +187,7 @@ export const en: Locale = {
     sideProjectsTitle: "Things I build out of curiosity",
     sideProjectsIntro:
       "Small experiments to test interaction ideas, product bets, and technical boundaries.",
+    backToProjects: "Back to projects",
     openProject: "Open project",
     projectLink: "Visit project",
     sideProjectsItems: [

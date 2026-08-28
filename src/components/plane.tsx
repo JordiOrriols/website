@@ -2,12 +2,16 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-export default function PlaneController() {
+interface PlaneControllerProps {
+  reducedMotion?: boolean;
+}
+
+export default function PlaneController({ reducedMotion = false }: PlaneControllerProps) {
   const { t } = useTranslation();
 
   const [position, setPosition] = useState({ x: 100, y: 10 });
   const [rotation, setRotation] = useState(0);
-  const [showNotification, setShowNotification] = useState(true);
+  const [showNotification, setShowNotification] = useState(!reducedMotion);
   const velocityYRef = useRef(0);
   const positionRef = useRef({ x: 100, y: 10 });
   const animationIdRef = useRef<number | null>(null);
@@ -17,7 +21,15 @@ export default function PlaneController() {
   const acceleration = 0.05;
 
   useEffect(() => {
+    setShowNotification(!reducedMotion);
+  }, [reducedMotion]);
+
+  useEffect(() => {
     // Hide notification after 6 seconds
+    if (reducedMotion) {
+      return;
+    }
+
     const timer = setTimeout(() => {
       setShowNotification(false);
     }, 6000);
@@ -68,7 +80,9 @@ export default function PlaneController() {
       animationIdRef.current = requestAnimationFrame(animate);
     };
 
-    animationIdRef.current = requestAnimationFrame(animate);
+    if (!reducedMotion) {
+      animationIdRef.current = requestAnimationFrame(animate);
+    }
 
     return () => {
       isRunning = false;
@@ -79,7 +93,7 @@ export default function PlaneController() {
         cancelAnimationFrame(animationIdRef.current);
       }
     };
-  }, [allowedKeys]);
+  }, [allowedKeys, reducedMotion]);
 
   return (
     <>
@@ -92,9 +106,9 @@ export default function PlaneController() {
           transform: "translate(-50%, -50%)",
         }}
         animate={{
-          rotate: rotation,
+          rotate: reducedMotion ? 0 : rotation,
         }}
-        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+        transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 20 }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

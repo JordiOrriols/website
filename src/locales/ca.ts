@@ -35,6 +35,8 @@ export const ca: Locale = {
     disablePlane: "Desactivar mode avió",
     enableSound: "Activar so",
     disableSound: "Desactivar so",
+    enableReducedMotion: "Activar moviment reduit",
+    disableReducedMotion: "Desactivar moviment reduit",
     dangerousFlyingTitle: "Condicions de Vol Perilloses!",
     dangerousFlyingMessage:
       "És massa perillós volar amb {}. Vols establir automàticament millors condicions per volar?",
@@ -149,29 +151,37 @@ export const ca: Locale = {
     notesTitle: "Petits escrits sobre lideratge en enginyeria",
     notesIntro:
       "Notes curtes on recullo decisions, trade-offs i aprenentatges de delivery.",
+    levelTwo: "Nivell 2",
+    backToNotes: "Tornar a notes",
     openNote: "Obrir nota",
     copyLink: "Copiar enllac",
     notesItems: [
       {
         title: "Entregar sota pressio",
         shortText:
-          "Com dividir un roadmap amb molta pressio en releases mesurables sense perdre confiança.",
+          "Dividir objectius amb molta pressio en entregues petites protegeix la confiança i la qualitat.",
+        longText:
+          "En programes amb pressio alta, intentar entregar-ho tot en una gran release acostuma a amagar riscos i retardar decisions importants. Prefereixo dividir el delivery en fites petites amb resultats mesurables, responsables clars i punts de revisio definits.\n\nAquest enfocament millora la coordinacio amb producte, direccio i marketing, i redueix friccio dins l'equip. El progres es veu abans, el feedback arriba a temps i la confiança es construeix amb evidencia.",
         tags: ["delivery", "lideratge"],
-        slug: "entregar-sota-pressio",
+        slug: "shipping-under-pressure",
       },
       {
         title: "La simplicitat com a decisio de producte",
         shortText:
-          "Per que reduir la complexitat de l'arquitectura pot millorar el time-to-value mes que afegir funcionalitats.",
+          "Reduir complexitat d'arquitectura sol millorar mes el time-to-value que afegir una feature extra.",
+        longText:
+          "La complexitat tecnica no es neutra: frena l'equip, complica operacions i incrementa incidencies. Per aixo tracto la simplicitat com una decisio de producte, perque impacta directament en velocitat, estabilitat i resultats.\n\nNo es una questio de tenir menys codi, sino de tenir sistemes clars que qualsevol equip pugui entendre i evolucionar. Amb trade-offs explicits, prioritzar valor avui sense hipotecar el dema es molt mes viable.",
         tags: ["arquitectura", "producte"],
-        slug: "simplicitat-decisio-producte",
+        slug: "simplicity-product-decision",
       },
       {
         title: "Autonomia d'equip amb limits clars",
         shortText:
-          "L'equilibri entre alineacio i llibertat per avancar mes rapid amb menys sorpreses.",
+          "L'autonomia funciona millor amb alineacio clara, context compartit i limits explicits.",
+        longText:
+          "Autonomia sense context genera desviacions; control sense confiança crea colls d'ampolla. Liderar be vol dir definir objectius, limits i principis perque l'equip pugui decidir sense esperar aprovacions constants.\n\nQuan les expectatives son clares, els equips coordinen millor, aprenen mes rapid i assumeixen ownership real dels resultats. Aqui es on velocitat de delivery i creixement de persones es reforcen.",
         tags: ["equips", "proces"],
-        slug: "autonomia-equip-limits",
+        slug: "team-autonomy-guardrails",
       },
     ],
 
@@ -180,6 +190,7 @@ export const ca: Locale = {
     sideProjectsTitle: "Coses que construeixo per curiositat",
     sideProjectsIntro:
       "Experiments petits per provar idees d'interaccio, hipotesis de producte i limits tecnics.",
+    backToProjects: "Tornar a projectes",
     openProject: "Obrir projecte",
     projectLink: "Visitar projecte",
     sideProjectsItems: [
