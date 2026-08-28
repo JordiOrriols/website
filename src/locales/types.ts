@@ -43,6 +43,7 @@ interface Translation {
   // Portfolio Page
   name: string;
   title: string;
+  valueStatement: string;
   projects: string;
   companies: string;
   leading: string;
@@ -85,6 +86,7 @@ interface Translation {
   // About Me Section
   aboutMeLabel: string;
   aboutMeTitle: string;
+  aboutMeStatement: string;
   aboutMeDescription1: string;
   aboutMeDescription2: string;
   aboutMeLocation: string;
@@ -93,6 +95,7 @@ interface Translation {
   // Philosophy Section
   philosophyLabel: string;
   philosophyTitle: string;
+  philosophyIntro: string;
   philosophyPrinciples: { number: string; title: string; description: string }[];
 
   // Notes Section

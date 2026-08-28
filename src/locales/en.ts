@@ -47,7 +47,9 @@ export const en: Locale = {
 
     // Portfolio Page
     name: "Jordi Orriols",
-    title: "Multimedia Engineering Lead",
+    title: "Engineering Lead - TypeScript, React Native, NestJS, AWS",
+    valueStatement:
+      "I build complex digital products without turning technology into unnecessary complexity.",
     projects: "Projects",
     companies: "Companies",
     leading: "Leading",
@@ -87,53 +89,57 @@ export const en: Locale = {
     messageResponse: "I’ll reply as soon as possible.",
     // About Me Section
     aboutMeLabel: "About Me",
-    aboutMeTitle: "Building digital experiences that matter",
+    aboutMeTitle: "Engineering leadership focused on impact",
+    aboutMeStatement:
+      "I lead product and engineering teams with one priority: clarity in decisions, quality in delivery, and measurable business impact.",
     aboutMeDescription1:
-      "I'm a Multimedia Engineering Lead based in Barcelona, passionate about creating innovative digital products that combine cutting-edge technology with thoughtful design.",
+      "I am based in Barcelona and I work across TypeScript, React, React Native, NestJS, and AWS. My focus is to build systems teams can understand, operate, and evolve with confidence.",
     aboutMeDescription2:
-      "With over 12 years of experience in the industry, I've led teams and projects across multiple sectors, always focusing on delivering exceptional user experiences.",
+      "I care about trade-offs that create real progress: smaller deliveries, fast feedback, and product outcomes that justify every technical decision.",
     aboutMeLocation: "Barcelona, Spain",
     aboutMeHighlights: [
-      "Multimedia Engineering Lead",
-      "12+ years of experience",
-      "Team leadership & mentoring",
-      "Full-stack development",
-      "Product-driven mindset",
+      "Leadership through context, not authority",
+      "Simplicity over sophistication",
+      "Product impact over perfect code",
+      "Team growth as a core metric",
+      "Systems others can maintain",
     ],
 
     // Philosophy Section
     philosophyLabel: "Philosophy",
-    philosophyTitle: "Principles that guide my work",
+    philosophyTitle: "Decision principles behind my work",
+    philosophyIntro:
+      "These principles help me align product direction, technical decisions, and team autonomy in high-pressure contexts.",
     philosophyPrinciples: [
       {
         number: "01",
-        title: "User First",
+        title: "Simplicity is architecture",
         description:
-          "Every decision starts with the user. Technology should serve people, not the other way around.",
+          "I add complexity only when it solves a real problem. Removing complexity later is always more expensive.",
       },
       {
         number: "02",
-        title: "Simplicity",
+        title: "Product before technology",
         description:
-          "The best solutions are the simplest ones. Complexity is easy; simplicity requires deep understanding.",
+          "Frameworks and migrations are means, not goals. The right choice is the one that improves outcomes for users and business.",
       },
       {
         number: "03",
-        title: "Craftsmanship",
+        title: "Maintainable by the team",
         description:
-          "Quality is not negotiable. Every line of code, every pixel, every interaction matters.",
+          "If only one person can evolve a system, it is not done. Shared understanding is part of the definition of quality.",
       },
       {
         number: "04",
-        title: "Continuous Learning",
+        title: "Explicit trade-offs",
         description:
-          "Technology evolves fast. Staying curious and adaptable is key to building what's next.",
+          "Almost every decision has a cost. I make gains, risks, and revisitation points explicit before committing.",
       },
       {
         number: "05",
-        title: "Collaboration",
+        title: "Autonomy with alignment",
         description:
-          "Great products are built by great teams. Open communication and shared ownership drive results.",
+          "Leadership is creating the context so teams can decide well without waiting for approval in every step.",
       },
     ],
 

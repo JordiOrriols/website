@@ -13,6 +13,8 @@ vi.mock("react-i18next", () => ({
             { number: "01", title: "Principle 1", description: "Description 1" },
             { number: "02", title: "Principle 2", description: "Description 2" },
             { number: "03", title: "Principle 3", description: "Description 3" },
+            { number: "04", title: "Principle 4", description: "Description 4" },
+            { number: "05", title: "Principle 5", description: "Description 5" },
           ];
         }
         return [];
@@ -43,11 +45,18 @@ describe("Philosophy Component", () => {
     expect(getByText("philosophyTitle")).toBeTruthy();
   });
 
+  it("renders philosophy intro", () => {
+    const { getByText } = render(<Philosophy />);
+    expect(getByText("philosophyIntro")).toBeTruthy();
+  });
+
   it("renders all principles", () => {
     const { getByText } = render(<Philosophy />);
     expect(getByText("Principle 1")).toBeTruthy();
     expect(getByText("Principle 2")).toBeTruthy();
     expect(getByText("Principle 3")).toBeTruthy();
+    expect(getByText("Principle 4")).toBeTruthy();
+    expect(getByText("Principle 5")).toBeTruthy();
   });
 
   it("renders principle numbers", () => {
@@ -55,6 +64,8 @@ describe("Philosophy Component", () => {
     expect(getByText("01")).toBeTruthy();
     expect(getByText("02")).toBeTruthy();
     expect(getByText("03")).toBeTruthy();
+    expect(getByText("04")).toBeTruthy();
+    expect(getByText("05")).toBeTruthy();
   });
 
   it("renders principle descriptions", () => {
@@ -62,12 +73,14 @@ describe("Philosophy Component", () => {
     expect(getByText("Description 1")).toBeTruthy();
     expect(getByText("Description 2")).toBeTruthy();
     expect(getByText("Description 3")).toBeTruthy();
+    expect(getByText("Description 4")).toBeTruthy();
+    expect(getByText("Description 5")).toBeTruthy();
   });
 
   it("renders correct number of principle items", () => {
     const { getAllByTestId } = render(<Philosophy />);
     const items = getAllByTestId(/^principle-/);
-    expect(items).toHaveLength(3);
+    expect(items).toHaveLength(5);
   });
 
   it("has correct card styling", () => {

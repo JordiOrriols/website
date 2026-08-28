@@ -23,6 +23,7 @@ export default function Philosophy() {
         <h2 className="text-3xl md:text-4xl font-light text-gray-800 mt-2 mb-8">
           {t("philosophyTitle")}
         </h2>
+        <p className="text-gray-600 leading-relaxed mb-8">{t("philosophyIntro")}</p>
 
         <motion.div
           className="space-y-6"

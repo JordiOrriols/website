@@ -9,7 +9,7 @@ vi.mock("react-i18next", () => ({
     t: (key: string, opts?: Record<string, unknown>) => {
       if (opts?.returnObjects) {
         if (key === "aboutMeHighlights") {
-          return ["Highlight 1", "Highlight 2", "Highlight 3"];
+          return ["Highlight 1", "Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5"];
         }
         return [];
       }
@@ -49,6 +49,11 @@ describe("AboutMe Component", () => {
     expect(getByText("aboutMeDescription1")).toBeTruthy();
   });
 
+  it("renders strategy statement", () => {
+    const { getByText } = render(<AboutMe />);
+    expect(getByText("aboutMeStatement")).toBeTruthy();
+  });
+
   it("renders second bio paragraph", () => {
     const { getByText } = render(<AboutMe />);
     expect(getByText("aboutMeDescription2")).toBeTruthy();
@@ -69,12 +74,14 @@ describe("AboutMe Component", () => {
     expect(getByText("Highlight 1")).toBeTruthy();
     expect(getByText("Highlight 2")).toBeTruthy();
     expect(getByText("Highlight 3")).toBeTruthy();
+    expect(getByText("Highlight 4")).toBeTruthy();
+    expect(getByText("Highlight 5")).toBeTruthy();
   });
 
   it("renders highlights with check icons", () => {
     const { getAllByTestId } = render(<AboutMe />);
     const checkIcons = getAllByTestId("highlight-check");
-    expect(checkIcons).toHaveLength(3);
+    expect(checkIcons).toHaveLength(5);
   });
 
   it("has correct card styling", () => {

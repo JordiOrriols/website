@@ -69,6 +69,9 @@ export default function HomeSection(props: Props) {
               <p className="text-gray-400 text-m tracking-wider" data-testid="profile-title">
                 {t("title")}
               </p>
+              <p className="text-gray-600 text-sm md:text-base mt-4 max-w-xl mx-auto" data-testid="profile-value-statement">
+                {t("valueStatement")}
+              </p>
             </div>
           </div>
         </div>
@@ -84,8 +87,7 @@ export default function HomeSection(props: Props) {
                 {
                   label: t("projects"),
                   value: "15",
-                  onClick: () => false,
-                  // onClick: () => handle("projects"),
+                  onClick: () => handle("projects"),
                 },
                 {
                   label: t("companies"),
@@ -96,8 +98,7 @@ export default function HomeSection(props: Props) {
                   label: t("leading"),
                   value: "3",
                   unit: t("years"),
-                  onClick: () => false,
-                  //onClick: () => handle("leading_years"),
+                  onClick: () => handle("leading_years"),
                 },
                 {
                   label: t("experience"),

@@ -72,7 +72,12 @@ describe("HomeSection Component", () => {
     expect(getByTestId("language-selector")).toBeTruthy();
   });
 
-  it.skip("calls handleStatClick when stat is clicked", () => {
+  it("renders value statement copy", () => {
+    const { getByText } = render(<HomeSection season="summer" isModalOpen={false} />);
+    expect(getByText("valueStatement")).toBeTruthy();
+  });
+
+  it("calls handleStatClick when projects stat is clicked", () => {
     const handleStatClick = vi.fn();
     const { getByTestId } = render(
       <HomeSection season="summer" isModalOpen={false} handleStatClick={handleStatClick} />
@@ -123,11 +128,14 @@ describe("HomeSection Component", () => {
       <HomeSection season="summer" isModalOpen={false} handleStatClick={handleStatClick} />
     );
 
+    fireEvent.click(getByTestId("stat-projects"));
+    expect(handleStatClick).toHaveBeenCalledWith("projects");
+
     fireEvent.click(getByTestId("stat-companies"));
     expect(handleStatClick).toHaveBeenCalledWith("companies");
 
-    // fireEvent.click(getByTestId("stat-leading"));
-    // expect(handleStatClick).toHaveBeenCalledWith("leading_years");
+    fireEvent.click(getByTestId("stat-leading"));
+    expect(handleStatClick).toHaveBeenCalledWith("leading_years");
 
     fireEvent.click(getByTestId("stat-experience"));
     expect(handleStatClick).toHaveBeenCalledWith("experience_years");

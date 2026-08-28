@@ -47,7 +47,9 @@ export const es: Locale = {
 
     // Portfolio Page
     name: "Jordi Orriols",
-    title: "Lider de Ingeniería Multimedia",
+    title: "Engineering Lead - TypeScript, React Native, NestJS, AWS",
+    valueStatement:
+      "Construyo productos digitales complejos sin convertir la tecnologia en complejidad innecesaria.",
     projects: "Proyectos",
     companies: "Compañías",
     leading: "Liderando",
@@ -88,53 +90,57 @@ export const es: Locale = {
 
     // About Me Section
     aboutMeLabel: "Sobre mí",
-    aboutMeTitle: "Construyendo experiencias digitales que importan",
+    aboutMeTitle: "Liderazgo de ingenieria orientado a impacto",
+    aboutMeStatement:
+      "Lidero equipos de producto e ingenieria con una prioridad: claridad en decisiones, calidad en delivery e impacto de negocio medible.",
     aboutMeDescription1:
-      "Soy un Multimedia Engineering Lead en Barcelona, apasionado por crear productos digitales innovadores que combinan tecnología de vanguardia con un diseño cuidado.",
+      "Trabajo desde Barcelona entre TypeScript, React, React Native, NestJS y AWS. Mi foco es construir sistemas que los equipos entiendan, operen y evolucionen con confianza.",
     aboutMeDescription2:
-      "Con más de 12 años de experiencia en la industria, he liderado equipos y proyectos en múltiples sectores, siempre enfocado en ofrecer experiencias de usuario excepcionales.",
+      "Me importan los trade-offs que generan progreso real: entregas mas pequeñas, feedback rapido y resultados de producto que justifiquen cada decision tecnica.",
     aboutMeLocation: "Barcelona, España",
     aboutMeHighlights: [
-      "Multimedia Engineering Lead",
-      "Más de 12 años de experiencia",
-      "Liderazgo de equipos y mentoría",
-      "Desarrollo full-stack",
-      "Mentalidad orientada al producto",
+      "Liderazgo mediante contexto, no autoridad",
+      "Simplicidad sobre sofisticacion",
+      "Impacto de producto sobre codigo perfecto",
+      "Crecimiento del equipo como metrica central",
+      "Sistemas mantenibles por otros",
     ],
 
     // Philosophy Section
     philosophyLabel: "Filosofía",
-    philosophyTitle: "Principios que guían mi trabajo",
+    philosophyTitle: "Principios de decision que guian mi trabajo",
+    philosophyIntro:
+      "Estos principios me ayudan a alinear direccion de producto, decisiones tecnicas y autonomia del equipo en contextos de alta presion.",
     philosophyPrinciples: [
       {
         number: "01",
-        title: "El usuario primero",
+        title: "La simplicidad es arquitectura",
         description:
-          "Cada decisión empieza con el usuario. La tecnología debe servir a las personas, no al revés.",
+          "Solo añado complejidad cuando resuelve un problema real. Quitar complejidad mas tarde siempre cuesta mas.",
       },
       {
         number: "02",
-        title: "Simplicidad",
+        title: "Producto antes que tecnologia",
         description:
-          "Las mejores soluciones son las más simples. La complejidad es fácil; la simplicidad requiere comprensión profunda.",
+          "Frameworks y migraciones son medios, no objetivos. La buena decision es la que mejora resultados de usuario y negocio.",
       },
       {
         number: "03",
-        title: "Artesanía",
+        title: "Mantenible por el equipo",
         description:
-          "La calidad no es negociable. Cada línea de código, cada píxel, cada interacción importa.",
+          "Si una sola persona puede evolucionar un sistema, no esta terminado. El entendimiento compartido tambien es calidad.",
       },
       {
         number: "04",
-        title: "Aprendizaje continuo",
+        title: "Trade-offs explicitos",
         description:
-          "La tecnología evoluciona rápido. Mantenerse curioso y adaptable es clave para construir lo que viene.",
+          "Casi toda decision tiene coste. Hago explicitos beneficios, riesgos y puntos de revision antes de decidir.",
       },
       {
         number: "05",
-        title: "Colaboración",
+        title: "Autonomia con alineacion",
         description:
-          "Los grandes productos los construyen grandes equipos. La comunicación abierta y la propiedad compartida generan resultados.",
+          "Liderar es crear contexto para que el equipo decida bien sin depender de aprobaciones en cada paso.",
       },
     ],
 

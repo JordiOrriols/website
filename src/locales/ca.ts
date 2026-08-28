@@ -47,7 +47,9 @@ export const ca: Locale = {
 
     // Portfolio Page
     name: "Jordi Orriols",
-    title: "Líder d'Enginyeria Multimèdia",
+    title: "Engineering Lead - TypeScript, React Native, NestJS, AWS",
+    valueStatement:
+      "Construeixo productes digitals complexos sense convertir la tecnologia en complexitat innecessaria.",
     projects: "Projectes",
     companies: "Empreses",
     leading: "Liderant",
@@ -88,53 +90,57 @@ export const ca: Locale = {
 
     // About Me Section
     aboutMeLabel: "Sobre mi",
-    aboutMeTitle: "Construint experiències digitals que importen",
+    aboutMeTitle: "Lideratge d'enginyeria orientat a impacte",
+    aboutMeStatement:
+      "Lidero equips de producte i enginyeria amb una prioritat: claredat en decisions, qualitat en delivery i impacte de negoci mesurable.",
     aboutMeDescription1:
-      "Soc un Multimedia Engineering Lead a Barcelona, apassionat per crear productes digitals innovadors que combinen tecnologia d'avantguarda amb un disseny acurat.",
+      "Treballo des de Barcelona entre TypeScript, React, React Native, NestJS i AWS. El meu focus es construir sistemes que els equips entenguin, operin i evolucionin amb confiança.",
     aboutMeDescription2:
-      "Amb més de 12 anys d'experiència en la indústria, he liderat equips i projectes en diversos sectors, sempre enfocat a oferir experiències d'usuari excepcionals.",
+      "M'importen els trade-offs que generen progres real: entregues mes petites, feedback rapid i resultats de producte que justifiquin cada decisio tecnica.",
     aboutMeLocation: "Barcelona, Espanya",
     aboutMeHighlights: [
-      "Multimedia Engineering Lead",
-      "Més de 12 anys d'experiència",
-      "Lideratge d'equips i mentoria",
-      "Desenvolupament full-stack",
-      "Mentalitat orientada al producte",
+      "Lideratge mitjancant context, no autoritat",
+      "Simplicitat sobre sofisticacio",
+      "Impacte de producte sobre codi perfecte",
+      "Creixement de l'equip com a metrica central",
+      "Sistemes mantenibles per altres",
     ],
 
     // Philosophy Section
     philosophyLabel: "Filosofia",
-    philosophyTitle: "Principis que guien el meu treball",
+    philosophyTitle: "Principis de decisio que guien el meu treball",
+    philosophyIntro:
+      "Aquests principis m'ajuden a alinear direccio de producte, decisions tecniques i autonomia de l'equip en contextos d'alta pressio.",
     philosophyPrinciples: [
       {
         number: "01",
-        title: "L'usuari primer",
+        title: "La simplicitat es arquitectura",
         description:
-          "Cada decisió comença amb l'usuari. La tecnologia ha de servir les persones, no al revés.",
+          "Nomes afegeixo complexitat quan resol un problema real. Treure complexitat despres sempre costa mes.",
       },
       {
         number: "02",
-        title: "Simplicitat",
+        title: "Producte abans que tecnologia",
         description:
-          "Les millors solucions són les més simples. La complexitat és fàcil; la simplicitat requereix comprensió profunda.",
+          "Frameworks i migracions son mitjans, no objectius. La bona decisio es la que millora resultats d'usuari i negoci.",
       },
       {
         number: "03",
-        title: "Artesania",
+        title: "Mantenible per l'equip",
         description:
-          "La qualitat no és negociable. Cada línia de codi, cada píxel, cada interacció importa.",
+          "Si nomes una persona pot evolucionar un sistema, no esta acabat. L'entesa compartida tambe es qualitat.",
       },
       {
         number: "04",
-        title: "Aprenentatge continu",
+        title: "Trade-offs explicits",
         description:
-          "La tecnologia evoluciona ràpid. Mantenir-se curiós i adaptable és clau per construir el que ve.",
+          "Gairebe tota decisio te cost. Faig explicits beneficis, riscos i punts de revisio abans de decidir.",
       },
       {
         number: "05",
-        title: "Col·laboració",
+        title: "Autonomia amb alineacio",
         description:
-          "Els grans productes els construeixen grans equips. La comunicació oberta i la propietat compartida generen resultats.",
+          "Liderar es crear context perque l'equip decideixi be sense dependre d'aprovacions a cada pas.",
       },
     ],
 
