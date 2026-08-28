@@ -1,6 +1,6 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import NotesSection from "./notes";
 
 vi.mock("react-i18next", () => ({
@@ -63,13 +63,12 @@ describe("NotesSection", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /Shipping under pressure/i }));
 
-    expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith(
-      "en",
-      "notes",
-      "shipping-under-pressure"
-    );
+    expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith("en", "notes", "shipping-under-pressure");
     expect(analyticsMocks.trackNoteOpened).toHaveBeenCalledWith("shipping-under-pressure");
-    expect(screen.getByTestId("note-detail")).toBeInTheDocument();
+
+    return waitFor(() => {
+      expect(screen.getByTestId("note-detail")).toBeInTheDocument();
+    });
   });
 
   it("returns to notes root from detail view", () => {

@@ -494,6 +494,7 @@ export default function Portfolio() {
         <ScrollCards
           key={scrollCardsInstance}
           initialCardKey={activeCardKey}
+          scrollLocked={Boolean(activeRouteSlug)}
           onActiveCardChange={(cardKey) => {
             if (cardKey !== activeCardKey) {
               setActiveCardKey(cardKey);

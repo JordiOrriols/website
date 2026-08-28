@@ -1,6 +1,6 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import SideProjectsSection from "./side-projects";
 
 vi.mock("react-i18next", () => ({
@@ -70,7 +70,10 @@ describe("SideProjectsSection", () => {
 
     expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith("en", "side-projects", "watch-lab");
     expect(analyticsMocks.trackSideProjectOpened).toHaveBeenCalledWith("watch-lab");
-    expect(screen.getByTestId("side-project-detail")).toBeInTheDocument();
+
+    return waitFor(() => {
+      expect(screen.getByTestId("side-project-detail")).toBeInTheDocument();
+    });
   });
 
   it("returns to side projects root from detail view", () => {
@@ -86,12 +89,14 @@ describe("SideProjectsSection", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /Watch Lab/i }));
 
-    fireEvent.click(screen.getByRole("link", { name: "Visit project" }));
+    return waitFor(() => {
+      fireEvent.click(screen.getByRole("link", { name: "Visit project" }));
 
-    expect(analyticsMocks.trackSideProjectLinkClicked).toHaveBeenCalledWith(
-      "watch-lab",
-      "https://example.com/watch-lab"
-    );
+      expect(analyticsMocks.trackSideProjectLinkClicked).toHaveBeenCalledWith(
+        "watch-lab",
+        "https://example.com/watch-lab"
+      );
+    });
   });
 
   it("does not render open project button in list view", () => {

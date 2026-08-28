@@ -1,5 +1,4 @@
 import React, { useState, useRef, useCallback, useEffect, type ReactNode } from "react";
-import { motion } from "framer-motion";
 
 interface CardItem {
   key: string;
@@ -10,12 +9,14 @@ interface ScrollCardsProps {
   cards: CardItem[];
   onActiveCardChange?: (cardKey: string, index: number) => void;
   initialCardKey?: string;
+  scrollLocked?: boolean;
 }
 
 export default function ScrollCards({
   cards,
   onActiveCardChange,
   initialCardKey,
+  scrollLocked = false,
 }: ScrollCardsProps) {
   const getInitialIndex = () => {
     if (!initialCardKey) return 0;
@@ -61,12 +62,11 @@ export default function ScrollCards({
       ref={containerRef}
       onScroll={handleScroll}
       data-testid="scroll-cards-container"
-      className="h-[100dvh] overflow-y-auto snap-y snap-mandatory"
+      className={`h-[100dvh] snap-y snap-mandatory ${scrollLocked ? "overflow-hidden" : "overflow-y-auto"}`}
       style={{ scrollSnapType: "y mandatory" }}
     >
       {cards.map((card, index) => {
         const isActive = index === activeIndex;
-        const isAbove = index < activeIndex;
 
         return (
           <div
@@ -78,21 +78,7 @@ export default function ScrollCards({
               pointerEvents: isActive ? "auto" : "none",
             }}
           >
-            <motion.div
-              className="relative w-full max-w-3xl"
-              animate={{
-                opacity: isActive ? 1 : isAbove ? 0 : 0.4,
-                scale: isActive ? 1 : isAbove ? 0.9 : 0.96,
-                y: isActive ? 0 : isAbove ? -40 : 40,
-              }}
-              transition={{
-                type: "spring",
-                damping: 25,
-                stiffness: 200,
-              }}
-            >
-              {card.component}
-            </motion.div>
+            <div className="relative w-full max-w-3xl">{card.component}</div>
           </div>
         );
       })}
