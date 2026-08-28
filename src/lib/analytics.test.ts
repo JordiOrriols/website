@@ -13,6 +13,13 @@ import {
   trackSpecialEventsToggle,
   trackPageView,
   trackError,
+  trackSectionVisible,
+  trackBlockVisible,
+  trackContentDisplayed,
+  trackNoteOpened,
+  trackNoteLinkCopied,
+  trackSideProjectOpened,
+  trackSideProjectLinkClicked,
 } from "./analytics";
 
 describe("Analytics Service", () => {
@@ -308,6 +315,105 @@ describe("Analytics Service", () => {
       expect(mockTrack).toHaveBeenCalledWith("error", {
         error: "Test error",
         context: "unknown",
+      });
+    });
+  });
+
+  describe("visibility and content events", () => {
+    it("should track section visibility", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackSectionVisible("about");
+
+      expect(mockTrack).toHaveBeenCalledWith("section_visible", {
+        section: "about",
+      });
+    });
+
+    it("should track block visibility with section context", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackBlockVisible("about", "highlights");
+
+      expect(mockTrack).toHaveBeenCalledWith("block_visible", {
+        section: "about",
+        block: "highlights",
+      });
+    });
+
+    it("should track content displayed with content type", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackContentDisplayed("note", "engineering-tradeoffs", "about");
+
+      expect(mockTrack).toHaveBeenCalledWith("content_displayed", {
+        content_type: "note",
+        slug: "engineering-tradeoffs",
+        section: "about",
+      });
+    });
+  });
+
+  describe("notes and side projects events", () => {
+    it("should track note opened", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackNoteOpened("engineering-tradeoffs");
+
+      expect(mockTrack).toHaveBeenCalledWith("note_opened", {
+        slug: "engineering-tradeoffs",
+      });
+    });
+
+    it("should track note link copied", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackNoteLinkCopied("engineering-tradeoffs");
+
+      expect(mockTrack).toHaveBeenCalledWith("note_link_copied", {
+        slug: "engineering-tradeoffs",
+      });
+    });
+
+    it("should track side project opened", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackSideProjectOpened("watch-lab");
+
+      expect(mockTrack).toHaveBeenCalledWith("side_project_opened", {
+        slug: "watch-lab",
+      });
+    });
+
+    it("should track side project link clicked", () => {
+      const mockTrack = vi.fn();
+      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
+        track: mockTrack,
+      };
+
+      trackSideProjectLinkClicked("watch-lab", "https://example.com");
+
+      expect(mockTrack).toHaveBeenCalledWith("side_project_link_clicked", {
+        slug: "watch-lab",
+        url: "https://example.com",
       });
     });
   });

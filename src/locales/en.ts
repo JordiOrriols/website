@@ -136,5 +136,69 @@ export const en: Locale = {
           "Great products are built by great teams. Open communication and shared ownership drive results.",
       },
     ],
+
+    // Notes Section
+    notesLabel: "Notes",
+    notesTitle: "Small writing on engineering leadership",
+    notesIntro: "Short notes where I capture decisions, trade-offs, and lessons from delivery.",
+    openNote: "Open note",
+    copyLink: "Copy link",
+    notesItems: [
+      {
+        title: "Shipping under pressure",
+        shortText:
+          "How to split a high-pressure roadmap into measurable releases without losing trust.",
+        tags: ["delivery", "leadership"],
+        slug: "shipping-under-pressure",
+      },
+      {
+        title: "Simplicity as a product decision",
+        shortText:
+          "Why reducing architecture complexity can improve time-to-value more than adding features.",
+        tags: ["architecture", "product"],
+        slug: "simplicity-product-decision",
+      },
+      {
+        title: "Team autonomy with clear guardrails",
+        shortText:
+          "The balance between alignment and freedom that helps teams move faster with fewer surprises.",
+        tags: ["teams", "process"],
+        slug: "team-autonomy-guardrails",
+      },
+    ],
+
+    // Side Projects Section
+    sideProjectsLabel: "Side Projects",
+    sideProjectsTitle: "Things I build out of curiosity",
+    sideProjectsIntro:
+      "Small experiments to test interaction ideas, product bets, and technical boundaries.",
+    openProject: "Open project",
+    projectLink: "Visit project",
+    sideProjectsItems: [
+      {
+        title: "Watch Lab",
+        shortDescription:
+          "Interactive watch concepts focused on motion, timing, and visual clarity.",
+        slug: "watch-lab",
+        link: "https://jordiorriols.cat",
+        images: ["/images/image.jpeg", "/images/image.jpeg"],
+      },
+      {
+        title: "Booking Flow Playground",
+        shortDescription:
+          "Rapid prototypes to validate booking funnel hypotheses with measurable user outcomes.",
+        slug: "booking-flow-playground",
+        link: "https://jordiorriols.cat",
+        images: ["/images/image.jpeg", "/images/image.jpeg"],
+      },
+      {
+        title: "Team Ops Dashboard",
+        shortDescription:
+          "A lightweight dashboard for delivery visibility, incidents, and cross-team ownership.",
+        slug: "team-ops-dashboard",
+        link: "https://jordiorriols.cat",
+        images: ["/images/image.jpeg", "/images/image.jpeg"],
+      },
+    ],
   },
 };

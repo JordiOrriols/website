@@ -97,6 +97,14 @@ vi.mock("@/components/sections/philosophy", () => ({
   default: () => <div data-testid="philosophy-section">Philosophy</div>,
 }));
 
+vi.mock("@/components/sections/notes", () => ({
+  default: () => <div data-testid="notes-section">Notes</div>,
+}));
+
+vi.mock("@/components/sections/side-projects", () => ({
+  default: () => <div data-testid="side-projects-section">Side Projects</div>,
+}));
+
 vi.mock("@/components/dropdown", () => ({
   default: ({ onValueChange }: any) => (
     <select data-testid="dropdown" onChange={(e) => onValueChange(e.target.value)}>

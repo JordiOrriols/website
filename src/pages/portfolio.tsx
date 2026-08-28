@@ -20,6 +20,8 @@ import ScrollCards from "@/components/scroll-cards";
 import ProfileCard from "@/components/sections/profile-card";
 import AboutMe from "@/components/sections/about-me";
 import Philosophy from "@/components/sections/philosophy";
+import NotesSection from "@/components/sections/notes";
+import SideProjectsSection from "@/components/sections/side-projects";
 import { useTranslation } from "react-i18next";
 import { useAmbientAudio } from "@/lib/ambient";
 import { ErrorBoundary } from "react-error-boundary";
@@ -32,6 +34,7 @@ import {
   trackPlaneToggle,
   trackAudioToggle,
   trackSpecialEventsToggle,
+  trackSectionVisible,
 } from "@/lib/analytics";
 
 const BARCELONA_LAT = 41.3851;
@@ -405,6 +408,9 @@ export default function Portfolio() {
       {/* Cards Container */}
       <div className="relative z-20">
         <ScrollCards
+          onActiveCardChange={(cardKey) => {
+            trackSectionVisible(cardKey);
+          }}
           cards={[
             {
               key: "profile",
@@ -428,6 +434,14 @@ export default function Portfolio() {
             {
               key: "philosophy",
               component: <Philosophy />,
+            },
+            {
+              key: "notes",
+              component: <NotesSection />,
+            },
+            {
+              key: "side-projects",
+              component: <SideProjectsSection />,
             },
           ]}
         />

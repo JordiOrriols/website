@@ -94,6 +94,33 @@ interface Translation {
   philosophyLabel: string;
   philosophyTitle: string;
   philosophyPrinciples: { number: string; title: string; description: string }[];
+
+  // Notes Section
+  notesLabel: string;
+  notesTitle: string;
+  notesIntro: string;
+  openNote: string;
+  copyLink: string;
+  notesItems: {
+    title: string;
+    shortText: string;
+    tags: string[];
+    slug: string;
+  }[];
+
+  // Side Projects Section
+  sideProjectsLabel: string;
+  sideProjectsTitle: string;
+  sideProjectsIntro: string;
+  openProject: string;
+  projectLink: string;
+  sideProjectsItems: {
+    title: string;
+    shortDescription: string;
+    slug: string;
+    link: string;
+    images: string[];
+  }[];
 }
 
 import type { ResourceLanguage } from "i18next";

@@ -143,3 +143,74 @@ export function trackError(error: string, context?: string): void {
     context: context ?? "unknown",
   });
 }
+
+/**
+ * Track section visibility in viewport
+ */
+export function trackSectionVisible(section: string): void {
+  trackEvent("section_visible", {
+    section,
+  });
+}
+
+/**
+ * Track block visibility in viewport with section context
+ */
+export function trackBlockVisible(section: string, block: string): void {
+  trackEvent("block_visible", {
+    section,
+    block,
+  });
+}
+
+/**
+ * Track when localized content cards are displayed
+ */
+export function trackContentDisplayed(
+  contentType: "note" | "side_project",
+  slug: string,
+  section: string
+): void {
+  trackEvent("content_displayed", {
+    content_type: contentType,
+    slug,
+    section,
+  });
+}
+
+/**
+ * Track note interactions
+ */
+export function trackNoteOpened(slug: string): void {
+  trackEvent("note_opened", {
+    slug,
+  });
+}
+
+/**
+ * Track note link copy action
+ */
+export function trackNoteLinkCopied(slug: string): void {
+  trackEvent("note_link_copied", {
+    slug,
+  });
+}
+
+/**
+ * Track side project interactions
+ */
+export function trackSideProjectOpened(slug: string): void {
+  trackEvent("side_project_opened", {
+    slug,
+  });
+}
+
+/**
+ * Track external side project link clicks
+ */
+export function trackSideProjectLinkClicked(slug: string, url: string): void {
+  trackEvent("side_project_link_clicked", {
+    slug,
+    url,
+  });
+}

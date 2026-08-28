@@ -137,5 +137,70 @@ export const es: Locale = {
           "Los grandes productos los construyen grandes equipos. La comunicación abierta y la propiedad compartida generan resultados.",
       },
     ],
+
+    // Notes Section
+    notesLabel: "Notas",
+    notesTitle: "Pequeños escritos sobre liderazgo en ingeniería",
+    notesIntro:
+      "Notas cortas donde recojo decisiones, trade-offs y aprendizajes de delivery.",
+    openNote: "Abrir nota",
+    copyLink: "Copiar enlace",
+    notesItems: [
+      {
+        title: "Entregar bajo presión",
+        shortText:
+          "Cómo dividir una hoja de ruta con mucha presión en releases medibles sin perder confianza.",
+        tags: ["delivery", "liderazgo"],
+        slug: "entregar-bajo-presion",
+      },
+      {
+        title: "La simplicidad como decisión de producto",
+        shortText:
+          "Por qué reducir complejidad de arquitectura puede mejorar el time-to-value más que añadir funcionalidades.",
+        tags: ["arquitectura", "producto"],
+        slug: "simplicidad-decision-producto",
+      },
+      {
+        title: "Autonomía de equipo con límites claros",
+        shortText:
+          "El equilibrio entre alineación y libertad para avanzar más rápido con menos sorpresas.",
+        tags: ["equipos", "proceso"],
+        slug: "autonomia-equipo-limites",
+      },
+    ],
+
+    // Side Projects Section
+    sideProjectsLabel: "Side Projects",
+    sideProjectsTitle: "Cosas que construyo por curiosidad",
+    sideProjectsIntro:
+      "Experimentos pequeños para probar ideas de interacción, hipótesis de producto y límites técnicos.",
+    openProject: "Abrir proyecto",
+    projectLink: "Visitar proyecto",
+    sideProjectsItems: [
+      {
+        title: "Watch Lab",
+        shortDescription:
+          "Conceptos interactivos de relojes centrados en movimiento, timing y claridad visual.",
+        slug: "watch-lab",
+        link: "https://jordiorriols.cat",
+        images: ["/images/image.jpeg", "/images/image.jpeg"],
+      },
+      {
+        title: "Booking Flow Playground",
+        shortDescription:
+          "Prototipos rápidos para validar hipótesis del funnel de reserva con impacto medible.",
+        slug: "booking-flow-playground",
+        link: "https://jordiorriols.cat",
+        images: ["/images/image.jpeg", "/images/image.jpeg"],
+      },
+      {
+        title: "Team Ops Dashboard",
+        shortDescription:
+          "Un dashboard ligero para visibilidad de delivery, incidencias y ownership entre equipos.",
+        slug: "team-ops-dashboard",
+        link: "https://jordiorriols.cat",
+        images: ["/images/image.jpeg", "/images/image.jpeg"],
+      },
+    ],
   },
 };

@@ -69,4 +69,20 @@ describe("ScrollCards Component", () => {
     const secondSection = getByTestId("scroll-card-section-1");
     expect(secondSection.style.pointerEvents).not.toBe("none");
   });
+
+  it("notifies initial active card and changes on scroll", () => {
+    const onActiveCardChange = vi.fn();
+    const { getByTestId } = render(
+      <ScrollCards cards={cards} onActiveCardChange={onActiveCardChange} />
+    );
+
+    expect(onActiveCardChange).toHaveBeenCalledWith("card-1", 0);
+
+    const container = getByTestId("scroll-cards-container");
+    Object.defineProperty(container, "scrollTop", { value: 800, writable: true });
+    Object.defineProperty(container, "clientHeight", { value: 800, writable: true });
+    fireEvent.scroll(container);
+
+    expect(onActiveCardChange).toHaveBeenCalledWith("card-2", 1);
+  });
 });

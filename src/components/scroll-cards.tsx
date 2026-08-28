@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, type ReactNode } from "react";
+import React, { useState, useRef, useCallback, useEffect, type ReactNode } from "react";
 import { motion } from "framer-motion";
 
 interface CardItem {
@@ -8,11 +8,13 @@ interface CardItem {
 
 interface ScrollCardsProps {
   cards: CardItem[];
+  onActiveCardChange?: (cardKey: string, index: number) => void;
 }
 
-export default function ScrollCards({ cards }: ScrollCardsProps) {
+export default function ScrollCards({ cards, onActiveCardChange }: ScrollCardsProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const notifiedIndexRef = useRef<number | null>(null);
 
   const handleScroll = useCallback(() => {
     const container = containerRef.current;
@@ -21,6 +23,15 @@ export default function ScrollCards({ cards }: ScrollCardsProps) {
     const newIndex = Math.round(scrollTop / clientHeight);
     setActiveIndex(newIndex);
   }, []);
+
+  useEffect(() => {
+    const activeCard = cards[activeIndex];
+    if (!activeCard) return;
+    if (notifiedIndexRef.current === activeIndex) return;
+
+    notifiedIndexRef.current = activeIndex;
+    onActiveCardChange?.(activeCard.key, activeIndex);
+  }, [activeIndex, cards, onActiveCardChange]);
 
   return (
     <div
