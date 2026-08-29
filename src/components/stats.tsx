@@ -24,7 +24,7 @@ export default function Stats(props: Props) {
           key={option.label}
           onClick={option.onClick}
           disabled={option.disabled}
-          whileHover={option.disabled ? undefined : { scale: 1.1 }}
+          {...(option.disabled ? {} : { whileHover: { scale: 1.1 } })}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
           className={`text-center rounded-xl p-4 transition-colors duration-200 ${
             option.disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-100"

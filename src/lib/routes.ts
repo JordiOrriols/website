@@ -33,7 +33,7 @@ export function parsePortfolioPath(pathname: string): PortfolioRoute {
   let section: SupportedSection | null = null;
   let slug: string | null = null;
 
-  const first = segments[0].toLowerCase();
+  const first = (segments[0] ?? "").toLowerCase();
   const maybeLocale = normalizeLocale(first);
   const firstIsLocale = SUPPORTED_LOCALES.includes(first as SupportedLocale);
 
