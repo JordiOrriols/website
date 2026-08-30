@@ -91,7 +91,3 @@ export function buildPortfolioAbsoluteLink(
 ): string {
   return `${origin}${buildPortfolioPath(locale, section, slug)}`;
 }
-
-export function getSupportedSections(): readonly string[] {
-  return SUPPORTED_SECTIONS;
-}
