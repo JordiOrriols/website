@@ -17,6 +17,10 @@ export type ExperienceEntry = {
   achievements?: string[];
   tech: string[];
   tags?: string[];
+  // Marks a people-management/leadership role; used to auto-calculate "leading years".
+  isLeadership?: boolean;
+  // Excludes a role from the "total experience years" calculation (e.g. pre-career, part-time jobs).
+  excludeFromExperienceTotal?: boolean;
 };
 
 export const experienceTimelineEn: ExperienceEntry[] = [
@@ -32,6 +36,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
       "Aligned product and tech through measurable goals and reduced critical production issues.",
     ],
     tech: TECH_PORTAVENTURA,
+    isLeadership: true,
     tags: [
       "Team Leadership",
       "Data-driven decisions",
@@ -52,6 +57,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
       "Led onboarding, performance reviews, and psychological safety practices across the team.",
     ],
     tech: TECH_WEFOX,
+    isLeadership: true,
     tags: [
       "People Management",
       "Agile Coaching",
@@ -126,6 +132,7 @@ export const experienceTimelineEn: ExperienceEntry[] = [
       "Trained new hires and improved customer service workflows.",
     ],
     tech: TECH_TIBIDABO,
+    excludeFromExperienceTotal: true,
     tags: ["Customer Service", "Product Design", "Training"],
   },
 ];
@@ -143,6 +150,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
       "Alineé producto y tecnología mediante objetivos medibles y reduje incidencias críticas en producción.",
     ],
     tech: TECH_PORTAVENTURA,
+    isLeadership: true,
     tags: [
       "Liderazgo de equipo",
       "Decisiones basadas en datos",
@@ -163,6 +171,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
       "Lideré onboarding, evaluaciones de rendimiento y prácticas de seguridad psicológica en el equipo.",
     ],
     tech: TECH_WEFOX,
+    isLeadership: true,
     tags: [
       "Gestión de personas",
       "Coaching ágil",
@@ -247,6 +256,7 @@ export const experienceTimelineEs: ExperienceEntry[] = [
       "Formé a nuevos empleados y mejoré los flujos de atención al cliente.",
     ],
     tech: TECH_TIBIDABO,
+    excludeFromExperienceTotal: true,
     tags: ["Atención al cliente", "Diseño de producto", "Formación"],
   },
 ];
@@ -264,6 +274,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
       "Vam alinear producte i tecnologia amb objectius mesurables i vam reduir incidències crítiques en producció.",
     ],
     tech: TECH_PORTAVENTURA,
+    isLeadership: true,
     tags: [
       "Lideratge d’equip",
       "Decisions basades en dades",
@@ -284,6 +295,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
       "Vaig liderar l’onboarding, revisions de rendiment i pràctiques de seguretat psicològica dins de l’equip.",
     ],
     tech: TECH_WEFOX,
+    isLeadership: true,
     tags: [
       "Gestió de persones",
       "Coaching àgil",
@@ -368,6 +380,7 @@ export const experienceTimelineCa: ExperienceEntry[] = [
       "Vaig formar nous empleats i vaig millorar els fluxos d’atenció al client.",
     ],
     tech: TECH_TIBIDABO,
+    excludeFromExperienceTotal: true,
     tags: ["Atenció al client", "Disseny de producte", "Formació"],
   },
 ];

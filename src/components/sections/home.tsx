@@ -3,11 +3,13 @@ import Avatar from "@/components/avatar";
 import Stats from "@/components/stats";
 import { motion } from "framer-motion";
 import type { SeasonType, SectionsType } from "@/pages/portfolio";
+import type { ExperienceEntry } from "@/data/experience";
 import { Button } from "@/components/ui/button";
 import { Mail } from "lucide-react";
 import LanguageSelector from "../language-selector";
 import { useTranslation } from "react-i18next";
 import Card from "@/components/ui/card";
+import { calculateLeadingYears, calculateTotalExperienceYears } from "@/lib/experience";
 
 interface Props {
   season: SeasonType;
@@ -20,6 +22,9 @@ interface Props {
 export default function HomeSection(props: Props) {
   const { t } = useTranslation();
   const isContactAvailale = false;
+  const experienceTimeline = t("experienceTimeline", { returnObjects: true }) as ExperienceEntry[];
+  const leadingYears = calculateLeadingYears(experienceTimeline);
+  const experienceYears = calculateTotalExperienceYears(experienceTimeline);
   return (
     <motion.div
       animate={
@@ -100,14 +105,14 @@ export default function HomeSection(props: Props) {
                 },
                 {
                   label: t("leading"),
-                  value: "3",
+                  value: String(leadingYears),
                   unit: t("years"),
                   disabled: true,
                   onClick: () => undefined,
                 },
                 {
                   label: t("experience"),
-                  value: "12",
+                  value: String(experienceYears),
                   unit: t("years"),
                   onClick: () => handle("experience_years"),
                 },

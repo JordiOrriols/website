@@ -6,7 +6,14 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 // Mock i18next
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
-    t: (key: string) => key,
+    t: (key: string, opts?: Record<string, unknown>) => {
+      if (opts?.returnObjects && key === "experienceTimeline") {
+        return [
+          { period: "Jul 2011 – Nov 2014", title: "A", company: "A", description: "", tech: [] },
+        ];
+      }
+      return key;
+    },
     i18n: { language: "en" },
   }),
 }));
