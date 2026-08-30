@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Accessibility, Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
+import { CircleDashed, Loader2, Plane, Volume2, VolumeOff } from "lucide-react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import {
   Dialog,
