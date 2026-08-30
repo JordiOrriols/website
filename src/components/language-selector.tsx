@@ -39,7 +39,7 @@ export default function LanguageSelector({ buildPath }: LanguageSelectorProps = 
 
   return (
     <nav
-      className="absolute top-5 right-5 flex items-center gap-1 bg-gray-100 rounded-full p-1"
+      className="absolute top-5 right-5 z-10 flex items-center gap-1 bg-gray-100 rounded-full p-1"
       role="navigation"
       aria-label="Language selection"
       data-testid="language-selector"
