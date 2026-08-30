@@ -43,6 +43,7 @@ import {
   isSupportedSection,
 } from "@/lib/routes";
 import { useMotionPreference } from "@/lib/motion";
+import { isSafari } from "@/lib/browser";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -101,6 +102,7 @@ export default function Portfolio() {
   const activeRouteSlugRef = useRef(activeRouteSlug);
   const scrollCardsRef = useRef<ScrollCardsHandle>(null);
   const { reducedMotion, toggleReducedMotion } = useMotionPreference();
+  const [hideReducedMotionButton] = useState(() => isSafari());
 
   const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
     useAmbientAudio(weather, timeOfDay);
@@ -473,18 +475,20 @@ export default function Portfolio() {
           </Button>
         </div>
 
-        <div className="absolute bottom-4 right-16 z-30">
-          <Button
-            onClick={toggleReducedMotion}
-            aria-label={reducedMotion ? t("disableReducedMotion") : t("enableReducedMotion")}
-            aria-pressed={reducedMotion}
-            className={`${
-              reducedMotion ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
-            } shadow-lg transition-all duration-300 mt-3 float-right`}
-          >
-            <Accessibility className="w-4 h-4" aria-hidden="true" />
-          </Button>
-        </div>
+        {!hideReducedMotionButton && (
+          <div className="absolute bottom-4 right-16 z-30">
+            <Button
+              onClick={toggleReducedMotion}
+              aria-label={reducedMotion ? t("disableReducedMotion") : t("enableReducedMotion")}
+              aria-pressed={reducedMotion}
+              className={`${
+                reducedMotion ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
+              } shadow-lg transition-all duration-300 mt-3 float-right`}
+            >
+              <CircleDashed className="w-4 h-4" aria-hidden="true" />
+            </Button>
+          </div>
+        )}
 
         <div className="absolute bottom-4 right-4 z-30">
           <Button
