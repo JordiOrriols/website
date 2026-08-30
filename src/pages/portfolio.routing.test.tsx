@@ -91,6 +91,7 @@ vi.mock("@/components/sections/side-projects", () => ({
 
 vi.mock("@/components/weather/scenes/dynamic", () => ({
   default: () => <div data-testid="dynamic-scene" />,
+  getSceneAccentColor: vi.fn(() => "#5CA9E6"),
 }));
 
 vi.mock("@/components/weather/scenes/thunderstorm", () => ({

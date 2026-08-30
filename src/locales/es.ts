@@ -90,6 +90,9 @@ export const es: Locale = {
     messageSent: "¡Mensaje enviado!",
     messageResponse: "Te responderé lo antes posible.",
 
+    // Profile Section
+    profileLabel: "Perfil",
+
     // About Me Section
     aboutMeLabel: "Sobre mí",
     aboutMeTitle: "Liderazgo de ingenieria orientado a impacto",
@@ -231,6 +234,7 @@ export const es: Locale = {
     // Fly With Me Page
     flyWithMeHeroEmoji: "✈️",
     flyWithMeHeroTitle: "¿Te vienes a volar?",
+    flyWithMeHeroShortLabel: "Inicio",
     flyWithMeHeroIntro: [
       "Te cuento un poco cómo suelo organizarlo, porque hay algunas cosas que está bien saber antes de buscar fecha.",
       "Vuelo desde el Aeroclub de Sabadell y normalmente alquilo una **Cessna 172**, una avioneta de cuatro plazas y uno de los modelos más utilizados del mundo. Aunque tenga cuatro plazas, por peso normalmente volamos **2 o 3 personas en total, contándome a mí**.",
@@ -239,6 +243,7 @@ export const es: Locale = {
       {
         emoji: "⚖️",
         title: "Lo primero: ¿cuántos somos y cuánto pesamos?",
+        shortLabel: "Peso",
         paragraphs: [
           "Antes de buscar avión necesitaré saber **quién viene y el peso aproximado de cada persona**.",
           "En una avioneta pequeña el peso y su distribución son importantes. Antes de cada vuelo calculo la carga y el centrado y, dependiendo de cuánto pesemos, también tenemos que ajustar cuánto combustible llevamos.",
@@ -250,6 +255,7 @@ export const es: Locale = {
       {
         emoji: "🗺️",
         title: "¿Dónde podemos ir?",
+        shortLabel: "Rutas",
         paragraphs: [
           "La mayoría de vuelos que hago son de **1 h a 1 h 30 min**.",
           "Algunas de mis rutas favoritas son:",
@@ -263,6 +269,7 @@ export const es: Locale = {
       {
         emoji: "🕐",
         title: "¿Cuánto tiempo necesitamos?",
+        shortLabel: "Tiempo",
         paragraphs: [
           "Aunque volemos solamente una hora, ir a volar lleva bastante más tiempo.",
           "Antes tengo que preparar la documentación, meteorología y planificación del vuelo y después hacemos juntos la inspección exterior del avión y el briefing antes de subir.",
@@ -273,6 +280,7 @@ export const es: Locale = {
       {
         emoji: "🎧",
         title: "¿Cómo es volar en una avioneta?",
+        shortLabel: "Experiencia",
         paragraphs: [
           "Es bastante diferente a volar en un avión de línea.",
           "La avioneta hace más ruido, por eso volamos con auriculares y podemos hablar entre nosotros durante todo el vuelo. También notarás más los movimientos del aire.",
@@ -286,6 +294,7 @@ export const es: Locale = {
       {
         emoji: "💰",
         title: "¿Cuánto cuesta?",
+        shortLabel: "Precio",
         paragraphs: [
           "Esto es importante: **no hago vuelos comerciales ni cobro por llevar a nadie a volar**. Vuelo como hobby y alquilo el avión al Aeroclub.",
           "Lo que hacemos es **compartir entre todos los ocupantes los costes del vuelo, incluyéndome a mí**. Todos pagamos exactamente la misma parte.",
@@ -297,6 +306,7 @@ export const es: Locale = {
       {
         emoji: "📅",
         title: "¿Y cómo buscamos fecha?",
+        shortLabel: "Fecha",
         paragraphs: [
           "Lo ideal es organizarlo con **unas dos semanas de antelación**, porque además de cuadrar nuestras agendas necesito encontrar una avioneta disponible.",
           "Elegir un día **no significa que el vuelo esté todavía confirmado**: es simplemente una propuesta de fecha.",

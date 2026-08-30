@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
-import DynamicScene from "../components/weather/scenes/dynamic";
+import DynamicScene, { getSceneAccentColor } from "../components/weather/scenes/dynamic";
 import ThunderstormScene from "../components/weather/scenes/thunderstorm";
 import Dropdown from "../components/dropdown";
 import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
@@ -44,6 +44,8 @@ import {
 } from "@/lib/routes";
 import { useMotionPreference } from "@/lib/motion";
 import { isSafari } from "@/lib/browser";
+import Notes from "@/components/sections/notes";
+import SideProjects from "@/components/sections/side-projects";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
@@ -315,6 +317,14 @@ export default function Portfolio() {
     return <DynamicScene weather={weather} timeOfDay={timeOfDay} />;
   };
 
+  // Drives the side index's contrast palette: white on dark scenes, dark blue otherwise.
+  const isDarkBackground =
+    weather === "thunderstorm" ||
+    timeOfDay === "night" ||
+    season === "halloween" ||
+    season === "newYear";
+  const sideIndexAccentColor = getSceneAccentColor(weather, timeOfDay);
+
   const handleShowPlane = () => {
     const newShowPlane = !showPlane;
 
@@ -515,6 +525,8 @@ export default function Portfolio() {
           <ScrollCards
             ref={scrollCardsRef}
             initialCardKey={activeCardKey}
+            isDarkBackground={isDarkBackground}
+            accentColor={sideIndexAccentColor}
             onActiveCardChange={(cardKey) => {
               if (cardKey !== activeCardKey) {
                 setActiveCardKey(cardKey);
@@ -534,6 +546,7 @@ export default function Portfolio() {
             cards={[
               {
                 key: "profile",
+                label: t("profileLabel"),
                 component: (
                   <ProfileCard
                     season={season}
@@ -549,11 +562,23 @@ export default function Portfolio() {
               },
               {
                 key: "about-me",
+                label: t("aboutMeLabel"),
                 component: <AboutMe />,
               },
               {
                 key: "philosophy",
+                label: t("philosophyLabel"),
                 component: <Philosophy />,
+              },
+              {
+                key: "notes",
+                label: t("notesLabel"),
+                component: <Notes />,
+              },
+              {
+                key: "side-projects",
+                label: t("sideProjectsLabel"),
+                component: <SideProjects />,
               },
             ]}
           />

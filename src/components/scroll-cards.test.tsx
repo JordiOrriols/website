@@ -92,4 +92,54 @@ describe("ScrollCards Component", () => {
     const thirdSection = getByTestId("scroll-card-section-2");
     expect(thirdSection.style.pointerEvents).not.toBe("none");
   });
+
+  it("renders a side index entry per card, using label or falling back to key", () => {
+    const labeledCards = [
+      { key: "card-1", label: "First", component: <div>Card 1</div> },
+      { key: "card-2", component: <div>Card 2</div> },
+    ];
+    const { getByTestId, getByText } = render(<ScrollCards cards={labeledCards} />);
+    expect(getByTestId("scroll-cards-side-index")).toBeTruthy();
+    expect(getByText("First")).toBeTruthy();
+    expect(getByText("card-2")).toBeTruthy();
+  });
+
+  it("marks the active side index entry with aria-current", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    expect(getByTestId("scroll-cards-side-index-0").getAttribute("aria-current")).toBe("true");
+    expect(getByTestId("scroll-cards-side-index-1").getAttribute("aria-current")).toBeNull();
+  });
+
+  it("scrolls to the clicked card via the side index", () => {
+    const scrollTo = vi.fn();
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    const container = getByTestId("scroll-cards-container");
+    Object.defineProperty(container, "clientHeight", { value: 800, writable: true });
+    container.scrollTo = scrollTo;
+
+    fireEvent.click(getByTestId("scroll-cards-side-index-2"));
+
+    expect(scrollTo).toHaveBeenCalledWith({ top: 1600, behavior: "smooth" });
+  });
+
+  it("uses accentColor for the active entry on light backgrounds, and white on dark ones", () => {
+    const { getByTestId, rerender } = render(
+      <ScrollCards cards={cards} accentColor="#FFB347" />
+    );
+    const activeLabel = getByTestId("scroll-cards-side-index-0").querySelector("span");
+    expect(activeLabel).toHaveStyle({ color: "#FFB347" });
+
+    rerender(<ScrollCards cards={cards} accentColor="#FFB347" isDarkBackground />);
+    const darkActiveLabel = getByTestId("scroll-cards-side-index-0").querySelector("span");
+    expect(darkActiveLabel?.className).toContain("text-white");
+    expect(darkActiveLabel?.getAttribute("style")).toBeFalsy();
+  });
+
+  it("makes the inactive dot smaller than the active one", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    const activeDot = getByTestId("scroll-cards-side-index-0").querySelectorAll("span")[1];
+    const inactiveDot = getByTestId("scroll-cards-side-index-1").querySelectorAll("span")[1];
+    expect(activeDot?.className).toContain("w-2.5");
+    expect(inactiveDot?.className).toContain("w-1 ");
+  });
 });

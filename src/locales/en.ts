@@ -89,6 +89,9 @@ export const en: Locale = {
     sending: "Sending...",
     messageSent: "Message sent!",
     messageResponse: "I’ll reply as soon as possible.",
+    // Profile Section
+    profileLabel: "Profile",
+
     // About Me Section
     aboutMeLabel: "About Me",
     aboutMeTitle: "Engineering leadership focused on impact",
@@ -229,6 +232,7 @@ export const en: Locale = {
     // Fly With Me Page
     flyWithMeHeroEmoji: "✈️",
     flyWithMeHeroTitle: "Want to come flying?",
+    flyWithMeHeroShortLabel: "Intro",
     flyWithMeHeroIntro: [
       "Here's a quick rundown of how I usually organize these flights, since there are a few things worth knowing before we pick a date.",
       "I fly out of the Sabadell Aeroclub and usually rent a **Cessna 172**, a four-seat aircraft and one of the most widely used models in the world. Even though it has four seats, weight limits usually mean we fly with **2 or 3 people total, myself included**.",
@@ -237,6 +241,7 @@ export const en: Locale = {
       {
         emoji: "⚖️",
         title: "First things first: how many of us, and how much do we weigh?",
+        shortLabel: "Weight",
         paragraphs: [
           "Before I look for a plane I'll need to know **who's coming and roughly how much each person weighs**.",
           "In a small aircraft, weight and how it's distributed really matter. Before every flight I calculate the load and balance, and depending on how much we weigh, we may also need to adjust how much fuel we carry.",
@@ -248,6 +253,7 @@ export const en: Locale = {
       {
         emoji: "🗺️",
         title: "Where can we go?",
+        shortLabel: "Routes",
         paragraphs: [
           "Most of the flights I do are **1 to 1.5 hours**.",
           "Some of my favorite routes:",
@@ -261,6 +267,7 @@ export const en: Locale = {
       {
         emoji: "🕐",
         title: "How much time do we need?",
+        shortLabel: "Time",
         paragraphs: [
           "Even if we only fly for an hour, going flying takes quite a bit longer than that.",
           "Beforehand I need to prepare the paperwork, weather briefing and flight planning, and afterwards we do the aircraft's walk-around inspection and briefing together before boarding.",
@@ -271,6 +278,7 @@ export const en: Locale = {
       {
         emoji: "🎧",
         title: "What's it like flying in a light aircraft?",
+        shortLabel: "Experience",
         paragraphs: [
           "It's quite different from flying on an airliner.",
           "The aircraft is noisier, so we fly with headsets and can talk to each other throughout the flight. You'll also notice air movement more.",
@@ -284,6 +292,7 @@ export const en: Locale = {
       {
         emoji: "💰",
         title: "How much does it cost?",
+        shortLabel: "Price",
         paragraphs: [
           "This is important: **I don't run commercial flights or charge anyone to fly**. I fly as a hobby and rent the plane from the Aeroclub.",
           "What we do is **split the flight costs between everyone on board, myself included**. Everyone pays exactly the same share.",
@@ -295,6 +304,7 @@ export const en: Locale = {
       {
         emoji: "📅",
         title: "So how do we pick a date?",
+        shortLabel: "Date",
         paragraphs: [
           "Ideally we organize this **around two weeks in advance**, since besides matching our schedules I also need to find an available aircraft.",
           "Picking a day **doesn't mean the flight is confirmed yet** — it's simply a proposed date.",

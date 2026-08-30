@@ -5,12 +5,17 @@ import { vi, describe, it, expect, beforeEach } from "vitest";
 
 const heroIntro = ["Hero paragraph one", "Hero paragraph **two**"];
 const sections = [
-  { emoji: "⚖️", title: "Weight section", paragraphs: ["Weight paragraph"] },
-  { emoji: "🗺️", title: "Routes section", paragraphs: ["Routes paragraph"] },
-  { emoji: "🕐", title: "Time section", paragraphs: ["Time paragraph"] },
-  { emoji: "🎧", title: "Experience section", paragraphs: ["Experience paragraph"] },
-  { emoji: "💰", title: "Cost section", paragraphs: ["Cost paragraph"] },
-  { emoji: "📅", title: "Booking section", paragraphs: ["Booking paragraph"] },
+  { emoji: "⚖️", title: "Weight section", shortLabel: "Weight", paragraphs: ["Weight paragraph"] },
+  { emoji: "🗺️", title: "Routes section", shortLabel: "Routes", paragraphs: ["Routes paragraph"] },
+  { emoji: "🕐", title: "Time section", shortLabel: "Time", paragraphs: ["Time paragraph"] },
+  {
+    emoji: "🎧",
+    title: "Experience section",
+    shortLabel: "Experience",
+    paragraphs: ["Experience paragraph"],
+  },
+  { emoji: "💰", title: "Cost section", shortLabel: "Cost", paragraphs: ["Cost paragraph"] },
+  { emoji: "📅", title: "Booking section", shortLabel: "Date", paragraphs: ["Booking paragraph"] },
 ];
 
 const changeLanguage = vi.fn();
@@ -37,6 +42,7 @@ vi.mock("@/components/weather/scenes/dynamic", () => ({
   default: ({ weather, timeOfDay }: { weather: string; timeOfDay: string }) => (
     <div data-testid="dynamic-scene" data-weather={weather} data-time-of-day={timeOfDay} />
   ),
+  getSceneAccentColor: vi.fn(() => "#5CA9E6"),
 }));
 
 vi.mock("@/components/plane", () => ({

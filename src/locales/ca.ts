@@ -90,6 +90,9 @@ export const ca: Locale = {
     messageSent: "Missatge enviat!",
     messageResponse: "Et respondré tan aviat com sigui possible.",
 
+    // Profile Section
+    profileLabel: "Perfil",
+
     // About Me Section
     aboutMeLabel: "Sobre mi",
     aboutMeTitle: "Lideratge d'enginyeria orientat a impacte",
@@ -231,6 +234,7 @@ export const ca: Locale = {
     // Fly With Me Page
     flyWithMeHeroEmoji: "✈️",
     flyWithMeHeroTitle: "Et ve de gust volar?",
+    flyWithMeHeroShortLabel: "Inici",
     flyWithMeHeroIntro: [
       "T'explico una mica com ho solc organitzar, perquè hi ha algunes coses que està bé saber abans de buscar data.",
       "Volo des de l'Aeroclub de Sabadell i normalment llogo una **Cessna 172**, una avioneta de quatre places i un dels models més utilitzats del món. Tot i tenir quatre places, per pes normalment volem **2 o 3 persones en total, comptant-me a mi**.",
@@ -239,6 +243,7 @@ export const ca: Locale = {
       {
         emoji: "⚖️",
         title: "Primer de tot: quants som i quant pesem?",
+        shortLabel: "Pes",
         paragraphs: [
           "Abans de buscar avió necessitaré saber **qui ve i el pes aproximat de cada persona**.",
           "En una avioneta petita el pes i la seva distribució són importants. Abans de cada vol calculo la càrrega i el centratge i, depenent de quant pesem, també hem d'ajustar quant combustible portem.",
@@ -250,6 +255,7 @@ export const ca: Locale = {
       {
         emoji: "🗺️",
         title: "On podem anar?",
+        shortLabel: "Rutes",
         paragraphs: [
           "La majoria de vols que faig són d'**1 h a 1 h 30 min**.",
           "Algunes de les meves rutes preferides són:",
@@ -263,6 +269,7 @@ export const ca: Locale = {
       {
         emoji: "🕐",
         title: "Quant de temps necessitem?",
+        shortLabel: "Temps",
         paragraphs: [
           "Encara que volem només una hora, anar a volar porta bastant més temps.",
           "Abans he de preparar la documentació, meteorologia i planificació del vol i després fem junts la inspecció exterior de l'avió i el briefing abans de pujar.",
@@ -273,6 +280,7 @@ export const ca: Locale = {
       {
         emoji: "🎧",
         title: "Com és volar en una avioneta?",
+        shortLabel: "Experiència",
         paragraphs: [
           "És força diferent de volar en un avió de línia.",
           "L'avioneta fa més soroll, per això volem amb auriculars i podem parlar entre nosaltres durant tot el vol. També notaràs més els moviments de l'aire.",
@@ -286,6 +294,7 @@ export const ca: Locale = {
       {
         emoji: "💰",
         title: "Quant costa?",
+        shortLabel: "Preu",
         paragraphs: [
           "Això és important: **no faig vols comercials ni cobro per portar ningú a volar**. Volo com a hobby i llogo l'avió a l'Aeroclub.",
           "El que fem és **compartir entre tots els ocupants els costos del vol, incloent-me a mi**. Tothom paga exactament la mateixa part.",
@@ -297,6 +306,7 @@ export const ca: Locale = {
       {
         emoji: "📅",
         title: "I com busquem data?",
+        shortLabel: "Data",
         paragraphs: [
           "L'ideal és organitzar-ho amb **unes dues setmanes d'antelació**, perquè a més de quadrar les nostres agendes necessito trobar una avioneta disponible.",
           "Triar un dia **no vol dir que el vol ja estigui confirmat**: és simplement una proposta de data.",

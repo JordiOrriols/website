@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { ErrorBoundary } from "react-error-boundary";
 import { AnimatePresence } from "framer-motion";
 import { CalendarSearch } from "lucide-react";
-import DynamicScene from "@/components/weather/scenes/dynamic";
+import DynamicScene, { getSceneAccentColor } from "@/components/weather/scenes/dynamic";
 import PlaneController from "@/components/plane";
 import ScrollCards from "@/components/scroll-cards";
 import FlyHeroCard from "@/components/sections/fly-hero-card";
@@ -29,6 +29,7 @@ export default function FlyWithMe() {
   const heroSection: FlySection = {
     emoji: t("flyWithMeHeroEmoji"),
     title: t("flyWithMeHeroTitle"),
+    shortLabel: t("flyWithMeHeroShortLabel"),
     paragraphs: t("flyWithMeHeroIntro", { returnObjects: true }) as string[],
   };
   const sections = t("flyWithMeSections", { returnObjects: true }) as FlySection[];
@@ -58,13 +59,16 @@ export default function FlyWithMe() {
       <div className="relative z-20">
         <ScrollCards
           onActiveCardChange={(cardKey) => trackSectionVisible(`fly-${cardKey}`)}
+          accentColor={getSceneAccentColor("clear", "day")}
           cards={[
             {
               key: "hero",
+              label: heroSection.shortLabel,
               component: <FlyHeroCard section={heroSection} testId="fly-hero-section" />,
             },
             ...sections.map((section, index) => ({
               key: `section-${index}`,
+              label: section.shortLabel,
               component: (
                 <FlySectionCard section={section} testId={`fly-section-${index}`}>
                   {index === sections.length - 1 && (

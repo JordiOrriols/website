@@ -47,7 +47,7 @@ export const configClear: Record<TimeOfDayType, configType> = {
   },
 };
 
-const configRain: Record<TimeOfDayType, configType> = {
+export const configRain: Record<TimeOfDayType, configType> = {
   morning: {
     // Amanecer lluvioso: más claro y ligeramente cálido, aún con bruma fría.
     skyline: "#1F2937",
@@ -77,6 +77,12 @@ const configRain: Record<TimeOfDayType, configType> = {
     gradientColors: ["#374151", "#4B5563", "#6B7280"],
   },
 };
+
+// The skyline color already tuned to contrast against each scene's own sky gradient.
+export function getSceneAccentColor(weather: WeatherType, timeOfDay: TimeOfDayType): string {
+  if (weather === "rain" || weather === "snow") return configRain[timeOfDay].skyline;
+  return configClear[timeOfDay].skyline;
+}
 
 export default function DynamicScene(props: { weather: WeatherType; timeOfDay: TimeOfDayType }) {
   const getConfig = (): configType => {

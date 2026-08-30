@@ -85,6 +85,9 @@ interface Translation {
 
   experienceTimeline: ExperienceEntry[];
 
+  // Profile Section
+  profileLabel: string;
+
   // About Me Section
   aboutMeLabel: string;
   aboutMeTitle: string;
@@ -142,8 +145,9 @@ interface Translation {
   // Fly With Me Page
   flyWithMeHeroEmoji: string;
   flyWithMeHeroTitle: string;
+  flyWithMeHeroShortLabel: string;
   flyWithMeHeroIntro: string[];
-  flyWithMeSections: { emoji: string; title: string; paragraphs: string[] }[];
+  flyWithMeSections: { emoji: string; title: string; shortLabel: string; paragraphs: string[] }[];
   flyWithMeBookingLabel: string;
   flyWithMeFindDateButton: string;
 }

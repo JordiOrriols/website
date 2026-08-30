@@ -5,6 +5,7 @@ import { renderWithBold } from "@/lib/text";
 export interface FlySection {
   emoji: string;
   title: string;
+  shortLabel: string;
   paragraphs: string[];
 }
 
