@@ -138,6 +138,13 @@ interface Translation {
   analyticsConsentAccept: string;
   analyticsConsentDecline: string;
   analyticsConsentManage: string;
+
+  // Fly With Me Page
+  flyWithMeHeroEmoji: string;
+  flyWithMeHeroTitle: string;
+  flyWithMeHeroIntro: string[];
+  flyWithMeSections: { emoji: string; title: string; paragraphs: string[] }[];
+  flyWithMeBookingLabel: string;
 }
 
 import type { ResourceLanguage } from "i18next";

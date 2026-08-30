@@ -228,5 +228,84 @@ export const ca: Locale = {
     analyticsConsentAccept: "Permetre",
     analyticsConsentDecline: "Rebutjar",
     analyticsConsentManage: "Privacitat",
+
+    // Fly With Me Page
+    flyWithMeHeroEmoji: "✈️",
+    flyWithMeHeroTitle: "Et ve de gust volar?",
+    flyWithMeHeroIntro: [
+      "T'explico una mica com ho solc organitzar, perquè hi ha algunes coses que està bé saber abans de buscar data.",
+      "Volo des de l'Aeroclub de Sabadell i normalment llogo una **Cessna 172**, una avioneta de quatre places i un dels models més utilitzats del món. Tot i tenir quatre places, per pes normalment volem **2 o 3 persones en total, comptant-me a mi**.",
+    ],
+    flyWithMeSections: [
+      {
+        emoji: "⚖️",
+        title: "Primer de tot: quants som i quant pesem?",
+        paragraphs: [
+          "Abans de buscar avió necessitaré saber **qui ve i el pes aproximat de cada persona**.",
+          "En una avioneta petita el pes i la seva distribució són importants. Abans de cada vol calculo la càrrega i el centratge i, depenent de quant pesem, també hem d'ajustar quant combustible portem.",
+          "Sempre intento reservar una **Cessna 172S**, que ens dona una mica més de marge, però depèn de la disponibilitat.",
+          "Així que si vols venir acompanyat, primer digue'm qui seríem i quant pesa aproximadament cadascú i miro que la combinació sigui viable.",
+          "No solem portar equipatge: mòbil, una ampolla petita d'aigua i poca cosa més.",
+        ],
+      },
+      {
+        emoji: "🗺️",
+        title: "On podem anar?",
+        paragraphs: [
+          "La majoria de vols que faig són d'**1 h a 1 h 30 min**.",
+          "Algunes de les meves rutes preferides són:",
+          "🌊 **Costa:** sortir de Sabadell cap a Mataró, arribar al mar i seguir la costa cap a Blanes/Lloret abans de tornar.",
+          "⛰️ **Montserrat / interior:** sortir cap a Igualada, passar per la zona de Montserrat i, depenent del temps i la durada del vol, continuar cap a Sau/Montseny.",
+          "🏔️ **Pirineus:** també podem fer vols més llargs cap a la Seu d'Urgell/Cerdanya. Aquests ja solen ser plans d'unes dues hores de vol i especialment a l'hivern són molt bonics.",
+          "La ruta que pensem inicialment **mai no està 100 % garantida**. El mateix dia miro meteorologia, vent, núvols i espais aeris i decidim què té més sentit.",
+          "Si el temps no acompanya, no passa absolutament res: **cancel·lem i busquem un altre dia**.",
+        ],
+      },
+      {
+        emoji: "🕐",
+        title: "Quant de temps necessitem?",
+        paragraphs: [
+          "Encara que volem només una hora, anar a volar porta bastant més temps.",
+          "Abans he de preparar la documentació, meteorologia i planificació del vol i després fem junts la inspecció exterior de l'avió i el briefing abans de pujar.",
+          "Si a més fem un mos tranquil·lament a l'Aeroclub abans o després, calcula aproximadament **4 hores per a tot el pla**.",
+          "Si fem un vol més llarg, aterrem en un altre aeroport o aprofitem per dinar allà, podem convertir-ho fàcilment en un pla de mig dia.",
+        ],
+      },
+      {
+        emoji: "🎧",
+        title: "Com és volar en una avioneta?",
+        paragraphs: [
+          "És força diferent de volar en un avió de línia.",
+          "L'avioneta fa més soroll, per això volem amb auriculars i podem parlar entre nosaltres durant tot el vol. També notaràs més els moviments de l'aire.",
+          "En general intentarem volar **a primera hora o a última hora del dia**, quan l'aire sol estar més tranquil.",
+          "Si et preocupen especialment les turbulències, digue-m'ho. Les rutes de muntanya es poden moure més per l'efecte del vent sobre el terreny, mentre que **la ruta de la costa sol ser especialment tranquil·la**.",
+          "I si mai has volat en avioneta i et fa una mica de respecte, també podem començar simplement amb **un vol curt** i tornar. No tenim cap obligació de fer una ruta determinada.",
+          "Si durant el vol algú no se sent bé, girem cua i tornem a Sabadell. Sense problema.",
+          "Durant el briefing també us explicaré les coses bàsiques de l'avió i, un cop en vol i quan les condicions ho permetin, us podré ensenyar com funcionen les comandes.",
+        ],
+      },
+      {
+        emoji: "💰",
+        title: "Quant costa?",
+        paragraphs: [
+          "Això és important: **no faig vols comercials ni cobro per portar ningú a volar**. Volo com a hobby i llogo l'avió a l'Aeroclub.",
+          "El que fem és **compartir entre tots els ocupants els costos del vol, incloent-me a mi**. Tothom paga exactament la mateixa part.",
+          "L'avió es factura per temps de motor i sol costar aproximadament **300–350 € per hora de vol en total**.",
+          "Per exemple, si som tres, normalment acabem pagant al voltant de **100–120 € cadascú per una hora**, jo inclòs. Si som dos, evidentment la part de cadascú serà més gran.",
+          "En acabar el vol fem números amb el cost real i normalment em feu un Bizum.",
+        ],
+      },
+      {
+        emoji: "📅",
+        title: "I com busquem data?",
+        paragraphs: [
+          "L'ideal és organitzar-ho amb **unes dues setmanes d'antelació**, perquè a més de quadrar les nostres agendes necessito trobar una avioneta disponible.",
+          "Tinc un calendari a Cal.com on pots veure els dies que tinc disponibles. Triar un dia allà **no vol dir que el vol ja estigui confirmat**: és simplement una proposta de data.",
+          "Un cop el tinguem, miro disponibilitat d'avions i, si en tenim un de disponible, faig la reserva i et confirmo el vol.",
+          "I a partir d'aquí... a esperar que la meteo ens acompanyi! ✈️",
+        ],
+      },
+    ],
+    flyWithMeBookingLabel: "Reserva el teu vol",
   },
 };
