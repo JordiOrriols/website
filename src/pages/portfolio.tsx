@@ -68,10 +68,13 @@ const isTemporarilyHiddenSection = (section: string | null | undefined) =>
 
 export default function Portfolio() {
   const { t, i18n } = useTranslation();
-  const initialRoute = parsePortfolioPath(typeof window !== "undefined" ? window.location.pathname : "/");
-  const initialSection = isSupportedSection(initialRoute.section) && !isTemporarilyHiddenSection(initialRoute.section)
-    ? initialRoute.section
-    : "profile";
+  const initialRoute = parsePortfolioPath(
+    typeof window !== "undefined" ? window.location.pathname : "/"
+  );
+  const initialSection =
+    isSupportedSection(initialRoute.section) && !isTemporarilyHiddenSection(initialRoute.section)
+      ? initialRoute.section
+      : "profile";
 
   const [weather, setWeather] = useState<WeatherType>("clear");
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
@@ -122,9 +125,10 @@ export default function Portfolio() {
   useEffect(() => {
     const applyRoute = (syncScroll: boolean, syncLocaleFromUrl: boolean) => {
       const route = parsePortfolioPath(window.location.pathname);
-      const nextSection = isSupportedSection(route.section) && !isTemporarilyHiddenSection(route.section)
-        ? route.section
-        : "profile";
+      const nextSection =
+        isSupportedSection(route.section) && !isTemporarilyHiddenSection(route.section)
+          ? route.section
+          : "profile";
       const nextSlug = nextSection === route.section ? route.slug : null;
       const currentLocale = normalizeLocale(i18n.language);
 
@@ -388,198 +392,202 @@ export default function Portfolio() {
         className={`relative min-h-[100dvh] overflow-hidden ${reducedMotion ? "reduce-motion" : ""}`}
         data-testid="main-content"
       >
-      {/* Dynamic Background */}
-      <ErrorBoundary fallback={fallbackComponent}>{getBackgroundComponent()}</ErrorBoundary>
+        {/* Dynamic Background */}
+        <ErrorBoundary fallback={fallbackComponent}>{getBackgroundComponent()}</ErrorBoundary>
 
-      {/* Plane in background */}
-      <ErrorBoundary fallback={fallbackComponent}>
-        <AnimatePresence>{showPlane && <PlaneController reducedMotion={reducedMotion} />}</AnimatePresence>
-      </ErrorBoundary>
+        {/* Plane in background */}
+        <ErrorBoundary fallback={fallbackComponent}>
+          <AnimatePresence>
+            {showPlane && <PlaneController reducedMotion={reducedMotion} />}
+          </AnimatePresence>
+        </ErrorBoundary>
 
-      <ErrorBoundary fallback={fallbackComponent}>
-        {/* Weather Mode Selector */}
-        <div className="absolute top-4 right-4 z-30 hidden md:block">
-          <Dropdown
-            auto={t(currentWeather ?? "clear")}
-            value={weatherMode}
-            onValueChange={handleWeatherModeChange}
-            disabled={disabledDropdown}
-            options={[
-              { label: `☀️ ${t("clear")}`, value: "clear" },
-              { label: `☁️ ${t("cloudy")}`, value: "cloudy" },
-              { label: `🌧️ ${t("rain")}`, value: "rain" },
-              { label: `⚡ ${t("thunderstorm")}`, value: "thunderstorm" },
-              { label: `❄️ ${t("snow")}`, value: "snow" },
-            ]}
-            placeholder={t("selectWeather")}
-          />
-        </div>
-
-        {/* Day Time Mode Selector */}
-        <div className="absolute top-15 right-4 z-30 hidden md:block">
-          <Dropdown
-            auto={t(currentTimeOfDay ?? "day")}
-            value={timeOfDayMode}
-            onValueChange={handleTimeOfDayModeChange}
-            disabled={disabledDropdown}
-            options={[
-              { label: `🌅 ${t("morning")}`, value: "morning" },
-              { label: `☀️ ${t("day")}`, value: "day" },
-              { label: `☀️ ${t("afternoon")}`, value: "afternoon" },
-              { label: `🌙 ${t("night")}`, value: "night" },
-            ]}
-            placeholder={t("selectMoment")}
-          />
-        </div>
-
-        {/* Season Mode Selector */}
-        {activeSpecialEvents && (
-          <div className="absolute top-26 right-4 z-30 hidden md:block">
+        <ErrorBoundary fallback={fallbackComponent}>
+          {/* Weather Mode Selector */}
+          <div className="absolute top-4 right-4 z-30 hidden md:block">
             <Dropdown
-              auto={t(currentSeason ?? "none")}
-              value={seasonMode}
-              onValueChange={handleSeasonModeChange}
-              disabled={false}
+              auto={t(currentWeather ?? "clear")}
+              value={weatherMode}
+              onValueChange={handleWeatherModeChange}
+              disabled={disabledDropdown}
               options={[
-                { label: `🐣 ${t("easter")}`, value: "easter" },
-                { label: `☀️ ${t("summer")}`, value: "summer" },
-                { label: `👻 ${t("halloween")}`, value: "halloween" },
-                { label: `🎄 ${t("christmas")}`, value: "christmas" },
-                { label: `🎉 ${t("newYear")}`, value: "newYear" },
-                { label: `💼 ${t("none")}`, value: "none" },
+                { label: `☀️ ${t("clear")}`, value: "clear" },
+                { label: `☁️ ${t("cloudy")}`, value: "cloudy" },
+                { label: `🌧️ ${t("rain")}`, value: "rain" },
+                { label: `⚡ ${t("thunderstorm")}`, value: "thunderstorm" },
+                { label: `❄️ ${t("snow")}`, value: "snow" },
               ]}
-              placeholder={t("selectSeason")}
+              placeholder={t("selectWeather")}
             />
           </div>
-        )}
-      </ErrorBoundary>
 
-      <div className="absolute bottom-4 right-28 z-30 hidden md:block">
-        <Button
-          onClick={handleShowPlane}
-          aria-label={showPlane ? t("disablePlane") : t("enablePlane")}
-          aria-pressed={showPlane}
-          className={`${
-            showPlane ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
-          } shadow-lg transition-all duration-300 mt-3 float-right`}
-        >
-          <Plane className="w-4 h-4" aria-hidden="true" />
-        </Button>
-      </div>
+          {/* Day Time Mode Selector */}
+          <div className="absolute top-15 right-4 z-30 hidden md:block">
+            <Dropdown
+              auto={t(currentTimeOfDay ?? "day")}
+              value={timeOfDayMode}
+              onValueChange={handleTimeOfDayModeChange}
+              disabled={disabledDropdown}
+              options={[
+                { label: `🌅 ${t("morning")}`, value: "morning" },
+                { label: `☀️ ${t("day")}`, value: "day" },
+                { label: `☀️ ${t("afternoon")}`, value: "afternoon" },
+                { label: `🌙 ${t("night")}`, value: "night" },
+              ]}
+              placeholder={t("selectMoment")}
+            />
+          </div>
 
-      <div className="absolute bottom-4 right-16 z-30">
-        <Button
-          onClick={toggleReducedMotion}
-          aria-label={reducedMotion ? t("disableReducedMotion") : t("enableReducedMotion")}
-          aria-pressed={reducedMotion}
-          className={`${
-            reducedMotion ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
-          } shadow-lg transition-all duration-300 mt-3 float-right`}
-        >
-          <Accessibility className="w-4 h-4" aria-hidden="true" />
-        </Button>
-      </div>
-
-      <div className="absolute bottom-4 right-4 z-30">
-        <Button
-          onClick={() => {
-            toggleMute();
-            trackAudioToggle(!muted);
-          }}
-          aria-label={muted ? t("enableSound") : t("disableSound")}
-          aria-pressed={!muted}
-          className={`${
-            muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
-          } shadow-lg transition-all duration-300 mt-3 float-right`}
-        >
-          {muted ? (
-            <VolumeOff className="w-4 h-4" aria-hidden="true" />
-          ) : (
-            <Volume2 className="w-4 h-4" aria-hidden="true" />
+          {/* Season Mode Selector */}
+          {activeSpecialEvents && (
+            <div className="absolute top-26 right-4 z-30 hidden md:block">
+              <Dropdown
+                auto={t(currentSeason ?? "none")}
+                value={seasonMode}
+                onValueChange={handleSeasonModeChange}
+                disabled={false}
+                options={[
+                  { label: `🐣 ${t("easter")}`, value: "easter" },
+                  { label: `☀️ ${t("summer")}`, value: "summer" },
+                  { label: `👻 ${t("halloween")}`, value: "halloween" },
+                  { label: `🎄 ${t("christmas")}`, value: "christmas" },
+                  { label: `🎉 ${t("newYear")}`, value: "newYear" },
+                  { label: `💼 ${t("none")}`, value: "none" },
+                ]}
+                placeholder={t("selectSeason")}
+              />
+            </div>
           )}
-        </Button>
-      </div>
+        </ErrorBoundary>
 
-      {/* Cards Container */}
-      <div className="relative z-20">
-        <ScrollCards
-          ref={scrollCardsRef}
-          initialCardKey={activeCardKey}
-          onActiveCardChange={(cardKey) => {
-            if (cardKey !== activeCardKey) {
-              setActiveCardKey(cardKey);
-              setActiveRouteSlug(null);
-            }
-            trackSectionVisible(cardKey);
-            const locale = normalizeLocale(i18n.language);
-            const preservedSlug =
-              cardKey === activeCardKeyRef.current ? activeRouteSlugRef.current ?? undefined : undefined;
-            const nextPath = buildPortfolioPath(locale, cardKey, preservedSlug);
-            if (window.location.pathname !== nextPath) {
-              replacePortfolioRoute(locale, cardKey, preservedSlug);
+        <div className="absolute bottom-4 right-28 z-30 hidden md:block">
+          <Button
+            onClick={handleShowPlane}
+            aria-label={showPlane ? t("disablePlane") : t("enablePlane")}
+            aria-pressed={showPlane}
+            className={`${
+              showPlane ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
+            } shadow-lg transition-all duration-300 mt-3 float-right`}
+          >
+            <Plane className="w-4 h-4" aria-hidden="true" />
+          </Button>
+        </div>
+
+        <div className="absolute bottom-4 right-16 z-30">
+          <Button
+            onClick={toggleReducedMotion}
+            aria-label={reducedMotion ? t("disableReducedMotion") : t("enableReducedMotion")}
+            aria-pressed={reducedMotion}
+            className={`${
+              reducedMotion ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
+            } shadow-lg transition-all duration-300 mt-3 float-right`}
+          >
+            <Accessibility className="w-4 h-4" aria-hidden="true" />
+          </Button>
+        </div>
+
+        <div className="absolute bottom-4 right-4 z-30">
+          <Button
+            onClick={() => {
+              toggleMute();
+              trackAudioToggle(!muted);
+            }}
+            aria-label={muted ? t("enableSound") : t("disableSound")}
+            aria-pressed={!muted}
+            className={`${
+              muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
+            } shadow-lg transition-all duration-300 mt-3 float-right`}
+          >
+            {muted ? (
+              <VolumeOff className="w-4 h-4" aria-hidden="true" />
+            ) : (
+              <Volume2 className="w-4 h-4" aria-hidden="true" />
+            )}
+          </Button>
+        </div>
+
+        {/* Cards Container */}
+        <div className="relative z-20">
+          <ScrollCards
+            ref={scrollCardsRef}
+            initialCardKey={activeCardKey}
+            onActiveCardChange={(cardKey) => {
+              if (cardKey !== activeCardKey) {
+                setActiveCardKey(cardKey);
+                setActiveRouteSlug(null);
+              }
+              trackSectionVisible(cardKey);
+              const locale = normalizeLocale(i18n.language);
+              const preservedSlug =
+                cardKey === activeCardKeyRef.current
+                  ? (activeRouteSlugRef.current ?? undefined)
+                  : undefined;
+              const nextPath = buildPortfolioPath(locale, cardKey, preservedSlug);
+              if (window.location.pathname !== nextPath) {
+                replacePortfolioRoute(locale, cardKey, preservedSlug);
+              }
+            }}
+            cards={[
+              {
+                key: "profile",
+                component: (
+                  <ProfileCard
+                    season={season}
+                    showPlane={showPlane}
+                    playClick={playClick}
+                    onClickAvatar={() => {
+                      const newState = !activeSpecialEvents;
+                      setActiveSpecialEvents(newState);
+                      trackSpecialEventsToggle(newState);
+                    }}
+                  />
+                ),
+              },
+              {
+                key: "about-me",
+                component: <AboutMe />,
+              },
+              {
+                key: "philosophy",
+                component: <Philosophy />,
+              },
+            ]}
+          />
+        </div>
+
+        {/* Flight Safety Confirmation Dialog */}
+        <Dialog
+          open={showFlightSafetyDialog}
+          onOpenChange={(open) => {
+            if (open !== showFlightSafetyDialog) {
+              setShowFlightSafetyDialog(open);
             }
           }}
-          cards={[
-            {
-              key: "profile",
-              component: (
-                <ProfileCard
-                  season={season}
-                  showPlane={showPlane}
-                  playClick={playClick}
-                  onClickAvatar={() => {
-                    const newState = !activeSpecialEvents;
-                    setActiveSpecialEvents(newState);
-                    trackSpecialEventsToggle(newState);
-                  }}
-                />
-              ),
-            },
-            {
-              key: "about-me",
-              component: <AboutMe />,
-            },
-            {
-              key: "philosophy",
-              component: <Philosophy />,
-            },
-          ]}
-        />
-      </div>
+        >
+          <DialogContent className="sm:max-w-md p-8" showClose={false}>
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold text-red-600">
+                {t("dangerousFlyingTitle")}
+              </DialogTitle>
+              <DialogDescription className="text-base pt-4">
+                {getFlightSafetyMessage()}
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:justify-end pt-2">
+              <Button onClick={handleCancelFlight} variant="outline" className="w-full sm:w-auto">
+                {t("skip")}
+              </Button>
+              <Button
+                onClick={handleSetSafeConditions}
+                className="w-full sm:w-auto bg-[#2D4A6B] hover:bg-[#1F3447]"
+              >
+                {t("changeConditions")}
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
 
-      {/* Flight Safety Confirmation Dialog */}
-      <Dialog
-        open={showFlightSafetyDialog}
-        onOpenChange={(open) => {
-          if (open !== showFlightSafetyDialog) {
-            setShowFlightSafetyDialog(open);
-          }
-        }}
-      >
-        <DialogContent className="sm:max-w-md p-8" showClose={false}>
-          <DialogHeader>
-            <DialogTitle className="text-xl font-bold text-red-600">
-              {t("dangerousFlyingTitle")}
-            </DialogTitle>
-            <DialogDescription className="text-base pt-4">
-              {getFlightSafetyMessage()}
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter className="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:justify-end pt-2">
-            <Button onClick={handleCancelFlight} variant="outline" className="w-full sm:w-auto">
-              {t("skip")}
-            </Button>
-            <Button
-              onClick={handleSetSafeConditions}
-              className="w-full sm:w-auto bg-[#2D4A6B] hover:bg-[#1F3447]"
-            >
-              {t("changeConditions")}
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <AnalyticsConsent />
+        <AnalyticsConsent />
       </main>
     </MotionConfig>
   );

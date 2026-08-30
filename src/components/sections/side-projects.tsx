@@ -116,7 +116,12 @@ export default function SideProjectsSection({ activeSlug = null }: SideProjectsS
               transition={{ duration: 0.2 }}
             >
               <div className="mb-4 flex items-center justify-between gap-3">
-                <Button type="button" variant="ghost" className="min-h-10 px-2" onClick={backToProjectsRoot}>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="min-h-10 px-2"
+                  onClick={backToProjectsRoot}
+                >
                   <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                   {t("backToProjects")}
                 </Button>
@@ -128,7 +133,9 @@ export default function SideProjectsSection({ activeSlug = null }: SideProjectsS
               <div className="flex items-start justify-between gap-4 mb-4">
                 <div>
                   <h3 className="text-xl font-medium text-gray-800">{activeProject.title}</h3>
-                  <p className="text-gray-600 mt-2 leading-relaxed">{activeProject.shortDescription}</p>
+                  <p className="text-gray-600 mt-2 leading-relaxed">
+                    {activeProject.shortDescription}
+                  </p>
                 </div>
                 <FolderKanban className="w-5 h-5 text-[#4A6FA5] shrink-0" aria-hidden="true" />
               </div>
@@ -136,7 +143,10 @@ export default function SideProjectsSection({ activeSlug = null }: SideProjectsS
               <div className="max-h-[40dvh] overflow-y-auto pr-1">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {activeProject.images.map((image, index) => (
-                    <div key={`${activeProject.slug}-${index}`} className="h-32 md:h-36 rounded-xl overflow-hidden">
+                    <div
+                      key={`${activeProject.slug}-${index}`}
+                      className="h-32 md:h-36 rounded-xl overflow-hidden"
+                    >
                       <ImageWithFallback
                         src={image}
                         alt={`${activeProject.title} preview ${index + 1}`}
@@ -152,7 +162,9 @@ export default function SideProjectsSection({ activeSlug = null }: SideProjectsS
                   href={activeProject.link}
                   target="_blank"
                   rel="noreferrer"
-                  onClick={() => trackSideProjectLinkClicked(activeProject.slug, activeProject.link)}
+                  onClick={() =>
+                    trackSideProjectLinkClicked(activeProject.slug, activeProject.link)
+                  }
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-[#2D4A6B] px-4 py-2 text-sm font-medium text-white shadow-xs transition-all hover:bg-[#1F3447]"
                 >
                   <ExternalLink className="w-4 h-4" aria-hidden="true" />
@@ -184,7 +196,9 @@ export default function SideProjectsSection({ activeSlug = null }: SideProjectsS
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-base md:text-lg font-medium text-gray-800">{project.title}</h3>
+                      <h3 className="text-base md:text-lg font-medium text-gray-800">
+                        {project.title}
+                      </h3>
                       <p className="text-gray-600 mt-2 leading-relaxed line-clamp-3">
                         {project.shortDescription}
                       </p>

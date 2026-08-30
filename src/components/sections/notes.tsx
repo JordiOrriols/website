@@ -4,16 +4,8 @@ import { useTranslation } from "react-i18next";
 import { ArrowLeft, NotebookPen } from "lucide-react";
 import Card from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  trackBlockVisible,
-  trackContentDisplayed,
-  trackNoteOpened,
-} from "@/lib/analytics";
-import {
-  normalizeLocale,
-  pushPortfolioRoute,
-  replacePortfolioRoute,
-} from "@/lib/routes";
+import { trackBlockVisible, trackContentDisplayed, trackNoteOpened } from "@/lib/analytics";
+import { normalizeLocale, pushPortfolioRoute, replacePortfolioRoute } from "@/lib/routes";
 
 interface NoteEntry {
   title: string;
@@ -34,10 +26,7 @@ export default function NotesSection({ activeSlug = null }: NotesSectionProps) {
   const [selectedSlug, setSelectedSlug] = useState<string | null>(activeSlug);
   const prevActiveSlugRef = useRef<string | null>(activeSlug);
 
-  const notes = useMemo(
-    () => t("notesItems", { returnObjects: true }) as NoteEntry[],
-    [t]
-  );
+  const notes = useMemo(() => t("notesItems", { returnObjects: true }) as NoteEntry[], [t]);
 
   useEffect(() => {
     if (prevActiveSlugRef.current !== activeSlug) {
@@ -100,7 +89,9 @@ export default function NotesSection({ activeSlug = null }: NotesSectionProps) {
         <span className="text-sm font-semibold tracking-widest text-[#4A6FA5] uppercase">
           {t("notesLabel")}
         </span>
-        <h2 className="text-xl md:text-4xl font-light text-gray-800 mt-2 mb-3">{t("notesTitle")}</h2>
+        <h2 className="text-xl md:text-4xl font-light text-gray-800 mt-2 mb-3">
+          {t("notesTitle")}
+        </h2>
         <p className="text-gray-600 leading-relaxed mb-6">{t("notesIntro")}</p>
 
         <AnimatePresence initial={false}>
@@ -116,7 +107,12 @@ export default function NotesSection({ activeSlug = null }: NotesSectionProps) {
               transition={{ duration: 0.2 }}
             >
               <div className="mb-4 flex items-center justify-between gap-3">
-                <Button type="button" variant="ghost" className="min-h-10 px-2" onClick={backToNotesRoot}>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="min-h-10 px-2"
+                  onClick={backToNotesRoot}
+                >
                   <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                   {t("backToNotes")}
                 </Button>
@@ -143,7 +139,10 @@ export default function NotesSection({ activeSlug = null }: NotesSectionProps) {
 
               <div className="flex flex-wrap gap-2 mt-4">
                 {activeNote.tags.map((tag) => (
-                  <span key={tag} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                  <span
+                    key={tag}
+                    className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
+                  >
                     #{tag}
                   </span>
                 ))}
@@ -166,20 +165,29 @@ export default function NotesSection({ activeSlug = null }: NotesSectionProps) {
                   type="button"
                   onClick={() => openNote(note.slug)}
                   className={`w-full rounded-2xl border bg-white p-4 text-left shadow-sm transition-colors hover:border-[#4A6FA5] ${
-                    activeSlug === note.slug ? "border-[#4A6FA5] ring-2 ring-[#4A6FA5]/20" : "border-gray-200"
+                    activeSlug === note.slug
+                      ? "border-[#4A6FA5] ring-2 ring-[#4A6FA5]/20"
+                      : "border-gray-200"
                   }`}
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div>
-                      <h3 className="text-base md:text-lg font-medium text-gray-800">{note.title}</h3>
-                      <p className="text-gray-600 mt-2 leading-relaxed line-clamp-3">{note.shortText}</p>
+                      <h3 className="text-base md:text-lg font-medium text-gray-800">
+                        {note.title}
+                      </h3>
+                      <p className="text-gray-600 mt-2 leading-relaxed line-clamp-3">
+                        {note.shortText}
+                      </p>
                     </div>
                     <NotebookPen className="w-5 h-5 text-[#4A6FA5] shrink-0" aria-hidden="true" />
                   </div>
 
                   <div className="flex flex-wrap gap-2 mt-3">
                     {note.tags.map((tag) => (
-                      <span key={tag} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                      <span
+                        key={tag}
+                        className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
+                      >
                         #{tag}
                       </span>
                     ))}

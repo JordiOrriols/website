@@ -31,9 +31,15 @@ export default function AboutMe() {
           </div>
 
           <div className="flex-1 space-y-4">
-            <p className="text-gray-800 leading-relaxed font-medium text-sm md:text-base">{t("aboutMeStatement")}</p>
-            <p className="text-gray-600 leading-relaxed text-sm md:text-base">{t("aboutMeDescription1")}</p>
-            <p className="hidden md:block text-gray-600 leading-relaxed">{t("aboutMeDescription2")}</p>
+            <p className="text-gray-800 leading-relaxed font-medium text-sm md:text-base">
+              {t("aboutMeStatement")}
+            </p>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              {t("aboutMeDescription1")}
+            </p>
+            <p className="hidden md:block text-gray-600 leading-relaxed">
+              {t("aboutMeDescription2")}
+            </p>
 
             <div
               className="flex items-center gap-2 text-gray-500 mt-4"

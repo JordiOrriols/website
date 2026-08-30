@@ -92,10 +92,7 @@ export default function FlyWithMe() {
   const fallbackComponent = null;
 
   return (
-    <main
-      className="relative min-h-[100dvh] overflow-hidden"
-      data-testid="vuela-conmigo-page"
-    >
+    <main className="relative min-h-[100dvh] overflow-hidden" data-testid="vuela-conmigo-page">
       <ErrorBoundary fallback={fallbackComponent}>
         <DynamicScene weather="clear" timeOfDay="day" />
       </ErrorBoundary>

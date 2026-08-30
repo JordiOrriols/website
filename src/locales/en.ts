@@ -157,7 +157,8 @@ export const en: Locale = {
     notesItems: [
       {
         title: "Shipping under pressure",
-        shortText: "Splitting high-pressure goals into small releases protects trust and delivery quality.",
+        shortText:
+          "Splitting high-pressure goals into small releases protects trust and delivery quality.",
         longText:
           "In high-pressure programs, promising one big release usually creates hidden risk and late surprises. I prefer to split delivery into smaller milestones with measurable outcomes, clear owners, and explicit review points.\n\nThis creates transparency with product, leadership, and marketing, while helping teams preserve focus under pressure. Progress becomes visible early, decisions get better with real feedback, and confidence is earned through evidence instead of optimism.",
         tags: ["delivery", "leadership"],
@@ -174,8 +175,7 @@ export const en: Locale = {
       },
       {
         title: "Team autonomy with clear guardrails",
-        shortText:
-          "Teams move faster when autonomy is paired with clear alignment and boundaries.",
+        shortText: "Teams move faster when autonomy is paired with clear alignment and boundaries.",
         longText:
           "Autonomy without context creates drift, and control without trust creates bottlenecks. Effective leadership defines goals, boundaries, and decision principles so teams can move independently without losing coherence.\n\nWhen expectations are explicit, teams can decide faster, coordinate better across functions, and own outcomes end to end. This is where delivery speed and people growth reinforce each other.",
         tags: ["teams", "process"],
@@ -297,7 +297,7 @@ export const en: Locale = {
         title: "So how do we pick a date?",
         paragraphs: [
           "Ideally we organize this **around two weeks in advance**, since besides matching our schedules I also need to find an available aircraft.",
-          "I have a Cal.com calendar where you can see the days I'm available. Picking a day there **doesn't mean the flight is confirmed yet** — it's simply a proposed date.",
+          "Picking a day **doesn't mean the flight is confirmed yet** — it's simply a proposed date.",
           "Once we have one, I check aircraft availability and, if there's one free, I book it and confirm the flight with you.",
           "And from there... let's hope the weather cooperates! ✈️",
         ],

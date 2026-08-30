@@ -150,8 +150,7 @@ export const ca: Locale = {
     // Notes Section
     notesLabel: "Notes",
     notesTitle: "Petits escrits sobre lideratge en enginyeria",
-    notesIntro:
-      "Notes curtes on recullo decisions, trade-offs i aprenentatges de delivery.",
+    notesIntro: "Notes curtes on recullo decisions, trade-offs i aprenentatges de delivery.",
     levelTwo: "Nivell 2",
     backToNotes: "Tornar a notes",
     openNote: "Obrir nota",
@@ -300,7 +299,7 @@ export const ca: Locale = {
         title: "I com busquem data?",
         paragraphs: [
           "L'ideal és organitzar-ho amb **unes dues setmanes d'antelació**, perquè a més de quadrar les nostres agendes necessito trobar una avioneta disponible.",
-          "Tinc un calendari a Cal.com on pots veure els dies que tinc disponibles. Triar un dia allà **no vol dir que el vol ja estigui confirmat**: és simplement una proposta de data.",
+          "Triar un dia **no vol dir que el vol ja estigui confirmat**: és simplement una proposta de data.",
           "Un cop el tinguem, miro disponibilitat d'avions i, si en tenim un de disponible, faig la reserva i et confirmo el vol.",
           "I a partir d'aquí... a esperar que la meteo ens acompanyi! ✈️",
         ],

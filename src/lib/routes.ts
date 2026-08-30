@@ -18,7 +18,9 @@ export function normalizeLocale(locale: string | undefined): SupportedLocale {
   return "en";
 }
 
-export function isSupportedSection(section: string | null | undefined): section is SupportedSection {
+export function isSupportedSection(
+  section: string | null | undefined
+): section is SupportedSection {
   if (!section) return false;
   return SUPPORTED_SECTIONS.includes(section as SupportedSection);
 }
@@ -81,7 +83,12 @@ export function pushPortfolioRoute(locale: string, section: string, slug?: strin
   window.history.pushState({}, "", nextPath);
 }
 
-export function buildPortfolioAbsoluteLink(origin: string, locale: string, section: string, slug?: string): string {
+export function buildPortfolioAbsoluteLink(
+  origin: string,
+  locale: string,
+  section: string,
+  slug?: string
+): string {
   return `${origin}${buildPortfolioPath(locale, section, slug)}`;
 }
 

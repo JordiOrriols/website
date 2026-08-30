@@ -150,8 +150,7 @@ export const es: Locale = {
     // Notes Section
     notesLabel: "Notas",
     notesTitle: "Pequeños escritos sobre liderazgo en ingeniería",
-    notesIntro:
-      "Notas cortas donde recojo decisiones, trade-offs y aprendizajes de delivery.",
+    notesIntro: "Notas cortas donde recojo decisiones, trade-offs y aprendizajes de delivery.",
     levelTwo: "Nivel 2",
     backToNotes: "Volver a notas",
     openNote: "Abrir nota",
@@ -300,7 +299,7 @@ export const es: Locale = {
         title: "¿Y cómo buscamos fecha?",
         paragraphs: [
           "Lo ideal es organizarlo con **unas dos semanas de antelación**, porque además de cuadrar nuestras agendas necesito encontrar una avioneta disponible.",
-          "Tengo un calendario en Cal.com donde puedes ver los días que tengo disponibles. Elegir un día allí **no significa que el vuelo esté todavía confirmado**: es simplemente una propuesta de fecha.",
+          "Elegir un día **no significa que el vuelo esté todavía confirmado**: es simplemente una propuesta de fecha.",
           "Una vez lo tengamos, miro disponibilidad de aviones y, si tenemos uno disponible, hago la reserva y te confirmo el vuelo.",
           "Y a partir de ahí... ¡a esperar que la meteo nos acompañe! ✈️",
         ],

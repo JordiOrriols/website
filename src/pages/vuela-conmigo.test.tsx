@@ -44,7 +44,9 @@ vi.mock("@/components/plane", () => ({
 }));
 
 vi.mock("@calcom/embed-react", () => ({
-  default: ({ calLink }: { calLink: string }) => <div data-testid="cal-embed" data-cal-link={calLink} />,
+  default: ({ calLink }: { calLink: string }) => (
+    <div data-testid="cal-embed" data-cal-link={calLink} />
+  ),
 }));
 
 const { trackSectionVisible, trackLanguageChange } = vi.hoisted(() => ({
@@ -116,9 +118,9 @@ describe("FlyWithMe page", () => {
     expect(getAllByTestId("cal-embed")).toHaveLength(1);
     const lastSection = getByTestId(`fly-section-${sections.length - 1}`);
     expect(lastSection.querySelector('[data-testid="cal-embed"]')).toBeTruthy();
-    expect(lastSection.querySelector('[data-testid="cal-embed"]')?.getAttribute("data-cal-link")).toBe(
-      "jordiorriols/fly-with-me"
-    );
+    expect(
+      lastSection.querySelector('[data-testid="cal-embed"]')?.getAttribute("data-cal-link")
+    ).toBe("jordiorriols/fly-with-me");
   });
 
   it("has the page root test id", () => {
