@@ -304,5 +304,6 @@ export const en: Locale = {
       },
     ],
     flyWithMeBookingLabel: "Book your flight",
+    flyWithMeFindDateButton: "Find a date",
   },
 };

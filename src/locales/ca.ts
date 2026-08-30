@@ -306,5 +306,6 @@ export const ca: Locale = {
       },
     ],
     flyWithMeBookingLabel: "Reserva el teu vol",
+    flyWithMeFindDateButton: "Buscar data",
   },
 };

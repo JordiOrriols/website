@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import FlyWithMe from "./vuela-conmigo";
 import { vi, describe, it, expect, beforeEach } from "vitest";
 
@@ -43,18 +43,26 @@ vi.mock("@/components/plane", () => ({
   default: () => <div data-testid="plane">Plane</div>,
 }));
 
-vi.mock("@/components/sections/fly-booking", () => ({
-  default: () => <div data-testid="fly-booking-embed" />,
+vi.mock("@/components/sections/fly-booking-modal", () => ({
+  default: ({ onClose }: { onClose: () => void }) => (
+    <div data-testid="fly-booking-modal">
+      <button onClick={onClose} data-testid="fly-booking-modal-close">
+        close
+      </button>
+    </div>
+  ),
 }));
 
-const { trackSectionVisible, trackLanguageChange } = vi.hoisted(() => ({
+const { trackSectionVisible, trackLanguageChange, trackModalAction } = vi.hoisted(() => ({
   trackSectionVisible: vi.fn(),
   trackLanguageChange: vi.fn(),
+  trackModalAction: vi.fn(),
 }));
 
 vi.mock("@/lib/analytics", () => ({
   trackSectionVisible,
   trackLanguageChange,
+  trackModalAction,
 }));
 
 describe("FlyWithMe page", () => {
@@ -111,11 +119,27 @@ describe("FlyWithMe page", () => {
     });
   });
 
-  it("renders the Cal.com booking embed only inside the last section", () => {
-    const { getByTestId, getAllByTestId } = render(<FlyWithMe />);
-    expect(getAllByTestId("fly-booking-embed")).toHaveLength(1);
+  it("renders a find-date button only inside the last section, closed by default", () => {
+    const { getByTestId, getAllByTestId, queryByTestId } = render(<FlyWithMe />);
+    expect(getAllByTestId("fly-find-date-button")).toHaveLength(1);
     const lastSection = getByTestId(`fly-section-${sections.length - 1}`);
-    expect(lastSection.querySelector('[data-testid="fly-booking-embed"]')).toBeTruthy();
+    expect(lastSection.querySelector('[data-testid="fly-find-date-button"]')).toBeTruthy();
+    expect(queryByTestId("fly-booking-modal")).toBeNull();
+  });
+
+  it("opens the booking modal when the find-date button is clicked, and tracks it", () => {
+    const { getByTestId } = render(<FlyWithMe />);
+    fireEvent.click(getByTestId("fly-find-date-button"));
+    expect(getByTestId("fly-booking-modal")).toBeTruthy();
+    expect(trackModalAction).toHaveBeenCalledWith("open", "booking");
+  });
+
+  it("closes the booking modal and tracks it", () => {
+    const { getByTestId, queryByTestId } = render(<FlyWithMe />);
+    fireEvent.click(getByTestId("fly-find-date-button"));
+    fireEvent.click(getByTestId("fly-booking-modal-close"));
+    expect(queryByTestId("fly-booking-modal")).toBeNull();
+    expect(trackModalAction).toHaveBeenCalledWith("close", "booking");
   });
 
   it("has the page root test id", () => {

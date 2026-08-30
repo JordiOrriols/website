@@ -145,6 +145,7 @@ interface Translation {
   flyWithMeHeroIntro: string[];
   flyWithMeSections: { emoji: string; title: string; paragraphs: string[] }[];
   flyWithMeBookingLabel: string;
+  flyWithMeFindDateButton: string;
 }
 
 import type { ResourceLanguage } from "i18next";
