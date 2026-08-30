@@ -575,11 +575,11 @@ export default function Portfolio() {
                 label: t("notesLabel"),
                 component: <Notes />,
               },
-              {
-                key: "side-projects",
-                label: t("sideProjectsLabel"),
-                component: <SideProjects />,
-              },
+              // {
+              //   key: "side-projects",
+              //   label: t("sideProjectsLabel"),
+              //   component: <SideProjects />,
+              // },
             ]}
           />
         </div>
