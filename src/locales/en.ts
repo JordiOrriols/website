@@ -49,7 +49,7 @@ export const en: Locale = {
 
     // Portfolio Page
     name: "Jordi Orriols",
-    title: "Engineering Lead - TypeScript, React Native, NestJS, AWS",
+    title: "Engineering Lead - TypeScript, React Native, AWS",
     valueStatement:
       "I build complex digital products without turning technology into unnecessary complexity.",
     projects: "Projects",

@@ -49,7 +49,7 @@ export const ca: Locale = {
 
     // Portfolio Page
     name: "Jordi Orriols",
-    title: "Engineering Lead - TypeScript, React Native, NestJS, AWS",
+    title: "Engineering Lead - TypeScript, React Native, AWS",
     valueStatement:
       "Construeixo productes digitals complexos sense convertir la tecnologia en complexitat innecessaria.",
     projects: "Projectes",
