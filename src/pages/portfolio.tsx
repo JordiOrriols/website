@@ -16,7 +16,7 @@ import ThunderstormScene from "../components/weather/scenes/thunderstorm";
 import Dropdown from "../components/dropdown";
 import { fetchCurrentWeather, getWeatherMode } from "@/lib/weather";
 import PlaneController from "@/components/plane";
-import ScrollCards from "@/components/scroll-cards";
+import ScrollCards, { type ScrollCardsHandle } from "@/components/scroll-cards";
 import ProfileCard from "@/components/sections/profile-card";
 import AboutMe from "@/components/sections/about-me";
 import Philosophy from "@/components/sections/philosophy";
@@ -94,9 +94,9 @@ export default function Portfolio() {
   const [showFlightSafetyDialog, setShowFlightSafetyDialog] = useState(false);
   const [activeCardKey, setActiveCardKey] = useState<string>(initialSection);
   const [activeRouteSlug, setActiveRouteSlug] = useState<string | null>(initialRoute.slug);
-  const [scrollCardsInstance, setScrollCardsInstance] = useState(0);
   const activeCardKeyRef = useRef(activeCardKey);
   const activeRouteSlugRef = useRef(activeRouteSlug);
+  const scrollCardsRef = useRef<ScrollCardsHandle>(null);
   const { reducedMotion, toggleReducedMotion } = useMotionPreference();
 
   const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
@@ -153,7 +153,7 @@ export default function Portfolio() {
       }
 
       if (syncScroll && sectionChanged) {
-        setScrollCardsInstance((current) => current + 1);
+        scrollCardsRef.current?.scrollToKey(nextSection);
       }
     };
 
@@ -503,7 +503,7 @@ export default function Portfolio() {
       {/* Cards Container */}
       <div className="relative z-20">
         <ScrollCards
-          key={scrollCardsInstance}
+          ref={scrollCardsRef}
           initialCardKey={activeCardKey}
           onActiveCardChange={(cardKey) => {
             if (cardKey !== activeCardKey) {

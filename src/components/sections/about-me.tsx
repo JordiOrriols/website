@@ -11,17 +11,17 @@ export default function AboutMe() {
   const highlights = t("aboutMeHighlights", { returnObjects: true }) as string[];
 
   return (
-    <Card data-testid="about-me-section">
+    <Card data-testid="about-me-section" className="max-h-[90dvh] overflow-y-auto">
       <div className="p-8 md:p-12">
         <span className="text-sm font-semibold tracking-widest text-[#4A6FA5] uppercase">
           {t("aboutMeLabel")}
         </span>
-        <h2 className="text-3xl md:text-4xl font-light text-gray-800 mt-2 mb-8">
+        <h2 className="text-xl md:text-4xl font-light text-gray-800 mt-2 mb-8">
           {t("aboutMeTitle")}
         </h2>
 
         <div className="flex flex-col md:flex-row gap-8 items-start">
-          <div className="w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-lg shrink-0 mx-auto md:mx-0">
+          <div className="hidden md:block w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden shadow-lg shrink-0 mx-auto md:mx-0">
             <ImageWithFallback
               src="/images/image.jpeg"
               alt={t("aboutMeLabel")}
@@ -31,9 +31,9 @@ export default function AboutMe() {
           </div>
 
           <div className="flex-1 space-y-4">
-            <p className="text-gray-800 leading-relaxed font-medium">{t("aboutMeStatement")}</p>
-            <p className="text-gray-600 leading-relaxed">{t("aboutMeDescription1")}</p>
-            <p className="text-gray-600 leading-relaxed">{t("aboutMeDescription2")}</p>
+            <p className="text-gray-800 leading-relaxed font-medium text-sm md:text-base">{t("aboutMeStatement")}</p>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">{t("aboutMeDescription1")}</p>
+            <p className="hidden md:block text-gray-600 leading-relaxed">{t("aboutMeDescription2")}</p>
 
             <div
               className="flex items-center gap-2 text-gray-500 mt-4"
@@ -44,7 +44,7 @@ export default function AboutMe() {
             </div>
 
             <motion.ul
-              className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-6"
+              className="hidden md:grid grid-cols-1 sm:grid-cols-2 gap-2 mt-6"
               initial="hidden"
               animate="visible"
               variants={{

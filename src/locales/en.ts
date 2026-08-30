@@ -110,6 +110,7 @@ export const en: Locale = {
     // Philosophy Section
     philosophyLabel: "Philosophy",
     philosophyTitle: "Decision principles behind my work",
+    philosophyTitleShort: "My principles",
     philosophyIntro:
       "These principles help me align product direction, technical decisions, and team autonomy in high-pressure contexts.",
     philosophyPrinciples: [

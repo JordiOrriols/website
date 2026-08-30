@@ -98,7 +98,7 @@ export default function SideProjectsSection({ activeSlug = null }: SideProjectsS
         <span className="text-sm font-semibold tracking-widest text-[#4A6FA5] uppercase">
           {t("sideProjectsLabel")}
         </span>
-        <h2 className="text-3xl md:text-4xl font-light text-gray-800 mt-2 mb-4">
+        <h2 className="text-xl md:text-4xl font-light text-gray-800 mt-2 mb-4">
           {t("sideProjectsTitle")}
         </h2>
         <p className="text-gray-600 leading-relaxed mb-6">{t("sideProjectsIntro")}</p>

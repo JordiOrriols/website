@@ -1,4 +1,12 @@
-import React, { useState, useRef, useCallback, useEffect, type ReactNode } from "react";
+import React, {
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  forwardRef,
+  type ReactNode,
+} from "react";
 import { motion } from "framer-motion";
 
 interface CardItem {
@@ -12,11 +20,14 @@ interface ScrollCardsProps {
   initialCardKey?: string;
 }
 
-export default function ScrollCards({
-  cards,
-  onActiveCardChange,
-  initialCardKey,
-}: ScrollCardsProps) {
+export interface ScrollCardsHandle {
+  scrollToKey: (key: string) => void;
+}
+
+const ScrollCards = forwardRef<ScrollCardsHandle, ScrollCardsProps>(function ScrollCards(
+  { cards, onActiveCardChange, initialCardKey },
+  ref
+) {
   const getInitialIndex = () => {
     if (!initialCardKey) return 0;
     const initialIndex = cards.findIndex((card) => card.key === initialCardKey);
@@ -46,6 +57,7 @@ export default function ScrollCards({
     onActiveCardChange?.(activeCard.key, activeIndex);
   }, [activeIndex, cards, onActiveCardChange]);
 
+  // Sync scroll position once on mount (e.g. deep link) so it never fights user scroll.
   useEffect(() => {
     const container = containerRef.current;
     if (!container || activeIndex <= 0 || typeof container.scrollTo !== "function") return;
@@ -54,7 +66,24 @@ export default function ScrollCards({
       top: container.clientHeight * activeIndex,
       behavior: "auto",
     });
-  }, [activeIndex]);
+  }, []);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      scrollToKey: (key: string) => {
+        const container = containerRef.current;
+        if (!container || typeof container.scrollTo !== "function") return;
+        const index = cards.findIndex((card) => card.key === key);
+        if (index < 0) return;
+        container.scrollTo({
+          top: container.clientHeight * index,
+          behavior: "smooth",
+        });
+      },
+    }),
+    [cards]
+  );
 
   return (
     <div
@@ -72,7 +101,7 @@ export default function ScrollCards({
           <div
             key={card.key}
             data-testid={`scroll-card-section-${index}`}
-            className="h-[100dvh] snap-start flex items-center justify-center px-4 py-12"
+            className="h-[100dvh] snap-start flex items-center justify-center px-4 py-6 md:py-12"
             style={{
               scrollSnapAlign: "start",
               pointerEvents: isActive ? "auto" : "none",
@@ -98,4 +127,6 @@ export default function ScrollCards({
       })}
     </div>
   );
-}
+});
+
+export default ScrollCards;

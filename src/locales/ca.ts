@@ -111,6 +111,7 @@ export const ca: Locale = {
     // Philosophy Section
     philosophyLabel: "Filosofia",
     philosophyTitle: "Principis de decisio que guien el meu treball",
+    philosophyTitleShort: "Els meus principis",
     philosophyIntro:
       "Aquests principis m'ajuden a alinear direccio de producte, decisions tecniques i autonomia de l'equip en contextos d'alta pressio.",
     philosophyPrinciples: [

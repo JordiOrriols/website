@@ -97,6 +97,7 @@ interface Translation {
   // Philosophy Section
   philosophyLabel: string;
   philosophyTitle: string;
+  philosophyTitleShort: string;
   philosophyIntro: string;
   philosophyPrinciples: { number: string; title: string; description: string }[];
 
