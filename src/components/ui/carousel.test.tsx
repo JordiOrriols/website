@@ -40,9 +40,28 @@ describe("Carousel", () => {
 
   it("renders nothing for an empty list", () => {
     const { queryByTestId } = render(
-      <Carousel items={[]} getKey={(item: Item) => item.id} renderItem={(item: Item) => item.label} />
+      <Carousel
+        items={[]}
+        getKey={(item: Item) => item.id}
+        renderItem={(item: Item) => item.label}
+      />
     );
     expect(queryByTestId("carousel")).toBeNull();
+  });
+
+  it("puts the slide width on the flex-item wrapper, not the rendered card (avoids indefinite % width)", () => {
+    const { container } = render(
+      <Carousel
+        items={items}
+        getKey={(item) => item.id}
+        itemClassName="w-[85%] sm:w-[60%] md:w-[44%]"
+        renderItem={(item) => <div data-testid={`card-${item.id}`}>{item.label}</div>}
+      />
+    );
+    const track = container.querySelector('[data-testid="carousel-track"]') as HTMLElement;
+    const wrapper = track.children[0] as HTMLElement;
+    expect(wrapper.className).toContain("w-[85%]");
+    expect(wrapper.getAttribute("role")).toBe("listitem");
   });
 
   it("disables previous on the first item and next on the last item", () => {

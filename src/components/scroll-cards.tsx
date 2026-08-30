@@ -170,7 +170,9 @@ const ScrollCards = forwardRef<ScrollCardsHandle, ScrollCardsProps>(function Scr
         {cards.map((card, index) => {
           const active = index === activeIndex;
           const activeColorStyle =
-            active && !isDarkBackground ? { color: accentColor ?? DEFAULT_ACCENT_COLOR } : undefined;
+            active && !isDarkBackground
+              ? { color: accentColor ?? DEFAULT_ACCENT_COLOR }
+              : undefined;
           return (
             <button
               key={card.key}
@@ -181,7 +183,10 @@ const ScrollCards = forwardRef<ScrollCardsHandle, ScrollCardsProps>(function Scr
               data-testid={`scroll-cards-side-index-${index}`}
               className="group flex items-center gap-2 cursor-pointer"
             >
-              <span className={getIndexLabelClass(active, isDarkBackground)} style={activeColorStyle}>
+              <span
+                className={getIndexLabelClass(active, isDarkBackground)}
+                style={activeColorStyle}
+              >
                 {card.label ?? card.key}
               </span>
               <span

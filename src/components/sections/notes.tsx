@@ -42,10 +42,11 @@ export default function NotesSection() {
           getKey={(note) => note.slug}
           onActiveIndexChange={handleActiveIndexChange}
           ariaLabel={t("notesLabel")}
+          itemClassName="w-[85%] sm:w-[60%] md:w-[44%]"
           renderItem={(note, _index, isActive) => (
             <article
               data-testid={`note-card-${note.slug}`}
-              className={`w-[85%] sm:w-[60%] md:w-[44%] rounded-2xl border bg-white p-6 md:p-8 shadow-sm transition-all duration-300 ${
+              className={`w-full h-full flex flex-col rounded-2xl border bg-white p-6 md:p-8 pb-10 md:pb-14 shadow-sm transition-all duration-300 ${
                 isActive ? "border-[#4A6FA5] ring-2 ring-[#4A6FA5]/20" : "border-gray-200"
               }`}
             >
@@ -56,7 +57,10 @@ export default function NotesSection() {
               <p className="text-gray-600 leading-relaxed">{note.longText ?? note.shortText}</p>
               <div className="flex flex-wrap gap-2 mt-4">
                 {note.tags.map((tag) => (
-                  <span key={tag} className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">
+                  <span
+                    key={tag}
+                    className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
+                  >
                     #{tag}
                   </span>
                 ))}

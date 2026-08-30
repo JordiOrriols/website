@@ -7,6 +7,9 @@ interface CarouselProps<T> {
   renderItem: (item: T, index: number, isActive: boolean) => ReactNode;
   onActiveIndexChange?: (index: number, item: T) => void;
   ariaLabel?: string;
+  // Width classes for each slide slot. Must live on the wrapper (not the rendered card) so
+  // percentage widths resolve against a definite size instead of an auto-sized flex item.
+  itemClassName?: string;
 }
 
 export default function Carousel<T>({
@@ -15,6 +18,7 @@ export default function Carousel<T>({
   renderItem,
   onActiveIndexChange,
   ariaLabel,
+  itemClassName = "w-[85%] sm:w-[60%] md:w-[44%]",
 }: CarouselProps<T>) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
@@ -99,7 +103,11 @@ export default function Carousel<T>({
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {items.map((item, index) => (
-          <div key={getKey(item, index)} role="listitem" className="snap-center flex-shrink-0">
+          <div
+            key={getKey(item, index)}
+            role="listitem"
+            className={`snap-center flex-shrink-0 ${itemClassName}`}
+          >
             {renderItem(item, index, index === active)}
           </div>
         ))}

@@ -123,9 +123,7 @@ describe("ScrollCards Component", () => {
   });
 
   it("uses accentColor for the active entry on light backgrounds, and white on dark ones", () => {
-    const { getByTestId, rerender } = render(
-      <ScrollCards cards={cards} accentColor="#FFB347" />
-    );
+    const { getByTestId, rerender } = render(<ScrollCards cards={cards} accentColor="#FFB347" />);
     const activeLabel = getByTestId("scroll-cards-side-index-0").querySelector("span");
     expect(activeLabel).toHaveStyle({ color: "#FFB347" });
 
