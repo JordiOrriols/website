@@ -13,6 +13,8 @@ const sections = [
   { emoji: "📅", title: "Booking section", paragraphs: ["Booking paragraph"] },
 ];
 
+const changeLanguage = vi.fn();
+
 vi.mock("react-i18next", () => ({
   useTranslation: () => ({
     t: (key: string, opts?: Record<string, unknown>) => {
@@ -23,7 +25,7 @@ vi.mock("react-i18next", () => ({
       }
       return key;
     },
-    i18n: { language: "en" },
+    i18n: { language: "en", changeLanguage },
   }),
 }));
 
@@ -45,9 +47,20 @@ vi.mock("@calcom/embed-react", () => ({
   default: ({ calLink }: { calLink: string }) => <div data-testid="cal-embed" data-cal-link={calLink} />,
 }));
 
+const { trackSectionVisible, trackLanguageChange } = vi.hoisted(() => ({
+  trackSectionVisible: vi.fn(),
+  trackLanguageChange: vi.fn(),
+}));
+
+vi.mock("@/lib/analytics", () => ({
+  trackSectionVisible,
+  trackLanguageChange,
+}));
+
 describe("FlyWithMe page", () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    window.history.replaceState({}, "", "/vuela-conmigo");
   });
 
   it("renders without crashing", () => {
@@ -111,5 +124,35 @@ describe("FlyWithMe page", () => {
   it("has the page root test id", () => {
     const { getByTestId } = render(<FlyWithMe />);
     expect(getByTestId("vuela-conmigo-page")).toBeTruthy();
+  });
+
+  it("switches language to the locale found in the URL", () => {
+    window.history.replaceState({}, "", "/es/vuela-conmigo");
+    render(<FlyWithMe />);
+    expect(changeLanguage).toHaveBeenCalledWith("es");
+  });
+
+  it("does not change language when the URL has no locale segment", () => {
+    window.history.replaceState({}, "", "/vuela-conmigo");
+    render(<FlyWithMe />);
+    expect(changeLanguage).not.toHaveBeenCalled();
+  });
+
+  it("renders the language selector on the hero card", () => {
+    const { getByTestId } = render(<FlyWithMe />);
+    const hero = getByTestId("fly-hero-section");
+    expect(hero.querySelector('[data-testid="language-selector"]')).toBeTruthy();
+  });
+
+  it("switching language from the selector keeps the /vuela-conmigo path", () => {
+    const { getByTestId } = render(<FlyWithMe />);
+    getByTestId("language-button-es").click();
+    expect(window.location.pathname).toBe("/es/vuela-conmigo");
+    expect(trackLanguageChange).toHaveBeenCalledWith("es");
+  });
+
+  it("tracks visibility for the hero card on mount", () => {
+    render(<FlyWithMe />);
+    expect(trackSectionVisible).toHaveBeenCalledWith("fly-hero");
   });
 });

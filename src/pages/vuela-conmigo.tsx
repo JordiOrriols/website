@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ErrorBoundary } from "react-error-boundary";
 import Cal from "@calcom/embed-react";
@@ -7,8 +7,11 @@ import PlaneController from "@/components/plane";
 import ScrollCards from "@/components/scroll-cards";
 import Card from "@/components/ui/card";
 import Avatar from "@/components/avatar";
+import LanguageSelector from "@/components/language-selector";
 import { useMotionPreference } from "@/lib/motion";
 import { renderWithBold } from "@/lib/text";
+import { parsePortfolioPath } from "@/lib/routes";
+import { trackSectionVisible } from "@/lib/analytics";
 
 interface FlySection {
   emoji: string;
@@ -47,6 +50,7 @@ function FlySectionCard({
 function FlyHeroCard({ section, testId }: { section: FlySection; testId: string }) {
   return (
     <Card data-testid={testId} className="relative overflow-visible">
+      <LanguageSelector buildPath={(locale) => `/${locale}/vuela-conmigo`} />
       <div className="relative pt-20 px-8 pb-8 md:pb-12">
         <div className="mt-[-200px] mb-6">
           <div className="w-40 h-40 rounded-full bg-white p-2 shadow-xl m-auto">
@@ -68,8 +72,15 @@ function FlyHeroCard({ section, testId }: { section: FlySection; testId: string 
 }
 
 export default function FlyWithMe() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { reducedMotion } = useMotionPreference();
+
+  useEffect(() => {
+    const { locale } = parsePortfolioPath(window.location.pathname);
+    if (locale && locale !== i18n.language) {
+      void i18n.changeLanguage(locale);
+    }
+  }, [i18n]);
 
   const heroSection: FlySection = {
     emoji: t("flyWithMeHeroEmoji"),
@@ -95,6 +106,7 @@ export default function FlyWithMe() {
 
       <div className="relative z-20">
         <ScrollCards
+          onActiveCardChange={(cardKey) => trackSectionVisible(`fly-${cardKey}`)}
           cards={[
             {
               key: "hero",

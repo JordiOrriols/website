@@ -3,7 +3,12 @@ import { useTranslation } from "react-i18next";
 import { trackLanguageChange } from "@/lib/analytics";
 import { normalizeLocale, parsePortfolioPath, replacePortfolioRoute } from "@/lib/routes";
 
-export default function LanguageSelector() {
+interface LanguageSelectorProps {
+  // Builds the destination path for a locale switch; defaults to the portfolio's own /:locale/:section route.
+  buildPath?: (locale: string) => string;
+}
+
+export default function LanguageSelector({ buildPath }: LanguageSelectorProps = {}) {
   const { i18n } = useTranslation();
   const languages = [
     { code: "ca", label: "CA" },
@@ -15,11 +20,19 @@ export default function LanguageSelector() {
 
   const handleLanguageChange = (langCode: string) => {
     const normalizedLang = normalizeLocale(langCode);
-    const route = parsePortfolioPath(window.location.pathname);
-    const currentSection = route.section ?? "profile";
-    const currentSlug = route.slug ?? undefined;
 
-    replacePortfolioRoute(normalizedLang, currentSection, currentSlug);
+    if (buildPath) {
+      const nextPath = buildPath(normalizedLang);
+      if (window.location.pathname !== nextPath) {
+        window.history.replaceState({}, "", nextPath);
+      }
+    } else {
+      const route = parsePortfolioPath(window.location.pathname);
+      const currentSection = route.section ?? "profile";
+      const currentSlug = route.slug ?? undefined;
+      replacePortfolioRoute(normalizedLang, currentSection, currentSlug);
+    }
+
     void i18n.changeLanguage(normalizedLang);
     trackLanguageChange(langCode);
   };
