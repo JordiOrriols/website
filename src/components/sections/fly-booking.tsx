@@ -21,7 +21,7 @@ export default function FlyBooking() {
       <Cal
         namespace={CAL_NAMESPACE}
         calLink={CAL_LINK}
-        style={{ width: "100%", height: "600px", overflow: "scroll" }}
+        style={{ width: "100%", height: "650px", overflow: "scroll" }}
         config={{ layout: "month_view", theme: "light" }}
       />
     </div>

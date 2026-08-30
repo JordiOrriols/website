@@ -9,6 +9,9 @@ interface Props {
   children?: React.ReactNode;
   className?: string;
   maxWidth?: string;
+  maxHeight?: string;
+  headerClassName?: string;
+  contentClassName?: string;
 }
 
 export default function Modal({
@@ -18,6 +21,9 @@ export default function Modal({
   children,
   className = "",
   maxWidth = "max-w-4xl",
+  maxHeight = "max-h-[70vh]",
+  headerClassName = "p-8 md:p-12",
+  contentClassName = "px-8 md:px-12 pb-8 md:pb-12",
 }: Props) {
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -50,7 +56,7 @@ export default function Modal({
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.9, y: 20 }}
       transition={{ type: "spring", damping: 25, stiffness: 300 }}
-      className={`relative bg-white rounded-3xl shadow-2xl w-full ${maxWidth} max-h-[70vh] overflow-hidden flex flex-col ${className}`}
+      className={`relative bg-white rounded-3xl shadow-2xl w-full ${maxWidth} ${maxHeight} overflow-hidden flex flex-col ${className}`}
     >
       <button
         ref={closeButtonRef}
@@ -63,7 +69,7 @@ export default function Modal({
 
       {/* Header: stays fixed and not part of the scrollable area */}
       {(title || subtitle) && (
-        <div className="p-8 md:p-12">
+        <div className={headerClassName}>
           {title && (
             <h2 id="modal-title" className="text-3xl font-light text-gray-800 mb-2">
               {title}
@@ -75,7 +81,7 @@ export default function Modal({
 
       {/* Scrollable content area: takes remaining space and handles scrolling */}
       <div
-        className="px-8 md:px-12 pb-8 md:pb-12 flex-1 overscroll-contain"
+        className={`${contentClassName} flex-1 overscroll-contain`}
         style={{
           overflowY: "auto",
           WebkitOverflowScrolling: "touch",

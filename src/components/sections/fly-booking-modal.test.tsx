@@ -21,10 +21,19 @@ describe("FlyBookingModal", () => {
     expect(getByTestId("fly-booking-embed")).toBeTruthy();
   });
 
-  it("is wider than the default modal so slots fit next to the calendar", () => {
+  it("is wider and taller than the default modal so slots fit next to the calendar", () => {
     const { container } = render(<FlyBookingModal onClose={vi.fn()} />);
     const dialog = container.querySelector('[role="dialog"]');
     expect(dialog?.className).toContain("max-w-5xl");
+    expect(dialog?.className).toContain("max-h-[92vh]");
+  });
+
+  it("uses minimal header/content padding so the calendar gets maximum space", () => {
+    const { getByTestId } = render(<FlyBookingModal onClose={vi.fn()} />);
+    const embed = getByTestId("fly-booking-embed");
+    const contentWrapper = embed.parentElement?.parentElement;
+    expect(contentWrapper?.className).toContain("px-1");
+    expect(contentWrapper?.className).not.toContain("px-8");
   });
 
   it("calls onClose when the close button is clicked", () => {
