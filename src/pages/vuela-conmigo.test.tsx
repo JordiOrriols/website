@@ -47,6 +47,7 @@ vi.mock("@calcom/embed-react", () => ({
   default: ({ calLink }: { calLink: string }) => (
     <div data-testid="cal-embed" data-cal-link={calLink} />
   ),
+  getCalApi: vi.fn(() => Promise.resolve(vi.fn())),
 }));
 
 const { trackSectionVisible, trackLanguageChange } = vi.hoisted(() => ({

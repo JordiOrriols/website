@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ErrorBoundary } from "react-error-boundary";
-import Cal from "@calcom/embed-react";
+import Cal, { getCalApi } from "@calcom/embed-react";
 import DynamicScene from "@/components/weather/scenes/dynamic";
 import PlaneController from "@/components/plane";
 import ScrollCards from "@/components/scroll-cards";
@@ -82,6 +82,17 @@ export default function FlyWithMe() {
     }
   }, [i18n]);
 
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "fly-with-me" });
+      cal("ui", {
+        theme: "light",
+        hideEventTypeDetails: true,
+        layout: "month_view",
+      });
+    })();
+  }, []);
+
   const heroSection: FlySection = {
     emoji: t("flyWithMeHeroEmoji"),
     title: t("flyWithMeHeroTitle"),
@@ -120,8 +131,12 @@ export default function FlyWithMe() {
                       </p>
                       <Cal
                         calLink="jordiorriols/fly-with-me"
-                        style={{ width: "100%", height: "600px", overflow: "scroll" }}
-                        config={{ layout: "month_view" }}
+                        style={{ width: "100%", height: "400px", overflow: "scroll" }}
+                        config={{
+                          layout: "month_view",
+                          // useSlotsViewOnSmallScreen: "true",
+                          theme: "light",
+                        }}
                       />
                     </div>
                   )}
