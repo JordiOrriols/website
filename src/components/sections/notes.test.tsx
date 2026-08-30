@@ -1,6 +1,6 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import NotesSection from "./notes";
 
 vi.mock("react-i18next", () => ({
@@ -11,8 +11,15 @@ vi.mock("react-i18next", () => ({
           {
             title: "Shipping under pressure",
             shortText: "How to split delivery in measurable milestones.",
+            longText: "The full story about splitting delivery into milestones.",
             tags: ["delivery", "leadership"],
             slug: "shipping-under-pressure",
+          },
+          {
+            title: "Simplicity as a product decision",
+            shortText: "Simpler architecture improves time-to-value.",
+            tags: ["architecture"],
+            slug: "simplicity-product-decision",
           },
         ];
       }
@@ -21,7 +28,6 @@ vi.mock("react-i18next", () => ({
         notesLabel: "Notes",
         notesTitle: "Small writing on engineering leadership",
         notesIntro: "Short notes I use to capture decisions and lessons learned.",
-        backToNotes: "Back to notes",
       };
 
       return textMap[key] ?? key;
@@ -33,57 +39,50 @@ vi.mock("react-i18next", () => ({
 const analyticsMocks = vi.hoisted(() => ({
   trackBlockVisible: vi.fn(),
   trackContentDisplayed: vi.fn(),
-  trackNoteOpened: vi.fn(),
-}));
-
-const routesMocks = vi.hoisted(() => ({
-  normalizeLocale: vi.fn(() => "en"),
-  pushPortfolioRoute: vi.fn(),
-  replacePortfolioRoute: vi.fn(),
 }));
 
 vi.mock("@/lib/analytics", () => analyticsMocks);
-vi.mock("@/lib/routes", () => routesMocks);
 
 describe("NotesSection", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it("renders localized notes content", () => {
+  it("renders localized header content", () => {
     render(<NotesSection />);
-
     expect(screen.getByText("Notes")).toBeInTheDocument();
-    expect(screen.getByText("Shipping under pressure")).toBeInTheDocument();
-    expect(screen.getByText("#delivery")).toBeInTheDocument();
+    expect(screen.getByText("Small writing on engineering leadership")).toBeInTheDocument();
   });
 
-  it("opens note detail when clicking a note card", () => {
+  it("renders every note as a carousel card with its full text and tags", () => {
     render(<NotesSection />);
+    expect(screen.getByText("Shipping under pressure")).toBeInTheDocument();
+    expect(
+      screen.getByText("The full story about splitting delivery into milestones.")
+    ).toBeInTheDocument();
+    expect(screen.getByText("#delivery")).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: /Shipping under pressure/i }));
+    // Falls back to shortText when longText is not provided
+    expect(screen.getByText("Simplicity as a product decision")).toBeInTheDocument();
+    expect(screen.getByText("Simpler architecture improves time-to-value.")).toBeInTheDocument();
+  });
 
-    expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith(
-      "en",
+  it("has no open/close/back navigation left over", () => {
+    render(<NotesSection />);
+    expect(screen.queryByRole("button", { name: /back to notes/i })).not.toBeInTheDocument();
+    expect(screen.queryByTestId("note-detail")).not.toBeInTheDocument();
+  });
+
+  it("tracks the first note as visible on mount", () => {
+    render(<NotesSection />);
+    expect(analyticsMocks.trackBlockVisible).toHaveBeenCalledWith(
       "notes",
       "shipping-under-pressure"
     );
-    expect(analyticsMocks.trackNoteOpened).toHaveBeenCalledWith("shipping-under-pressure");
-    expect(screen.getByTestId("note-detail")).toBeInTheDocument();
-  });
-
-  it("returns to notes root from detail view", () => {
-    render(<NotesSection activeSlug="shipping-under-pressure" />);
-
-    fireEvent.click(screen.getByRole("button", { name: "Back to notes" }));
-
-    expect(routesMocks.replacePortfolioRoute).toHaveBeenCalledWith("en", "notes");
-  });
-
-  it("does not render open and copy actions in list view", () => {
-    render(<NotesSection />);
-
-    expect(screen.queryByRole("button", { name: "Open note" })).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: "Copy link" })).not.toBeInTheDocument();
+    expect(analyticsMocks.trackContentDisplayed).toHaveBeenCalledWith(
+      "note",
+      "shipping-under-pressure",
+      "notes"
+    );
   });
 });

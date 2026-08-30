@@ -154,10 +154,6 @@ export const ca: Locale = {
     notesLabel: "Notes",
     notesTitle: "Petits escrits sobre lideratge en enginyeria",
     notesIntro: "Notes curtes on recullo decisions, trade-offs i aprenentatges de delivery.",
-    levelTwo: "Nivell 2",
-    backToNotes: "Tornar a notes",
-    openNote: "Obrir nota",
-    copyLink: "Copiar enllac",
     notesItems: [
       {
         title: "Entregar sota pressio",
@@ -193,8 +189,6 @@ export const ca: Locale = {
     sideProjectsTitle: "Coses que construeixo per curiositat",
     sideProjectsIntro:
       "Experiments petits per provar idees d'interaccio, hipotesis de producte i limits tecnics.",
-    backToProjects: "Tornar a projectes",
-    openProject: "Obrir projecte",
     projectLink: "Visitar projecte",
     sideProjectsItems: [
       {

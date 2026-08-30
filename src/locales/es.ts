@@ -154,10 +154,6 @@ export const es: Locale = {
     notesLabel: "Notas",
     notesTitle: "Pequeños escritos sobre liderazgo en ingeniería",
     notesIntro: "Notas cortas donde recojo decisiones, trade-offs y aprendizajes de delivery.",
-    levelTwo: "Nivel 2",
-    backToNotes: "Volver a notas",
-    openNote: "Abrir nota",
-    copyLink: "Copiar enlace",
     notesItems: [
       {
         title: "Entregar bajo presión",
@@ -193,8 +189,6 @@ export const es: Locale = {
     sideProjectsTitle: "Cosas que construyo por curiosidad",
     sideProjectsIntro:
       "Experimentos pequeños para probar ideas de interacción, hipótesis de producto y límites técnicos.",
-    backToProjects: "Volver a proyectos",
-    openProject: "Abrir proyecto",
     projectLink: "Visitar proyecto",
     sideProjectsItems: [
       {

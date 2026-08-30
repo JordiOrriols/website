@@ -108,10 +108,6 @@ interface Translation {
   notesLabel: string;
   notesTitle: string;
   notesIntro: string;
-  levelTwo: string;
-  backToNotes: string;
-  openNote: string;
-  copyLink: string;
   notesItems: {
     title: string;
     shortText: string;
@@ -124,8 +120,6 @@ interface Translation {
   sideProjectsLabel: string;
   sideProjectsTitle: string;
   sideProjectsIntro: string;
-  backToProjects: string;
-  openProject: string;
   projectLink: string;
   sideProjectsItems: {
     title: string;

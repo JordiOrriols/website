@@ -20,9 +20,6 @@ import {
   trackSectionVisible,
   trackBlockVisible,
   trackContentDisplayed,
-  trackNoteOpened,
-  trackNoteLinkCopied,
-  trackSideProjectOpened,
   trackSideProjectLinkClicked,
 } from "./analytics";
 
@@ -414,45 +411,6 @@ describe("Analytics Service", () => {
   });
 
   describe("notes and side projects events", () => {
-    it("should track note opened", () => {
-      const mockTrack = vi.fn();
-      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
-        track: mockTrack,
-      };
-
-      trackNoteOpened("engineering-tradeoffs");
-
-      expect(mockTrack).toHaveBeenCalledWith("note_opened", {
-        slug: "engineering-tradeoffs",
-      });
-    });
-
-    it("should track note link copied", () => {
-      const mockTrack = vi.fn();
-      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
-        track: mockTrack,
-      };
-
-      trackNoteLinkCopied("engineering-tradeoffs");
-
-      expect(mockTrack).toHaveBeenCalledWith("note_link_copied", {
-        slug: "engineering-tradeoffs",
-      });
-    });
-
-    it("should track side project opened", () => {
-      const mockTrack = vi.fn();
-      (window as Window & { umami?: { track: typeof mockTrack } }).umami = {
-        track: mockTrack,
-      };
-
-      trackSideProjectOpened("watch-lab");
-
-      expect(mockTrack).toHaveBeenCalledWith("side_project_opened", {
-        slug: "watch-lab",
-      });
-    });
-
     it("should track side project link clicked", () => {
       const mockTrack = vi.fn();
       (window as Window & { umami?: { track: typeof mockTrack } }).umami = {

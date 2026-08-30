@@ -22,7 +22,6 @@ vi.mock("react-i18next", () => ({
         sideProjectsLabel: "Side Projects",
         sideProjectsTitle: "Things I build out of curiosity",
         sideProjectsIntro: "Small products where I test ideas quickly.",
-        openProject: "Open project",
         projectLink: "Visit project",
       };
 
@@ -35,18 +34,10 @@ vi.mock("react-i18next", () => ({
 const analyticsMocks = vi.hoisted(() => ({
   trackBlockVisible: vi.fn(),
   trackContentDisplayed: vi.fn(),
-  trackSideProjectOpened: vi.fn(),
   trackSideProjectLinkClicked: vi.fn(),
 }));
 
-const routesMocks = vi.hoisted(() => ({
-  normalizeLocale: vi.fn(() => "en"),
-  pushPortfolioRoute: vi.fn(),
-  replacePortfolioRoute: vi.fn(),
-}));
-
 vi.mock("@/lib/analytics", () => analyticsMocks);
-vi.mock("@/lib/routes", () => routesMocks);
 
 describe("SideProjectsSection", () => {
   beforeEach(() => {
@@ -55,33 +46,23 @@ describe("SideProjectsSection", () => {
 
   it("renders localized side projects content", () => {
     render(<SideProjectsSection />);
-
     expect(screen.getByText("Side Projects")).toBeInTheDocument();
     expect(screen.getByText("Watch Lab")).toBeInTheDocument();
   });
 
-  it("opens project detail when clicking a project card", () => {
+  it("renders the project images and visit link directly on the card", () => {
     render(<SideProjectsSection />);
-
-    fireEvent.click(screen.getByRole("button", { name: /Watch Lab/i }));
-
-    expect(routesMocks.pushPortfolioRoute).toHaveBeenCalledWith("en", "side-projects", "watch-lab");
-    expect(analyticsMocks.trackSideProjectOpened).toHaveBeenCalledWith("watch-lab");
-    expect(screen.getByTestId("side-project-detail")).toBeInTheDocument();
+    expect(
+      screen.getByText("Interactive watch experiments focused on delightful details.")
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Visit project" })).toHaveAttribute(
+      "href",
+      "https://example.com/watch-lab"
+    );
   });
 
-  it("returns to side projects root from detail view", () => {
-    render(<SideProjectsSection activeSlug="watch-lab" />);
-
-    fireEvent.click(screen.getByRole("button", { name: "backToProjects" }));
-
-    expect(routesMocks.replacePortfolioRoute).toHaveBeenCalledWith("en", "side-projects");
-  });
-
-  it("tracks project link click", () => {
+  it("tracks project link clicks", () => {
     render(<SideProjectsSection />);
-
-    fireEvent.click(screen.getByRole("button", { name: /Watch Lab/i }));
 
     fireEvent.click(screen.getByRole("link", { name: "Visit project" }));
 
@@ -91,9 +72,19 @@ describe("SideProjectsSection", () => {
     );
   });
 
-  it("does not render open project button in list view", () => {
+  it("has no open/close/back navigation left over", () => {
     render(<SideProjectsSection />);
+    expect(screen.queryByRole("button", { name: /back to projects/i })).not.toBeInTheDocument();
+    expect(screen.queryByTestId("side-project-detail")).not.toBeInTheDocument();
+  });
 
-    expect(screen.queryByRole("button", { name: "Open project" })).not.toBeInTheDocument();
+  it("tracks the first project as visible on mount", () => {
+    render(<SideProjectsSection />);
+    expect(analyticsMocks.trackBlockVisible).toHaveBeenCalledWith("side_projects", "watch-lab");
+    expect(analyticsMocks.trackContentDisplayed).toHaveBeenCalledWith(
+      "side_project",
+      "watch-lab",
+      "side_projects"
+    );
   });
 });

@@ -11,12 +11,9 @@ describe("Locale parity", () => {
       expect(locale.translation).toHaveProperty("notesLabel");
       expect(locale.translation).toHaveProperty("notesTitle");
       expect(locale.translation).toHaveProperty("notesIntro");
-      expect(locale.translation).toHaveProperty("openNote");
-      expect(locale.translation).toHaveProperty("copyLink");
       expect(locale.translation).toHaveProperty("sideProjectsLabel");
       expect(locale.translation).toHaveProperty("sideProjectsTitle");
       expect(locale.translation).toHaveProperty("sideProjectsIntro");
-      expect(locale.translation).toHaveProperty("openProject");
       expect(locale.translation).toHaveProperty("projectLink");
     });
   });

@@ -228,33 +228,6 @@ export function trackContentDisplayed(
 }
 
 /**
- * Track note interactions
- */
-export function trackNoteOpened(slug: string): void {
-  trackEvent("note_opened", {
-    slug,
-  });
-}
-
-/**
- * Track note link copy action
- */
-export function trackNoteLinkCopied(slug: string): void {
-  trackEvent("note_link_copied", {
-    slug,
-  });
-}
-
-/**
- * Track side project interactions
- */
-export function trackSideProjectOpened(slug: string): void {
-  trackEvent("side_project_opened", {
-    slug,
-  });
-}
-
-/**
  * Track external side project link clicks
  */
 export function trackSideProjectLinkClicked(slug: string, url: string): void {
