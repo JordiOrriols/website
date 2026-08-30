@@ -166,4 +166,20 @@ describe("LanguageSelector Component", () => {
       expect(window.location.pathname).toBe("/ca/notes/shipping-under-pressure");
     });
   });
+
+  it("uses a custom buildPath instead of the portfolio route when provided", async () => {
+    window.history.replaceState({}, "", "/vuela-conmigo");
+
+    render(
+      <I18nextProvider i18n={i18n}>
+        <LanguageSelector buildPath={(locale) => `/${locale}/vuela-conmigo`} />
+      </I18nextProvider>
+    );
+
+    await userEvent.click(screen.getByText("ES"));
+
+    await waitFor(() => {
+      expect(window.location.pathname).toBe("/es/vuela-conmigo");
+    });
+  });
 });

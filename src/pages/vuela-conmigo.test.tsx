@@ -43,11 +43,8 @@ vi.mock("@/components/plane", () => ({
   default: () => <div data-testid="plane">Plane</div>,
 }));
 
-vi.mock("@calcom/embed-react", () => ({
-  default: ({ calLink }: { calLink: string }) => (
-    <div data-testid="cal-embed" data-cal-link={calLink} />
-  ),
-  getCalApi: vi.fn(() => Promise.resolve(vi.fn())),
+vi.mock("@/components/sections/fly-booking", () => ({
+  default: () => <div data-testid="fly-booking-embed" />,
 }));
 
 const { trackSectionVisible, trackLanguageChange } = vi.hoisted(() => ({
@@ -116,12 +113,9 @@ describe("FlyWithMe page", () => {
 
   it("renders the Cal.com booking embed only inside the last section", () => {
     const { getByTestId, getAllByTestId } = render(<FlyWithMe />);
-    expect(getAllByTestId("cal-embed")).toHaveLength(1);
+    expect(getAllByTestId("fly-booking-embed")).toHaveLength(1);
     const lastSection = getByTestId(`fly-section-${sections.length - 1}`);
-    expect(lastSection.querySelector('[data-testid="cal-embed"]')).toBeTruthy();
-    expect(
-      lastSection.querySelector('[data-testid="cal-embed"]')?.getAttribute("data-cal-link")
-    ).toBe("jordiorriols/fly-with-me");
+    expect(lastSection.querySelector('[data-testid="fly-booking-embed"]')).toBeTruthy();
   });
 
   it("has the page root test id", () => {
