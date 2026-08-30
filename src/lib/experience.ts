@@ -17,7 +17,10 @@ const MONTHS: Record<string, number> = {
 
 const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.25;
 
-function parseBound(token: string | undefined, fallbackMonth: number): { year: number; month: number } | null {
+function parseBound(
+  token: string | undefined,
+  fallbackMonth: number
+): { year: number; month: number } | null {
   if (!token) return null;
   const match = token.trim().match(/^([A-Za-z]{3})?\s*(\d{4})/);
   if (!match) return null;
@@ -28,7 +31,10 @@ function parseBound(token: string | undefined, fallbackMonth: number): { year: n
 
 // Parses period strings like "Oct 2023 – Present", "Jun 2020 – Oct 2022", "2017 – Jul 2020".
 // An unparseable end token (e.g. "Present"/"Presente") is treated as ongoing (end = now).
-export function parseExperiencePeriod(period: string, now: Date = new Date()): { start: Date; end: Date } {
+export function parseExperiencePeriod(
+  period: string,
+  now: Date = new Date()
+): { start: Date; end: Date } {
   const [rawStart, rawEnd] = period.split(/\s[–-]\s/);
 
   const startBound = parseBound(rawStart, 0);
