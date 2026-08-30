@@ -25,7 +25,12 @@ vi.mock("@/components/stats", () => ({
   default: ({ options }: any) => (
     <div data-testid="stats">
       {options.map((opt: any) => (
-        <button key={opt.label} onClick={opt.onClick} disabled={opt.disabled} data-testid={`stat-${opt.label}`}>
+        <button
+          key={opt.label}
+          onClick={opt.onClick}
+          disabled={opt.disabled}
+          data-testid={`stat-${opt.label}`}
+        >
           {opt.label}
         </button>
       ))}

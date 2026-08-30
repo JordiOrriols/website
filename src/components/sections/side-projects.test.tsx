@@ -13,10 +13,7 @@ vi.mock("react-i18next", () => ({
             shortDescription: "Interactive watch experiments focused on delightful details.",
             slug: "watch-lab",
             link: "https://example.com/watch-lab",
-            images: [
-              "/images/watch-lab-1.jpg",
-              "/images/watch-lab-2.jpg",
-            ],
+            images: ["/images/watch-lab-1.jpg", "/images/watch-lab-2.jpg"],
           },
         ];
       }

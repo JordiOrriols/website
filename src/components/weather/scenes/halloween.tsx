@@ -29,7 +29,10 @@ export default function HalloweenScene() {
       <Stars max={50} />
 
       {/* City Skyline */}
-      <CitySkyline fill={configHalloween.skyline} backgroundFill={configHalloween.gradientColors[2]} />
+      <CitySkyline
+        fill={configHalloween.skyline}
+        backgroundFill={configHalloween.gradientColors[2]}
+      />
 
       {/* Logo */}
       <AppLogo />

@@ -20,15 +20,15 @@ describe("FlyBooking", () => {
 
   it("renders the Cal embed with the expected booking link", () => {
     const { getByTestId } = render(<FlyBooking />);
-    expect(getByTestId("cal-embed").getAttribute("data-cal-link")).toBe(
-      "jordiorriols/fly-with-me"
-    );
+    expect(getByTestId("cal-embed").getAttribute("data-cal-link")).toBe("jordiorriols/fly-with-me");
   });
 
   it("uses the same namespace for getCalApi and the Cal component", async () => {
     const { getByTestId } = render(<FlyBooking />);
     await waitFor(() => expect(getCalApiMock).toHaveBeenCalled());
-    const [{ namespace: requestedNamespace }] = getCalApiMock.mock.calls[0] as [{ namespace: string }];
+    const [{ namespace: requestedNamespace }] = getCalApiMock.mock.calls[0] as [
+      { namespace: string },
+    ];
     expect(getByTestId("cal-embed").getAttribute("data-namespace")).toBe(requestedNamespace);
   });
 

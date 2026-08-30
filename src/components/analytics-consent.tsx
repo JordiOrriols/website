@@ -40,7 +40,9 @@ export default function AnalyticsConsent() {
       <Card>
         <div className="p-5 space-y-4">
           <h2 className="text-base font-medium text-gray-800">{t("analyticsConsentTitle")}</h2>
-          <p className="text-sm text-gray-600 leading-relaxed">{t("analyticsConsentDescription")}</p>
+          <p className="text-sm text-gray-600 leading-relaxed">
+            {t("analyticsConsentDescription")}
+          </p>
           <div className="flex flex-col sm:flex-row gap-2">
             <Button
               type="button"

@@ -2,11 +2,7 @@ import React, { useState, type ComponentPropsWithoutRef } from "react";
 
 type ImageWithFallbackProps = ComponentPropsWithoutRef<"img">;
 
-export default function ImageWithFallback({
-  onError,
-  alt,
-  ...rest
-}: ImageWithFallbackProps) {
+export default function ImageWithFallback({ onError, alt, ...rest }: ImageWithFallbackProps) {
   const [hasError, setHasError] = useState(false);
 
   if (hasError) {

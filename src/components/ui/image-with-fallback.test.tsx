@@ -14,9 +14,7 @@ describe("ImageWithFallback Component", () => {
   });
 
   it("passes alt attribute", () => {
-    const { getByAltText } = render(
-      <ImageWithFallback src="/images/image.jpeg" alt="My photo" />
-    );
+    const { getByAltText } = render(<ImageWithFallback src="/images/image.jpeg" alt="My photo" />);
     expect(getByAltText("My photo")).toBeTruthy();
   });
 

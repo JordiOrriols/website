@@ -53,7 +53,11 @@ vi.mock("@/lib/motion", () => ({
   }),
 }));
 
-function MockScrollCards({ onActiveCardChange }: { onActiveCardChange?: (cardKey: string) => void }) {
+function MockScrollCards({
+  onActiveCardChange,
+}: {
+  onActiveCardChange?: (cardKey: string) => void;
+}) {
   useEffect(() => {
     onActiveCardChange?.("profile");
   }, [onActiveCardChange]);
@@ -122,11 +126,7 @@ describe("Portfolio routing stability", () => {
     render(<Portfolio />);
 
     await waitFor(() => {
-      expect(routesMocks.replacePortfolioRoute).toHaveBeenCalledWith(
-        "en",
-        "profile",
-        undefined
-      );
+      expect(routesMocks.replacePortfolioRoute).toHaveBeenCalledWith("en", "profile", undefined);
     });
   });
 });

@@ -108,7 +108,9 @@ export default function PlaneController({ reducedMotion = false }: PlaneControll
         animate={{
           rotate: reducedMotion ? 0 : rotation,
         }}
-        transition={reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 20 }}
+        transition={
+          reducedMotion ? { duration: 0 } : { type: "spring", stiffness: 300, damping: 20 }
+        }
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

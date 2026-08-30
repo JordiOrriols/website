@@ -32,7 +32,11 @@ vi.mock("@/components/sections/home", () => ({
       <button disabled onClick={() => handleStatClick?.("projects")} data-testid="stat-projects">
         Projects
       </button>
-      <button disabled onClick={() => handleStatClick?.("leading_years")} data-testid="stat-leading">
+      <button
+        disabled
+        onClick={() => handleStatClick?.("leading_years")}
+        data-testid="stat-leading"
+      >
         Leading
       </button>
       <button onClick={() => handleStatClick?.("contact")} data-testid="stat-contact">

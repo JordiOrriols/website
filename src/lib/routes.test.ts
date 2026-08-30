@@ -34,7 +34,9 @@ describe("routes helpers", () => {
   });
 
   it("builds clean portfolio path", () => {
-    expect(buildPortfolioPath("es", "side-projects", "watch-lab")).toBe("/es/side-projects/watch-lab");
+    expect(buildPortfolioPath("es", "side-projects", "watch-lab")).toBe(
+      "/es/side-projects/watch-lab"
+    );
   });
 
   it("roundtrips encoded slugs", () => {
