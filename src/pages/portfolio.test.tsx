@@ -46,6 +46,14 @@ vi.mock("@/lib/motion", () => ({
   }),
 }));
 
+const browserMocks = vi.hoisted(() => ({
+  isSafari: vi.fn(() => false),
+}));
+
+vi.mock("@/lib/browser", () => ({
+  isSafari: browserMocks.isSafari,
+}));
+
 vi.mock("@/components/weather/scenes/dynamic", () => ({
   default: () => <div data-testid="dynamic-scene">Dynamic Scene</div>,
 }));
@@ -227,6 +235,18 @@ describe("Portfolio Component", () => {
       fireEvent.click(screen.getByLabelText("enableReducedMotion"));
       expect(motionMocks.toggleReducedMotion).toHaveBeenCalledOnce();
     });
+  });
+
+  it("hides the reduced motion button on Safari", async () => {
+    browserMocks.isSafari.mockReturnValueOnce(true);
+    render(<Portfolio />);
+
+    await waitFor(() => {
+      const buttons = document.querySelectorAll("button");
+      expect(buttons.length).toBeGreaterThan(0);
+    });
+
+    expect(screen.queryByLabelText("enableReducedMotion")).toBeNull();
   });
 
   it("has plane toggle button on desktop", async () => {
