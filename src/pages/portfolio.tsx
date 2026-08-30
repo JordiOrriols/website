@@ -45,7 +45,7 @@ import {
 import { useMotionPreference } from "@/lib/motion";
 import { isSafari } from "@/lib/browser";
 import Notes from "@/components/sections/notes";
-import SideProjects from "@/components/sections/side-projects";
+// import SideProjects from "@/components/sections/side-projects";
 
 const BARCELONA_LAT = 41.3851;
 const BARCELONA_LON = 2.1734;
