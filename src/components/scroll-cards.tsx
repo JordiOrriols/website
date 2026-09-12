@@ -143,7 +143,7 @@ const ScrollCards = forwardRef<ScrollCardsHandle, ScrollCardsProps>(function Scr
               }}
             >
               <motion.div
-                className="relative w-full max-w-3xl"
+                className="relative z-20 w-full max-w-3xl"
                 animate={{
                   opacity: isActive ? 1 : isAbove ? 0 : 0.4,
                   scale: isActive ? 1 : isAbove ? 0.9 : 0.96,
@@ -164,7 +164,7 @@ const ScrollCards = forwardRef<ScrollCardsHandle, ScrollCardsProps>(function Scr
 
       {/* Side index: highlights the current card and lets you jump to any other */}
       <div
-        className="fixed right-6 top-1/2 -translate-y-1/2 z-30 hidden md:flex flex-col items-end gap-3"
+        className="fixed right-6 top-1/2 -translate-y-1/2 z-10 hidden md:flex flex-col items-end gap-3"
         data-testid="scroll-cards-side-index"
       >
         {cards.map((card, index) => {

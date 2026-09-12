@@ -104,6 +104,15 @@ describe("ScrollCards Component", () => {
     expect(getByText("card-2")).toBeTruthy();
   });
 
+  it("keeps the side index behind the cards", () => {
+    const { getByTestId } = render(<ScrollCards cards={cards} />);
+    const cardLayer = getByTestId("scroll-card-section-0").firstElementChild;
+    const sideIndex = getByTestId("scroll-cards-side-index");
+
+    expect(cardLayer?.className).toContain("z-20");
+    expect(sideIndex.className).toContain("z-10");
+  });
+
   it("marks the active side index entry with aria-current", () => {
     const { getByTestId } = render(<ScrollCards cards={cards} />);
     expect(getByTestId("scroll-cards-side-index-0").getAttribute("aria-current")).toBe("true");
