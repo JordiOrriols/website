@@ -20,14 +20,14 @@ export default function FlySectionCard({ section, testId, children }: FlySection
     <Card data-testid={testId} className="max-h-[90dvh] overflow-y-auto">
       <div className="p-8 md:p-12">
         <div className="flex items-center gap-2 md:block">
-          <span className="text-4xl" aria-hidden="true">
+          <span className="text-lg md:text-4xl" aria-hidden="true">
             {section.emoji}
           </span>
           <h2 className="text-lg md:text-4xl font-light text-gray-800 mt-0 md:mt-2 mb-8">
             {section.title}
           </h2>
         </div>
-        <div className="space-y-4 text-sm text-gray-600 leading-relaxed">
+        <div className="space-y-4 text-sm md:text-base text-gray-600 leading-relaxed">
           {section.paragraphs.map((paragraph, index) => (
             <p key={index}>{renderWithBold(paragraph)}</p>
           ))}
