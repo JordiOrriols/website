@@ -243,11 +243,15 @@ describe("Portfolio Component", () => {
     render(<Portfolio />);
 
     await waitFor(() => {
-      const buttons = document.querySelectorAll("button");
-      expect(buttons.length).toBeGreaterThan(0);
+      expect(screen.getByLabelText("enablePlane")).toBeTruthy();
     });
 
     expect(screen.queryByLabelText("enableReducedMotion")).toBeNull();
+    const controls = screen.getByTestId("portfolio-controls");
+    expect(controls.className).toContain("right-4");
+    expect(controls.className).toContain("flex");
+    expect(controls).toContainElement(screen.getByLabelText("enablePlane"));
+    expect(controls).toContainElement(screen.getByLabelText("disableSound"));
   });
 
   it("has plane toggle button on desktop", async () => {

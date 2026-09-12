@@ -485,35 +485,34 @@ export default function Portfolio() {
           )}
         </ErrorBoundary>
 
-        <div className="absolute bottom-4 right-28 z-30 hidden md:block">
+        <div
+          className="absolute bottom-4 right-4 z-30 flex items-center gap-3"
+          data-testid="portfolio-controls"
+        >
           <Button
             onClick={handleShowPlane}
             aria-label={showPlane ? t("disablePlane") : t("enablePlane")}
             aria-pressed={showPlane}
             className={`${
               showPlane ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
-            } shadow-lg transition-all duration-300 mt-3 float-right`}
+            } hidden md:inline-flex shadow-lg transition-all duration-300`}
           >
             <Plane className="w-4 h-4" aria-hidden="true" />
           </Button>
-        </div>
 
-        {!hideReducedMotionButton && (
-          <div className="absolute bottom-4 right-16 z-30">
+          {!hideReducedMotionButton && (
             <Button
               onClick={toggleReducedMotion}
               aria-label={reducedMotion ? t("disableReducedMotion") : t("enableReducedMotion")}
               aria-pressed={reducedMotion}
               className={`${
                 reducedMotion ? "bg-red-600 hover:bg-red-700" : "bg-[#2D4A6B] hover:bg-[#1F3447]"
-              } shadow-lg transition-all duration-300 mt-3 float-right`}
+              } shadow-lg transition-all duration-300`}
             >
               <CircleDashed className="w-4 h-4" aria-hidden="true" />
             </Button>
-          </div>
-        )}
+          )}
 
-        <div className="absolute bottom-4 right-4 z-30">
           <Button
             onClick={() => {
               toggleMute();
@@ -523,7 +522,7 @@ export default function Portfolio() {
             aria-pressed={!muted}
             className={`${
               muted ? "bg-[#2D4A6B] hover:bg-[#1F3447]" : "bg-red-600 hover:bg-red-700"
-            } shadow-lg transition-all duration-300 mt-3 float-right`}
+            } shadow-lg transition-all duration-300`}
           >
             {muted ? (
               <VolumeOff className="w-4 h-4" aria-hidden="true" />
