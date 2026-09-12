@@ -52,6 +52,16 @@ const BARCELONA_LON = 2.1734;
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm" | "snow";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
+
+// Rough guess from the local clock (using default sunrise/sunset hours) so the
+// initial render/audio already matches reality instead of always starting at "night".
+const getInitialTimeOfDay = (): TimeOfDayType => {
+  const hour = new Date().getHours();
+  if (hour >= 7 && hour < 10) return "morning";
+  if (hour >= 10 && hour < 17) return "day";
+  if (hour >= 17 && hour < 20) return "afternoon";
+  return "night";
+};
 export type SeasonType = "easter" | "summer" | "halloween" | "christmas" | "newYear" | "none";
 
 // Mode types include "auto" for selectors
@@ -80,7 +90,7 @@ export default function Portfolio() {
       : "profile";
 
   const [weather, setWeather] = useState<WeatherType>("clear");
-  const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("night");
+  const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>(getInitialTimeOfDay);
   const [season, setSeason] = useState<SeasonType>("none");
 
   const [weatherMode, setWeatherMode] = useState<WeatherMode>("auto");
@@ -93,6 +103,9 @@ export default function Portfolio() {
 
   const [sunrise, setSunrise] = useState<string | null>(null);
   const [sunset, setSunset] = useState<string | null>(null);
+
+  // Gates ambient audio: stays false until determineTimeOfDay has run with real data.
+  const [audioReady, setAudioReady] = useState(false);
 
   const [loading, setLoading] = useState(true);
   const [showPlane, setShowPlane] = useState(false);
@@ -107,7 +120,7 @@ export default function Portfolio() {
   const [hideReducedMotionButton] = useState(() => isSafari());
 
   const { playThunder, playFireworks, playClick, playNotification, toggleMute, muted } =
-    useAmbientAudio(weather, timeOfDay);
+    useAmbientAudio(weather, timeOfDay, audioReady);
 
   useEffect(() => {
     activeCardKeyRef.current = activeCardKey;
@@ -119,9 +132,10 @@ export default function Portfolio() {
 
   useEffect(() => {
     async function fetchData() {
-      await fetchWeather();
-      determineTimeOfDay();
+      const { sunrise: fetchedSunrise, sunset: fetchedSunset } = await fetchWeather();
+      determineTimeOfDay(fetchedSunrise, fetchedSunset);
       determineSeason();
+      setAudioReady(true);
     }
     fetchData();
   }, []);
@@ -177,11 +191,11 @@ export default function Portfolio() {
     };
   }, [i18n, i18n.language]);
 
-  const fetchWeather = async () => {
+  const fetchWeather = async (): Promise<{ sunrise: string | null; sunset: string | null }> => {
     try {
       if (currentWeather) {
         setWeather(currentWeather);
-        return;
+        return { sunrise, sunset };
       }
 
       setLoading(true);
@@ -192,22 +206,31 @@ export default function Portfolio() {
       setCurrentWeather(selectedWeather);
       setWeather(selectedWeather);
 
-      setSunrise(response.daily?.sunrise[0] ?? null);
-      setSunset(response.daily?.sunset[0] ?? null);
+      const fetchedSunrise = response.daily?.sunrise[0] ?? null;
+      const fetchedSunset = response.daily?.sunset[0] ?? null;
+      setSunrise(fetchedSunrise);
+      setSunset(fetchedSunset);
+
+      return { sunrise: fetchedSunrise, sunset: fetchedSunset };
     } catch (error) {
       console.error("Error fetching weather:", error);
       setCurrentWeather("clear");
       setWeather("clear");
+      return { sunrise: null, sunset: null };
     } finally {
       setLoading(false);
     }
   };
 
-  const determineTimeOfDay = () => {
+  // sunriseOverride/sunsetOverride let callers pass freshly-fetched values, avoiding stale state closures.
+  const determineTimeOfDay = (
+    sunriseOverride: string | null = sunrise,
+    sunsetOverride: string | null = sunset
+  ) => {
     const hour = new Date().getHours();
 
-    const sunriseHour = sunrise ? new Date(sunrise).getHours() : 8;
-    const sunsetHour = sunset ? new Date(sunset).getHours() : 19;
+    const sunriseHour = sunriseOverride ? new Date(sunriseOverride).getHours() : 8;
+    const sunsetHour = sunsetOverride ? new Date(sunsetOverride).getHours() : 19;
 
     const startMorning = sunriseHour - 1;
     const endMorning = sunriseHour + 2;

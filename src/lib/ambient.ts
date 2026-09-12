@@ -47,7 +47,11 @@ const getAudioConfig = (weather: WeatherType, timeOfDay: TimeOfDayType): Ambient
   return { background: [] };
 };
 
-export const useAmbientAudio = (weather: WeatherType, timeOfDay: TimeOfDayType) => {
+export const useAmbientAudio = (
+  weather: WeatherType,
+  timeOfDay: TimeOfDayType,
+  enabled: boolean = true
+) => {
   const howlsRef = useRef<Map<AmbientAudioKey, Howl>>(new Map());
   const timersRef = useRef<number[]>([]);
   const lastConfigRef = useRef<AmbientConfig | null>(null);
@@ -138,6 +142,9 @@ export const useAmbientAudio = (weather: WeatherType, timeOfDay: TimeOfDayType) 
   }, []);
 
   useEffect(() => {
+    // Don't start any background sound until the real weather/time-of-day are known.
+    if (!enabled) return;
+
     const newCfg = getAudioConfig(weather, timeOfDay);
     const lastCfg = lastConfigRef.current;
 
@@ -180,7 +187,7 @@ export const useAmbientAudio = (weather: WeatherType, timeOfDay: TimeOfDayType) 
     });
 
     scheduleRandom(newCfg.random);
-  }, [weather, timeOfDay, playSound, scheduleRandom, muted]);
+  }, [weather, timeOfDay, enabled, playSound, scheduleRandom, muted]);
 
   return {
     playThunder,
