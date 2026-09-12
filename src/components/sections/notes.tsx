@@ -42,7 +42,7 @@ export default function NotesSection() {
           getKey={(note) => note.slug}
           onActiveIndexChange={handleActiveIndexChange}
           ariaLabel={t("notesLabel")}
-          itemClassName="w-[85%] sm:w-[60%] md:w-[44%]"
+          itemClassName="w-[85%] sm:w-[80%] md:w-[75%]"
           renderItem={(note, _index, isActive) => (
             <article
               data-testid={`note-card-${note.slug}`}
