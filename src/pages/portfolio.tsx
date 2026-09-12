@@ -52,16 +52,6 @@ const BARCELONA_LON = 2.1734;
 
 export type WeatherType = "clear" | "cloudy" | "rain" | "thunderstorm" | "snow";
 export type TimeOfDayType = "morning" | "day" | "afternoon" | "night";
-
-// Rough guess from the local clock (using default sunrise/sunset hours) so the
-// initial render/audio already matches reality instead of always starting at "night".
-const getInitialTimeOfDay = (): TimeOfDayType => {
-  const hour = new Date().getHours();
-  if (hour >= 7 && hour < 10) return "morning";
-  if (hour >= 10 && hour < 17) return "day";
-  if (hour >= 17 && hour < 20) return "afternoon";
-  return "night";
-};
 export type SeasonType = "easter" | "summer" | "halloween" | "christmas" | "newYear" | "none";
 
 // Mode types include "auto" for selectors
@@ -90,7 +80,7 @@ export default function Portfolio() {
       : "profile";
 
   const [weather, setWeather] = useState<WeatherType>("clear");
-  const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>(getInitialTimeOfDay);
+  const [timeOfDay, setTimeOfDay] = useState<TimeOfDayType>("day");
   const [season, setSeason] = useState<SeasonType>("none");
 
   const [weatherMode, setWeatherMode] = useState<WeatherMode>("auto");

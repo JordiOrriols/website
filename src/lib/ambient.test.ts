@@ -1,6 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import { useAmbientAudio } from "./ambient";
 import { vi, describe, it, expect, beforeEach } from "vitest";
+import { Howl } from "howler";
 
 // Mock Howler
 vi.mock("howler", () => {
@@ -16,6 +17,7 @@ vi.mock("howler", () => {
     });
     this.play = vi.fn(() => 1);
     this.stop = vi.fn();
+    this.unload = vi.fn();
     this.pause = vi.fn();
     this.volume = vi.fn((val?: number) => {
       if (val !== undefined) this.volume_ = val;
@@ -55,6 +57,19 @@ describe("useAmbientAudio", () => {
     const { result } = renderHook(() => useAmbientAudio("clear" as any, "day" as any));
 
     expect(result.current.muted).toBe(false);
+  });
+
+  it("does not start placeholder audio before conditions are ready", () => {
+    const { rerender } = renderHook(
+      ({ timeOfDay, enabled }) => useAmbientAudio("clear" as any, timeOfDay as any, enabled),
+      { initialProps: { timeOfDay: "night", enabled: false } }
+    );
+
+    expect(Howl).not.toHaveBeenCalled();
+
+    rerender({ timeOfDay: "day", enabled: true });
+
+    expect(Howl).not.toHaveBeenCalled();
   });
 
   it("toggleMute changes muted state", () => {
@@ -144,5 +159,16 @@ describe("useAmbientAudio", () => {
     rerender({ weather: "clear", timeOfDay: "night" });
 
     expect(result.current.muted).toBe(initialMuted);
+  });
+
+  it("stops ambient audio when the hook unmounts", () => {
+    const { unmount } = renderHook(() => useAmbientAudio("clear" as any, "night" as any));
+    const nightSound = vi.mocked(Howl).mock.results.at(-1)?.value;
+
+    expect(nightSound.play).toHaveBeenCalled();
+
+    unmount();
+
+    expect(nightSound.stop).toHaveBeenCalled();
   });
 });

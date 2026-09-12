@@ -189,6 +189,20 @@ export const useAmbientAudio = (
     scheduleRandom(newCfg.random);
   }, [weather, timeOfDay, enabled, playSound, scheduleRandom, muted]);
 
+  useEffect(
+    () => () => {
+      timersRef.current.forEach(clearTimeout);
+      timersRef.current = [];
+      howlsRef.current.forEach((howl) => {
+        howl.stop();
+        howl.unload();
+      });
+      howlsRef.current.clear();
+      lastConfigRef.current = null;
+    },
+    []
+  );
+
   return {
     playThunder,
     playFireworks,
