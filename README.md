@@ -1,5 +1,11 @@
 # AI Specifications & Development Rules
 
+## Website development runtime
+
+Use Node.js 26 LTS with npm 11.20.0. Run `nvm install && nvm use`, then
+`npm ci`. Local development and GitHub Actions share the `.nvmrc` version.
+Vitest uses jsdom's browser storage rather than Node's native Web Storage.
+
 This repository contains a comprehensive set of development rules, standards, and AI agent configurations designed to work seamlessly with multiple AI coding copilots. The setup is portable and can be imported into any project to provide consistent, high-quality AI-assisted development.
 
 It's highly recommended to be used along with Spec-Driven Development frameworks like [OpenSpec](https://github.com/Fission-AI/OpenSpec)
@@ -317,4 +323,3 @@ El contenido de este repositorio es parte del programa AI4Devs de LIDR.co. Si qu
 **Made with 🤖 by the LIDR community**
 
 For questions, issues, or suggestions, visit [LIDR.co](https://lidr.co/ia-devs)
-
