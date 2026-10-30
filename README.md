@@ -2,6 +2,10 @@
 
 ## Website development runtime
 
+Build and deployment run in separate jobs. Only deployment from `main` receives
+Pages/OIDC permissions; builds have read-only repository access and no persisted
+checkout credentials. Actions use commit SHA pins with weekly Dependabot updates.
+
 Use Node.js 26 LTS with npm 11.20.0. Run `nvm install && nvm use`, then
 `npm ci`. Local development and GitHub Actions share the `.nvmrc` version.
 Vitest uses jsdom's browser storage rather than Node's native Web Storage.
